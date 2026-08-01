@@ -1,134 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Getwell Nutrition Coach</title>
+    <title>Getwell Nutrition Coach</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+
+            background:
+            radial-gradient(circle at top,#EAF3FF 0%,#C7DFFF 40%,#8EB6FF 100%);
+        }
+
+        h1{
+            font-size:42px;
+            font-weight:700;
+            color:#2953A6;
+            line-height:1.1;
+            margin-bottom:15px;
+        }
+
+        h2{
+            font-size:24px;
+            font-weight:600;
+            color:#404A5A;
+            margin-bottom:15px;
+        }
+
+        p{
+            color:#7E8797;
+            line-height:1.7;
+        }
+
+        .login-card{
+
+            width:420px;
+            max-width:100%;
+
+            background:rgba(255,255,255,.72);
+
+            backdrop-filter:blur(22px);
+
+            border:1px solid rgba(255,255,255,.7);
+
+            border-radius:30px;
+
+            padding:50px 40px;
+
+            text-align:center;
+
+            box-shadow:
+            0 25px 60px rgba(48,82,170,.18);
+
+        }
+
+        input{
+
+            width:100%;
+
+            height:58px;
+
+            border:none;
+
+            border-radius:18px;
+
+            margin-top:18px;
+
+            padding:0 20px;
+
+            font-size:16px;
+
+            background:rgba(255,255,255,.9);
+
+            outline:none;
+
+        }
+
+        button{
+
+            width:100%;
+
+            height:58px;
+
+            margin-top:25px;
+
+            border:none;
+
+            border-radius:18px;
+
+            font-size:18px;
+
+            font-weight:700;
+
+            color:white;
+
+            cursor:pointer;
+
+            background:
+            linear-gradient(135deg,#3567E5,#5D8BFF);
+
+            box-shadow:
+            0 15px 35px rgba(53,103,229,.35);
+
+            transition:.3s;
+
+        }
+
+        button:hover{
+
+            transform:translateY(-3px);
+
+        }
+
+        .help{
+
+            display:block;
+
+            margin-top:25px;
+
+            color:#8791A2;
+
+            text-decoration:none;
+
+        }
+
+    </style>
 
 </head>
-
-<body>
-
-<div class="background">
-
-    <!-- Grid -->
-    <div class="grid"></div>
-
-    <!-- Glow -->
-    <div class="glow glow1"></div>
-    <div class="glow glow2"></div>
-
-    <!-- Floating Stars -->
-    <span class="star" style="top:12%;left:18%;"></span>
-    <span class="star" style="top:18%;left:72%;"></span>
-    <span class="star" style="top:25%;left:40%;"></span>
-    <span class="star" style="top:40%;left:25%;"></span>
-    <span class="star" style="top:55%;left:70%;"></span>
-    <span class="star" style="top:62%;left:52%;"></span>
-    <span class="star" style="top:75%;left:18%;"></span>
-    <span class="star" style="top:82%;left:80%;"></span>
-
-</div>
-
-<div class="container">
-
-    <div class="login-card">
-
-        <div class="logo">
-            <img src="logo.png" alt="Getwell Logo">
-        </div>
-
-        <p class="small-title">
-            Powered by Getwell Clinic
-        </p>
-
-        <h1>
-            Getwell Nutrition Coach
-        </h1>
-
-        <h2>
-            Your personal health companion.
-        </h2>
-
-        <p class="description">
-            Log in with your Patient ID to access your food diary,
-            nutrition guidance, progress tracking and personalised
-            recommendations.
-        </p>
-
-        <form>
-
-            <div class="input-box">
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                height="20" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-
-                <path stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5.121 17.804A8 8 0 1118.879
-                6.196M15 11a3 3 0 11-6 0
-                3 3 0 016 0z"/>
-
-                </svg>
-
-                <input
-                type="text"
-                placeholder="Patient ID"
-                required>
-
-            </div>
-
-            <div class="input-box">
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-
-                <path stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 15v2m6-6V9a6
-                6 0 10-12 0v2m12
-                0H6a2 2 0 00-2 2v6a2
-                2 0 002 2h12a2 2 0
-                002-2v-6a2 2 0
-                00-2-2z"/>
-
-                </svg>
-
-                <input
-                type="password"
-                placeholder="Password"
-                required>
-
-            </div>
-
-            <button type="submit">
-                Sign In
-            </button>
-
-        </form>
-
-        <a href="#" class="help">
-            Need help? Contact Getwell Clinic
-        </a>
-
-    </div>
-
-</div>
-
-</body>
-</html>
