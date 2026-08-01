@@ -1,146 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Getwell Nutrition Coach</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Getwell Nutrition Coach</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins',sans-serif;
-        }
+<style>
 
-        body{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            padding:30px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-            background:
-            radial-gradient(circle at top,#EAF3FF 0%,#C7DFFF 40%,#8EB6FF 100%);
-        }
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:radial-gradient(circle at top,#F4F9FF 0%,#D9E8FF 45%,#A8C6FF 100%);
+position:relative;
+}
 
-        h1{
-            font-size:42px;
-            font-weight:700;
-            color:#2953A6;
-            line-height:1.1;
-            margin-bottom:15px;
-        }
+/* Background Glow */
 
-        h2{
-            font-size:24px;
-            font-weight:600;
-            color:#404A5A;
-            margin-bottom:15px;
-        }
+body::before{
+content:"";
+position:absolute;
+width:650px;
+height:650px;
+background:rgba(80,130,255,.18);
+border-radius:50%;
+filter:blur(120px);
+bottom:-200px;
+left:50%;
+transform:translateX(-50%);
+}
 
-        p{
-            color:#7E8797;
-            line-height:1.7;
-        }
+/* Grid */
 
-        .login-card{
+.grid{
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+background-size:40px 40px;
+opacity:.5;
+}
 
-            width:420px;
-            max-width:100%;
+/* Login Card */
 
-            background:rgba(255,255,255,.72);
+.card{
 
-            backdrop-filter:blur(22px);
+position:relative;
+z-index:2;
 
-            border:1px solid rgba(255,255,255,.7);
+width:90%;
+max-width:420px;
 
-            border-radius:30px;
+background:rgba(255,255,255,.72);
 
-            padding:50px 40px;
+backdrop-filter:blur(20px);
 
-            text-align:center;
+border:1px solid rgba(255,255,255,.7);
 
-            box-shadow:
-            0 25px 60px rgba(48,82,170,.18);
+border-radius:28px;
 
-        }
+padding:45px 30px;
 
-        input{
+text-align:center;
 
-            width:100%;
+box-shadow:0 20px 50px rgba(0,60,180,.15);
 
-            height:58px;
+}
 
-            border:none;
+/* Logo */
 
-            border-radius:18px;
+.logo{
 
-            margin-top:18px;
+width:75px;
+height:75px;
 
-            padding:0 20px;
+margin:auto;
+margin-bottom:20px;
 
-            font-size:16px;
+background:linear-gradient(135deg,#2F5FD7,#6EA3FF);
 
-            background:rgba(255,255,255,.9);
+border-radius:22px;
 
-            outline:none;
+display:flex;
+justify-content:center;
+align-items:center;
 
-        }
+font-size:32px;
+color:white;
+font-weight:700;
 
-        button{
+}
 
-            width:100%;
+/* Text */
 
-            height:58px;
+.small{
 
-            margin-top:25px;
+font-size:13px;
+color:#6D7B91;
+margin-bottom:8px;
 
-            border:none;
+}
 
-            border-radius:18px;
+h1{
 
-            font-size:18px;
+font-size:36px;
+font-weight:700;
+line-height:1.15;
 
-            font-weight:700;
+color:#2D4FA6;
 
-            color:white;
+margin-bottom:15px;
 
-            cursor:pointer;
+}
 
-            background:
-            linear-gradient(135deg,#3567E5,#5D8BFF);
+.subtitle{
 
-            box-shadow:
-            0 15px 35px rgba(53,103,229,.35);
+font-size:17px;
+font-weight:600;
+color:#37445A;
 
-            transition:.3s;
+margin-bottom:12px;
 
-        }
+}
 
-        button:hover{
+.description{
 
-            transform:translateY(-3px);
+font-size:14px;
+color:#7D8899;
+line-height:1.7;
+margin-bottom:30px;
 
-        }
+}
 
-        .help{
+/* Inputs */
 
-            display:block;
+input{
 
-            margin-top:25px;
+width:100%;
+height:56px;
 
-            color:#8791A2;
+border:none;
 
-            text-decoration:none;
+border-radius:18px;
 
-        }
+background:white;
 
-    </style>
+padding:0 18px;
+
+font-size:15px;
+
+margin-bottom:18px;
+
+outline:none;
+
+box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+transition:.3s;
+
+}
+
+input:focus{
+
+border:2px solid #4E7FFF;
+
+}
+
+/* Button */
+
+button{
+
+width:100%;
+height:58px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#3767E8,#5B8CFF);
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 15px 30px rgba(54,104,232,.35);
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* Help */
+
+.help{
+
+margin-top:22px;
+
+font-size:14px;
+
+color:#8794A8;
+
+}
+
+</style>
 
 </head>
+
+<body>
+
+<div class="grid"></div>
+
+<div class="card">
+
+<div class="logo">
+G
+</div>
+
+<div class="small">
+Powered by Getwell Clinic
+</div>
+
+<h1>
+Getwell Nutrition Coach
+</h1>
+
+<div class="subtitle">
+Your personal health companion.
+</div>
+
+<div class="description">
+Log in with your Patient ID to access your food diary, nutrition guidance, progress tracking and personalised recommendations.
+</div>
+
+<input type="text" placeholder="Patient ID">
+
+<input type="password" placeholder="Password">
+
+<button>
+Sign In
+</button>
+
+<div class="help">
+Need help? Contact Getwell Clinic
+</div>
+
+</div>
+
+</body>
+
+</html>
