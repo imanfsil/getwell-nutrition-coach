@@ -1,74 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Getwell Nutrition Coach</title>
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial, sans-serif;
-background:#f5f9fc;
-display:flex;
-justify-content:center;
-align-items:center;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+background:linear-gradient(180deg,#EEF5FC,#FFFFFF);
+
 height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:25px;
+
 }
 
-.card{
-background:white;
-width:90%;
-max-width:380px;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+.container{
+
+width:100%;
+max-width:430px;
+
 }
 
-h1{
-color:#1E4D8C;
+.logo{
+
 text-align:center;
-margin-bottom:5px;
+
+font-size:34px;
+
+font-weight:700;
+
+color:#1F4E96;
+
+margin-bottom:18px;
+
 }
 
-p{
+.subtitle{
+
 text-align:center;
-color:#666;
-margin-bottom:25px;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#444;
+
+margin-bottom:12px;
+
+}
+
+.description{
+
+text-align:center;
+
+font-size:15px;
+
+line-height:1.6;
+
+color:#777;
+
+margin-bottom:35px;
+
 }
 
 input{
+
 width:100%;
-padding:15px;
-margin-bottom:15px;
-border-radius:12px;
-border:1px solid #ddd;
-box-sizing:border-box;
+
+padding:18px;
+
 font-size:16px;
+
+border:1px solid #D9D9D9;
+
+border-radius:15px;
+
+margin-bottom:18px;
+
+outline:none;
+
+background:white;
+
+}
+
+input:focus{
+
+border:1px solid #1F4E96;
+
 }
 
 button{
+
 width:100%;
-padding:15px;
-background:#1E4D8C;
-color:white;
+
+padding:18px;
+
 border:none;
-border-radius:12px;
+
+border-radius:15px;
+
+background:#1F4E96;
+
+color:white;
+
 font-size:18px;
+
 font-weight:bold;
+
 cursor:pointer;
+
+transition:.3s;
+
 }
 
 button:hover{
-background:#163d6b;
+
+background:#173D76;
+
 }
 
 .footer{
-margin-top:20px;
-font-size:13px;
-color:gray;
+
 text-align:center;
+
+margin-top:35px;
+
+font-size:14px;
+
+color:#999;
+
 }
 
 </style>
@@ -77,25 +155,48 @@ text-align:center;
 
 <body>
 
-<div class="card">
+<div class="container">
 
-<h1>🌿 Getwell</h1>
+<div class="logo">
 
-<p>Nutrition Coach</p>
+Getwell Nutrition Coach
 
-<input type="text" placeholder="Patient ID">
+</div>
 
-<input type="password" placeholder="Password">
+<div class="subtitle">
 
-<button>Login</button>
+Your personal health companion.
+
+</div>
+
+<div class="description">
+
+Log in with your Patient ID to access your food diary, nutrition guidance, progress tracking, and personalised recommendations.
+
+</div>
+
+<input
+type="text"
+placeholder="Patient ID">
+
+<input
+type="password"
+placeholder="Password">
+
+<button>
+
+Login
+
+</button>
 
 <div class="footer">
 
-For Getwell Weight Loss Patients Only
+Need help? Contact Getwell Clinic.
 
 </div>
 
 </div>
 
 </body>
+
 </html>
