@@ -1,202 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Getwell Nutrition Coach</title>
 
-<style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-body{
-
-background:linear-gradient(180deg,#EEF5FC,#FFFFFF);
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:25px;
-
-}
-
-.container{
-
-width:100%;
-max-width:430px;
-
-}
-
-.logo{
-
-text-align:center;
-
-font-size:34px;
-
-font-weight:700;
-
-color:#1F4E96;
-
-margin-bottom:18px;
-
-}
-
-.subtitle{
-
-text-align:center;
-
-font-size:18px;
-
-font-weight:600;
-
-color:#444;
-
-margin-bottom:12px;
-
-}
-
-.description{
-
-text-align:center;
-
-font-size:15px;
-
-line-height:1.6;
-
-color:#777;
-
-margin-bottom:35px;
-
-}
-
-input{
-
-width:100%;
-
-padding:18px;
-
-font-size:16px;
-
-border:1px solid #D9D9D9;
-
-border-radius:15px;
-
-margin-bottom:18px;
-
-outline:none;
-
-background:white;
-
-}
-
-input:focus{
-
-border:1px solid #1F4E96;
-
-}
-
-button{
-
-width:100%;
-
-padding:18px;
-
-border:none;
-
-border-radius:15px;
-
-background:#1F4E96;
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-button:hover{
-
-background:#173D76;
-
-}
-
-.footer{
-
-text-align:center;
-
-margin-top:35px;
-
-font-size:14px;
-
-color:#999;
-
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<div class="background">
+
+    <!-- Grid -->
+    <div class="grid"></div>
+
+    <!-- Glow -->
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+
+    <!-- Floating Stars -->
+    <span class="star" style="top:12%;left:18%;"></span>
+    <span class="star" style="top:18%;left:72%;"></span>
+    <span class="star" style="top:25%;left:40%;"></span>
+    <span class="star" style="top:40%;left:25%;"></span>
+    <span class="star" style="top:55%;left:70%;"></span>
+    <span class="star" style="top:62%;left:52%;"></span>
+    <span class="star" style="top:75%;left:18%;"></span>
+    <span class="star" style="top:82%;left:80%;"></span>
+
+</div>
+
 <div class="container">
 
-<div class="logo">
+    <div class="login-card">
 
-Getwell Nutrition Coach
+        <div class="logo">
+            <img src="logo.png" alt="Getwell Logo">
+        </div>
 
-</div>
+        <p class="small-title">
+            Powered by Getwell Clinic
+        </p>
 
-<div class="subtitle">
+        <h1>
+            Getwell Nutrition Coach
+        </h1>
 
-Your personal health companion.
+        <h2>
+            Your personal health companion.
+        </h2>
 
-</div>
+        <p class="description">
+            Log in with your Patient ID to access your food diary,
+            nutrition guidance, progress tracking and personalised
+            recommendations.
+        </p>
 
-<div class="description">
+        <form>
 
-Log in with your Patient ID to access your food diary, nutrition guidance, progress tracking, and personalised recommendations.
+            <div class="input-box">
 
-</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
 
-<input
-type="text"
-placeholder="Patient ID">
+                <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5.121 17.804A8 8 0 1118.879
+                6.196M15 11a3 3 0 11-6 0
+                3 3 0 016 0z"/>
 
-<input
-type="password"
-placeholder="Password">
+                </svg>
 
-<button>
+                <input
+                type="text"
+                placeholder="Patient ID"
+                required>
 
-Login
+            </div>
 
-</button>
+            <div class="input-box">
 
-<div class="footer">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
 
-Need help? Contact Getwell Clinic.
+                <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m6-6V9a6
+                6 0 10-12 0v2m12
+                0H6a2 2 0 00-2 2v6a2
+                2 0 002 2h12a2 2 0
+                002-2v-6a2 2 0
+                00-2-2z"/>
 
-</div>
+                </svg>
+
+                <input
+                type="password"
+                placeholder="Password"
+                required>
+
+            </div>
+
+            <button type="submit">
+                Sign In
+            </button>
+
+        </form>
+
+        <a href="#" class="help">
+            Need help? Contact Getwell Clinic
+        </a>
+
+    </div>
 
 </div>
 
 </body>
-
 </html>
