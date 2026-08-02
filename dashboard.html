@@ -166,6 +166,29 @@ Logout
 </button>
 
 </div>
+<script type="module">
 
+import { auth } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+
+    if(user){
+
+        const patientId = user.email.split("@")[0].toUpperCase();
+
+        document.getElementById("patientName").innerHTML =
+        "Welcome, " + patientId;
+
+    }else{
+
+        window.location.href="index.html";
+
+    }
+
+});
+
+</script>
+  
 </body>
 </html>
