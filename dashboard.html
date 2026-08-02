@@ -124,22 +124,22 @@ Welcome
 
 <div class="card">
 <h3>Current Weight</h3>
-<div class="value">72.5 kg</div>
+<div class="value" id="currentWeight">Loading...</div>
 </div>
 
 <div class="card">
 <h3>Goal Weight</h3>
-<div class="value">65 kg</div>
+<div class="value" id="goalWeight">Loading...</div>
 </div>
 
 <div class="card">
 <h3>BMI</h3>
-<div class="value">27.4</div>
+<div class="value" id="bmi">Loading...</div>
 </div>
 
 <div class="card">
 <h3>Water Intake</h3>
-<div class="value">5 / 8</div>
+<div class="value" id="water">Loading...</div>
 </div>
 
 <div class="card">
@@ -153,9 +153,8 @@ Welcome
 
 <div class="card">
 <h3>Next Appointment</h3>
-<div class="value" style="font-size:22px;">
-12 August<br>
-10:30 AM
+<div class="value" id="appointment" style="font-size:22px;">
+Loading...
 </div>
 </div>
 
@@ -183,8 +182,31 @@ onAuthStateChanged(auth, (user) => {
 
         const patientId = user.email.split("@")[0].toUpperCase();
 
-        document.getElementById("patientName").innerHTML =
-        "Welcome, " + patientId;
+const docRef = doc(db, "patients", patientId);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+
+    const data = docSnap.data();
+
+    document.getElementById("patientName").innerHTML =
+        "Welcome, " + data.name;
+
+    document.getElementById("currentWeight").innerHTML =
+        data.currentWeight + " kg";
+
+    document.getElementById("goalWeight").innerHTML =
+        data.goalWeight + " kg";
+
+    document.getElementById("bmi").innerHTML =
+        data.bmi;
+
+    document.getElementById("water").innerHTML =
+        data.water + " / 8";
+
+    document.getElementById("appointment").innerHTML =
+        data.appointment;
+}
 
     }else{
 
