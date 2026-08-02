@@ -1,3 +1,8 @@
+import {
+    auth,
+    signInWithEmailAndPassword
+} from "./firebase.js";
+
 const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", async () => {
@@ -10,12 +15,8 @@ loginBtn.addEventListener("click", async () => {
         return;
     }
 
-    // Temporary format:
-    // Patient ID: PT0001
-    // Email becomes: PT0001@getwell.com
+    const email = patientId.toLowerCase() + "@getwell.com";
 
-   const email = patientId.toLowerCase() + "@getwell.com";
-    
     try {
 
         await signInWithEmailAndPassword(
@@ -23,8 +24,6 @@ loginBtn.addEventListener("click", async () => {
             email,
             password
         );
-
-        alert("Login successful!");
 
         window.location.href = "dashboard.html";
 
