@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDPuQJb4JBDbZC9bFwzVMLseji-qVN0QMcI",
+  apiKey: "AIzaSyDpuQJb4JBDbZC9bFWzVMLseji-qVNQMcI",
   authDomain: "getwell-nutrition-coach.firebaseapp.com",
   projectId: "getwell-nutrition-coach",
   storageBucket: "getwell-nutrition-coach.appspot.com",
