@@ -176,8 +176,8 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-onAuthStateChanged(auth, (user) => {
-
+onAuthStateChanged(auth, async (user) => {
+  
     if(user){
 
         const patientId = user.email.split("@")[0].toUpperCase();
@@ -206,7 +206,10 @@ if (docSnap.exists()) {
 
     document.getElementById("appointment").innerHTML =
         data.appointment;
-}
+  
+   } else {
+        alert("Patient data not found.");
+    }
 
     }else{
 
