@@ -5,18 +5,22 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
+import {
+  getFirestore
+} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDpuQJb4JBDbZC9bFWzVMLseji-qVNQMcI",
+  apiKey: "AIzaSyDPuQJb4JBDbZC9bFwzVMLseji-qVN0QMcI",
   authDomain: "getwell-nutrition-coach.firebaseapp.com",
   projectId: "getwell-nutrition-coach",
-  storageBucket: "getwell-nutrition-coach.firebasestorage.app",
+  storageBucket: "getwell-nutrition-coach.appspot.com",
   messagingSenderId: "996763282056",
   appId: "1:996763282056:web:219c4717188a3acbbc0d3d"
 };
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
-window.auth = auth;
-window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+export { signInWithEmailAndPassword };
