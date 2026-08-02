@@ -177,43 +177,48 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
-  
-    if(user){
+
+    if (!user) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    try {
 
         const patientId = user.email.split("@")[0].toUpperCase();
 
-const docRef = doc(db, "patients", patientId);
-const docSnap = await getDoc(docRef);
+        const docRef = doc(db, "patients", patientId);
+        const docSnap = await getDoc(docRef);
 
-if (docSnap.exists()) {
+        if (!docSnap.exists()) {
+            alert("Patient data not found.");
+            return;
+        }
 
-    const data = docSnap.data();
+        const data = docSnap.data();
 
-    document.getElementById("patientName").innerHTML =
-        "Welcome, " + data.name;
+        document.getElementById("patientName").textContent =
+            "Welcome, " + data.name;
 
-    document.getElementById("currentWeight").innerHTML =
-        data.currentWeight + " kg";
+        document.getElementById("currentWeight").textContent =
+            data.currentWeight + " kg";
 
-    document.getElementById("goalWeight").innerHTML =
-        data.goalWeight + " kg";
+        document.getElementById("goalWeight").textContent =
+            data.goalWeight + " kg";
 
-    document.getElementById("bmi").innerHTML =
-        data.bmi;
+        document.getElementById("bmi").textContent =
+            data.bmi;
 
-    document.getElementById("water").innerHTML =
-        data.water + " / 8";
+        document.getElementById("water").textContent =
+            data.water + " / 8";
 
-    document.getElementById("appointment").innerHTML =
-        data.appointment;
-  
-   } else {
-        alert("Patient data not found.");
-    }
+        document.getElementById("appointment").textContent =
+            data.appointment;
 
-    }else{
+    } catch (error) {
 
-        window.location.href="index.html";
+        console.error(error);
+        alert(error.message);
 
     }
 
