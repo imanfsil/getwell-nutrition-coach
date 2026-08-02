@@ -14,8 +14,8 @@ loginBtn.addEventListener("click", async () => {
     // Patient ID: PT0001
     // Email becomes: PT0001@getwell.com
 
-    const email = patientId + "@getwell.com";
-
+   const email = patientId.toLowerCase() + "@getwell.com";
+    
     try {
 
         await signInWithEmailAndPassword(
