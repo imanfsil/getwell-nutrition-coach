@@ -195,11 +195,14 @@ onAuthStateChanged(auth, async (user) => {
             return;
         }
 
-        const data = docSnap.data();
+       const data = docSnap.data();
 
-        document.getElementById("patientName").textContent =
-            "Welcome, " + data.name;
+console.log(data);
+console.log("Patient ID:", patientId);
 
+document.getElementById("patientName").textContent =
+    "Welcome, " + data.name;
+      
         document.getElementById("currentWeight").textContent =
             data.currentWeight + " kg";
 
