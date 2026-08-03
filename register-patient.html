@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register New Patient</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef6ff;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.header{
+margin-bottom:35px;
+}
+
+.header h1{
+font-size:34px;
+color:#204c9c;
+margin-bottom:10px;
+}
+
+.header p{
+color:#666;
+}
+
+.form-box{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.section-title{
+font-size:22px;
+color:#204c9c;
+margin-top:25px;
+margin-bottom:20px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:#444;
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+outline:none;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+border-color:#204c9c;
+
+}
+
+.radio-group{
+
+display:flex;
+gap:30px;
+margin-top:10px;
+
+}
+
+.radio-group label{
+
+font-weight:500;
+
+}
+
+button{
+
+margin-top:30px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#204c9c;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#163c7e;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>Register New Patient</h1>
+
+<p>Complete the form below to register a new patient.</p>
+
+</div>
+
+<div class="form-box">
+
+<h2 class="section-title">👤 Patient Information</h2>
+
+<div class="form-group">
+
+<label>Patient ID</label>
+
+<input
+type="text"
+placeholder="Auto Generated"
+readonly>
+
+</div>
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input
+type="text">
+
+</div>
+
+<div class="form-group">
+
+<label>Phone Number</label>
+
+<input
+type="tel">
+
+</div>
+
+<div class="form-group">
+
+<label>Date of Birth</label>
+
+<input
+type="date">
+
+</div>
+
+<div class="form-group">
+
+<label>Age</label>
+
+<input
+type="text"
+placeholder="Auto Calculated"
+readonly>
+
+</div>
+
+<div class="form-group">
+
+<label>Gender</label>
+
+<div class="radio-group">
+
+<label>
+<input type="radio" name="gender">
+ Male
+</label>
+
+<label>
+<input type="radio" name="gender">
+ Female
+</label>
+
+</div>
+
+</div>
+
+<h2 class="section-title">⚕️ Health Information</h2>
+
+<div class="form-group">
+
+<label>Height (cm)</label>
+
+<input type="number">
+
+</div>
+
+<div class="form-group">
+
+<label>Starting Weight (kg)</label>
+
+<input type="number">
+
+</div>
+
+<div class="form-group">
+
+<label>Goal Weight (kg)</label>
+
+<input type="number">
+
+</div>
+
+<h2 class="section-title">🏥 Programme Information</h2>
+
+<div class="form-group">
+
+<label>Programme Start Date</label>
+
+<input type="date">
+
+</div>
+
+<div class="form-group">
+
+<label>Attending Doctor</label>
+
+<select>
+
+<option>Dr Aaron</option>
+
+<option>Dr Najwa</option>
+
+<option>Dr Aisyah</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Visit Interval</label>
+
+<div class="radio-group">
+
+<label>
+<input type="radio" name="visit">
+ Every 5 Days
+</label>
+
+<label>
+<input type="radio" name="visit">
+ Every 7 Days
+</label>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>Custom Next Appointment</label>
+
+<input type="date">
+
+</div>
+
+<h2 class="section-title">📝 Remarks</h2>
+
+<div class="form-group">
+
+<textarea
+rows="5"
+placeholder="Optional remarks..."></textarea>
+
+</div>
+
+<button>
+
+Create Patient
+
+</button>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
