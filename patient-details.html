@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef6ff;
+padding:40px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.back-btn{
+display:inline-block;
+margin-bottom:25px;
+text-decoration:none;
+color:#204c9c;
+font-weight:600;
+}
+
+.section{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:25px;
+}
+
+.section h2{
+font-size:24px;
+color:#204c9c;
+margin-bottom:20px;
+}
+
+.info-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.info-row:last-child{
+border-bottom:none;
+}
+
+.label{
+font-weight:600;
+color:#555;
+}
+
+.value{
+color:#222;
+}
+
+.progress-bar{
+width:100%;
+height:18px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.progress{
+width:40%;
+height:100%;
+background:#2d5cff;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th{
+background:#204c9c;
+color:white;
+padding:14px;
+text-align:left;
+}
+
+td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+.view-btn{
+
+background:#204c9c;
+color:white;
+border:none;
+padding:8px 18px;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+textarea{
+width:100%;
+height:120px;
+padding:15px;
+border:1px solid #ddd;
+border-radius:12px;
+resize:none;
+font-size:15px;
+}
+
+.button-group{
+display:flex;
+gap:20px;
+margin-top:25px;
+}
+
+.save-btn{
+
+background:#2d5cff;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:12px;
+font-size:15px;
+cursor:pointer;
+
+}
+
+.visit-btn{
+
+background:#204c9c;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:12px;
+font-size:15px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="patient-list.html" class="back-btn">
+← Back to Patient List
+</a>
+
+<div class="section">
+
+<h2>Patient Details</h2>
+
+<div class="info-row">
+<span class="label">Patient ID</span>
+<span class="value">GW0001</span>
+</div>
+
+<div class="info-row">
+<span class="label">Full Name</span>
+<span class="value">Nurul Iman</span>
+</div>
+
+<div class="info-row">
+<span class="label">Programme Status</span>
+<span class="value">🟢 Active</span>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>👤 Personal Information</h2>
+
+<div class="info-row">
+<span class="label">Phone Number</span>
+<span class="value">012-3456789</span>
+</div>
+
+<div class="info-row">
+<span class="label">Gender</span>
+<span class="value">Female</span>
+</div>
+
+<div class="info-row">
+<span class="label">Date of Birth</span>
+<span class="value">15 June 1999</span>
+</div>
+
+<div class="info-row">
+<span class="label">Age</span>
+<span class="value">27 Years</span>
+</div>
+
+<div class="info-row">
+<span class="label">Height</span>
+<span class="value">158 cm</span>
+</div>
+
+<div class="info-row">
+<span class="label">Attending Doctor</span>
+<span class="value">Dr Aaron</span>
+</div>
+
+<div class="info-row">
+<span class="label">Programme Start Date</span>
+<span class="value">03 August 2026</span>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>⚖️ Weight Information</h2>
+
+<div class="info-row">
+<span class="label">Current Weight</span>
+<span class="value">60 kg</span>
+</div>
+
+<div class="info-row">
+<span class="label">Goal Weight</span>
+<span class="value">55 kg</span>
+</div>
+
+<div class="info-row">
+<span class="label">BMI</span>
+<span class="value">24.03</span>
+</div>
+
+<div class="info-row">
+<span class="label">Weight Lost</span>
+<span class="value">0 kg</span>
+</div>
+
+<div class="label">
+Weight Progress Bar
+</div>
+
+<div class="progress-bar">
+<div class="progress"></div>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🥗 Daily Wellness Summary</h2>
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Calories</th>
+<th>Water</th>
+<th>Exercise</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>03 Aug 2026</td>
+<td>1568 kcal</td>
+<td>2.3 L</td>
+<td>Cycling</td>
+<td><button class="view-btn">View</button></td>
+</tr>
+
+<tr>
+<td>02 Aug 2026</td>
+<td>1702 kcal</td>
+<td>2.0 L</td>
+<td>Walking</td>
+<td><button class="view-btn">View</button></td>
+</tr>
+
+<tr>
+<td>01 Aug 2026</td>
+<td>1490 kcal</td>
+<td>2.5 L</td>
+<td>Rest Day</td>
+<td><button class="view-btn">View</button></td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>📅 Appointment Information</h2>
+
+<div class="info-row">
+<span class="label">Next Appointment</span>
+<span class="value">10 August 2026</span>
+</div>
+
+<div class="info-row">
+<span class="label">Visit Interval</span>
+<span class="value">Every 7 Days</span>
+</div>
+
+<div class="info-row">
+<span class="label">Appointment History</span>
+<span class="value">03 Aug • 27 Jul • 20 Jul</span>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📝 Remarks</h2>
+
+<textarea></textarea>
+
+<div class="button-group">
+
+<button class="save-btn">
+Save Changes
+</button>
+
+<button class="visit-btn">
+Record Visit
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
