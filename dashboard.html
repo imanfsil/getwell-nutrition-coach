@@ -197,6 +197,8 @@ onAuthStateChanged(auth, async (user) => {
 
        const data = docSnap.data();
 
+      alert(JSON.stringify(data));
+
 console.log(data);
 console.log("Patient ID:", patientId);
 console.log("Name:", data.name);
