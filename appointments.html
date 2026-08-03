@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Appointments</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef6ff;
+padding:40px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+.header{
+margin-bottom:35px;
+}
+
+.header h1{
+font-size:34px;
+color:#204c9c;
+margin-bottom:8px;
+}
+
+.header p{
+color:#666;
+}
+
+.search-box{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.search-box h2{
+font-size:22px;
+color:#204c9c;
+margin-bottom:20px;
+}
+
+.search-box input{
+width:100%;
+padding:16px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+outline:none;
+}
+
+.search-box input:focus{
+border-color:#204c9c;
+}
+
+.table-box{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#204c9c;
+color:white;
+padding:16px;
+text-align:left;
+font-size:15px;
+}
+
+td{
+padding:16px;
+border-bottom:1px solid #eee;
+}
+
+tr:hover{
+background:#f5f9ff;
+}
+
+.status-scheduled{
+color:#0a9b39;
+font-weight:600;
+}
+
+.status-completed{
+color:#0066cc;
+font-weight:600;
+}
+
+.status-cancelled{
+color:#d11a2a;
+font-weight:600;
+}
+
+.button-area{
+margin-top:25px;
+text-align:right;
+}
+
+.add-btn{
+
+background:#2d5cff;
+color:white;
+border:none;
+padding:15px 28px;
+border-radius:12px;
+font-size:15px;
+cursor:pointer;
+
+}
+
+.add-btn:hover{
+
+background:#204c9c;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>Appointments</h1>
+
+<p>Manage all patient appointments.</p>
+
+</div>
+
+<div class="search-box">
+
+<h2>📅 Search Appointment</h2>
+
+<input
+type="text"
+placeholder="Search by Patient ID or Patient Name">
+
+</div>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Time</th>
+
+<th>Patient ID</th>
+
+<th>Patient Name</th>
+
+<th>Doctor</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>10 Aug 2026</td>
+
+<td>9:00 AM</td>
+
+<td>GW0001</td>
+
+<td>Nurul Iman</td>
+
+<td>Dr Aaron</td>
+
+<td class="status-scheduled">
+🟢 Scheduled
+</td>
+
+</tr>
+
+<tr>
+
+<td>10 Aug 2026</td>
+
+<td>9:30 AM</td>
+
+<td>GW0002</td>
+
+<td>Ali Ahmad</td>
+
+<td>Dr Aaron</td>
+
+<td class="status-scheduled">
+🟢 Scheduled
+</td>
+
+</tr>
+
+<tr>
+
+<td>11 Aug 2026</td>
+
+<td>2:00 PM</td>
+
+<td>GW0003</td>
+
+<td>Sarah Lee</td>
+
+<td>Dr Najwa</td>
+
+<td class="status-completed">
+🔵 Completed
+</td>
+
+</tr>
+
+<tr>
+
+<td>12 Aug 2026</td>
+
+<td>11:00 AM</td>
+
+<td>GW0004</td>
+
+<td>John Tan</td>
+
+<td>Dr Aaron</td>
+
+<td class="status-cancelled">
+🔴 Cancelled
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="button-area">
+
+<button class="add-btn">
+
++ Add Appointment
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
