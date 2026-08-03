@@ -199,11 +199,10 @@ onAuthStateChanged(auth, async (user) => {
 
 console.log(data);
 console.log("Patient ID:", patientId);
-
-const firstName = data.name.split(" ")[0];
-
+console.log("Name:", data.name);
+      
 document.getElementById("patientName").textContent =
-    "Welcome, " + firstName + " 👋";
+    "Welcome, " + (data.name || "Patient") + " 👋";
       
         document.getElementById("currentWeight").textContent =
             data.currentWeight + " kg";
