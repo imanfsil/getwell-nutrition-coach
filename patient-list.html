@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient List</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef6ff;
+padding:40px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+.header{
+margin-bottom:35px;
+}
+
+.header h1{
+font-size:34px;
+color:#204c9c;
+margin-bottom:8px;
+}
+
+.header p{
+color:#666;
+}
+
+/* Search */
+
+.search-box{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.search-box h2{
+font-size:22px;
+color:#204c9c;
+margin-bottom:20px;
+}
+
+.search-box input{
+width:100%;
+padding:16px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+outline:none;
+}
+
+.search-box input:focus{
+border-color:#204c9c;
+}
+
+/* Table */
+
+.table-box{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#204c9c;
+color:white;
+padding:16px;
+text-align:left;
+font-size:15px;
+}
+
+td{
+padding:18px 16px;
+border-bottom:1px solid #eee;
+font-size:15px;
+}
+
+tr:hover{
+background:#f5f9ff;
+}
+
+.status-active{
+color:#0a9b39;
+font-weight:600;
+}
+
+.status-completed{
+color:#0066cc;
+font-weight:600;
+}
+
+.view-btn{
+
+background:#204c9c;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+.view-btn:hover{
+
+background:#163c7e;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>Patient List</h1>
+
+<p>Manage all registered patients.</p>
+
+</div>
+
+<div class="search-box">
+
+<h2>🔍 Search Patient</h2>
+
+<input
+type="text"
+placeholder="Search by Patient ID, Name or Phone Number">
+
+</div>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Patient ID</th>
+
+<th>Patient Name</th>
+
+<th>Phone Number</th>
+
+<th>Current Weight</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>GW0001</td>
+
+<td>Nurul Iman</td>
+
+<td>012-3456789</td>
+
+<td>60 kg</td>
+
+<td class="status-active">🟢 Active</td>
+
+<td>
+<button class="view-btn">
+View
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td>GW0002</td>
+
+<td>Ali Ahmad</td>
+
+<td>011-2233445</td>
+
+<td>88 kg</td>
+
+<td class="status-active">🟢 Active</td>
+
+<td>
+<button class="view-btn">
+View
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td>GW0003</td>
+
+<td>Sarah Lee</td>
+
+<td>017-8899001</td>
+
+<td>56 kg</td>
+
+<td class="status-completed">🔵 Completed</td>
+
+<td>
+<button class="view-btn">
+View
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td>GW0004</td>
+
+<td>John Tan</td>
+
+<td>018-7788990</td>
+
+<td>73 kg</td>
+
+<td class="status-active">🟢 Active</td>
+
+<td>
+<button class="view-btn">
+View
+</button>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
