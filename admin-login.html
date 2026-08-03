@@ -136,6 +136,26 @@ Getwell Nutrition Coach Admin Portal
 
 </div>
 
-</body>
+  <script>
 
+document.getElementById("loginBtn").addEventListener("click", function(){
+
+const username = document.getElementById("username").value;
+const password = document.getElementById("password").value;
+
+if(username === "admin" && password === "123456"){
+
+    window.location.href = "admin-dashboard.html";
+
+}else{
+
+    alert("Invalid Username or Password");
+
+}
+
+});
+
+</script>
+  
+</body>
 </html>
