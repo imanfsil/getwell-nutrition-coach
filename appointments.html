@@ -185,6 +185,77 @@ background:#204c9c;
 
 }
 
+ /* ==========================
+MODAL
+========================== */
+
+.modal{
+
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+
+}
+
+.modal-content{
+
+background:white;
+width:450px;
+padding:30px;
+border-radius:18px;
+
+display:flex;
+flex-direction:column;
+gap:15px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+}
+
+.modal-content h2{
+
+color:#204c9c;
+
+}
+
+.modal-content input{
+
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
+
+}
+
+.save-btn{
+
+background:#2d5cff;
+color:white;
+border:none;
+padding:15px;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+
+}
+
+.close-btn{
+
+font-size:28px;
+cursor:pointer;
+align-self:flex-end;
+
+} 
+
 </style>
 
 </head>
