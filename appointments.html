@@ -454,65 +454,31 @@ placeholder="Search by Patient ID or Patient Name">
 
 <div id="appointmentModal" class="modal">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span class="close-btn" onclick="closeModal()">&times;</span>
+        <span class="close-btn" onclick="closeModal()">&times;</span>
 
-<h2>New Appointment</h2>
+        <h2>New Appointment</h2>
 
-<input type="text" placeholder="Patient Name">
+        <input type="text" placeholder="Patient Name">
+        <input type="text" placeholder="Patient ID">
+        <input type="text" placeholder="Doctor">
+        <input type="date">
+        <input type="time">
 
-<input type="text" placeholder="Patient ID">
+        <button class="save-btn">
+            Save Appointment
+        </button>
 
-<input type="text" placeholder="Doctor">
-
-<input type="date">
-
-<input type="time">
-
-<button class="save-btn">
-
-Save Appointment
-
-</button>
+    </div>
 
 </div>
 
-</div>
+</div> <!-- table-box -->
 
-</div>
+</div> <!-- main-content -->
 
-</div>
-
-</div>
-
- </div>
-
-</div>
-
-</div>
-
-<script>
-
-function openModal() {
-    document.getElementById("appointmentModal").style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("appointmentModal").style.display = "none";
-}
-
-window.onclick = function(event) {
-
-    const modal = document.getElementById("appointmentModal");
-
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-
-}
-
-</script>
+</div> <!-- container -->
 
 <script>
 
