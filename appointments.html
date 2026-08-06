@@ -371,11 +371,41 @@ placeholder="Search by Patient ID or Patient Name">
 
 <div class="button-area">
 
-<button class="add-btn">
+<button class="add-btn" onclick="openModal()">
 
 + Add Appointment
 
 </button>
+
+</div>
+
+<!-- Appointment Modal -->
+
+<div id="appointmentModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close-btn" onclick="closeModal()">&times;</span>
+
+<h2>New Appointment</h2>
+
+<input type="text" placeholder="Patient Name">
+
+<input type="text" placeholder="Patient ID">
+
+<input type="text" placeholder="Doctor">
+
+<input type="date">
+
+<input type="time">
+
+<button class="save-btn">
+
+Save Appointment
+
+</button>
+
+</div>
 
 </div>
 
