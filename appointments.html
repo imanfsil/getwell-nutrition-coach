@@ -20,12 +20,60 @@ font-family:Poppins,sans-serif;
 
 body{
 background:#eef6ff;
-padding:40px;
 }
 
 .container{
-max-width:1200px;
-margin:auto;
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#204c9c;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.logo{
+font-size:34px;
+font-weight:700;
+text-align:center;
+padding:40px 20px;
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.menu{
+padding:20px;
+}
+
+.menu-link{
+text-decoration:none;
+color:inherit;
+display:block;
+}
+
+.menu-item{
+padding:15px 18px;
+margin-bottom:10px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu-item:hover{
+background:rgba(255,255,255,.15);
+}
+
+.menu-item.active{
+background:white;
+color:#204c9c;
+font-weight:600;
+}
+
+.main-content{
+flex:1;
+padding:40px;
 }
 
 .header{
@@ -143,7 +191,59 @@ background:#204c9c;
 
 <body>
 
+<body>
+
 <div class="container">
+
+<div class="sidebar">
+
+<h1 class="logo">
+Getwell
+</h1>
+
+<div class="menu">
+
+<a href="dashboard.html" class="menu-link">
+<div class="menu-item">
+🏠 Dashboard
+</div>
+</a>
+
+<a href="register-patient.html" class="menu-link">
+<div class="menu-item">
+➕ Register Patient
+</div>
+</a>
+
+<a href="patient-list.html" class="menu-link">
+<div class="menu-item">
+👥 Patient List
+</div>
+</a>
+
+<a href="appointments.html" class="menu-link">
+<div class="menu-item active">
+📅 Appointments
+</div>
+</a>
+
+<div class="menu-item">
+📊 Reports
+</div>
+
+<div class="menu-item">
+⚙️ Settings
+</div>
+
+<div class="menu-item">
+🚪 Logout
+</div>
+
+</div>
+
+</div>
+
+<div class="main-content">
 
 <div class="header">
 
@@ -272,6 +372,8 @@ placeholder="Search by Patient ID or Patient Name">
 + Add Appointment
 
 </button>
+
+</div>
 
 </div>
 
