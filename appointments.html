@@ -466,35 +466,35 @@ placeholder="Search by Patient ID or Patient Name">
         <input type="date">
         <input type="time">
 
-        <button class="save-btn">
-            Save Appointment
-        </button>
+      <button class="save-btn">
+    Save Appointment
+</button>
 
-</div>
+</div> <!-- modal-content -->
 
-</div>
+</div> <!-- modal -->
 
-</div>
+</div> <!-- table-box -->
+
+</div> <!-- main-content -->
+
+</div> <!-- container -->
 
 <script>
+const modal = document.getElementById("appointmentModal");
 
 function openModal() {
-    document.getElementById("appointmentModal").style.display = "flex";
+    console.log("Button clicked");
+    modal.style.display = "flex";
 }
 
 function closeModal() {
-    document.getElementById("appointmentModal").style.display = "none";
+    modal.style.display = "none";
 }
 
-window.onclick = function(event) {
-    const modal = document.getElementById("appointmentModal");
-
-    if (event.target === modal) {
-        modal.style.display = "none";
+window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+        closeModal();
     }
-}
-
+});
 </script>
-
-</body>
-</html>
