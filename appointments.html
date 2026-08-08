@@ -1156,6 +1156,32 @@ button.add-time{
     border-radius:12px;
     padding:13px;
 }
+.profile-next-card{position:relative;}
+.profile-info-label-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:5px;
+}
+.profile-info-label-row span{margin-bottom:0!important;}
+.profile-edit-btn{
+    width:27px;
+    height:27px;
+    border:0;
+    border-radius:7px;
+    background:#eef3ff;
+    color:#315df4;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+}
+.profile-edit-btn:hover{
+    background:#315df4;
+    color:#fff;
+}
 .profile-info-card span,
 .profile-details span{
     display:block;
@@ -1698,6 +1724,65 @@ button.add-time{
     }
     .edit-modal-grid{grid-template-columns:1fr;}
     .edit-modal-grid .full{grid-column:auto;}
+}
+
+
+/* Final Upcoming Appointments presentation */
+.day-card{
+    min-width:0;
+    min-height:190px;
+    padding:13px;
+}
+.day-appointment{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:6px;
+    margin-top:11px;
+    min-width:0;
+}
+.day-appointment-main{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    min-width:0;
+}
+.day-time{
+    white-space:nowrap;
+}
+.upcoming-patient-link{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:#204c9c;
+    font-family:"Poppins",sans-serif;
+    font-size:10px;
+    font-weight:500;
+    cursor:pointer;
+    text-align:left;
+}
+.upcoming-patient-link:hover{
+    text-decoration:underline;
+}
+.day-edit-btn{
+    flex:0 0 auto;
+    width:25px;
+    height:25px;
+    border:0;
+    border-radius:7px;
+    background:#eef3ff;
+    color:#204c9c;
+    cursor:pointer;
+    font-size:9px;
+}
+.day-edit-btn:hover{
+    background:#dfe8ff;
 }
 
 </style>
@@ -2319,202 +2404,7 @@ button.add-time{
             </div>
 
 
-            <div class="upcoming-days">
-
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <div>
-
-                            <div class="day-name">
-                                Wednesday
-                            </div>
-
-                            <div class="day-date">
-                                12 Aug 2026
-                            </div>
-
-                        </div>
-
-                        <div class="day-count">
-                            2
-                        </div>
-
-                    </div>
-
-                    <div class="day-time">
-                        9:00 AM
-                    </div>
-
-                    <div class="day-time">
-                        11:00 AM
-                    </div>
-
-                    <button class="add-time" type="button" onclick="openAppointmentModal()">
-                        + Add
-                    </button>
-
-                </div>
-
-
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <div>
-
-                            <div class="day-name">
-                                Thursday
-                            </div>
-
-                            <div class="day-date">
-                                13 Aug 2026
-                            </div>
-
-                        </div>
-
-                        <div class="day-count">
-                            3
-                        </div>
-
-                    </div>
-
-                    <div class="day-time">
-                        9:00 AM
-                    </div>
-
-                    <div class="day-time">
-                        10:30 AM
-                    </div>
-
-                    <div class="day-time">
-                        2:00 PM
-                    </div>
-
-                    <button class="add-time" type="button" onclick="openAppointmentModal()">
-                        + Add
-                    </button>
-
-                </div>
-
-
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <div>
-
-                            <div class="day-name">
-                                Friday
-                            </div>
-
-                            <div class="day-date">
-                                14 Aug 2026
-                            </div>
-
-                        </div>
-
-                        <div class="day-count">
-                            2
-                        </div>
-
-                    </div>
-
-                    <div class="day-time">
-                        9:30 AM
-                    </div>
-
-                    <div class="day-time">
-                        3:00 PM
-                    </div>
-
-                    <button class="add-time" type="button" onclick="openAppointmentModal()">
-                        + Add
-                    </button>
-
-                </div>
-
-
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <div>
-
-                            <div class="day-name">
-                                Saturday
-                            </div>
-
-                            <div class="day-date">
-                                15 Aug 2026
-                            </div>
-
-                        </div>
-
-                        <div class="day-count">
-                            2
-                        </div>
-
-                    </div>
-
-                    <div class="day-time">
-                        9:00 AM
-                    </div>
-
-                    <div class="day-time">
-                        11:30 AM
-                    </div>
-
-                    <button class="add-time" type="button" onclick="openAppointmentModal()">
-                        + Add
-                    </button>
-
-                </div>
-
-
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <div>
-
-                            <div class="day-name">
-                                Sunday
-                            </div>
-
-                            <div class="day-date">
-                                16 Aug 2026
-                            </div>
-
-                        </div>
-
-                        <div class="day-count">
-                            0
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="day-time"
-                        style="margin-top:35px;text-align:center;"
-                    >
-                        No appointments
-                    </div>
-
-                    <button class="add-time" type="button" onclick="openAppointmentModal()">
-                        + Add
-                    </button>
-
-                </div>
-
-
-            </div>
+            <div class="upcoming-days" id="upcomingDays"></div>
 
         </div>
 
@@ -2743,8 +2633,14 @@ button.add-time{
         <span>Last Visit</span>
         <strong id="profileLastVisit">10 Aug 2026</strong>
       </div>
-      <div class="profile-info-card">
-        <span>Next Appointment</span>
+      <div class="profile-info-card profile-next-card">
+        <div class="profile-info-label-row">
+          <span>Next Appointment</span>
+          <button class="profile-edit-btn" type="button" title="Edit appointment"
+                  onclick="editProfileAppointment()" aria-label="Edit next appointment">
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+        </div>
         <strong id="profileNextAppointment">10 Aug 2026 · 9:00 AM</strong>
       </div>
     </div>
@@ -2933,23 +2829,23 @@ See you soon, and thank you for choosing GetWell Clinic! 😊💙</textarea>
    ========================================================= */
 
 const samplePatients = [
-  {id:"GW0001", name:"Nurul Iman", phone:"012-3456789", weight:"60 kg", status:"Active", lastVisit:"10 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0002", name:"Ali Ahmad", phone:"011-2233445", weight:"88 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0003", name:"Sarah Lee", phone:"017-8899001", weight:"56 kg", status:"Completed", lastVisit:"10 Aug 2026", nextAppointment:"—", doctor:"Dr. Najwa", type:"Skin Consultation"},
-  {id:"GW0004", name:"John Tan", phone:"018-7788990", weight:"73 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy"},
-  {id:"GW0005", name:"Fatimah Zahra", phone:"012-5566778", weight:"72 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0006", name:"Ahmad Firdaus", phone:"013-4455667", weight:"81 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 10:30 AM", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0007", name:"Siti Aisyah", phone:"016-9988776", weight:"64 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 2:00 PM", doctor:"Dr. Najwa", type:"IV Drip Therapy"},
-  {id:"GW0008", name:"Ali bin Hassan", phone:"012-1112233", weight:"90 kg", status:"Active", lastVisit:"9 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0009", name:"Nur Syazwani", phone:"013-2223344", weight:"68 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0010", name:"Farah Nadia", phone:"014-3334455", weight:"76 kg", status:"Active", lastVisit:"26 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0011", name:"Ahmad Syukri", phone:"015-4445566", weight:"84 kg", status:"Active", lastVisit:"9 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0012", name:"Nurul Huda", phone:"016-5556677", weight:"71 kg", status:"Active", lastVisit:"12 May 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0013", name:"Jivitha", phone:"017-1112233", weight:"69 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
-  {id:"GW0014", name:"Mei Ling", phone:"012-2223344", weight:"63 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0015", name:"Hafiz Rahman", phone:"013-3334455", weight:"82 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Consultation"},
-  {id:"GW0016", name:"Aina Sofea", phone:"016-4445566", weight:"58 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 3:00 PM", doctor:"Dr. Najwa", type:"Follow Up"},
-  {id:"GW0017", name:"Daniel Lim", phone:"018-5556677", weight:"77 kg", status:"Active", lastVisit:"6 Aug 2026", nextAppointment:"12 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy"}
+  {id:"GW0001", name:"Nurul Iman", phone:"012-3456789", weight:"60 kg", status:"Active", lastVisit:"10 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"10 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Scheduled"},{"date":"27 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"13 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"29 Jun 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0002", name:"Ali Ahmad", phone:"011-2233445", weight:"88 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0003", name:"Sarah Lee", phone:"017-8899001", weight:"56 kg", status:"Completed", lastVisit:"10 Aug 2026", nextAppointment:"—", doctor:"Dr. Najwa", type:"Skin Consultation", history:[{"date":"10 Aug 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"20 Jul 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"22 Jun 2026","type":"Consultation","doctor":"Dr. Najwa","status":"Completed"}]},
+  {id:"GW0004", name:"John Tan", phone:"018-7788990", weight:"73 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy", history:[{"date":"7 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"24 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"10 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0005", name:"Fatimah Zahra", phone:"012-5566778", weight:"72 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"8 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0006", name:"Ahmad Firdaus", phone:"013-4455667", weight:"81 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 10:30 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"26 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0007", name:"Siti Aisyah", phone:"016-9988776", weight:"64 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 2:00 PM", doctor:"Dr. Najwa", type:"IV Drip Therapy", history:[{"date":"8 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Najwa","status":"Completed"},{"date":"18 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Najwa","status":"Completed"}]},
+  {id:"GW0008", name:"Ali bin Hassan", phone:"012-1112233", weight:"90 kg", status:"Active", lastVisit:"9 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"9 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"No Show"},{"date":"26 Jul 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0009", name:"Nur Syazwani", phone:"013-2223344", weight:"68 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"No Show"},{"date":"25 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0010", name:"Farah Nadia", phone:"014-3334455", weight:"76 kg", status:"Active", lastVisit:"26 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"26 Jun 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 Jun 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"29 May 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"15 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"1 May 2026","type":"Initial Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0011", name:"Ahmad Syukri", phone:"015-4445566", weight:"84 kg", status:"Active", lastVisit:"9 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"9 Jun 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"26 May 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0012", name:"Nurul Huda", phone:"016-5556677", weight:"71 kg", status:"Active", lastVisit:"12 May 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"12 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"28 Apr 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"14 Apr 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0013", name:"Jivitha", phone:"017-1112233", weight:"69 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"8 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0014", name:"Mei Ling", phone:"012-2223344", weight:"63 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0015", name:"Hafiz Rahman", phone:"013-3334455", weight:"82 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Consultation", history:[{"date":"7 Aug 2026","type":"Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"24 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
+  {id:"GW0016", name:"Aina Sofea", phone:"016-4445566", weight:"58 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 3:00 PM", doctor:"Dr. Najwa", type:"Follow Up", history:[{"date":"7 Aug 2026","type":"Follow Up","doctor":"Dr. Najwa","status":"Completed"},{"date":"21 Jul 2026","type":"Follow Up","doctor":"Dr. Najwa","status":"Completed"}]},
+  {id:"GW0017", name:"Daniel Lim", phone:"018-5556677", weight:"77 kg", status:"Active", lastVisit:"6 Aug 2026", nextAppointment:"12 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy", history:[{"date":"6 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"23 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"}]}
 ];
 
 const todayAppointments = [
@@ -3331,45 +3227,6 @@ function saveEditedAppointment(){
 }
 
 function openPatientProfileByName(name){
-  const patient=samplePatients.find(p=>p.name===name);
-
-  if(!patient){
-    alert("Patient profile is not available in this UI sample yet.");
-    return;
-  }
-
-  document.getElementById("profileAvatar").textContent =
-    patient.name.split(" ").map(part=>part[0]).slice(0,2).join("").toUpperCase();
-  document.getElementById("profileName").textContent=patient.name;
-  document.getElementById("profileId").textContent=patient.id;
-  document.getElementById("profileStatus").textContent=patient.status;
-  document.getElementById("profilePhone").textContent=patient.phone;
-  document.getElementById("profileWeight").textContent=patient.weight;
-  document.getElementById("profileLastVisit").textContent=patient.lastVisit;
-  document.getElementById("profileNextAppointment").textContent=patient.nextAppointment;
-  document.getElementById("profileDoctor").textContent=patient.doctor;
-  document.getElementById("profileType").textContent=patient.type;
-  document.getElementById("profileAppointmentStatus").textContent =
-    patient.nextAppointment==="—" ? "No Upcoming Appointment" : "Scheduled";
-
-  const history=[
-    {date:patient.lastVisit,type:patient.type,doctor:patient.doctor,status:"Completed"},
-    {date:"Previous Visit",type:"Follow Up",doctor:patient.doctor,status:"Completed"}
-  ];
-
-  document.getElementById("profileHistory").innerHTML=history.map(h=>`
-    <div class="profile-history-row">
-      <strong>${h.date}</strong>
-      <span>${h.type}</span>
-      <span>${h.doctor}</span>
-      <span class="status status-completed">${h.status}</span>
-    </div>`).join("");
-
-  document.getElementById("patientProfileOverlay").classList.add("show");
-}
-
-
-function openPatientProfileByName(name){
   const patient = samplePatients.find(p => p.name === name);
 
   if(!patient){
@@ -3392,31 +3249,59 @@ function openPatientProfileByName(name){
   document.getElementById("profileAppointmentStatus").textContent =
     patient.nextAppointment === "—" ? "No Upcoming Appointment" : "Scheduled";
 
-  const history = [
-    {
-      date: patient.lastVisit,
-      type: patient.type,
-      doctor: patient.doctor,
-      status: "Completed"
-    },
-    {
-      date: "Previous Visit",
-      type: "Follow Up",
-      doctor: patient.doctor,
-      status: "Completed"
-    }
-  ];
+  // Show every visit recorded for this UI sample, newest first.
+  const history = patient.history && patient.history.length
+    ? patient.history
+    : [{
+        date: patient.lastVisit,
+        type: patient.type,
+        doctor: patient.doctor,
+        status: "Completed"
+      }];
 
   document.getElementById("profileHistory").innerHTML = history.map(h => `
     <div class="profile-history-row">
       <strong>${h.date}</strong>
       <span>${h.type}</span>
       <span>${h.doctor}</span>
-      <span class="status status-completed">${h.status}</span>
+      <span class="status ${h.status==="Completed" ? "status-completed" : h.status==="No Show" ? "status-no-show" : "status-scheduled"}">${h.status}</span>
     </div>
   `).join("");
 
   document.getElementById("patientProfileOverlay").classList.add("show");
+}
+
+function editProfileAppointment(){
+  const name = document.getElementById("profileName").textContent;
+  const patient = samplePatients.find(p => p.name === name);
+
+  if(!patient){
+    alert("Patient profile is not available in this UI sample yet.");
+    return;
+  }
+
+  if(patient.nextAppointment === "—"){
+    // UI-only: allow staff to create the next appointment for this patient.
+    openEditAppointment(patient.name, patient.doctor, patient.type, "", "");
+    return;
+  }
+
+  const parts = patient.nextAppointment.split(" · ");
+  const dateText = parts[0] || "";
+  const timeText = parts[1] || "";
+
+  const parsedDate = new Date(dateText);
+  const isoDate = isNaN(parsedDate.getTime())
+    ? ""
+    : `${parsedDate.getFullYear()}-${String(parsedDate.getMonth()+1).padStart(2,"0")}-${String(parsedDate.getDate()).padStart(2,"0")}`;
+
+  openEditAppointment(
+    patient.name,
+    patient.doctor,
+    patient.type,
+    isoDate,
+    timeText
+  );
 }
 
 function renderPatientOptions(filter=""){
