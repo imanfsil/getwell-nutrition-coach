@@ -1,1 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Appointments Overview - Getwell</title>
+
+<!-- Poppins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<!-- Font Awesome -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background: #eef6ff;
+    color: #17325c;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 258px;
+    height: 100vh;
+
+    background: #2b5ba6;
+    color: #ffffff;
+
+    z-index: 100;
+}
+
+.logo {
+    height: 118px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 38px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.nav {
+    padding: 42px 18px;
+}
+
+.nav a {
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 0 25px;
+
+    margin-bottom: 9px;
+
+    border-radius: 13px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+    transition: background 0.2s ease;
+}
+
+.nav a:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+.nav a.active {
+    background: #ffffff;
+    color: #204c9c;
+
+    font-weight: 700;
+}
+
+.nav-icon {
+    width: 23px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    margin-left: 258px;
+
+    width: calc(100% - 258px);
+
+    min-height: 100vh;
+
+    padding: 42px 42px 60px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 32px;
+}
+
+.page-title h1 {
+    color: #204c9c;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 36px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.page-title p {
+    color: #666666;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e1ec;
+
+    border-radius: 10px;
+
+    padding: 12px 16px;
+
+    color: #52627a;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+
+    font-weight: 400;
+}
+
+.date-selector .calendar-icon {
+    color: #2458aa;
+}
+
+.date-selector .arrow {
+    font-size: 10px;
+    margin-left: 3px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.summary-card {
+    min-height: 125px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 23px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.summary-icon {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: #ffffff;
+
+    font-size: 23px;
+}
+
+.summary-blue {
+    background: #2870f5;
+}
+
+.summary-green {
+    background: #16b86a;
+}
+
+.summary-orange {
+    background: #f89b0f;
+}
+
+.summary-red {
+    background: #ed4a54;
+}
+
+.summary-label {
+    color: #666666;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    margin-bottom: 3px;
+}
+
+.summary-number {
+    color: #17325c;
+
+    font-size: 28px;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+    margin-bottom: 3px;
+}
+
+.summary-sub {
+    color: #888888;
+
+    font-size: 10px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   GENERAL CARD
+========================================================= */
+
+.card {
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+    min-width: 0;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #204c9c;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+.card-title i {
+    font-size: 15px;
+}
+
+.card-button {
+    border: none;
+
+    background: #f0f5ff;
+
+    color: #2858a3;
+
+    border-radius: 8px;
+
+    padding: 8px 12px;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.card-button:hover {
+    background: #e5eefc;
+}
+
+
+/* =========================================================
+   APPOINTMENT LIST
+========================================================= */
+
+.appointment-item {
+    display: grid;
+
+    grid-template-columns: 72px minmax(0, 1fr) 75px 82px;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 72px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.appointment-item:last-of-type {
+    border-bottom: none;
+}
+
+.appointment-time {
+    color: #2458aa;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+.appointment-patient {
+    color: #17325c;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.appointment-type {
+    color: #777777;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    margin-top: 3px;
+
+    white-space: nowrap;
+}
+
+.appointment-doctor {
+    color: #666666;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    white-space: nowrap;
+}
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 9px;
+
+    border-radius: 10px;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.status-scheduled {
+    background: #e5f9ee;
+    color: #09975b;
+}
+
+.status-completed {
+    background: #e8f0ff;
+    color: #2466cf;
+}
+
+.status-no-show {
+    background: #ffe8eb;
+    color: #d73542;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.card-footer {
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    background: #f1f5fd;
+
+    color: #3567bc;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.card-footer.green {
+    background: #e6f8ee;
+    color: #15965c;
+}
+
+
+/* =========================================================
+   MISSED APPOINTMENTS
+========================================================= */
+
+.missed-card .card-title {
+    color: #d63c48;
+}
+
+.missed-card .card-title i {
+    color: #d63c48;
+}
+
+.missed-item {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.missed-item:last-child {
+    border-bottom: none;
+}
+
+.missed-name {
+    color: #17325c;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.missed-date {
+    color: #888888;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    margin-top: 3px;
+}
+
+.no-show {
+    background: #ffe7ea;
+
+    color: #d73542;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   UPCOMING APPOINTMENTS
+========================================================= */
+
+.upcoming-card {
+    grid-column: span 2;
+}
+
+.upcoming-days {
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.day-card {
+    min-height: 155px;
+
+    padding: 13px;
+
+    border: 1px solid #dfe5ee;
+
+    border-radius: 10px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.day-name {
+    color: #263d62;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.day-date {
+    color: #888888;
+
+    font-size: 8px;
+
+    font-weight: 400;
+
+    margin-top: 3px;
+}
+
+.day-count {
+    min-width: 21px;
+    height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2858a7;
+
+    color: #ffffff;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+.day-time {
+    color: #55657d;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    margin-top: 12px;
+}
+
+.add-time {
+    color: #3567bc;
+
+    text-align: center;
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    margin-top: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FOLLOW-UP
+========================================================= */
+
+.followup-card .card-title {
+    color: #e37b00;
+}
+
+.followup-card .card-title i {
+    color: #e37b00;
+}
+
+.followup-item {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.followup-item:last-child {
+    border-bottom: none;
+}
+
+.followup-name {
+    color: #17325c;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.last-visit {
+    color: #888888;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-card {
+    grid-column: span 1;
+}
+
+.quick-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.quick-button {
+    width: 100%;
+    height: 46px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.quick-button i {
+    margin-right: 7px;
+}
+
+.quick-primary {
+    background: #315df4;
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+.quick-secondary {
+    background: #f1f4fb;
+    color: #52627a;
+}
+
+.quick-button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   ADD APPOINTMENT MODAL
+========================================================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999;
+
+    background: rgba(15,31,55,0.45);
+
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 460px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    position: relative;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 19px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8792a3;
+
+    font-size: 26px;
+
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: #204c9c;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin-bottom: 22px;
+}
+
+.form-group {
+    margin-bottom: 13px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #52627a;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #333333;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 400;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #204c9c;
+}
+
+.save-button {
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 7px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #204c9c;
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #163c7e;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1350px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+
+        padding: 35px 30px 50px;
+    }
+
+    .nav a {
+        font-size: 14px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .summary-grid {
+        gap: 14px;
+    }
+
+    .summary-card {
+        padding: 18px;
+    }
+
+}
+
+
+@media (max-width: 1100px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .upcoming-card {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: 180px;
+    }
+
+    .main {
+        margin-left: 180px;
+        width: calc(100% - 180px);
+
+        padding: 30px 20px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .upcoming-card {
+        grid-column: span 1;
+    }
+
+    .upcoming-days {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+    }
+
+    .logo {
+        height: 75px;
+    }
+
+    .nav {
+        padding: 15px;
+    }
+
+    .nav a {
+        height: 45px;
+    }
+
+    .main {
+        margin-left: 0;
+
+        width: 100%;
+
+        padding: 25px 15px;
+    }
+
+    .page-title h1 {
+        font-size: 30px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .upcoming-card {
+        grid-column: span 1;
+    }
+
+    .upcoming-days {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-item {
+        grid-template-columns: 65px 1fr;
+        padding: 10px 0;
+    }
+
+    .appointment-doctor,
+    .status {
+        display: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Getwell
+    </div>
+
+    <nav class="nav">
+
+        <a href="dashboard.html">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-house"></i>
+            </span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="register-patient.html">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </span>
+
+            <span>Register Patient</span>
+
+        </a>
+
+
+        <a href="patient-list.html">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-users"></i>
+            </span>
+
+            <span>Patient List</span>
+
+        </a>
+
+
+        <a href="appointments.html" class="active">
+
+            <span class="nav-icon">
+                <i class="fa-regular fa-calendar-check"></i>
+            </span>
+
+            <span>Appointments</span>
+
+        </a>
+
+
+        <a href="reports.html">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-chart-column"></i>
+            </span>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="#">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-gear"></i>
+            </span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a href="admin-login.html">
+
+            <span class="nav-icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+    <!-- PAGE HEADER -->
+
+    <header class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                Appointments Overview
+            </h1>
+
+            <p>
+                Stay on top of your daily schedule and follow-ups.
+            </p>
+
+        </div>
+
+
+        <div class="date-selector">
+
+            <i class="fa-regular fa-calendar calendar-icon"></i>
+
+            <span>
+                10 Aug 2026 (Today)
+            </span>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="summary-grid">
+
+
+        <!-- TODAY -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-blue">
+
+                <i class="fa-regular fa-calendar-check"></i>
+
+            </div>
+
+            <div>
+
+                <div class="summary-label">
+                    Today's Appointments
+                </div>
+
+                <div class="summary-number">
+                    4
+                </div>
+
+                <div class="summary-sub">
+                    Scheduled
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOMORROW -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-green">
+
+                <i class="fa-regular fa-calendar"></i>
+
+            </div>
+
+            <div>
+
+                <div class="summary-label">
+                    Tomorrow's Appointments
+                </div>
+
+                <div class="summary-number">
+                    3
+                </div>
+
+                <div class="summary-sub">
+                    Scheduled
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THIS WEEK -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-orange">
+
+                <i class="fa-solid fa-calendar-week"></i>
+
+            </div>
+
+            <div>
+
+                <div class="summary-label">
+                    This Week
+                </div>
+
+                <div class="summary-number">
+                    12
+                </div>
+
+                <div class="summary-sub">
+                    Total Appointments
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MISSING -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-red">
+
+                <i class="fa-solid fa-user-clock"></i>
+
+            </div>
+
+            <div>
+
+                <div class="summary-label">
+                    Missing / No Show
+                </div>
+
+                <div class="summary-number">
+                    5
+                </div>
+
+                <div class="summary-sub">
+                    Need Follow-up
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN APPOINTMENT GRID
+    ====================================================== -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- =================================================
+             TODAY'S APPOINTMENTS
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2 class="card-title">
+
+                    <i class="fa-regular fa-calendar-check"></i>
+
+                    Today's Appointments
+
+                </h2>
+
+                <button class="card-button">
+                    View All
+                </button>
+
+            </div>
+
+
+            <!-- 9:00 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    9:00 AM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Nurul Iman
+                    </div>
+
+                    <div class="appointment-type">
+                        Weight Loss Consultation
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Aaron
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <!-- 9:30 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    9:30 AM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Ali Ahmad
+                    </div>
+
+                    <div class="appointment-type">
+                        Follow Up
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Aaron
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <!-- 11:00 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    11:00 AM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        John Tan
+                    </div>
+
+                    <div class="appointment-type">
+                        IV Drip Therapy
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Aaron
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <!-- 2:00 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    2:00 PM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Sarah Lee
+                    </div>
+
+                    <div class="appointment-type">
+                        Skin Consultation
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Najwa
+                </div>
+
+                <div class="status status-completed">
+                    Completed
+                </div>
+
+            </div>
+
+
+            <div class="card-footer">
+                View Full Schedule &nbsp; →
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TOMORROW'S APPOINTMENTS
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2 class="card-title">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    Tomorrow's Appointments
+
+                </h2>
+
+                <button class="card-button">
+                    View All
+                </button>
+
+            </div>
+
+
+            <!-- 9:00 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    9:00 AM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Fatimah Zahra
+                    </div>
+
+                    <div class="appointment-type">
+                        Weight Loss Consultation
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Aaron
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <!-- 10:30 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    10:30 AM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Ahmad Firdaus
+                    </div>
+
+                    <div class="appointment-type">
+                        Follow Up
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Aaron
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <!-- 2:00 -->
+
+            <div class="appointment-item">
+
+                <div class="appointment-time">
+                    2:00 PM
+                </div>
+
+                <div>
+
+                    <div class="appointment-patient">
+                        Siti Aisyah
+                    </div>
+
+                    <div class="appointment-type">
+                        IV Drip Therapy
+                    </div>
+
+                </div>
+
+                <div class="appointment-doctor">
+                    Dr. Najwa
+                </div>
+
+                <div class="status status-scheduled">
+                    Scheduled
+                </div>
+
+            </div>
+
+
+            <div class="card-footer green">
+                View Full Schedule &nbsp; →
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MISSED APPOINTMENTS
+        ================================================== -->
+
+        <div class="card missed-card">
+
+            <div class="card-header">
+
+                <h2 class="card-title">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    Missed Appointments
+
+                </h2>
+
+                <button class="card-button">
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="missed-item">
+
+                <div>
+
+                    <div class="missed-name">
+                        Ali bin Hassan
+                    </div>
+
+                    <div class="missed-date">
+                        10 Aug 2026
+                    </div>
+
+                </div>
+
+                <div class="no-show">
+                    No Show
+                </div>
+
+            </div>
+
+
+            <div class="missed-item">
+
+                <div>
+
+                    <div class="missed-name">
+                        Nur Syazwani
+                    </div>
+
+                    <div class="missed-date">
+                        9 Aug 2026
+                    </div>
+
+                </div>
+
+                <div class="no-show">
+                    No Show
+                </div>
+
+            </div>
+
+
+            <div class="missed-item">
+
+                <div>
+
+                    <div class="missed-name">
+                        John Tan
+                    </div>
+
+                    <div class="missed-date">
+                        7 Aug 2026
+                    </div>
+
+                </div>
+
+                <div class="no-show">
+                    No Show
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             UPCOMING APPOINTMENTS
+        ================================================== -->
+
+        <div class="card upcoming-card">
+
+            <div class="card-header">
+
+                <h2 class="card-title">
+
+                    <i class="fa-regular fa-calendar-days"></i>
+
+                    Upcoming Appointments
+
+                </h2>
+
+                <button class="card-button">
+                    View Calendar
+                </button>
+
+            </div>
+
+
+            <div class="upcoming-days">
+
+
+                <!-- WEDNESDAY -->
+
+                <div class="day-card">
+
+                    <div class="day-header">
+
+                        <div>
+
+                            <div class="day-name">
+                                Wednesday
+                            </div>
+
+                            <div class="day-date">
+                                12 Aug 2026
+                            </div>
+
+                        </div>
+
+                        <div class="day-count">
+                            2
+                        </div>
+
+                    </div>
+
+                    <div class="day-time">
+                        9:00 AM
+                    </div>
+
+                    <div class="day-time">
+                        11:00 AM
+                    </div>
+
+                    <div class="add-time">
+                        + Add
+                    </div>
+
+                </div>
+
+
+                <!-- THURSDAY -->
+
+                <div class="day-card">
+
+                    <div class="day-header">
+
+                        <div>
+
+                            <div class="day-name">
+                                Thursday
+                            </div>
+
+                            <div class="day-date">
+                                13 Aug 2026
+                            </div>
+
+                        </div>
+
+                        <div class="day-count">
+                            3
+                        </div>
+
+                    </div>
+
+                    <div class="day-time">
+                        9:00 AM
+                    </div>
+
+                    <div class="day-time">
+                        10:30 AM
+                    </div>
+
+                    <div class="day-time">
+                        2:00 PM
+                    </div>
+
+                    <div class="add-time">
+                        + Add
+                    </div>
+
+                </div>
+
+
+                <!-- FRIDAY -->
+
+                <div class="day-card">
+
+                    <div class="day-header">
+
+                        <div>
+
+                            <div class="day-name">
+                                Friday
+                            </div>
+
+                            <div class="day-date">
+                                14 Aug 2026
+                            </div>
+
+                        </div>
+
+                        <div class="day-count">
+                            2
+                        </div>
+
+                    </div>
+
+                    <div class="day-time">
+                        9:30 AM
+                    </div>
+
+                    <div class="day-time">
+                        3:00 PM
+                    </div>
+
+                    <div class="add-time">
+                        + Add
+                    </div>
+
+                </div>
+
+
+                <!-- SATURDAY -->
+
+                <div class="day-card">
+
+                    <div class="day-header">
+
+                        <div>
+
+                            <div class="day-name">
+                                Saturday
+                            </div>
+
+                            <div class="day-date">
+                                15 Aug 2026
+                            </div>
+
+                        </div>
+
+                        <div class="day-count">
+                            2
+                        </div>
+
+                    </div>
+
+                    <div class="day-time">
+                        9:00 AM
+                    </div>
+
+                    <div class="day-time">
+                        11:30 AM
+                    </div>
+
+                    <div class="add-time">
+                        + Add
+                    </div>
+
+                </div>
+
+
+                <!-- SUNDAY -->
+
+                <div class="day-card">
+
+                    <div class="day-header">
+
+                        <div>
+
+                            <div class="day-name">
+                                Sunday
+                            </div>
+
+                            <div class="day-date">
+                                16 Aug 2026
+                            </div>
+
+                        </div>
+
+                        <div class="day-count">
+                            0
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="day-time"
+                        style="margin-top:35px;text-align:center;"
+                    >
+                        No appointments
+                    </div>
+
+                    <div class="add-time">
+                        + Add
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PATIENTS DUE FOR FOLLOW-UP
+        ================================================== -->
+
+        <div class="card followup-card">
+
+            <div class="card-header">
+
+                <h2 class="card-title">
+
+                    <i class="fa-solid fa-user-clock"></i>
+
+                    Patients Due for Follow-Up
+
+                </h2>
+
+                <button class="card-button">
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="followup-item">
+
+                <div class="followup-name">
+                    Farah Nadia
+                </div>
+
+                <div class="last-visit">
+                    Last visit: 45 days ago
+                </div>
+
+            </div>
+
+
+            <div class="followup-item">
+
+                <div class="followup-name">
+                    Ahmad Syukri
+                </div>
+
+                <div class="last-visit">
+                    Last visit: 62 days ago
+                </div>
+
+            </div>
+
+
+            <div class="followup-item">
+
+                <div class="followup-name">
+                    Nurul Huda
+                </div>
+
+                <div class="last-visit">
+                    Last visit: 90 days ago
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <div class="card quick-card">
+
+            <div class="card-header">
+
+                <h2
+                    class="card-title"
+                    style="color:#5a45d8;"
+                >
+
+                    <i
+                        class="fa-solid fa-bolt"
+                        style="color:#5a45d8;"
+                    ></i>
+
+                    Quick Actions
+
+                </h2>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <button
+                    class="quick-button quick-primary"
+                    onclick="openAppointmentModal()"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    New Appointment
+
+                </button>
+
+
+                <button
+                    class="quick-button quick-secondary"
+                >
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    Follow Up Reminders
+
+                </button>
+
+
+                <button
+                    class="quick-button quick-secondary"
+                >
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Export Appointments
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     NEW APPOINTMENT MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="appointmentModal"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="modal-close"
+            onclick="closeAppointmentModal()"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+
+        <h2>
+            New Appointment
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="patientName">
+                Patient Name
+            </label>
+
+            <input
+                type="text"
+                id="patientName"
+                placeholder="Enter patient name"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="patientId">
+                Patient ID
+            </label>
+
+            <input
+                type="text"
+                id="patientId"
+                placeholder="Enter patient ID"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="doctor">
+                Doctor
+            </label>
+
+            <select id="doctor">
+
+                <option value="">
+                    Select Doctor
+                </option>
+
+                <option value="Dr. Aaron">
+                    Dr. Aaron
+                </option>
+
+                <option value="Dr. Najwa">
+                    Dr. Najwa
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="appointmentDate">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="appointmentDate"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="appointmentTime">
+                Time
+            </label>
+
+            <input
+                type="time"
+                id="appointmentTime"
+            >
+
+        </div>
+
+
+        <button
+            class="save-button"
+            onclick="saveAppointment()"
+        >
+            Save Appointment
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   APPOINTMENT MODAL
+========================================================= */
+
+function openAppointmentModal() {
+
+    const modal = document.getElementById("appointmentModal");
+
+    modal.classList.add("show");
+
+}
+
+
+function closeAppointmentModal() {
+
+    const modal = document.getElementById("appointmentModal");
+
+    modal.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   SAVE APPOINTMENT
+========================================================= */
+
+function saveAppointment() {
+
+    const patientName =
+        document.getElementById("patientName").value.trim();
+
+    const patientId =
+        document.getElementById("patientId").value.trim();
+
+    const doctor =
+        document.getElementById("doctor").value;
+
+    const date =
+        document.getElementById("appointmentDate").value;
+
+    const time =
+        document.getElementById("appointmentTime").value;
+
+
+    if (
+        patientName === "" ||
+        patientId === "" ||
+        doctor === "" ||
+        date === "" ||
+        time === ""
+    ) {
+
+        alert("Please complete all appointment details.");
+
+        return;
+
+    }
+
+
+    alert("Appointment saved successfully.");
+
+
+    document.getElementById("patientName").value = "";
+    document.getElementById("patientId").value = "";
+    document.getElementById("doctor").value = "";
+    document.getElementById("appointmentDate").value = "";
+    document.getElementById("appointmentTime").value = "";
+
+
+    closeAppointmentModal();
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+
+window.addEventListener("click", function(event) {
+
+    const modal =
+        document.getElementById("appointmentModal");
+
+    if (event.target === modal) {
+
+        closeAppointmentModal();
+
+    }
+
+});
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        closeAppointmentModal();
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
