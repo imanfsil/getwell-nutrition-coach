@@ -3,153 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Appointments Overview - Getwell</title>
 
+  <!-- Poppins Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
   <style>
+
+    /* =========================
+       GLOBAL
+    ========================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
       background: #eef5fc;
-      color: #10264a;
-      display: flex;
+      color: #17325c;
       min-height: 100vh;
+      display: flex;
     }
 
-    /* SIDEBAR */
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
     .sidebar {
-      width: 225px;
-      background: #2855a0;
-      color: white;
+      width: 180px;
       min-height: 100vh;
+      background: #2858a3;
+      color: white;
       position: fixed;
       left: 0;
       top: 0;
-      padding-bottom: 20px;
+      bottom: 0;
     }
 
     .logo {
-      height: 116px;
+      height: 84px;
       display: flex;
       align-items: center;
-      padding-left: 30px;
-      font-size: 25px;
+      padding-left: 24px;
+      font-size: 20px;
       font-weight: 700;
       border-bottom: 1px solid rgba(255,255,255,0.15);
     }
 
     .nav {
-      padding: 22px 18px;
+      padding: 22px 14px;
     }
 
     .nav a {
+      height: 44px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      height: 55px;
-      padding: 0 18px;
+      gap: 12px;
+      padding: 0 16px;
+      margin-bottom: 5px;
+      border-radius: 9px;
       color: white;
       text-decoration: none;
-      border-radius: 11px;
-      font-size: 14px;
-      margin-bottom: 5px;
+      font-size: 11px;
+      font-weight: 500;
     }
 
     .nav a:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.10);
     }
 
     .nav a.active {
       background: white;
-      color: #2855a0;
-      font-weight: 700;
+      color: #2858a3;
+      font-weight: 600;
     }
 
     .nav-icon {
-      width: 17px;
+      width: 16px;
       text-align: center;
-      font-size: 15px;
+      font-size: 11px;
     }
 
     .clinic-label {
       position: absolute;
-      bottom: 18px;
-      left: 18px;
-      right: 18px;
+      left: 14px;
+      right: 14px;
+      bottom: 8px;
       border: 1px solid rgba(255,255,255,0.18);
       border-radius: 7px;
-      padding: 12px;
-      font-size: 10px;
+      padding: 10px;
+      font-size: 8px;
       line-height: 1.5;
-      opacity: 0.9;
     }
 
-    /* MAIN */
+
+    /* =========================
+       MAIN
+    ========================= */
+
     .main {
-      margin-left: 225px;
-      width: calc(100% - 225px);
-      padding: 30px 34px;
+      margin-left: 180px;
+      width: calc(100% - 180px);
+      min-height: 100vh;
+      padding: 16px 26px 32px;
     }
+
+
+    /* =========================
+       HEADER
+    ========================= */
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 25px;
+      margin-bottom: 16px;
     }
 
     .header h1 {
-      font-size: 30px;
       color: #24539f;
-      margin-bottom: 7px;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
     }
 
     .header p {
-      font-size: 13px;
       color: #73819a;
+      font-size: 10px;
+      font-weight: 400;
     }
 
     .date-selector {
       background: white;
       border: 1px solid #dce4ef;
       border-radius: 7px;
-      padding: 10px 14px;
+      padding: 7px 11px;
       color: #53627a;
-      font-size: 11px;
+      font-size: 9px;
     }
 
-    /* SUMMARY CARDS */
+
+    /* =========================
+       SUMMARY CARDS
+    ========================= */
+
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 9px;
+      margin-bottom: 11px;
     }
 
     .summary-card {
       background: white;
-      border-radius: 12px;
-      padding: 18px;
+      min-height: 68px;
+      border-radius: 11px;
+      padding: 13px;
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 11px;
       box-shadow: 0 3px 12px rgba(37, 76, 130, 0.07);
     }
 
     .summary-icon {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 19px;
       flex-shrink: 0;
+    }
+
+    .summary-icon i {
+      font-size: 16px;
     }
 
     .blue {
@@ -169,66 +211,92 @@
     }
 
     .summary-label {
-      font-size: 10px;
-      color: #6e7d95;
-      margin-bottom: 4px;
+      font-size: 8px;
+      color: #667792;
+      margin-bottom: 1px;
     }
 
     .summary-number {
-      font-size: 19px;
-      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 600;
       color: #142d56;
     }
 
     .summary-sub {
-      font-size: 9px;
+      font-size: 7px;
       color: #8a96a8;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
-    /* CONTENT GRID */
+
+    /* =========================
+       CONTENT GRID
+    ========================= */
+
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .panel {
       background: white;
-      border-radius: 12px;
-      padding: 13px;
+      border-radius: 11px;
+      padding: 11px;
       box-shadow: 0 3px 12px rgba(37, 76, 130, 0.07);
     }
+
+
+    /* =========================
+       PANEL TITLE
+    ========================= */
 
     .panel-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 7px;
     }
 
     .panel-title h2 {
-      font-size: 12px;
-      color: #1d4f9d;
-      font-weight: 700;
+      font-size: 10px;
+      color: #164e9f;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-title h2 i {
+      font-size: 9px;
     }
 
     .view-all {
-      border: 0;
+      border: none;
       background: #f1f5fd;
       color: #3567bc;
-      font-size: 9px;
+      font-size: 7px;
       padding: 5px 8px;
       border-radius: 5px;
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* APPOINTMENT ROW */
+    .view-all:hover {
+      background: #e5edfb;
+    }
+
+
+    /* =========================
+       APPOINTMENT ROW
+    ========================= */
+
     .appointment-row {
       display: grid;
-      grid-template-columns: 43px 1fr 70px 62px;
+      grid-template-columns: 39px 1fr 65px 57px;
       align-items: center;
-      min-height: 48px;
+      min-height: 38px;
       border-bottom: 1px solid #edf0f5;
       gap: 5px;
     }
@@ -238,31 +306,31 @@
     }
 
     .appointment-time {
-      font-size: 9px;
+      font-size: 7px;
       color: #2458aa;
       font-weight: 600;
     }
 
     .patient-name {
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 600;
       color: #172d50;
     }
 
     .appointment-type {
-      font-size: 8px;
+      font-size: 6.5px;
       color: #7c889b;
-      margin-top: 3px;
+      margin-top: 1px;
     }
 
     .doctor {
-      font-size: 8px;
+      font-size: 6.5px;
       color: #6e7c91;
     }
 
     .status {
-      font-size: 8px;
-      padding: 4px 6px;
+      font-size: 6.5px;
+      padding: 4px 5px;
       border-radius: 8px;
       text-align: center;
       white-space: nowrap;
@@ -283,13 +351,18 @@
       background: #ffe8eb;
     }
 
+
+    /* =========================
+       PANEL FOOTER
+    ========================= */
+
     .panel-footer {
-      margin-top: 9px;
+      margin-top: 7px;
       background: #f1f5fd;
-      border-radius: 7px;
-      padding: 9px;
+      border-radius: 6px;
+      padding: 7px;
       text-align: center;
-      font-size: 9px;
+      font-size: 7px;
       color: #3568bc;
       cursor: pointer;
     }
@@ -299,21 +372,44 @@
       color: #15965c;
     }
 
-    /* ALERT PANELS */
+
+    /* =========================
+       MISSED APPOINTMENTS
+    ========================= */
+
     .alert-panel .panel-title h2 {
       color: #d63c48;
     }
+
+    .alert-panel .panel-title h2 i {
+      color: #d63c48;
+    }
+
+
+    /* =========================
+       FOLLOW-UP
+    ========================= */
 
     .followup-panel .panel-title h2 {
       color: #e37b00;
     }
 
+    .followup-panel .panel-title h2 i {
+      color: #e37b00;
+    }
+
+
+    /* =========================
+       ALERT ROW
+    ========================= */
+
     .alert-row {
-      min-height: 39px;
+      min-height: 35px;
       border-bottom: 1px solid #edf0f5;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .alert-row:last-child {
@@ -321,31 +417,37 @@
     }
 
     .alert-patient {
-      font-size: 9px;
+      font-size: 7.5px;
       color: #1a2d4b;
       font-weight: 600;
     }
 
     .alert-date {
-      font-size: 8px;
+      font-size: 6.5px;
       color: #8490a1;
-      margin-top: 3px;
+      margin-top: 1px;
     }
 
     .no-show-badge {
       background: #ffe7ea;
       color: #dc3545;
-      padding: 5px 7px;
+      padding: 4px 6px;
       border-radius: 6px;
-      font-size: 8px;
+      font-size: 6.5px;
+      white-space: nowrap;
     }
 
     .days-away {
-      font-size: 8px;
+      font-size: 6.5px;
       color: #7d899b;
+      white-space: nowrap;
     }
 
-    /* UPCOMING */
+
+    /* =========================
+       UPCOMING APPOINTMENTS
+    ========================= */
+
     .upcoming-panel {
       grid-column: span 2;
     }
@@ -353,73 +455,81 @@
     .upcoming-days {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 7px;
+      gap: 6px;
     }
 
     .day-card {
       border: 1px solid #e1e7f0;
       border-radius: 6px;
-      min-height: 105px;
-      padding: 8px;
+      min-height: 86px;
+      padding: 7px;
     }
 
     .day-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
+      align-items: flex-start;
     }
 
     .day-name {
-      font-size: 9px;
-      font-weight: 700;
+      font-size: 7px;
+      font-weight: 600;
       color: #263d62;
     }
 
     .day-date {
-      font-size: 7px;
+      font-size: 5.5px;
       color: #8a95a6;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .count {
       background: #2858a7;
       color: white;
       border-radius: 4px;
-      font-size: 7px;
-      padding: 3px 5px;
+      font-size: 6px;
+      padding: 2px 4px;
     }
 
     .day-time {
-      font-size: 8px;
+      font-size: 6.5px;
       color: #55657d;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .add-slot {
       text-align: center;
-      margin-top: 12px;
-      font-size: 8px;
+      margin-top: 9px;
+      font-size: 6px;
       color: #3567bc;
       cursor: pointer;
     }
 
-    /* QUICK ACTIONS */
+
+    /* =========================
+       QUICK ACTIONS
+    ========================= */
+
     .quick-actions {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
     .quick-btn {
       width: 100%;
-      height: 34px;
+      height: 28px;
       border: none;
       border-radius: 6px;
       background: #f1f4fb;
       color: #4e6080;
-      font-size: 9px;
+      font-size: 7px;
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .quick-btn i {
+      margin-right: 5px;
     }
 
     .quick-btn.primary {
@@ -431,7 +541,11 @@
       opacity: 0.9;
     }
 
-    /* MODAL */
+
+    /* =========================
+       MODAL
+    ========================= */
+
     .modal {
       display: none;
       position: fixed;
@@ -463,23 +577,23 @@
     .modal-content h2 {
       color: #24539f;
       font-size: 20px;
+      font-weight: 600;
       margin-bottom: 20px;
     }
 
-    .modal-content input,
-    .modal-content select {
+    .modal-content input {
       width: 100%;
       height: 42px;
       border: 1px solid #dce3ed;
       border-radius: 7px;
       margin-bottom: 11px;
       padding: 0 12px;
-      font-size: 12px;
+      font-size: 11px;
       outline: none;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .modal-content input:focus,
-    .modal-content select:focus {
+    .modal-content input:focus {
       border-color: #4778d1;
     }
 
@@ -490,13 +604,20 @@
       border: none;
       border-radius: 7px;
       color: white;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       margin-top: 5px;
+      font-family: 'Poppins', sans-serif;
     }
 
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
     @media (max-width: 1100px) {
+
       .summary-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -510,31 +631,46 @@
       }
     }
 
+
     @media (max-width: 800px) {
+
       .sidebar {
-        width: 180px;
+        width: 170px;
       }
 
       .main {
-        margin-left: 180px;
-        width: calc(100% - 180px);
+        margin-left: 170px;
+        width: calc(100% - 170px);
       }
 
-      .content-grid,
       .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-grid {
         grid-template-columns: 1fr;
       }
 
       .upcoming-panel {
         grid-column: span 1;
       }
+
+      .upcoming-days {
+        grid-template-columns: 1fr 1fr;
+      }
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- SIDEBAR -->
+
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
+
   <aside class="sidebar">
 
     <div class="logo">
@@ -544,189 +680,364 @@
     <nav class="nav">
 
       <a href="dashboard.html">
-        <span class="nav-icon">⌂</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-house"></i>
+        </span>
         Dashboard
       </a>
 
       <a href="register-patient.html">
-        <span class="nav-icon">＋</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-user-plus"></i>
+        </span>
         Register Patient
       </a>
 
       <a href="patient-list.html">
-        <span class="nav-icon">♧</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-users"></i>
+        </span>
         Patient List
       </a>
 
       <a href="appointments.html" class="active">
-        <span class="nav-icon">▣</span>
+        <span class="nav-icon">
+          <i class="fa-regular fa-calendar-check"></i>
+        </span>
         Appointments
       </a>
 
       <a href="reports.html">
-        <span class="nav-icon">▥</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-chart-column"></i>
+        </span>
         Reports
       </a>
 
       <a href="#">
-        <span class="nav-icon">⚙</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-gear"></i>
+        </span>
         Settings
       </a>
 
       <a href="admin-login.html">
-        <span class="nav-icon">↪</span>
+        <span class="nav-icon">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </span>
         Logout
       </a>
 
     </nav>
 
+
     <div class="clinic-label">
-      🛡️ Getwell Clinic<br>
-      Puncak Alam
+      <i class="fa-solid fa-shield-halved"></i>
+      &nbsp; Getwell Clinic
+      <br>
+      &nbsp;&nbsp;&nbsp; Puncak Alam
     </div>
 
   </aside>
 
 
-  <!-- MAIN CONTENT -->
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
   <main class="main">
+
+
+    <!-- HEADER -->
 
     <div class="header">
 
       <div>
-        <h1>Appointments Overview</h1>
-        <p>Stay on top of your daily schedule and follow-ups.</p>
+
+        <h1>
+          Appointments Overview
+        </h1>
+
+        <p>
+          Stay on top of your daily schedule and follow-ups.
+        </p>
+
       </div>
 
+
       <div class="date-selector">
-        ▣ &nbsp; 10 Aug 2026 (Today) &nbsp;⌄
+
+        <i class="fa-regular fa-calendar"></i>
+        &nbsp; 10 Aug 2026 (Today)
+        &nbsp; <i class="fa-solid fa-chevron-down"></i>
+
       </div>
 
     </div>
 
 
-    <!-- SUMMARY -->
+
+    <!-- =========================
+         SUMMARY CARDS
+    ========================= -->
+
     <section class="summary-grid">
 
+
+      <!-- TODAY -->
+
       <div class="summary-card">
-        <div class="summary-icon blue">▣</div>
+
+        <div class="summary-icon blue">
+          <i class="fa-regular fa-calendar-check"></i>
+        </div>
 
         <div>
-          <div class="summary-label">Today's Appointments</div>
-          <div class="summary-number">4</div>
-          <div class="summary-sub">Scheduled</div>
+
+          <div class="summary-label">
+            Today's Appointments
+          </div>
+
+          <div class="summary-number">
+            4
+          </div>
+
+          <div class="summary-sub">
+            Scheduled
+          </div>
+
         </div>
+
       </div>
 
 
+
+      <!-- TOMORROW -->
+
       <div class="summary-card">
-        <div class="summary-icon green">▣</div>
+
+        <div class="summary-icon green">
+          <i class="fa-regular fa-calendar"></i>
+        </div>
 
         <div>
-          <div class="summary-label">Tomorrow's Appointments</div>
-          <div class="summary-number">3</div>
-          <div class="summary-sub">Scheduled</div>
+
+          <div class="summary-label">
+            Tomorrow's Appointments
+          </div>
+
+          <div class="summary-number">
+            3
+          </div>
+
+          <div class="summary-sub">
+            Scheduled
+          </div>
+
         </div>
+
       </div>
 
 
+
+      <!-- THIS WEEK -->
+
       <div class="summary-card">
-        <div class="summary-icon orange">▣</div>
+
+        <div class="summary-icon orange">
+          <i class="fa-solid fa-calendar-week"></i>
+        </div>
 
         <div>
-          <div class="summary-label">This Week</div>
-          <div class="summary-number">12</div>
-          <div class="summary-sub">Total Appointments</div>
+
+          <div class="summary-label">
+            This Week
+          </div>
+
+          <div class="summary-number">
+            12
+          </div>
+
+          <div class="summary-sub">
+            Total Appointments
+          </div>
+
         </div>
+
       </div>
 
 
+
+      <!-- MISSING / NO SHOW -->
+
       <div class="summary-card">
-        <div class="summary-icon red">♙</div>
+
+        <div class="summary-icon red">
+          <i class="fa-solid fa-user-clock"></i>
+        </div>
 
         <div>
-          <div class="summary-label">Missing / No Show</div>
-          <div class="summary-number">5</div>
-          <div class="summary-sub">Need Follow-up</div>
+
+          <div class="summary-label">
+            Missing / No Show
+          </div>
+
+          <div class="summary-number">
+            5
+          </div>
+
+          <div class="summary-sub">
+            Need Follow-up
+          </div>
+
         </div>
+
       </div>
 
     </section>
 
 
-    <!-- MAIN APPOINTMENT CONTENT -->
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
     <section class="content-grid">
 
 
-      <!-- TODAY -->
+      <!-- =========================
+           TODAY'S APPOINTMENTS
+      ========================= -->
+
       <div class="panel">
 
         <div class="panel-title">
-          <h2>▣ &nbsp;Today's Appointments</h2>
-          <button class="view-all">View All</button>
-        </div>
 
+          <h2>
+            <i class="fa-regular fa-calendar-check"></i>
+            Today's Appointments
+          </h2>
 
-        <div class="appointment-row">
-
-          <div class="appointment-time">9:00 AM</div>
-
-          <div>
-            <div class="patient-name">Nurul Iman</div>
-            <div class="appointment-type">Weight Loss Consultation</div>
-          </div>
-
-          <div class="doctor">Dr. Aaron</div>
-
-          <div class="status scheduled">Scheduled</div>
+          <button class="view-all">
+            View All
+          </button>
 
         </div>
 
 
         <div class="appointment-row">
 
-          <div class="appointment-time">9:30 AM</div>
-
-          <div>
-            <div class="patient-name">Ali Ahmad</div>
-            <div class="appointment-type">Follow Up</div>
+          <div class="appointment-time">
+            9:00 AM
           </div>
 
-          <div class="doctor">Dr. Aaron</div>
+          <div>
 
-          <div class="status scheduled">Scheduled</div>
+            <div class="patient-name">
+              Nurul Iman
+            </div>
+
+            <div class="appointment-type">
+              Weight Loss Consultation
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Aaron
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
 
         </div>
 
 
         <div class="appointment-row">
 
-          <div class="appointment-time">11:00 AM</div>
-
-          <div>
-            <div class="patient-name">John Tan</div>
-            <div class="appointment-type">IV Drip Therapy</div>
+          <div class="appointment-time">
+            9:30 AM
           </div>
 
-          <div class="doctor">Dr. Aaron</div>
+          <div>
 
-          <div class="status scheduled">Scheduled</div>
+            <div class="patient-name">
+              Ali Ahmad
+            </div>
+
+            <div class="appointment-type">
+              Follow Up
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Aaron
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
 
         </div>
 
 
         <div class="appointment-row">
 
-          <div class="appointment-time">2:00 PM</div>
-
-          <div>
-            <div class="patient-name">Sarah Lee</div>
-            <div class="appointment-type">Skin Consultation</div>
+          <div class="appointment-time">
+            11:00 AM
           </div>
 
-          <div class="doctor">Dr. Najwa</div>
+          <div>
 
-          <div class="status completed">Completed</div>
+            <div class="patient-name">
+              John Tan
+            </div>
+
+            <div class="appointment-type">
+              IV Drip Therapy
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Aaron
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
+
+        </div>
+
+
+        <div class="appointment-row">
+
+          <div class="appointment-time">
+            2:00 PM
+          </div>
+
+          <div>
+
+            <div class="patient-name">
+              Sarah Lee
+            </div>
+
+            <div class="appointment-type">
+              Skin Consultation
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Najwa
+          </div>
+
+          <div class="status completed">
+            Completed
+          </div>
 
         </div>
 
@@ -738,59 +1049,110 @@
       </div>
 
 
-      <!-- TOMORROW -->
+
+      <!-- =========================
+           TOMORROW'S APPOINTMENTS
+      ========================= -->
+
       <div class="panel">
 
         <div class="panel-title">
-          <h2>▣ &nbsp;Tomorrow's Appointments</h2>
-          <button class="view-all">View All</button>
-        </div>
 
+          <h2>
+            <i class="fa-regular fa-calendar"></i>
+            Tomorrow's Appointments
+          </h2>
 
-        <div class="appointment-row">
-
-          <div class="appointment-time">9:00 AM</div>
-
-          <div>
-            <div class="patient-name">Fatimah Zahra</div>
-            <div class="appointment-type">Weight Loss Consultation</div>
-          </div>
-
-          <div class="doctor">Dr. Aaron</div>
-
-          <div class="status scheduled">Scheduled</div>
+          <button class="view-all">
+            View All
+          </button>
 
         </div>
 
 
         <div class="appointment-row">
 
-          <div class="appointment-time">10:30 AM</div>
-
-          <div>
-            <div class="patient-name">Ahmad Firdaus</div>
-            <div class="appointment-type">Follow Up</div>
+          <div class="appointment-time">
+            9:00 AM
           </div>
 
-          <div class="doctor">Dr. Aaron</div>
+          <div>
 
-          <div class="status scheduled">Scheduled</div>
+            <div class="patient-name">
+              Fatimah Zahra
+            </div>
+
+            <div class="appointment-type">
+              Weight Loss Consultation
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Aaron
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
 
         </div>
 
 
         <div class="appointment-row">
 
-          <div class="appointment-time">2:00 PM</div>
-
-          <div>
-            <div class="patient-name">Siti Aisyah</div>
-            <div class="appointment-type">IV Drip Therapy</div>
+          <div class="appointment-time">
+            10:30 AM
           </div>
 
-          <div class="doctor">Dr. Najwa</div>
+          <div>
 
-          <div class="status scheduled">Scheduled</div>
+            <div class="patient-name">
+              Ahmad Firdaus
+            </div>
+
+            <div class="appointment-type">
+              Follow Up
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Aaron
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
+
+        </div>
+
+
+        <div class="appointment-row">
+
+          <div class="appointment-time">
+            2:00 PM
+          </div>
+
+          <div>
+
+            <div class="patient-name">
+              Siti Aisyah
+            </div>
+
+            <div class="appointment-type">
+              IV Drip Therapy
+            </div>
+
+          </div>
+
+          <div class="doctor">
+            Dr. Najwa
+          </div>
+
+          <div class="status scheduled">
+            Scheduled
+          </div>
 
         </div>
 
@@ -802,23 +1164,23 @@
       </div>
 
 
-      <!-- MISSED APPOINTMENTS -->
+
+      <!-- =========================
+           MISSED APPOINTMENTS
+      ========================= -->
+
       <div class="panel alert-panel">
 
         <div class="panel-title">
-          <h2>♟ &nbsp;Missed Appointments</h2>
-          <button class="view-all">View All</button>
-        </div>
 
+          <h2>
+            <i class="fa-solid fa-calendar-xmark"></i>
+            Missed Appointments
+          </h2>
 
-        <div class="alert-row">
-
-          <div>
-            <div class="alert-patient">Ali bin Hassan</div>
-            <div class="alert-date">10 Aug 2026</div>
-          </div>
-
-          <div class="no-show-badge">No Show</div>
+          <button class="view-all">
+            View All
+          </button>
 
         </div>
 
@@ -826,11 +1188,20 @@
         <div class="alert-row">
 
           <div>
-            <div class="alert-patient">Nur Syazwani</div>
-            <div class="alert-date">9 Aug 2026</div>
+
+            <div class="alert-patient">
+              Ali bin Hassan
+            </div>
+
+            <div class="alert-date">
+              10 Aug 2026
+            </div>
+
           </div>
 
-          <div class="no-show-badge">No Show</div>
+          <div class="no-show-badge">
+            No Show
+          </div>
 
         </div>
 
@@ -838,143 +1209,307 @@
         <div class="alert-row">
 
           <div>
-            <div class="alert-patient">John Tan</div>
-            <div class="alert-date">7 Aug 2026</div>
+
+            <div class="alert-patient">
+              Nur Syazwani
+            </div>
+
+            <div class="alert-date">
+              9 Aug 2026
+            </div>
+
           </div>
 
-          <div class="no-show-badge">No Show</div>
+          <div class="no-show-badge">
+            No Show
+          </div>
+
+        </div>
+
+
+        <div class="alert-row">
+
+          <div>
+
+            <div class="alert-patient">
+              John Tan
+            </div>
+
+            <div class="alert-date">
+              7 Aug 2026
+            </div>
+
+          </div>
+
+          <div class="no-show-badge">
+            No Show
+          </div>
 
         </div>
 
       </div>
 
 
-      <!-- UPCOMING -->
+
+      <!-- =========================
+           UPCOMING APPOINTMENTS
+      ========================= -->
+
       <div class="panel upcoming-panel">
 
         <div class="panel-title">
-          <h2>▣ &nbsp;Upcoming Appointments</h2>
-          <button class="view-all">View Calendar</button>
+
+          <h2>
+            <i class="fa-regular fa-calendar-days"></i>
+            Upcoming Appointments
+          </h2>
+
+          <button class="view-all">
+            View Calendar
+          </button>
+
         </div>
 
 
         <div class="upcoming-days">
 
 
+          <!-- WEDNESDAY -->
+
           <div class="day-card">
 
             <div class="day-header">
+
               <div>
-                <div class="day-name">Wednesday</div>
-                <div class="day-date">12 Aug 2026</div>
+
+                <div class="day-name">
+                  Wednesday
+                </div>
+
+                <div class="day-date">
+                  12 Aug 2026
+                </div>
+
               </div>
 
-              <div class="count">2</div>
+              <div class="count">
+                2
+              </div>
+
             </div>
 
-            <div class="day-time">9:00 AM</div>
-            <div class="day-time">11:00 AM</div>
+            <div class="day-time">
+              9:00 AM
+            </div>
 
-            <div class="add-slot">+ Add</div>
+            <div class="day-time">
+              11:00 AM
+            </div>
+
+            <div class="add-slot">
+              + Add
+            </div>
 
           </div>
 
 
+
+          <!-- THURSDAY -->
+
           <div class="day-card">
 
             <div class="day-header">
+
               <div>
-                <div class="day-name">Thursday</div>
-                <div class="day-date">13 Aug 2026</div>
+
+                <div class="day-name">
+                  Thursday
+                </div>
+
+                <div class="day-date">
+                  13 Aug 2026
+                </div>
+
               </div>
 
-              <div class="count">3</div>
+              <div class="count">
+                3
+              </div>
+
             </div>
 
-            <div class="day-time">9:00 AM</div>
-            <div class="day-time">10:30 AM</div>
-            <div class="day-time">2:00 PM</div>
+            <div class="day-time">
+              9:00 AM
+            </div>
 
-            <div class="add-slot">+ Add</div>
+            <div class="day-time">
+              10:30 AM
+            </div>
+
+            <div class="day-time">
+              2:00 PM
+            </div>
+
+            <div class="add-slot">
+              + Add
+            </div>
 
           </div>
 
 
+
+          <!-- FRIDAY -->
+
           <div class="day-card">
 
             <div class="day-header">
+
               <div>
-                <div class="day-name">Friday</div>
-                <div class="day-date">14 Aug 2026</div>
+
+                <div class="day-name">
+                  Friday
+                </div>
+
+                <div class="day-date">
+                  14 Aug 2026
+                </div>
+
               </div>
 
-              <div class="count">2</div>
+              <div class="count">
+                2
+              </div>
+
             </div>
 
-            <div class="day-time">9:30 AM</div>
-            <div class="day-time">3:00 PM</div>
+            <div class="day-time">
+              9:30 AM
+            </div>
 
-            <div class="add-slot">+ Add</div>
+            <div class="day-time">
+              3:00 PM
+            </div>
+
+            <div class="add-slot">
+              + Add
+            </div>
 
           </div>
 
 
+
+          <!-- SATURDAY -->
+
           <div class="day-card">
 
             <div class="day-header">
+
               <div>
-                <div class="day-name">Saturday</div>
-                <div class="day-date">15 Aug 2026</div>
+
+                <div class="day-name">
+                  Saturday
+                </div>
+
+                <div class="day-date">
+                  15 Aug 2026
+                </div>
+
               </div>
 
-              <div class="count">2</div>
+              <div class="count">
+                2
+              </div>
+
             </div>
 
-            <div class="day-time">9:00 AM</div>
-            <div class="day-time">11:30 AM</div>
+            <div class="day-time">
+              9:00 AM
+            </div>
 
-            <div class="add-slot">+ Add</div>
+            <div class="day-time">
+              11:30 AM
+            </div>
+
+            <div class="add-slot">
+              + Add
+            </div>
 
           </div>
 
 
+
+          <!-- SUNDAY -->
+
           <div class="day-card">
 
             <div class="day-header">
+
               <div>
-                <div class="day-name">Sunday</div>
-                <div class="day-date">16 Aug 2026</div>
+
+                <div class="day-name">
+                  Sunday
+                </div>
+
+                <div class="day-date">
+                  16 Aug 2026
+                </div>
+
               </div>
 
-              <div class="count">0</div>
+              <div class="count">
+                0
+              </div>
+
             </div>
 
-            <div class="day-time" style="margin-top: 22px; text-align: center;">
+            <div
+              class="day-time"
+              style="margin-top: 22px; text-align: center;"
+            >
               No appointments
             </div>
 
-            <div class="add-slot">+ Add</div>
+            <div class="add-slot">
+              + Add
+            </div>
 
           </div>
+
 
         </div>
 
       </div>
 
 
-      <!-- PATIENTS DUE FOR FOLLOW-UP -->
+
+      <!-- =========================
+           PATIENTS DUE FOR FOLLOW-UP
+      ========================= -->
+
       <div class="panel followup-panel">
 
         <div class="panel-title">
-          <h2>◷ &nbsp;Patients Due for Follow-Up</h2>
-          <button class="view-all">View All</button>
+
+          <h2>
+            <i class="fa-solid fa-user-clock"></i>
+            Patients Due for Follow-Up
+          </h2>
+
+          <button class="view-all">
+            View All
+          </button>
+
         </div>
 
 
         <div class="alert-row">
 
           <div>
-            <div class="alert-patient">Farah Nadia</div>
+
+            <div class="alert-patient">
+              Farah Nadia
+            </div>
+
           </div>
 
           <div class="days-away">
@@ -987,7 +1522,11 @@
         <div class="alert-row">
 
           <div>
-            <div class="alert-patient">Ahmad Syukri</div>
+
+            <div class="alert-patient">
+              Ahmad Syukri
+            </div>
+
           </div>
 
           <div class="days-away">
@@ -1000,7 +1539,11 @@
         <div class="alert-row">
 
           <div>
-            <div class="alert-patient">Nurul Huda</div>
+
+            <div class="alert-patient">
+              Nurul Huda
+            </div>
+
           </div>
 
           <div class="days-away">
@@ -1012,26 +1555,58 @@
       </div>
 
 
-      <!-- QUICK ACTIONS -->
+
+      <!-- =========================
+           QUICK ACTIONS
+      ========================= -->
+
       <div class="panel">
 
         <div class="panel-title">
-          <h2 style="color:#5a45d8;">ϟ &nbsp;Quick Actions</h2>
+
+          <h2 style="color:#5a45d8;">
+
+            <i class="fa-solid fa-bolt"></i>
+
+            Quick Actions
+
+          </h2>
+
         </div>
+
 
         <div class="quick-actions">
 
-          <button class="quick-btn primary" onclick="openModal()">
-            ＋ &nbsp; New Appointment
+
+          <button
+            class="quick-btn primary"
+            onclick="openModal()"
+          >
+
+            <i class="fa-solid fa-plus"></i>
+
+            New Appointment
+
           </button>
 
-          <button class="quick-btn">
-            ✉ &nbsp; Follow Up Reminders
-          </button>
 
           <button class="quick-btn">
-            ⇩ &nbsp; Export Appointments
+
+            <i class="fa-regular fa-envelope"></i>
+
+            Follow Up Reminders
+
           </button>
+
+
+          <button class="quick-btn">
+
+            <i class="fa-solid fa-download"></i>
+
+            Export Appointments
+
+          </button>
+
 
         </div>
 
@@ -1043,14 +1618,31 @@
   </main>
 
 
-  <!-- ADD APPOINTMENT MODAL -->
-  <div class="modal" id="appointmentModal">
+
+  <!-- =========================
+       ADD APPOINTMENT MODAL
+  ========================= -->
+
+  <div
+    class="modal"
+    id="appointmentModal"
+  >
 
     <div class="modal-content">
 
-      <span class="close-btn" onclick="closeModal()">&times;</span>
 
-      <h2>New Appointment</h2>
+      <span
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        &times;
+      </span>
+
+
+      <h2>
+        New Appointment
+      </h2>
+
 
       <input
         type="text"
@@ -1058,11 +1650,13 @@
         placeholder="Patient Name"
       >
 
+
       <input
         type="text"
         id="patientId"
         placeholder="Patient ID"
       >
+
 
       <input
         type="text"
@@ -1070,34 +1664,54 @@
         placeholder="Doctor"
       >
 
+
       <input
         type="date"
         id="appointmentDate"
       >
+
 
       <input
         type="time"
         id="appointmentTime"
       >
 
-      <button class="save-btn" onclick="saveAppointment()">
+
+      <button
+        class="save-btn"
+        onclick="saveAppointment()"
+      >
         Save Appointment
       </button>
+
 
     </div>
 
   </div>
 
 
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
 
     function openModal() {
-      document.getElementById("appointmentModal").style.display = "flex";
+
+      document.getElementById(
+        "appointmentModal"
+      ).style.display = "flex";
+
     }
 
 
     function closeModal() {
-      document.getElementById("appointmentModal").style.display = "none";
+
+      document.getElementById(
+        "appointmentModal"
+      ).style.display = "none";
+
     }
 
 
@@ -1119,38 +1733,71 @@
         document.getElementById("appointmentTime").value;
 
 
-      if (!patientName || !patientId || !doctor || !date || !time) {
+      if (
+        !patientName ||
+        !patientId ||
+        !doctor ||
+        !date ||
+        !time
+      ) {
 
-        alert("Please complete all appointment details.");
+        alert(
+          "Please complete all appointment details."
+        );
 
         return;
+
       }
 
 
-      alert("Appointment saved successfully.");
+      alert(
+        "Appointment saved successfully."
+      );
 
-      document.getElementById("patientName").value = "";
-      document.getElementById("patientId").value = "";
-      document.getElementById("doctor").value = "";
-      document.getElementById("appointmentDate").value = "";
-      document.getElementById("appointmentTime").value = "";
+
+      document.getElementById(
+        "patientName"
+      ).value = "";
+
+      document.getElementById(
+        "patientId"
+      ).value = "";
+
+      document.getElementById(
+        "doctor"
+      ).value = "";
+
+      document.getElementById(
+        "appointmentDate"
+      ).value = "";
+
+      document.getElementById(
+        "appointmentTime"
+      ).value = "";
+
 
       closeModal();
+
     }
 
 
     window.onclick = function(event) {
 
       const modal =
-        document.getElementById("appointmentModal");
+        document.getElementById(
+          "appointmentModal"
+        );
 
       if (event.target === modal) {
+
         closeModal();
+
       }
 
     };
 
   </script>
+
 
 </body>
 </html>
