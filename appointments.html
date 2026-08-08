@@ -1527,6 +1527,179 @@ button.add-time{
 
 }
 
+
+/* =========================================================
+   FINAL DESKTOP GRID FIX
+   ========================================================= */
+
+.summary-grid{
+    width:100%;
+}
+
+.dashboard-grid{
+    width:100%;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.dashboard-grid > .card{
+    min-width:0;
+}
+
+.upcoming-card{
+    grid-column:span 2;
+}
+
+.followup-card{
+    grid-column:span 1;
+}
+
+.quick-card{
+    grid-column:span 1;
+}
+
+.card-footer{
+    appearance:none;
+    -webkit-appearance:none;
+    display:block;
+    border:0;
+    width:100%;
+    text-decoration:none;
+}
+
+
+/* =========================================================
+   APPOINTMENT INTERACTION POLISH
+   ========================================================= */
+
+.appointment-patient-link,
+.missed-name-link,
+.followup-name-link,
+.upcoming-patient-link{
+    border:0;
+    background:transparent;
+    padding:0;
+    margin:0;
+    color:#17325c;
+    font-family:"Poppins",sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    text-align:left;
+}
+.appointment-patient-link{
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:100%;
+}
+.appointment-patient-link:hover,
+.missed-name-link:hover,
+.followup-name-link:hover,
+.upcoming-patient-link:hover{
+    color:#2458aa;
+    text-decoration:underline;
+}
+.appointment-item{
+    position:relative;
+    grid-template-columns:68px minmax(0,1fr) 58px 76px 24px;
+}
+.appointment-edit-btn{
+    width:24px;
+    height:24px;
+    border:0;
+    border-radius:7px;
+    background:#f1f4fb;
+    color:#5a6b85;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:10px;
+}
+.appointment-edit-btn:hover{
+    background:#e4ebf8;
+    color:#204c9c;
+}
+.day-appointment{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:5px;
+    margin-top:10px;
+}
+.day-appointment-main{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+.day-time{
+    margin-top:0;
+}
+.upcoming-patient-link{
+    font-size:8px;
+    line-height:1.2;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.day-edit-btn{
+    flex:0 0 20px;
+    width:20px;
+    height:20px;
+    border:0;
+    border-radius:6px;
+    background:#f1f4fb;
+    color:#63738d;
+    cursor:pointer;
+    font-size:8px;
+}
+.day-edit-btn:hover{
+    color:#204c9c;
+    background:#e4ebf8;
+}
+.edit-modal-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+.edit-modal-grid .full{
+    grid-column:1 / -1;
+}
+.edit-modal-label{
+    display:block;
+    color:#52627a;
+    font-family:"Poppins",sans-serif;
+    font-size:11px;
+    font-weight:600;
+    margin-bottom:6px;
+}
+.edit-modal-input,
+.edit-modal-select{
+    width:100%;
+    height:42px;
+    border:1px solid #dce2eb;
+    border-radius:9px;
+    padding:0 12px;
+    font-family:"Poppins",sans-serif;
+    font-size:12px;
+    color:#17325c;
+    outline:none;
+    background:#fff;
+}
+.edit-modal-input:focus,
+.edit-modal-select:focus{
+    border-color:#315df4;
+}
+@media(max-width:900px){
+    .appointment-item{
+        grid-template-columns:64px minmax(0,1fr) 54px 72px 22px;
+        column-gap:7px;
+    }
+    .edit-modal-grid{grid-template-columns:1fr;}
+    .edit-modal-grid .full{grid-column:auto;}
+}
+
 </style>
 
 </head>
@@ -1923,7 +2096,7 @@ button.add-time{
             </div>
 
 
-            <div class="card-footer">
+            <button class="card-footer" type="button" onclick="openOverview('today')">
                 View Full Schedule &nbsp; →
             </button>
 
@@ -2036,7 +2209,7 @@ button.add-time{
             </div>
 
 
-            <div class="card-footer green">
+            <button class="card-footer green" type="button" onclick="openOverview('tomorrow')">
                 View Full Schedule &nbsp; →
             </button>
 
@@ -2472,6 +2645,51 @@ button.add-time{
 
 
 
+
+<!-- EDIT APPOINTMENT -->
+<div class="ui-overlay" id="editAppointmentOverlay">
+  <div class="ui-panel small">
+    <button class="ui-close" type="button" onclick="closeUI('editAppointmentOverlay')">&times;</button>
+    <h2>Edit Appointment</h2>
+    <div class="panel-sub">Update the patient's appointment schedule. UI-only for now.</div>
+
+    <div class="edit-modal-grid">
+      <div class="full">
+        <label class="edit-modal-label">Patient</label>
+        <input class="edit-modal-input" id="editPatientName" type="text" readonly>
+      </div>
+
+      <div>
+        <label class="edit-modal-label">Doctor</label>
+        <select class="edit-modal-select" id="editDoctor">
+          <option value="Dr. Aaron">Dr. Aaron</option>
+          <option value="Dr. Najwa">Dr. Najwa</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="edit-modal-label">Appointment Type</label>
+        <input class="edit-modal-input" id="editType" type="text">
+      </div>
+
+      <div>
+        <label class="edit-modal-label">Date</label>
+        <input class="edit-modal-input" id="editDate" type="date">
+      </div>
+
+      <div>
+        <label class="edit-modal-label">Time</label>
+        <input class="edit-modal-input" id="editTime" type="time">
+      </div>
+    </div>
+
+    <div class="ui-actions">
+      <button class="ui-btn secondary" type="button" onclick="closeUI('editAppointmentOverlay')">Cancel</button>
+      <button class="ui-btn primary" type="button" onclick="saveEditedAppointment()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
 <!-- UI-ONLY OVERVIEW PANEL -->
 <div class="ui-overlay" id="overviewOverlay">
   <div class="ui-panel">
@@ -2726,7 +2944,12 @@ const samplePatients = [
   {id:"GW0009", name:"Nur Syazwani", phone:"013-2223344", weight:"68 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up"},
   {id:"GW0010", name:"Farah Nadia", phone:"014-3334455", weight:"76 kg", status:"Active", lastVisit:"26 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
   {id:"GW0011", name:"Ahmad Syukri", phone:"015-4445566", weight:"84 kg", status:"Active", lastVisit:"9 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up"},
-  {id:"GW0012", name:"Nurul Huda", phone:"016-5556677", weight:"71 kg", status:"Active", lastVisit:"12 May 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"}
+  {id:"GW0012", name:"Nurul Huda", phone:"016-5556677", weight:"71 kg", status:"Active", lastVisit:"12 May 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
+  {id:"GW0013", name:"Jivitha", phone:"017-1112233", weight:"69 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation"},
+  {id:"GW0014", name:"Mei Ling", phone:"012-2223344", weight:"63 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"Follow Up"},
+  {id:"GW0015", name:"Hafiz Rahman", phone:"013-3334455", weight:"82 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Consultation"},
+  {id:"GW0016", name:"Aina Sofea", phone:"016-4445566", weight:"58 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 3:00 PM", doctor:"Dr. Najwa", type:"Follow Up"},
+  {id:"GW0017", name:"Daniel Lim", phone:"018-5556677", weight:"77 kg", status:"Active", lastVisit:"6 Aug 2026", nextAppointment:"12 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy"}
 ];
 
 const todayAppointments = [
@@ -2755,13 +2978,16 @@ const followUpPatients = [
 ];
 
 const upcomingAppointments = [
-  ["12 Aug 2026","9:00 AM","Upcoming Patient","Consultation","Dr. Aaron","Scheduled"],
-  ["12 Aug 2026","11:00 AM","Upcoming Patient","Follow Up","Dr. Aaron","Scheduled"],
-  ["13 Aug 2026","9:00 AM","Upcoming Patient","Weight Loss Consultation","Dr. Aaron","Scheduled"],
-  ["13 Aug 2026","10:30 AM","Upcoming Patient","Follow Up","Dr. Aaron","Scheduled"],
-  ["13 Aug 2026","2:00 PM","Upcoming Patient","IV Drip Therapy","Dr. Najwa","Scheduled"],
-  ["14 Aug 2026","9:30 AM","Upcoming Patient","Consultation","Dr. Aaron","Scheduled"],
-  ["14 Aug 2026","3:00 PM","Upcoming Patient","Follow Up","Dr. Najwa","Scheduled"]
+  ["10 Aug 2026","9:00 AM","Jivitha","Weight Loss Consultation","Dr. Aaron","Scheduled"],
+  ["10 Aug 2026","11:00 AM","Mei Ling","Follow Up","Dr. Aaron","Scheduled"],
+  ["11 Aug 2026","9:30 AM","Hafiz Rahman","Consultation","Dr. Aaron","Scheduled"],
+  ["11 Aug 2026","3:00 PM","Aina Sofea","Follow Up","Dr. Najwa","Scheduled"],
+  ["12 Aug 2026","9:00 AM","Daniel Lim","IV Drip Therapy","Dr. Aaron","Scheduled"],
+  ["12 Aug 2026","11:00 AM","Jivitha","Follow Up","Dr. Aaron","Scheduled"],
+  ["13 Aug 2026","10:30 AM","Mei Ling","Weight Loss Consultation","Dr. Aaron","Scheduled"],
+  ["13 Aug 2026","2:00 PM","Hafiz Rahman","Follow Up","Dr. Najwa","Scheduled"],
+  ["14 Aug 2026","9:00 AM","Aina Sofea","Consultation","Dr. Aaron","Scheduled"],
+  ["14 Aug 2026","3:00 PM","Daniel Lim","Follow Up","Dr. Najwa","Scheduled"]
 ];
 
 let calendarDate = new Date(2026,7,10);
@@ -2825,78 +3051,191 @@ function selectCalendarDate(year,month,day){
   closeUI("calendarOverlay");
 }
 
-function openOverview(type){
-  const title = document.getElementById("overviewTitle");
-  const sub = document.getElementById("overviewSub");
-  const content = document.getElementById("overviewContent");
+function getUpcomingReferenceDate(){
+  // UI sample reference: Saturday 8 Aug 2026.
+  // Upcoming starts after tomorrow, so the five cards are Monday–Friday.
+  return new Date(2026,7,8);
+}
 
-  let rows = "";
-  let heading = "";
+function formatLongDate(date){
+  return date.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+}
+
+function formatISODate(date){
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+function upcomingDataForDate(date){
+  const dateLabel=formatLongDate(date);
+  return upcomingAppointments.filter(a=>a[0]===dateLabel);
+}
+
+function renderUpcomingDays(){
+  const container=document.getElementById("upcomingDays");
+  if(!container) return;
+
+  const reference=getUpcomingReferenceDate();
+  const tomorrow=new Date(reference);
+  tomorrow.setDate(tomorrow.getDate()+1);
+
+  const days=[];
+  for(let i=1;i<=5;i++){
+    const d=new Date(tomorrow);
+    d.setDate(tomorrow.getDate()+i);
+    days.push(d);
+  }
+
+  container.innerHTML=days.map((date,dayIndex)=>{
+    const dateLabel=formatLongDate(date);
+    const items=upcomingDataForDate(date);
+    const count=items.length;
+
+    return `
+      <div class="day-card">
+        <div class="day-header">
+          <div>
+            <div class="day-name">${date.toLocaleDateString("en-US",{weekday:"long"})}</div>
+            <div class="day-date">${dateLabel}</div>
+          </div>
+          <div class="day-count">${count}</div>
+        </div>
+
+        ${
+          items.length
+          ? items.map((a,index)=>`
+              <div class="day-appointment">
+                <div class="day-appointment-main">
+                  <div class="day-time">${a[1]}</div>
+                  <button class="upcoming-patient-link" type="button"
+                    onclick="openPatientProfileByName('${a[2]}')">${a[2]}</button>
+                </div>
+                <button class="day-edit-btn" type="button" title="Edit appointment"
+                  onclick="openEditAppointment('upcoming',${upcomingAppointments.indexOf(a)})">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+              </div>
+            `).join("")
+          : `<div class="day-time" style="margin-top:35px;text-align:center;">No appointments</div>`
+        }
+
+        <button class="add-time" type="button" onclick="openAppointmentModal()">+ Add</button>
+      </div>
+    `;
+  }).join("");
+}
+
+function makeDashboardNamesClickable(){
+  const items=document.querySelectorAll(".appointment-item");
+
+  items.forEach((item,index)=>{
+    const nameEl=item.querySelector(".appointment-patient");
+    if(nameEl && !nameEl.querySelector("button")){
+      const name=nameEl.textContent.trim();
+      nameEl.innerHTML=`<button class="appointment-patient-link" type="button"
+        onclick="openPatientProfileByName('${name}')">${name}</button>`;
+    }
+
+    if(!item.querySelector(".appointment-edit-btn")){
+      const edit=document.createElement("button");
+      edit.className="appointment-edit-btn";
+      edit.type="button";
+      edit.title="Edit appointment";
+      edit.innerHTML='<i class="fa-solid fa-pencil"></i>';
+      edit.onclick=()=>openEditAppointment(index<4?"today":"tomorrow", index<4?index:index-4);
+      item.appendChild(edit);
+    }
+  });
+
+  document.querySelectorAll(".missed-name").forEach(el=>{
+    if(!el.querySelector("button")){
+      const name=el.textContent.trim();
+      el.innerHTML=`<button class="missed-name-link" type="button"
+        onclick="openPatientProfileByName('${name}')">${name}</button>`;
+    }
+  });
+
+  document.querySelectorAll(".followup-name").forEach(el=>{
+    if(!el.querySelector("button")){
+      const name=el.textContent.trim();
+      el.innerHTML=`<button class="followup-name-link" type="button"
+        onclick="openPatientProfileByName('${name}')">${name}</button>`;
+    }
+  });
+}
+
+function openOverview(type){
+  const title=document.getElementById("overviewTitle");
+  const sub=document.getElementById("overviewSub");
+  const content=document.getElementById("overviewContent");
+
+  let rows="";
+  let heading="";
 
   if(type==="today"){
-    heading = "Today's Appointments";
-    sub.textContent = "10 Aug 2026 · 4 appointments";
-    rows = todayAppointments.map(a => appointmentRow(a)).join("");
+    heading="Today's Appointments";
+    sub.textContent="10 Aug 2026 · 4 appointments";
+    rows=todayAppointments.map((a,i)=>appointmentRow(a,"today",i)).join("");
   }else if(type==="tomorrow"){
-    heading = "Tomorrow's Appointments";
-    sub.textContent = "11 Aug 2026 · 3 scheduled appointments";
-    rows = tomorrowAppointments.map(a => appointmentRow(a)).join("");
+    heading="Tomorrow's Appointments";
+    sub.textContent="11 Aug 2026 · 3 scheduled appointments";
+    rows=tomorrowAppointments.map((a,i)=>appointmentRow(a,"tomorrow",i)).join("");
   }else if(type==="week"){
-    heading = "This Week";
-    sub.textContent = "10–16 Aug 2026 · 12 total appointments";
-    rows = [
-      ...todayAppointments,
-      ...tomorrowAppointments,
-      ["9:30 AM","Weekly Patient","Consultation","Dr. Aaron","Scheduled"],
-      ["3:00 PM","Weekly Patient","Follow Up","Dr. Najwa","Scheduled"]
-    ].map(a => appointmentRow(a)).join("");
+    heading="This Week";
+    sub.textContent="10–16 Aug 2026 · 12 total appointments";
+    rows=[...todayAppointments,...tomorrowAppointments].map((a,i)=>appointmentRow(a,i<todayAppointments.length?"today":"tomorrow",i<todayAppointments.length?i:i-todayAppointments.length)).join("");
   }else if(type==="missed"){
-    heading = "Missed Appointments";
-    sub.textContent = "Patients who did not attend their scheduled appointment.";
-    rows = missedAppointments.map(a => `
+    heading="Missed Appointments";
+    sub.textContent="Patients who did not attend their scheduled appointment.";
+    rows=missedAppointments.map(a=>`
       <tr>
         <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[0]}')">${a[0]}</button></td>
         <td>${a[1]}</td>
         <td><span class="no-show">No Show</span></td>
       </tr>`).join("");
   }else if(type==="followup"){
-    heading = "Patients Due for Follow-Up";
-    sub.textContent = "Patients who remain due for follow-up after the 3-day waiting period.";
-    rows = followUpPatients.map(a => `
+    heading="Patients Due for Follow-Up";
+    sub.textContent="Patients who remain due for follow-up after the 3-day waiting period.";
+    rows=followUpPatients.map(a=>`
       <tr>
         <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[0]}')">${a[0]}</button></td>
         <td>${a[1]}</td>
         <td><button class="ui-btn secondary" type="button" onclick="openReminderModal()">Send Reminder</button></td>
       </tr>`).join("");
   }else if(type==="calendar"){
-    heading = "Upcoming Appointments";
-    sub.textContent = "Upcoming appointments from 12–16 Aug 2026.";
-    rows = upcomingAppointments.map(a => `
+    heading="Upcoming Appointments";
+    sub.textContent="The five upcoming days after tomorrow.";
+    rows=upcomingAppointments.map((a,i)=>`
       <tr>
         <td>${a[0]}</td>
         <td>${a[1]}</td>
         <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[2]}')">${a[2]}</button></td>
         <td>${a[4]}</td>
         <td><span class="status status-scheduled">${a[5]}</span></td>
+        <td><button class="appointment-edit-btn" type="button" title="Edit appointment"
+          onclick="openEditAppointment('upcoming',${i})"><i class="fa-solid fa-pencil"></i></button></td>
       </tr>`).join("");
   }
 
-  title.textContent = heading;
-  content.innerHTML = `
+  title.textContent=heading;
+  content.innerHTML=`
     <table class="ui-table">
-      ${type==="missed" || type==="followup"
+      ${
+        type==="missed" || type==="followup"
         ? `<thead><tr><th>Patient</th><th>Details</th><th>Action</th></tr></thead>`
         : type==="calendar"
-          ? `<thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th></tr></thead>`
-          : `<thead><tr><th>Time</th><th>Patient</th><th>Type</th><th>Doctor</th><th>Status</th></tr></thead>`}
+        ? `<thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
+        : `<thead><tr><th>Time</th><th>Patient</th><th>Type</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
+      }
       <tbody>${rows}</tbody>
-    </table>
-  `;
+    </table>`;
   document.getElementById("overviewOverlay").classList.add("show");
 }
 
-function appointmentRow(a){
-  const statusClass = a[4]==="Completed" ? "status status-completed" : "status status-scheduled";
+function appointmentRow(a,type,index){
+  const statusClass=a[4]==="Completed" ? "status status-completed" : "status status-scheduled";
   return `
     <tr>
       <td>${a[0]}</td>
@@ -2904,7 +3243,129 @@ function appointmentRow(a){
       <td>${a[2]}</td>
       <td>${a[3]}</td>
       <td><span class="${statusClass}">${a[4]}</span></td>
+      <td><button class="appointment-edit-btn" type="button" title="Edit appointment"
+        onclick="openEditAppointment('${type}',${index})"><i class="fa-solid fa-pencil"></i></button></td>
     </tr>`;
+}
+
+let editingAppointment={type:null,index:null};
+
+function openEditAppointment(type,index){
+  let a;
+
+  if(type==="today") a=todayAppointments[index];
+  else if(type==="tomorrow") a=tomorrowAppointments[index];
+  else if(type==="upcoming") a=upcomingAppointments[index];
+
+  if(!a) return;
+
+  editingAppointment={type,index};
+
+  document.getElementById("editPatientName").value=a[1] || a[2];
+  document.getElementById("editDoctor").value=a[3] || a[4];
+  document.getElementById("editType").value=a[2] || a[3];
+
+  const dateText=a[0];
+  const parsed=new Date(dateText);
+  document.getElementById("editDate").value=formatISODate(parsed);
+
+  const time=a[0].includes("AM") || a[0].includes("PM") ? a[0] : a[1];
+  document.getElementById("editTime").value=to24Hour(time);
+
+  document.getElementById("editAppointmentOverlay").classList.add("show");
+}
+
+function to24Hour(value){
+  if(!value) return "";
+  const parts=value.trim().split(" ");
+  if(parts.length!==2) return value;
+  let [h,m]=parts[0].split(":").map(Number);
+  const ap=parts[1];
+  if(ap==="PM" && h!==12) h+=12;
+  if(ap==="AM" && h===12) h=0;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+}
+
+function to12Hour(value){
+  if(!value) return "";
+  let [h,m]=value.split(":").map(Number);
+  const ap=h>=12?"PM":"AM";
+  h=h%12 || 12;
+  return `${h}:${String(m).padStart(2,"0")} ${ap}`;
+}
+
+function saveEditedAppointment(){
+  const date=document.getElementById("editDate").value;
+  const time=to12Hour(document.getElementById("editTime").value);
+  const doctor=document.getElementById("editDoctor").value;
+  const type=document.getElementById("editType").value.trim();
+
+  if(!date || !time || !doctor || !type){
+    alert("Please complete all appointment details.");
+    return;
+  }
+
+  const formattedDate=new Date(date+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const {type:source,index}=editingAppointment;
+
+  if(source==="today"){
+    todayAppointments[index][0]=time;
+    todayAppointments[index][2]=type;
+    todayAppointments[index][3]=doctor;
+  }else if(source==="tomorrow"){
+    tomorrowAppointments[index][0]=time;
+    tomorrowAppointments[index][2]=type;
+    tomorrowAppointments[index][3]=doctor;
+  }else if(source==="upcoming"){
+    upcomingAppointments[index][0]=formattedDate;
+    upcomingAppointments[index][1]=time;
+    upcomingAppointments[index][3]=type;
+    upcomingAppointments[index][4]=doctor;
+  }
+
+  closeUI("editAppointmentOverlay");
+  renderUpcomingDays();
+  makeDashboardNamesClickable();
+
+  alert("Appointment updated successfully in the UI preview.");
+}
+
+function openPatientProfileByName(name){
+  const patient=samplePatients.find(p=>p.name===name);
+
+  if(!patient){
+    alert("Patient profile is not available in this UI sample yet.");
+    return;
+  }
+
+  document.getElementById("profileAvatar").textContent =
+    patient.name.split(" ").map(part=>part[0]).slice(0,2).join("").toUpperCase();
+  document.getElementById("profileName").textContent=patient.name;
+  document.getElementById("profileId").textContent=patient.id;
+  document.getElementById("profileStatus").textContent=patient.status;
+  document.getElementById("profilePhone").textContent=patient.phone;
+  document.getElementById("profileWeight").textContent=patient.weight;
+  document.getElementById("profileLastVisit").textContent=patient.lastVisit;
+  document.getElementById("profileNextAppointment").textContent=patient.nextAppointment;
+  document.getElementById("profileDoctor").textContent=patient.doctor;
+  document.getElementById("profileType").textContent=patient.type;
+  document.getElementById("profileAppointmentStatus").textContent =
+    patient.nextAppointment==="—" ? "No Upcoming Appointment" : "Scheduled";
+
+  const history=[
+    {date:patient.lastVisit,type:patient.type,doctor:patient.doctor,status:"Completed"},
+    {date:"Previous Visit",type:"Follow Up",doctor:patient.doctor,status:"Completed"}
+  ];
+
+  document.getElementById("profileHistory").innerHTML=history.map(h=>`
+    <div class="profile-history-row">
+      <strong>${h.date}</strong>
+      <span>${h.type}</span>
+      <span>${h.doctor}</span>
+      <span class="status status-completed">${h.status}</span>
+    </div>`).join("");
+
+  document.getElementById("patientProfileOverlay").classList.add("show");
 }
 
 
@@ -3106,6 +3567,8 @@ document.addEventListener("keydown",function(event){
 
 document.addEventListener("DOMContentLoaded",function(){
   renderPatientOptions();
+  renderUpcomingDays();
+  makeDashboardNamesClickable();
 });
 </script>
 
