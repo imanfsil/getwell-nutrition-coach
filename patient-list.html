@@ -1,276 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Patient List</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
 }
 
 body{
-background:#eef6ff;
-padding:40px;
+    background:#eef6ff;
+    color:#12356f;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:284px;
+    height:100vh;
+    background:#2d5eaa;
+    color:white;
+    z-index:100;
+}
+
+.logo{
+    height:132px;
+    display:flex;
+    align-items:center;
+    padding:0 46px;
+    font-size:32px;
+    font-weight:700;
+    border-bottom:1px solid rgba(255,255,255,.18);
+}
+
+.nav{
+    padding:48px 20px;
+}
+
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    height:70px;
+    padding:0 28px;
+    margin-bottom:8px;
+    border-radius:15px;
+    color:white;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.nav a:hover{
+    background:rgba(255,255,255,.10);
+}
+
+.nav a.active{
+    background:white;
+    color:#204c9c;
+}
+
+.nav-icon{
+    width:24px;
+    text-align:center;
+    font-size:21px;
+}
+
+/* =========================
+   MAIN
+========================= */
+.main{
+    margin-left:284px;
+    min-height:100vh;
+    padding:48px 48px 60px;
 }
 
 .container{
-max-width:1200px;
-margin:auto;
+    max-width:1320px;
+    margin:0 auto;
 }
 
 .header{
-margin-bottom:35px;
+    margin-bottom:36px;
 }
 
 .header h1{
-font-size:34px;
-color:#204c9c;
-margin-bottom:8px;
+    font-size:38px;
+    line-height:1.2;
+    color:#204c9c;
+    font-weight:700;
+    margin-bottom:10px;
 }
 
 .header p{
-color:#666;
+    color:#666;
+    font-size:17px;
 }
 
-/* Search */
-
+/* =========================
+   SEARCH
+========================= */
 .search-box{
-background:white;
-padding:25px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-margin-bottom:30px;
+    background:white;
+    padding:28px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.07);
+    margin-bottom:32px;
 }
 
 .search-box h2{
-font-size:22px;
-color:#204c9c;
-margin-bottom:20px;
+    font-size:23px;
+    color:#204c9c;
+    font-weight:700;
+    margin-bottom:22px;
 }
 
 .search-box input{
-width:100%;
-padding:16px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:15px;
-outline:none;
+    width:100%;
+    height:62px;
+    padding:0 18px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    color:#333;
+    outline:none;
 }
 
 .search-box input:focus{
-border-color:#204c9c;
+    border-color:#204c9c;
 }
 
-/* Table */
-
+/* =========================
+   TABLE
+========================= */
 .table-box{
-background:white;
-padding:25px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-overflow-x:auto;
+    background:white;
+    padding:28px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.07);
+    overflow-x:auto;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
 }
 
 th{
-background:#204c9c;
-color:white;
-padding:16px;
-text-align:left;
-font-size:15px;
+    background:#204c9c;
+    color:white;
+    padding:18px;
+    text-align:left;
+    font-size:16px;
+    font-weight:700;
 }
 
 td{
-padding:18px 16px;
-border-bottom:1px solid #eee;
-font-size:15px;
+    padding:20px 18px;
+    border-bottom:1px solid #eee;
+    font-size:16px;
+    color:#111;
 }
 
-tr:hover{
-background:#f5f9ff;
+tbody tr:hover{
+    background:#f7faff;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+}
+
+.status-dot{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    display:inline-block;
 }
 
 .status-active{
-color:#0a9b39;
-font-weight:600;
+    color:#0a9b39;
+}
+
+.status-active .status-dot{
+    background:#55d58a;
 }
 
 .status-completed{
-color:#0066cc;
-font-weight:600;
+    color:#0066cc;
+}
+
+.status-completed .status-dot{
+    background:#4c82d9;
+}
+
+.patient-name-btn{
+    border:0;
+    background:transparent;
+    color:#12356f;
+    font-family:"Poppins",sans-serif;
+    font-size:16px;
+    font-weight:600;
+    padding:0;
+    cursor:pointer;
+    text-align:left;
+}
+
+.patient-name-btn:hover{
+    color:#204c9c;
+    text-decoration:underline;
 }
 
 .view-btn{
-
-background:#204c9c;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:10px;
-cursor:pointer;
-
+    background:#204c9c;
+    color:white;
+    border:none;
+    padding:11px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:"Poppins",sans-serif;
+    font-size:15px;
+    font-weight:500;
 }
 
 .view-btn:hover{
-
-background:#163c7e;
-
+    background:#163c7e;
 }
 
-</style>
+/* =========================
+   PATIENT PROFILE MODAL
+========================= */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(24,43,70,.52);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    z-index:500;
+}
 
+.overlay.show{
+    display:flex;
+}
+
+.patient-modal{
+    width:min(1050px,100%);
+    max-height:92vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 25px 70px rgba(0,0,0,.22);
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:24px;
+    right:26px;
+    width:38px;
+    height:38px;
+    border:0;
+    background:transparent;
+    color:#7b8798;
+    font-size:29px;
+    line-height:38px;
+    cursor:pointer;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-right:48px;
+    margin-bottom:28px;
+}
+
+.profile-name{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.avatar{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    background:#315cf4;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:700;
+}
+
+.profile-name h2{
+    color:#204c9c;
+    font-size:27px;
+    font-weight:700;
+    margin-bottom:3px;
+}
+
+.profile-name p{
+    color:#7b8798;
+    font-size:14px;
+}
+
+.profile-status{
+    background:#dff7ea;
+    color:#07954a;
+    padding:9px 18px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:24px;
+}
+
+.info-card{
+    background:#f5f8fc;
+    border-radius:13px;
+    padding:16px;
+    min-height:86px;
+}
+
+.info-label{
+    color:#7b8798;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.info-value{
+    color:#183b73;
+    font-size:15px;
+    font-weight:600;
+}
+
+.section{
+    border-top:1px solid #e5e9ef;
+    padding-top:22px;
+    margin-top:22px;
+}
+
+.section h3{
+    color:#2855a1;
+    font-size:19px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.appointment-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.history-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.history-table th{
+    background:#f1f5ff;
+    color:#204c9c;
+    font-size:13px;
+    padding:13px 12px;
+}
+
+.history-table td{
+    font-size:14px;
+    padding:15px 12px;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:24px;
+}
+
+.close-modal{
+    border:0;
+    background:#eef3fb;
+    color:#204c9c;
+    padding:12px 22px;
+    border-radius:11px;
+    font-family:"Poppins",sans-serif;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+@media(max-width:1000px){
+    .sidebar{
+        width:284px;
+    }
+
+    .main{
+        margin-left:284px;
+        padding:35px 25px;
+        min-width:760px;
+    }
+
+    .logo{
+        padding:0 30px;
+    }
+
+    .nav{
+        padding:35px 12px;
+    }
+
+    .nav a{
+        padding:0 20px;
+        gap:14px;
+    }
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px){
+    /* Keep the Getwell sidebar fixed on the LEFT.
+       Do not move it above the page content. */
+    .sidebar{
+        position:fixed;
+        top:0;
+        left:0;
+        width:284px;
+        height:100vh;
+        overflow-y:auto;
+    }
+
+    .logo{
+        height:132px;
+    }
+
+    .nav{
+        padding:48px 20px;
+        display:block;
+    }
+
+    .nav a{
+        width:auto;
+        margin-bottom:8px;
+    }
+
+    .main{
+        margin-left:284px;
+        padding:35px 25px;
+        min-width:620px;
+    }
+
+    .appointment-info{
+        grid-template-columns:1fr;
+    }
+
+    .patient-modal{
+        width:calc(100vw - 320px);
+        min-width:560px;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="logo">Getwell</div>
+
+    <nav class="nav">
+        <a href="dashboard.html">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="register-patient.html">
+            <span class="nav-icon">♟</span>
+            <span>Register Patient</span>
+        </a>
+
+        <a href="patient-list.html" class="active">
+            <span class="nav-icon">♣</span>
+            <span>Patient List</span>
+        </a>
+
+        <a href="appointments.html">
+            <span class="nav-icon">▣</span>
+            <span>Appointments</span>
+        </a>
+
+        <a href="reports.html">
+            <span class="nav-icon">▥</span>
+            <span>Reports</span>
+        </a>
+
+        <a href="settings.html">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+        </a>
+
+        <a href="index.html">
+            <span class="nav-icon">↪</span>
+            <span>Logout</span>
+        </a>
+    </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
 <div class="container">
 
-<div class="header">
+    <div class="header">
+        <h1>Patient List</h1>
+        <p>Manage all registered patients.</p>
+    </div>
 
-<h1>Patient List</h1>
+    <div class="search-box">
+        <h2>🔍 Search Patient</h2>
+        <input
+            id="patientSearch"
+            type="text"
+            placeholder="Search by Patient ID, Name or Phone Number">
+    </div>
 
-<p>Manage all registered patients.</p>
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Patient Name</th>
+                    <th>Phone Number</th>
+                    <th>Current Weight</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-</div>
+            <tbody id="patientTableBody">
 
-<div class="search-box">
+                <tr data-search="GW0001 Nurul Iman 012-3456789">
+                    <td>GW0001</td>
+                    <td><button class="patient-name-btn" type="button" data-patient="nurul">Nurul Iman</button></td>
+                    <td>012-3456789</td>
+                    <td>60 kg</td>
+                    <td>
+                        <span class="status status-active">
+                            <span class="status-dot"></span>Active
+                        </span>
+                    </td>
+                    <td>
+                        <button class="view-btn" data-patient="nurul">View</button>
+                    </td>
+                </tr>
 
-<h2>🔍 Search Patient</h2>
+                <tr data-search="GW0002 Ali Ahmad 011-2233445">
+                    <td>GW0002</td>
+                    <td><button class="patient-name-btn" type="button" data-patient="ali">Ali Ahmad</button></td>
+                    <td>011-2233445</td>
+                    <td>88 kg</td>
+                    <td>
+                        <span class="status status-active">
+                            <span class="status-dot"></span>Active
+                        </span>
+                    </td>
+                    <td>
+                        <button class="view-btn" data-patient="ali">View</button>
+                    </td>
+                </tr>
 
-<input
-type="text"
-placeholder="Search by Patient ID, Name or Phone Number">
+                <tr data-search="GW0003 Sarah Lee 017-8899001">
+                    <td>GW0003</td>
+                    <td><button class="patient-name-btn" type="button" data-patient="sarah">Sarah Lee</button></td>
+                    <td>017-8899001</td>
+                    <td>56 kg</td>
+                    <td>
+                        <span class="status status-completed">
+                            <span class="status-dot"></span>Completed
+                        </span>
+                    </td>
+                    <td>
+                        <button class="view-btn" data-patient="sarah">View</button>
+                    </td>
+                </tr>
 
-</div>
+                <tr data-search="GW0004 John Tan 018-7788990">
+                    <td>GW0004</td>
+                    <td><button class="patient-name-btn" type="button" data-patient="john">John Tan</button></td>
+                    <td>018-7788990</td>
+                    <td>73 kg</td>
+                    <td>
+                        <span class="status status-active">
+                            <span class="status-dot"></span>Active
+                        </span>
+                    </td>
+                    <td>
+                        <button class="view-btn" data-patient="john">View</button>
+                    </td>
+                </tr>
 
-<div class="table-box">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Patient ID</th>
-
-<th>Patient Name</th>
-
-<th>Phone Number</th>
-
-<th>Current Weight</th>
-
-<th>Status</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td>GW0001</td>
-
-<td>Nurul Iman</td>
-
-<td>012-3456789</td>
-
-<td>60 kg</td>
-
-<td class="status-active">🟢 Active</td>
-
-<td>
-<button class="view-btn">
-View
-</button>
-</td>
-
-</tr>
-
-<tr>
-
-<td>GW0002</td>
-
-<td>Ali Ahmad</td>
-
-<td>011-2233445</td>
-
-<td>88 kg</td>
-
-<td class="status-active">🟢 Active</td>
-
-<td>
-<button class="view-btn">
-View
-</button>
-</td>
-
-</tr>
-
-<tr>
-
-<td>GW0003</td>
-
-<td>Sarah Lee</td>
-
-<td>017-8899001</td>
-
-<td>56 kg</td>
-
-<td class="status-completed">🔵 Completed</td>
-
-<td>
-<button class="view-btn">
-View
-</button>
-</td>
-
-</tr>
-
-<tr>
-
-<td>GW0004</td>
-
-<td>John Tan</td>
-
-<td>018-7788990</td>
-
-<td>73 kg</td>
-
-<td class="status-active">🟢 Active</td>
-
-<td>
-<button class="view-btn">
-View
-</button>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
+            </tbody>
+        </table>
+    </div>
 
 </div>
+</main>
 
+<!-- PATIENT INFORMATION -->
+<div class="overlay" id="patientOverlay" onclick="closePatientFromOverlay(event)">
+    <div class="patient-modal">
+
+        <button class="close-btn" onclick="closePatient()">×</button>
+
+        <div class="profile-top">
+            <div class="profile-name">
+                <div class="avatar" id="profileAvatar">NI</div>
+                <div>
+                    <h2 id="profileName">Nurul Iman</h2>
+                    <p id="profileId">GW0001</p>
+                </div>
+            </div>
+
+            <div class="profile-status" id="profileStatus">Active</div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-label">Phone Number</div>
+                <div class="info-value" id="profilePhone">012-3456789</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Current Weight</div>
+                <div class="info-value" id="profileWeight">60 kg</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Last Visit</div>
+                <div class="info-value" id="profileLastVisit">10 Aug 2026</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Next Appointment</div>
+                <div class="info-value" id="profileNextAppointment">—</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Appointment Information</h3>
+
+            <div class="appointment-info">
+                <div>
+                    <div class="info-label">Doctor</div>
+                    <div class="info-value" id="profileDoctor">Dr. Aaron</div>
+                </div>
+
+                <div>
+                    <div class="info-label">Appointment Type</div>
+                    <div class="info-value" id="profileType">Weight Loss Consultation</div>
+                </div>
+
+                <div>
+                    <div class="info-label">Status</div>
+                    <div class="info-value" id="profileAppointmentStatus">Scheduled</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Recent Appointment History</h3>
+
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Billed Date</th>
+                        <th>Reason of Visit</th>
+                        <th>Doctor Attended</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+
+                <tbody id="historyBody"></tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+            <button class="close-modal" onclick="closePatient()">Close</button>
+        </div>
+
+    </div>
 </div>
+
+<script>
+const patients = {
+    nurul:{
+        initials:"NI",
+        name:"Nurul Iman",
+        id:"GW0001",
+        phone:"012-3456789",
+        weight:"60 kg",
+        status:"Active",
+        lastVisit:"10 Aug 2026",
+        nextAppointment:"—",
+        doctor:"Dr. Aaron",
+        type:"Weight Loss Consultation",
+        appointmentStatus:"Scheduled",
+        history:[
+            ["10 Aug 2026","Weight Loss Consultation","Dr. Aaron","Patient attended consultation."],
+            ["25 Jul 2026","Weight Loss Injection","Dr. Aaron","Injection given."],
+            ["11 Jul 2026","Follow Up","Dr. Aaron","Patient progressing well."]
+        ]
+    },
+
+    ali:{
+        initials:"AA",
+        name:"Ali Ahmad",
+        id:"GW0002",
+        phone:"011-2233445",
+        weight:"88 kg",
+        status:"Active",
+        lastVisit:"9 Aug 2026",
+        nextAppointment:"—",
+        doctor:"Dr. Aaron",
+        type:"Follow Up",
+        appointmentStatus:"Scheduled",
+        history:[
+            ["9 Aug 2026","Follow Up","Dr. Aaron","Follow-up completed."],
+            ["26 Jul 2026","Weight Loss Injection","Dr. Aaron","Injection given."],
+            ["12 Jul 2026","Weight Loss Consultation","Dr. Aaron","Programme reviewed."]
+        ]
+    },
+
+    sarah:{
+        initials:"SL",
+        name:"Sarah Lee",
+        id:"GW0003",
+        phone:"017-8899001",
+        weight:"56 kg",
+        status:"Completed",
+        lastVisit:"11 Aug 2026",
+        nextAppointment:"—",
+        doctor:"Dr. Najwa",
+        type:"Skin Consultation",
+        appointmentStatus:"Completed",
+        history:[
+            ["11 Aug 2026","Skin Consultation","Dr. Najwa","Consultation completed."],
+            ["20 Jul 2026","Follow Up","Dr. Najwa","Follow-up completed."]
+        ]
+    },
+
+    john:{
+        initials:"JT",
+        name:"John Tan",
+        id:"GW0004",
+        phone:"018-7788990",
+        weight:"73 kg",
+        status:"Active",
+        lastVisit:"7 Aug 2026",
+        nextAppointment:"—",
+        doctor:"Dr. Aaron",
+        type:"IV Drip Therapy",
+        appointmentStatus:"Scheduled",
+        history:[
+            ["7 Aug 2026","IV Drip Therapy","Dr. Aaron","Treatment completed."],
+            ["20 Jul 2026","Follow Up","Dr. Aaron","Patient reviewed."]
+        ]
+    }
+};
+
+function openPatient(key){
+    const patient = patients[key];
+
+    if(!patient) return;
+
+    document.getElementById("profileAvatar").textContent = patient.initials;
+    document.getElementById("profileName").textContent = patient.name;
+    document.getElementById("profileId").textContent = patient.id;
+    document.getElementById("profilePhone").textContent = patient.phone;
+    document.getElementById("profileWeight").textContent = patient.weight;
+    document.getElementById("profileLastVisit").textContent = patient.lastVisit;
+    document.getElementById("profileNextAppointment").textContent = patient.nextAppointment;
+    document.getElementById("profileDoctor").textContent = patient.doctor;
+    document.getElementById("profileType").textContent = patient.type;
+    document.getElementById("profileAppointmentStatus").textContent = patient.appointmentStatus;
+    document.getElementById("profileStatus").textContent = patient.status;
+
+    const historyBody = document.getElementById("historyBody");
+    historyBody.innerHTML = "";
+
+    patient.history.forEach((visit,index)=>{
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${visit[0]}</td>
+            <td>${visit[1]}</td>
+            <td>${visit[2]}</td>
+            <td>${visit[3]}</td>
+        `;
+
+        historyBody.appendChild(row);
+    });
+
+    document.getElementById("patientOverlay").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closePatient(){
+    document.getElementById("patientOverlay").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+function closePatientFromOverlay(event){
+    if(event.target === document.getElementById("patientOverlay")){
+        closePatient();
+    }
+}
+
+document.querySelectorAll("[data-patient]").forEach(function(element){
+    element.addEventListener("click", function(){
+        openPatient(this.dataset.patient);
+    });
+});
+
+document.getElementById("patientSearch").addEventListener("input",function(){
+    const query = this.value.toLowerCase().trim();
+
+    document.querySelectorAll("#patientTableBody tr").forEach(row=>{
+        const text = row.dataset.search.toLowerCase();
+        row.style.display = text.includes(query) ? "" : "none";
+    });
+});
+
+document.addEventListener("keydown",function(event){
+    if(event.key === "Escape"){
+        closePatient();
+    }
+});
+</script>
 
 </body>
-
 </html>
