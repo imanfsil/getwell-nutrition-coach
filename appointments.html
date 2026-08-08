@@ -6,12 +6,15 @@
 
   <title>Appointments Overview - Getwell</title>
 
-  <!-- Poppins Font -->
+  <!-- Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -19,38 +22,37 @@
 
   <style>
 
-    /* =========================
+    /* =========================================================
        GLOBAL
-    ========================= */
+    ========================================================= */
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
       background: #eef5fc;
       color: #17325c;
       min-height: 100vh;
-      display: flex;
     }
 
 
-    /* =========================
+    /* =========================================================
        SIDEBAR
-    ========================= */
+    ========================================================= */
 
     .sidebar {
       width: 180px;
-      min-height: 100vh;
-      background: #2858a3;
+      height: 100vh;
+      background: #2b5ba6;
       color: white;
       position: fixed;
       left: 0;
       top: 0;
-      bottom: 0;
+      z-index: 100;
     }
 
     .logo {
@@ -58,13 +60,13 @@
       display: flex;
       align-items: center;
       padding-left: 24px;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 700;
       border-bottom: 1px solid rgba(255,255,255,0.15);
     }
 
     .nav {
-      padding: 22px 14px;
+      padding: 25px 14px;
     }
 
     .nav a {
@@ -72,13 +74,14 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 0 16px;
-      margin-bottom: 5px;
-      border-radius: 9px;
+      padding: 0 15px;
+      margin-bottom: 6px;
+      border-radius: 10px;
       color: white;
       text-decoration: none;
       font-size: 11px;
       font-weight: 500;
+      transition: 0.2s ease;
     }
 
     .nav a:hover {
@@ -92,85 +95,90 @@
     }
 
     .nav-icon {
-      width: 16px;
+      width: 17px;
       text-align: center;
-      font-size: 11px;
+      font-size: 12px;
     }
 
 
-    /* =========================
+    /* =========================================================
        MAIN
-    ========================= */
+    ========================================================= */
 
     .main {
       margin-left: 180px;
       width: calc(100% - 180px);
       min-height: 100vh;
-      padding: 16px 26px 32px;
+      padding: 28px 30px 40px;
     }
 
 
-    /* =========================
+    /* =========================================================
        HEADER
-    ========================= */
+    ========================================================= */
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .header h1 {
       color: #24539f;
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 30px;
       line-height: 1.2;
-      margin-bottom: 4px;
+      font-weight: 600;
+      margin-bottom: 5px;
     }
 
     .header p {
-      color: #73819a;
-      font-size: 10px;
+      color: #71809a;
+      font-size: 12px;
       font-weight: 400;
     }
 
     .date-selector {
       background: white;
-      border: 1px solid #dce4ef;
-      border-radius: 7px;
-      padding: 7px 11px;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      padding: 9px 13px;
       color: #53627a;
-      font-size: 9px;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .date-selector i {
+      color: #2858a3;
     }
 
 
-    /* =========================
+    /* =========================================================
        SUMMARY CARDS
-    ========================= */
+    ========================================================= */
 
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 9px;
-      margin-bottom: 11px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
     .summary-card {
       background: white;
-      min-height: 68px;
-      border-radius: 11px;
-      padding: 13px;
+      min-height: 84px;
+      border-radius: 12px;
+      padding: 16px;
       display: flex;
       align-items: center;
-      gap: 11px;
-      box-shadow: 0 3px 12px rgba(37, 76, 130, 0.07);
+      gap: 14px;
+      box-shadow: 0 4px 14px rgba(37, 76, 130, 0.07);
     }
 
     .summary-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -179,7 +187,7 @@
     }
 
     .summary-icon i {
-      font-size: 16px;
+      font-size: 19px;
     }
 
     .blue {
@@ -199,94 +207,94 @@
     }
 
     .summary-label {
-      font-size: 8px;
       color: #667792;
-      margin-bottom: 1px;
+      font-size: 10px;
+      margin-bottom: 2px;
     }
 
     .summary-number {
-      font-size: 17px;
+      color: #142d56;
+      font-size: 22px;
       line-height: 1.2;
       font-weight: 600;
-      color: #142d56;
     }
 
     .summary-sub {
-      font-size: 7px;
       color: #8a96a8;
-      margin-top: 1px;
+      font-size: 8px;
+      margin-top: 2px;
     }
 
 
-    /* =========================
+    /* =========================================================
        CONTENT GRID
-    ========================= */
+    ========================================================= */
 
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
     .panel {
       background: white;
-      border-radius: 11px;
-      padding: 11px;
-      box-shadow: 0 3px 12px rgba(37, 76, 130, 0.07);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 4px 14px rgba(37, 76, 130, 0.07);
     }
 
 
-    /* =========================
-       PANEL TITLE
-    ========================= */
+    /* =========================================================
+       PANEL TITLES
+    ========================================================= */
 
     .panel-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 7px;
+      margin-bottom: 10px;
     }
 
     .panel-title h2 {
-      font-size: 10px;
-      color: #164e9f;
-      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      color: #164e9f;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .panel-title h2 i {
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .view-all {
       border: none;
       background: #f1f5fd;
       color: #3567bc;
-      font-size: 7px;
-      padding: 5px 8px;
-      border-radius: 5px;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: "Poppins", sans-serif;
+      font-size: 8px;
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
     }
 
     .view-all:hover {
-      background: #e5edfb;
+      background: #e6edf9;
     }
 
 
-    /* =========================
-       APPOINTMENT ROW
-    ========================= */
+    /* =========================================================
+       APPOINTMENT ROWS
+    ========================================================= */
 
     .appointment-row {
       display: grid;
-      grid-template-columns: 39px 1fr 65px 57px;
+      grid-template-columns: 55px 1fr 78px 68px;
       align-items: center;
-      min-height: 38px;
+      min-height: 52px;
+      gap: 7px;
       border-bottom: 1px solid #edf0f5;
-      gap: 5px;
     }
 
     .appointment-row:last-of-type {
@@ -294,34 +302,34 @@
     }
 
     .appointment-time {
-      font-size: 7px;
       color: #2458aa;
+      font-size: 8px;
       font-weight: 600;
     }
 
     .patient-name {
-      font-size: 8px;
-      font-weight: 600;
       color: #172d50;
+      font-size: 9px;
+      font-weight: 600;
     }
 
     .appointment-type {
-      font-size: 6.5px;
       color: #7c889b;
-      margin-top: 1px;
+      font-size: 7px;
+      margin-top: 2px;
     }
 
     .doctor {
-      font-size: 6.5px;
       color: #6e7c91;
+      font-size: 7px;
     }
 
     .status {
-      font-size: 6.5px;
-      padding: 4px 5px;
-      border-radius: 8px;
       text-align: center;
       white-space: nowrap;
+      border-radius: 9px;
+      padding: 5px 7px;
+      font-size: 7px;
     }
 
     .status.scheduled {
@@ -340,18 +348,18 @@
     }
 
 
-    /* =========================
+    /* =========================================================
        PANEL FOOTER
-    ========================= */
+    ========================================================= */
 
     .panel-footer {
-      margin-top: 7px;
+      margin-top: 10px;
+      padding: 9px;
       background: #f1f5fd;
-      border-radius: 6px;
-      padding: 7px;
-      text-align: center;
-      font-size: 7px;
       color: #3568bc;
+      border-radius: 7px;
+      text-align: center;
+      font-size: 8px;
       cursor: pointer;
     }
 
@@ -361,9 +369,9 @@
     }
 
 
-    /* =========================
+    /* =========================================================
        MISSED APPOINTMENTS
-    ========================= */
+    ========================================================= */
 
     .alert-panel .panel-title h2 {
       color: #d63c48;
@@ -374,9 +382,9 @@
     }
 
 
-    /* =========================
-       FOLLOW-UP
-    ========================= */
+    /* =========================================================
+       PATIENTS DUE FOR FOLLOW-UP
+    ========================================================= */
 
     .followup-panel .panel-title h2 {
       color: #e37b00;
@@ -387,16 +395,16 @@
     }
 
 
-    /* =========================
-       ALERT ROW
-    ========================= */
+    /* =========================================================
+       ALERT ROWS
+    ========================================================= */
 
     .alert-row {
-      min-height: 35px;
+      min-height: 43px;
       border-bottom: 1px solid #edf0f5;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
     }
 
@@ -405,36 +413,36 @@
     }
 
     .alert-patient {
-      font-size: 7.5px;
       color: #1a2d4b;
+      font-size: 9px;
       font-weight: 600;
     }
 
     .alert-date {
-      font-size: 6.5px;
       color: #8490a1;
-      margin-top: 1px;
+      font-size: 7px;
+      margin-top: 2px;
     }
 
     .no-show-badge {
       background: #ffe7ea;
       color: #dc3545;
-      padding: 4px 6px;
       border-radius: 6px;
-      font-size: 6.5px;
+      padding: 5px 8px;
+      font-size: 7px;
       white-space: nowrap;
     }
 
     .days-away {
-      font-size: 6.5px;
       color: #7d899b;
+      font-size: 7px;
       white-space: nowrap;
     }
 
 
-    /* =========================
+    /* =========================================================
        UPCOMING APPOINTMENTS
-    ========================= */
+    ========================================================= */
 
     .upcoming-panel {
       grid-column: span 2;
@@ -443,14 +451,14 @@
     .upcoming-days {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
+      gap: 8px;
     }
 
     .day-card {
+      min-height: 108px;
       border: 1px solid #e1e7f0;
-      border-radius: 6px;
-      min-height: 86px;
-      padding: 7px;
+      border-radius: 7px;
+      padding: 9px;
     }
 
     .day-header {
@@ -460,64 +468,64 @@
     }
 
     .day-name {
-      font-size: 7px;
-      font-weight: 600;
       color: #263d62;
+      font-size: 8px;
+      font-weight: 600;
     }
 
     .day-date {
-      font-size: 5.5px;
       color: #8a95a6;
-      margin-top: 1px;
+      font-size: 7px;
+      margin-top: 2px;
     }
 
     .count {
       background: #2858a7;
       color: white;
       border-radius: 4px;
-      font-size: 6px;
-      padding: 2px 4px;
+      padding: 3px 5px;
+      font-size: 7px;
     }
 
     .day-time {
-      font-size: 6.5px;
       color: #55657d;
-      margin-top: 6px;
+      font-size: 7px;
+      margin-top: 8px;
     }
 
     .add-slot {
-      text-align: center;
-      margin-top: 9px;
-      font-size: 6px;
       color: #3567bc;
+      text-align: center;
+      margin-top: 12px;
+      font-size: 7px;
       cursor: pointer;
     }
 
 
-    /* =========================
+    /* =========================================================
        QUICK ACTIONS
-    ========================= */
+    ========================================================= */
 
     .quick-actions {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 8px;
     }
 
     .quick-btn {
       width: 100%;
-      height: 28px;
+      height: 35px;
       border: none;
-      border-radius: 6px;
+      border-radius: 7px;
       background: #f1f4fb;
       color: #4e6080;
-      font-size: 7px;
+      font-family: "Poppins", sans-serif;
+      font-size: 8px;
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
     }
 
     .quick-btn i {
-      margin-right: 5px;
+      margin-right: 6px;
     }
 
     .quick-btn.primary {
@@ -530,55 +538,55 @@
     }
 
 
-    /* =========================
+    /* =========================================================
        MODAL
-    ========================= */
+    ========================================================= */
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
+      z-index: 1000;
       background: rgba(15, 31, 55, 0.45);
       align-items: center;
       justify-content: center;
-      z-index: 1000;
     }
 
     .modal-content {
-      width: 390px;
+      position: relative;
+      width: 400px;
       background: white;
       border-radius: 14px;
-      padding: 25px;
+      padding: 28px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-      position: relative;
     }
 
     .close-btn {
       position: absolute;
-      right: 18px;
       top: 13px;
-      font-size: 23px;
+      right: 18px;
       color: #8792a3;
+      font-size: 23px;
       cursor: pointer;
     }
 
     .modal-content h2 {
       color: #24539f;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 600;
       margin-bottom: 20px;
     }
 
     .modal-content input {
       width: 100%;
-      height: 42px;
+      height: 43px;
       border: 1px solid #dce3ed;
       border-radius: 7px;
-      margin-bottom: 11px;
       padding: 0 12px;
-      font-size: 11px;
+      margin-bottom: 11px;
       outline: none;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
     }
 
     .modal-content input:focus {
@@ -587,24 +595,24 @@
 
     .save-btn {
       width: 100%;
-      height: 43px;
-      background: #315df4;
+      height: 44px;
+      margin-top: 5px;
       border: none;
       border-radius: 7px;
+      background: #315df4;
       color: white;
-      font-size: 11px;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 5px;
-      font-family: 'Poppins', sans-serif;
     }
 
 
-    /* =========================
+    /* =========================================================
        RESPONSIVE
-    ========================= */
+    ========================================================= */
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1200px) {
 
       .summary-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -620,7 +628,7 @@
     }
 
 
-    @media (max-width: 800px) {
+    @media (max-width: 850px) {
 
       .sidebar {
         width: 170px;
@@ -629,6 +637,7 @@
       .main {
         margin-left: 170px;
         width: calc(100% - 170px);
+        padding: 22px;
       }
 
       .summary-grid {
@@ -644,7 +653,7 @@
       }
 
       .upcoming-days {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -655,9 +664,9 @@
 <body>
 
 
-  <!-- =========================
+  <!-- =========================================================
        SIDEBAR
-  ========================= -->
+  ========================================================= -->
 
   <aside class="sidebar">
 
@@ -718,14 +727,13 @@
 
     </nav>
 
-
   </aside>
 
 
 
-  <!-- =========================
-       MAIN
-  ========================= -->
+  <!-- =========================================================
+       MAIN CONTENT
+  ========================================================= -->
 
   <main class="main">
 
@@ -750,8 +758,12 @@
       <div class="date-selector">
 
         <i class="fa-regular fa-calendar"></i>
+
         &nbsp; 10 Aug 2026 (Today)
-        &nbsp; <i class="fa-solid fa-chevron-down"></i>
+
+        &nbsp;
+
+        <i class="fa-solid fa-chevron-down"></i>
 
       </div>
 
@@ -759,14 +771,12 @@
 
 
 
-    <!-- =========================
+    <!-- =======================================================
          SUMMARY CARDS
-    ========================= -->
+    ======================================================= -->
 
     <section class="summary-grid">
 
-
-      <!-- TODAY -->
 
       <div class="summary-card">
 
@@ -794,8 +804,6 @@
 
 
 
-      <!-- TOMORROW -->
-
       <div class="summary-card">
 
         <div class="summary-icon green">
@@ -822,8 +830,6 @@
 
 
 
-      <!-- THIS WEEK -->
-
       <div class="summary-card">
 
         <div class="summary-icon orange">
@@ -849,8 +855,6 @@
       </div>
 
 
-
-      <!-- MISSING / NO SHOW -->
 
       <div class="summary-card">
 
@@ -880,16 +884,14 @@
 
 
 
-    <!-- =========================
-         CONTENT
-    ========================= -->
+    <!-- =======================================================
+         CONTENT GRID
+    ======================================================= -->
 
     <section class="content-grid">
 
 
-      <!-- =========================
-           TODAY'S APPOINTMENTS
-      ========================= -->
+      <!-- TODAY -->
 
       <div class="panel">
 
@@ -914,7 +916,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Nurul Iman
             </div>
@@ -922,7 +923,6 @@
             <div class="appointment-type">
               Weight Loss Consultation
             </div>
-
           </div>
 
           <div class="doctor">
@@ -943,7 +943,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Ali Ahmad
             </div>
@@ -951,7 +950,6 @@
             <div class="appointment-type">
               Follow Up
             </div>
-
           </div>
 
           <div class="doctor">
@@ -972,7 +970,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               John Tan
             </div>
@@ -980,7 +977,6 @@
             <div class="appointment-type">
               IV Drip Therapy
             </div>
-
           </div>
 
           <div class="doctor">
@@ -1001,7 +997,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Sarah Lee
             </div>
@@ -1009,7 +1004,6 @@
             <div class="appointment-type">
               Skin Consultation
             </div>
-
           </div>
 
           <div class="doctor">
@@ -1031,9 +1025,7 @@
 
 
 
-      <!-- =========================
-           TOMORROW'S APPOINTMENTS
-      ========================= -->
+      <!-- TOMORROW -->
 
       <div class="panel">
 
@@ -1058,7 +1050,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Fatimah Zahra
             </div>
@@ -1066,7 +1057,6 @@
             <div class="appointment-type">
               Weight Loss Consultation
             </div>
-
           </div>
 
           <div class="doctor">
@@ -1087,7 +1077,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Ahmad Firdaus
             </div>
@@ -1095,7 +1084,6 @@
             <div class="appointment-type">
               Follow Up
             </div>
-
           </div>
 
           <div class="doctor">
@@ -1116,7 +1104,6 @@
           </div>
 
           <div>
-
             <div class="patient-name">
               Siti Aisyah
             </div>
@@ -1124,7 +1111,6 @@
             <div class="appointment-type">
               IV Drip Therapy
             </div>
-
           </div>
 
           <div class="doctor">
@@ -1146,9 +1132,7 @@
 
 
 
-      <!-- =========================
-           MISSED APPOINTMENTS
-      ========================= -->
+      <!-- MISSED APPOINTMENTS -->
 
       <div class="panel alert-panel">
 
@@ -1232,9 +1216,7 @@
 
 
 
-      <!-- =========================
-           UPCOMING APPOINTMENTS
-      ========================= -->
+      <!-- UPCOMING -->
 
       <div class="panel upcoming-panel">
 
@@ -1254,8 +1236,6 @@
 
         <div class="upcoming-days">
 
-
-          <!-- WEDNESDAY -->
 
           <div class="day-card">
 
@@ -1294,8 +1274,6 @@
           </div>
 
 
-
-          <!-- THURSDAY -->
 
           <div class="day-card">
 
@@ -1339,8 +1317,6 @@
 
 
 
-          <!-- FRIDAY -->
-
           <div class="day-card">
 
             <div class="day-header">
@@ -1378,8 +1354,6 @@
           </div>
 
 
-
-          <!-- SATURDAY -->
 
           <div class="day-card">
 
@@ -1419,8 +1393,6 @@
 
 
 
-          <!-- SUNDAY -->
-
           <div class="day-card">
 
             <div class="day-header">
@@ -1445,7 +1417,7 @@
 
             <div
               class="day-time"
-              style="margin-top: 22px; text-align: center;"
+              style="margin-top:28px;text-align:center;"
             >
               No appointments
             </div>
@@ -1463,9 +1435,7 @@
 
 
 
-      <!-- =========================
-           PATIENTS DUE FOR FOLLOW-UP
-      ========================= -->
+      <!-- PATIENTS DUE FOR FOLLOW-UP -->
 
       <div class="panel followup-panel">
 
@@ -1485,12 +1455,8 @@
 
         <div class="alert-row">
 
-          <div>
-
-            <div class="alert-patient">
-              Farah Nadia
-            </div>
-
+          <div class="alert-patient">
+            Farah Nadia
           </div>
 
           <div class="days-away">
@@ -1502,12 +1468,8 @@
 
         <div class="alert-row">
 
-          <div>
-
-            <div class="alert-patient">
-              Ahmad Syukri
-            </div>
-
+          <div class="alert-patient">
+            Ahmad Syukri
           </div>
 
           <div class="days-away">
@@ -1519,12 +1481,8 @@
 
         <div class="alert-row">
 
-          <div>
-
-            <div class="alert-patient">
-              Nurul Huda
-            </div>
-
+          <div class="alert-patient">
+            Nurul Huda
           </div>
 
           <div class="days-away">
@@ -1537,9 +1495,7 @@
 
 
 
-      <!-- =========================
-           QUICK ACTIONS
-      ========================= -->
+      <!-- QUICK ACTIONS -->
 
       <div class="panel">
 
@@ -1557,7 +1513,6 @@
 
 
         <div class="quick-actions">
-
 
           <button
             class="quick-btn primary"
@@ -1588,7 +1543,6 @@
 
           </button>
 
-
         </div>
 
       </div>
@@ -1600,9 +1554,9 @@
 
 
 
-  <!-- =========================
+  <!-- =========================================================
        ADD APPOINTMENT MODAL
-  ========================= -->
+  ========================================================= -->
 
   <div
     class="modal"
@@ -1611,7 +1565,6 @@
 
     <div class="modal-content">
 
-
       <span
         class="close-btn"
         onclick="closeModal()"
@@ -1619,11 +1572,9 @@
         &times;
       </span>
 
-
       <h2>
         New Appointment
       </h2>
-
 
       <input
         type="text"
@@ -1631,13 +1582,11 @@
         placeholder="Patient Name"
       >
 
-
       <input
         type="text"
         id="patientId"
         placeholder="Patient ID"
       >
-
 
       <input
         type="text"
@@ -1645,18 +1594,15 @@
         placeholder="Doctor"
       >
 
-
       <input
         type="date"
         id="appointmentDate"
       >
 
-
       <input
         type="time"
         id="appointmentTime"
       >
-
 
       <button
         class="save-btn"
@@ -1665,33 +1611,28 @@
         Save Appointment
       </button>
 
-
     </div>
 
   </div>
 
 
 
-  <!-- =========================
+  <!-- =========================================================
        JAVASCRIPT
-  ========================= -->
+  ========================================================= -->
 
   <script>
 
     function openModal() {
 
-      document.getElementById(
-        "appointmentModal"
-      ).style.display = "flex";
+      document.getElementById("appointmentModal").style.display = "flex";
 
     }
 
 
     function closeModal() {
 
-      document.getElementById(
-        "appointmentModal"
-      ).style.display = "none";
+      document.getElementById("appointmentModal").style.display = "none";
 
     }
 
@@ -1722,39 +1663,21 @@
         !time
       ) {
 
-        alert(
-          "Please complete all appointment details."
-        );
+        alert("Please complete all appointment details.");
 
         return;
 
       }
 
 
-      alert(
-        "Appointment saved successfully."
-      );
+      alert("Appointment saved successfully.");
 
 
-      document.getElementById(
-        "patientName"
-      ).value = "";
-
-      document.getElementById(
-        "patientId"
-      ).value = "";
-
-      document.getElementById(
-        "doctor"
-      ).value = "";
-
-      document.getElementById(
-        "appointmentDate"
-      ).value = "";
-
-      document.getElementById(
-        "appointmentTime"
-      ).value = "";
+      document.getElementById("patientName").value = "";
+      document.getElementById("patientId").value = "";
+      document.getElementById("doctor").value = "";
+      document.getElementById("appointmentDate").value = "";
+      document.getElementById("appointmentTime").value = "";
 
 
       closeModal();
@@ -1765,9 +1688,7 @@
     window.onclick = function(event) {
 
       const modal =
-        document.getElementById(
-          "appointmentModal"
-        );
+        document.getElementById("appointmentModal");
 
       if (event.target === modal) {
 
@@ -1778,7 +1699,6 @@
     };
 
   </script>
-
 
 </body>
 </html>
