@@ -1785,6 +1785,99 @@ button.add-time{
     background:#dfe8ff;
 }
 
+
+/* Patient appointment history */
+.profile-history-table-wrap{width:100%;overflow-x:auto;}
+.profile-history-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+    font-family:"Poppins",sans-serif;
+}
+.profile-history-table th{
+    background:#f3f6ff;
+    color:#204c9c;
+    font-size:11px;
+    font-weight:600;
+    text-align:left;
+    padding:12px 10px;
+    border-bottom:1px solid #e2e7ef;
+}
+.profile-history-table td{
+    padding:13px 10px;
+    border-bottom:1px solid #edf0f4;
+    color:#68758a;
+    font-size:11px;
+    vertical-align:middle;
+}
+.profile-history-table td.visit-no{
+    color:#204c9c;
+    font-weight:700;
+    width:55px;
+}
+.profile-history-table td.billed-date{
+    color:#204c9c;
+    font-weight:600;
+    white-space:nowrap;
+}
+.profile-history-table td.reason{
+    color:#50617b;
+}
+.profile-history-table td.doctor{
+    white-space:nowrap;
+}
+.remark-cell{
+    min-width:190px;
+}
+.remark-button{
+    border:0;
+    background:#f1f5ff;
+    color:#315df4;
+    border-radius:7px;
+    padding:6px 9px;
+    font-family:"Poppins",sans-serif;
+    font-size:10px;
+    cursor:pointer;
+}
+.remark-button:hover{background:#e4ebff;}
+.remark-saved{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#405572;
+    line-height:1.4;
+}
+.remark-edit{
+    flex:0 0 auto;
+    border:0;
+    background:#f1f5ff;
+    color:#315df4;
+    width:24px;
+    height:24px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.remark-textarea{
+    width:100%;
+    min-height:150px;
+    resize:vertical;
+    border:1px solid #dce2eb;
+    border-radius:10px;
+    padding:13px;
+    font-family:"Poppins",sans-serif;
+    font-size:12px;
+    line-height:1.6;
+    outline:0;
+}
+.remark-textarea:focus{border-color:#315df4;}
+
+
+#patientProfileOverlay,
+#editAppointmentOverlay,
+#remarkOverlay{
+    z-index:2200;
+}
+
 </style>
 
 </head>
@@ -2665,6 +2758,21 @@ button.add-time{
   </div>
 </div>
 
+
+<!-- APPOINTMENT REMARK / NOTE -->
+<div class="ui-overlay" id="remarkOverlay">
+  <div class="ui-panel small">
+    <button class="ui-close" type="button" onclick="closeUI('remarkOverlay')">&times;</button>
+    <h2 id="remarkTitle">Appointment Remark</h2>
+    <div class="panel-sub" id="remarkSub">Add a note for this visit.</div>
+    <textarea class="remark-textarea" id="remarkText" placeholder="Add notes about this visit..."></textarea>
+    <div class="ui-actions">
+      <button class="ui-btn secondary" type="button" onclick="closeUI('remarkOverlay')">Cancel</button>
+      <button class="ui-btn primary" type="button" onclick="saveRemark()">Save Note</button>
+    </div>
+  </div>
+</div>
+
 <!-- FOLLOW-UP REMINDERS -->
 <div class="ui-overlay" id="reminderOverlay">
   <div class="ui-panel">
@@ -3192,7 +3300,7 @@ function to12Hour(value){
 
 function saveEditedAppointment(){
   const date=document.getElementById("editDate").value;
-  const time=to12Hour(document.getElementById("editTime").value);
+  const time=document.getElementById("editTime").value;
   const doctor=document.getElementById("editDoctor").value;
   const type=document.getElementById("editType").value.trim();
 
@@ -3202,30 +3310,45 @@ function saveEditedAppointment(){
   }
 
   const formattedDate=new Date(date+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
-  const {type:source,index}=editingAppointment;
+  const displayTime=to12Hour(time);
 
-  if(source==="today"){
-    todayAppointments[index][0]=time;
-    todayAppointments[index][2]=type;
-    todayAppointments[index][3]=doctor;
-  }else if(source==="tomorrow"){
-    tomorrowAppointments[index][0]=time;
-    tomorrowAppointments[index][2]=type;
-    tomorrowAppointments[index][3]=doctor;
-  }else if(source==="upcoming"){
-    upcomingAppointments[index][0]=formattedDate;
-    upcomingAppointments[index][1]=time;
-    upcomingAppointments[index][3]=type;
-    upcomingAppointments[index][4]=doctor;
+  if(editingAppointment.type==="profile"){
+    const patient=samplePatients.find(p=>p.id===editingAppointment.patientId);
+    if(patient){
+      patient.nextAppointment=`${formattedDate} · ${displayTime}`;
+      patient.doctor=doctor;
+      patient.type=type;
+
+      document.getElementById("profileNextAppointment").textContent=patient.nextAppointment;
+      document.getElementById("profileDoctor").textContent=doctor;
+      document.getElementById("profileType").textContent=type;
+      document.getElementById("profileAppointmentStatus").textContent="Scheduled";
+    }
+  }else{
+    const {type:source,index}=editingAppointment;
+
+    if(source==="today"){
+      todayAppointments[index][0]=displayTime;
+      todayAppointments[index][2]=type;
+      todayAppointments[index][3]=doctor;
+    }else if(source==="tomorrow"){
+      tomorrowAppointments[index][0]=displayTime;
+      tomorrowAppointments[index][2]=type;
+      tomorrowAppointments[index][3]=doctor;
+    }else if(source==="upcoming"){
+      upcomingAppointments[index][0]=formattedDate;
+      upcomingAppointments[index][1]=displayTime;
+      upcomingAppointments[index][3]=type;
+      upcomingAppointments[index][4]=doctor;
+    }
+
+    renderUpcomingDays();
+    makeDashboardNamesClickable();
   }
 
   closeUI("editAppointmentOverlay");
-  renderUpcomingDays();
-  makeDashboardNamesClickable();
-
   alert("Appointment updated successfully in the UI preview.");
 }
-
 function openPatientProfileByName(name){
   const patient = samplePatients.find(p => p.name === name);
 
@@ -3259,14 +3382,47 @@ function openPatientProfileByName(name){
         status: "Completed"
       }];
 
-  document.getElementById("profileHistory").innerHTML = history.map(h => `
-    <div class="profile-history-row">
-      <strong>${h.date}</strong>
-      <span>${h.type}</span>
-      <span>${h.doctor}</span>
-      <span class="status ${h.status==="Completed" ? "status-completed" : h.status==="No Show" ? "status-no-show" : "status-scheduled"}">${h.status}</span>
+  document.getElementById("profileHistory").innerHTML = `
+    <div class="profile-history-table-wrap">
+      <table class="profile-history-table">
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>Billed Date</th>
+            <th>Reason of Visit</th>
+            <th>Doctor Attended</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${history.map((h, index) => {
+            const remark = h.remark || "";
+            return `
+              <tr>
+                <td class="visit-no">${index + 1}</td>
+                <td class="billed-date">${h.date}</td>
+                <td class="reason">${h.type}</td>
+                <td class="doctor">${h.doctor}</td>
+                <td class="remark-cell">
+                  ${remark
+                    ? `<div class="remark-saved">
+                         <span>${escapeHtml(remark)}</span>
+                         <button class="remark-edit" type="button" title="Edit remark"
+                           onclick="openRemark('${patient.id}',${index})">
+                           <i class="fa-solid fa-pencil"></i>
+                         </button>
+                       </div>`
+                    : `<button class="remark-button" type="button"
+                         onclick="openRemark('${patient.id}',${index})">
+                         + Add Note
+                       </button>`}
+                </td>
+              </tr>`;
+          }).join("")}
+        </tbody>
+      </table>
     </div>
-  `).join("");
+  `;
 
   document.getElementById("patientProfileOverlay").classList.add("show");
 }
@@ -3280,29 +3436,60 @@ function editProfileAppointment(){
     return;
   }
 
-  if(patient.nextAppointment === "—"){
-    // UI-only: allow staff to create the next appointment for this patient.
-    openEditAppointment(patient.name, patient.doctor, patient.type, "", "");
-    return;
+  editingAppointment = {type:"profile", index:null, patientId:patient.id};
+
+  document.getElementById("editPatientName").value = patient.name;
+  document.getElementById("editDoctor").value = patient.doctor || "Dr. Aaron";
+  document.getElementById("editType").value = patient.type || "Consultation";
+
+  if(patient.nextAppointment && patient.nextAppointment !== "—"){
+    const parts = patient.nextAppointment.split(" · ");
+    const parsed = new Date(parts[0]);
+    document.getElementById("editDate").value = isNaN(parsed.getTime()) ? "" : formatISODate(parsed);
+    document.getElementById("editTime").value = to24Hour(parts[1] || "");
+  }else{
+    document.getElementById("editDate").value = "";
+    document.getElementById("editTime").value = "";
   }
 
-  const parts = patient.nextAppointment.split(" · ");
-  const dateText = parts[0] || "";
-  const timeText = parts[1] || "";
-
-  const parsedDate = new Date(dateText);
-  const isoDate = isNaN(parsedDate.getTime())
-    ? ""
-    : `${parsedDate.getFullYear()}-${String(parsedDate.getMonth()+1).padStart(2,"0")}-${String(parsedDate.getDate()).padStart(2,"0")}`;
-
-  openEditAppointment(
-    patient.name,
-    patient.doctor,
-    patient.type,
-    isoDate,
-    timeText
-  );
+  document.getElementById("editAppointmentOverlay").classList.add("show");
 }
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+let editingRemark={patientId:null, historyIndex:null};
+
+function openRemark(patientId, historyIndex){
+  const patient=samplePatients.find(p=>p.id===patientId);
+  if(!patient || !patient.history || !patient.history[historyIndex]) return;
+
+  editingRemark={patientId,historyIndex};
+  const visit=patient.history[historyIndex];
+
+  document.getElementById("remarkTitle").textContent="Appointment Remark";
+  document.getElementById("remarkSub").textContent=
+    `${visit.date} · ${visit.type} · ${visit.doctor}`;
+  document.getElementById("remarkText").value=visit.remark || "";
+  document.getElementById("remarkOverlay").classList.add("show");
+}
+
+function saveRemark(){
+  const patient=samplePatients.find(p=>p.id===editingRemark.patientId);
+  if(!patient || !patient.history || !patient.history[editingRemark.historyIndex]) return;
+
+  patient.history[editingRemark.historyIndex].remark =
+    document.getElementById("remarkText").value.trim();
+
+  closeUI("remarkOverlay");
+  openPatientProfileByName(patient.name);
+}
+
 
 function renderPatientOptions(filter=""){
   const q = filter.toLowerCase().trim();
