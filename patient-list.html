@@ -760,8 +760,8 @@ button{font-family:"Poppins",sans-serif!important}
           Registered Patients
         </h2>
 
-        <span class="patient-count">
-          5 Patients
+        <span class="patient-count" id="patientCount">
+          Loading...
         </span>
 
       </div>
@@ -790,253 +790,12 @@ button{font-family:"Poppins",sans-serif!important}
         </thead>
 
 
-        <tbody>
-
-
-          <!-- PATIENT 1 -->
-
+        <tbody id="patientTableBody">
           <tr>
-
-            <td>
-              GW0001
+            <td colspan="6" style="text-align:center;padding:28px;color:#7d899b;">
+              Loading patients...
             </td>
-
-            <td>
-
-              <div class="patient-name">
-                Nurul Iman
-              </div>
-
-            </td>
-
-            <td>
-              012-3456789
-            </td>
-
-            <td>
-              10 Aug 2026
-            </td>
-
-            <td>
-
-              <span class="status-badge active">
-                <i class="fa-solid fa-circle"></i>
-                Active
-              </span>
-
-            </td>
-
-            <td>
-
-              <button
-                class="view-btn"
-                onclick="openProfile('nurul')"
-              >
-                <i class="fa-regular fa-eye"></i>
-                View Profile
-              </button>
-
-            </td>
-
           </tr>
-
-
-
-          <!-- PATIENT 2 -->
-
-          <tr>
-
-            <td>
-              GW0015
-            </td>
-
-            <td>
-
-              <div class="patient-name">
-                Hafiz Rahman
-              </div>
-
-            </td>
-
-            <td>
-              013-3334455
-            </td>
-
-            <td>
-              7 Aug 2026
-            </td>
-
-            <td>
-
-              <span class="status-badge active">
-                <i class="fa-solid fa-circle"></i>
-                Active
-              </span>
-
-            </td>
-
-            <td>
-
-              <button
-                class="view-btn"
-                onclick="openProfile('hafiz')"
-              >
-                <i class="fa-regular fa-eye"></i>
-                View Profile
-              </button>
-
-            </td>
-
-          </tr>
-
-
-
-          <!-- PATIENT 3 -->
-
-          <tr>
-
-            <td>
-              GW0021
-            </td>
-
-            <td>
-
-              <div class="patient-name">
-                Sarah Lee
-              </div>
-
-            </td>
-
-            <td>
-              011-2223344
-            </td>
-
-            <td>
-              5 Aug 2026
-            </td>
-
-            <td>
-
-              <span class="status-badge active">
-                <i class="fa-solid fa-circle"></i>
-                Active
-              </span>
-
-            </td>
-
-            <td>
-
-              <button
-                class="view-btn"
-                onclick="openProfile('sarah')"
-              >
-                <i class="fa-regular fa-eye"></i>
-                View Profile
-              </button>
-
-            </td>
-
-          </tr>
-
-
-
-          <!-- PATIENT 4 -->
-
-          <tr>
-
-            <td>
-              GW0028
-            </td>
-
-            <td>
-
-              <div class="patient-name">
-                Farah Nadia
-              </div>
-
-            </td>
-
-            <td>
-              014-5556677
-            </td>
-
-            <td>
-              26 Jun 2026
-            </td>
-
-            <td>
-
-              <span class="status-badge inactive">
-                <i class="fa-solid fa-circle"></i>
-                Inactive
-              </span>
-
-            </td>
-
-            <td>
-
-              <button
-                class="view-btn"
-                onclick="openProfile('farah')"
-              >
-                <i class="fa-regular fa-eye"></i>
-                View Profile
-              </button>
-
-            </td>
-
-          </tr>
-
-
-
-          <!-- PATIENT 5 -->
-
-          <tr>
-
-            <td>
-              GW0042
-            </td>
-
-            <td>
-
-              <div class="patient-name">
-                Nurul Huda
-              </div>
-
-            </td>
-
-            <td>
-              016-8889911
-            </td>
-
-            <td>
-              12 May 2026
-            </td>
-
-            <td>
-
-              <span class="status-badge inactive">
-                <i class="fa-solid fa-circle"></i>
-                Inactive
-              </span>
-
-            </td>
-
-            <td>
-
-              <button
-                class="view-btn"
-                onclick="openProfile('huda')"
-              >
-                <i class="fa-regular fa-eye"></i>
-                View Profile
-              </button>
-
-            </td>
-
-          </tr>
-
-
         </tbody>
 
       </table>
@@ -1323,426 +1082,366 @@ button{font-family:"Poppins",sans-serif!important}
   ========================= -->
 
   <script>
-
-
-    /* =========================
-       PATIENT DATA
-    ========================= */
-
-    const patients = {
-
-      nurul: {
-
-        initials: "NI",
-
-        name: "Nurul Iman",
-
-        id: "GW0001",
-
-        phone: "012-3456789",
-
-        weight: "60 kg",
-
-        lastVisit: "10 Aug 2026",
-
-        nextAppointment: "—",
-
-        doctor: "Dr. Aaron",
-
-        appointmentType: "Weight Loss Consultation",
-
-        appointmentStatus: "Scheduled",
-
-        status: "Active",
-
-        history: [
-
-          {
-            date: "10 Aug 2026",
-            reason: "Weight Loss Consultation",
-            doctor: "Dr. Aaron",
-            remarks: "Patient attended consultation."
-          },
-
-          {
-            date: "25 Jul 2026",
-            reason: "Weight Loss Injection",
-            doctor: "Dr. Aaron",
-            remarks: "Injection given."
-          },
-
-          {
-            date: "11 Jul 2026",
-            reason: "Follow Up",
-            doctor: "Dr. Aaron",
-            remarks: "Patient progressing well."
-          }
-
-        ]
-
-      },
-
-
-      hafiz: {
-
-        initials: "HR",
-
-        name: "Hafiz Rahman",
-
-        id: "GW0015",
-
-        phone: "013-3334455",
-
-        weight: "82 kg",
-
-        lastVisit: "7 Aug 2026",
-
-        nextAppointment: "11 Aug 2026 · 9:30 AM",
-
-        doctor: "Dr. Aaron",
-
-        appointmentType: "Consultation",
-
-        appointmentStatus: "Scheduled",
-
-        status: "Active",
-
-        history: [
-
-          {
-            date: "7 Aug 2026",
-            reason: "Consultation",
-            doctor: "Dr. Aaron",
-            remarks: ""
-          },
-
-          {
-            date: "24 Jul 2026",
-            reason: "Follow Up",
-            doctor: "Dr. Aaron",
-            remarks: ""
-          }
-
-        ]
-
-      },
-
-
-      sarah: {
-
-        initials: "SL",
-
-        name: "Sarah Lee",
-
-        id: "GW0021",
-
-        phone: "011-2223344",
-
-        weight: "55 kg",
-
-        lastVisit: "5 Aug 2026",
-
-        nextAppointment: "—",
-
-        doctor: "Dr. Najwa",
-
-        appointmentType: "Skin Consultation",
-
-        appointmentStatus: "Completed",
-
-        status: "Active",
-
-        history: [
-
-          {
-            date: "5 Aug 2026",
-            reason: "Skin Consultation",
-            doctor: "Dr. Najwa",
-            remarks: "Consultation completed."
-          },
-
-          {
-            date: "19 Jul 2026",
-            reason: "Follow Up",
-            doctor: "Dr. Najwa",
-            remarks: "Follow-up consultation."
-          }
-
-        ]
-
-      },
-
-
-      farah: {
-
-        initials: "FN",
-
-        name: "Farah Nadia",
-
-        id: "GW0028",
-
-        phone: "014-5556677",
-
-        weight: "68 kg",
-
-        lastVisit: "26 Jun 2026",
-
-        nextAppointment: "—",
-
-        doctor: "Dr. Aaron",
-
-        appointmentType: "Follow Up",
-
-        appointmentStatus: "No Appointment",
-
-        status: "Inactive",
-
-        history: [
-
-          {
-            date: "26 Jun 2026",
-            reason: "Follow Up",
-            doctor: "Dr. Aaron",
-            remarks: "Patient attended follow-up."
-          },
-
-          {
-            date: "12 Jun 2026",
-            reason: "Consultation",
-            doctor: "Dr. Aaron",
-            remarks: "Consultation completed."
-          }
-
-        ]
-
-      },
-
-
-      huda: {
-
-        initials: "NH",
-
-        name: "Nurul Huda",
-
-        id: "GW0042",
-
-        phone: "016-8889911",
-
-        weight: "72 kg",
-
-        lastVisit: "12 May 2026",
-
-        nextAppointment: "—",
-
-        doctor: "Dr. Aaron",
-
-        appointmentType: "Follow Up",
-
-        appointmentStatus: "No Appointment",
-
-        status: "Inactive",
-
-        history: [
-
-          {
-            date: "12 May 2026",
-            reason: "Follow Up",
-            doctor: "Dr. Aaron",
-            remarks: "Patient attended follow-up."
-          },
-
-          {
-            date: "28 Apr 2026",
-            reason: "Consultation",
-            doctor: "Dr. Aaron",
-            remarks: "Consultation completed."
-          }
-
-        ]
-
+    /* =========================================================
+       GETWELL PATIENT LIST — GOOGLE SHEETS BACKEND
+       The UI/design is unchanged. This script only replaces
+       the old hard-coded demo patient data with live data.
+    ========================================================= */
+
+    const API_URL = "https://script.google.com/macros/s/AKfycbyysVYfFU-wxvhib67EUGYvUnT1CNU8QHJBk5iSDZbGhoUyjB9LIgzEYaapO-6TMPsSQw/exec";
+
+    let patients = {};
+    let patientList = [];
+    let appointments = [];
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(value) {
+      if (!value) return "—";
+
+      const raw = String(value);
+      const datePart = raw.includes(" ") ? raw.split(" ")[0] : raw;
+
+      // yyyy-mm-dd
+      const iso = datePart.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      if (iso) {
+        const d = new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+        return d.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        });
       }
 
-    };
+      // Already readable — keep it
+      return raw;
+    }
 
+    function formatAppointment(date, time) {
+      if (!date) return "—";
+      const d = formatDate(date);
+      return time ? `${d} · ${formatTime(time)}` : d;
+    }
+
+    function formatTime(value) {
+      if (!value) return "";
+      const raw = String(value);
+
+      // HH:mm / HH:mm:ss
+      const match = raw.match(/^(\d{1,2}):(\d{2})/);
+      if (!match) return raw;
+
+      let hour = Number(match[1]);
+      const minute = match[2];
+      const suffix = hour >= 12 ? "PM" : "AM";
+      hour = hour % 12 || 12;
+      return `${hour}:${minute} ${suffix}`;
+    }
+
+    function initials(name) {
+      const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return "PT";
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function normalizeStatus(status) {
+      const value = String(status || "Active").trim();
+      return value || "Active";
+    }
+
+    function statusClass(status) {
+      return String(status).toLowerCase() === "active" ? "active" : "inactive";
+    }
+
+    function getLatestCompletedAppointment(patientId) {
+      const rows = appointments
+        .filter(a =>
+          String(a.patient_id) === String(patientId) &&
+          String(a.status || "").toLowerCase() === "completed"
+        )
+        .sort((a,b) =>
+          String(b.appointment_date || "").localeCompare(String(a.appointment_date || "")) ||
+          String(b.appointment_time || "").localeCompare(String(a.appointment_time || ""))
+        );
+
+      return rows[0] || null;
+    }
+
+    function getNextAppointment(patient) {
+      if (patient.next_appointment) return String(patient.next_appointment);
+
+      const now = new Date();
+
+      const upcoming = appointments
+        .filter(a =>
+          String(a.patient_id) === String(patient.patient_id) &&
+          ["scheduled", "confirmed", "rescheduled"].includes(String(a.status || "").toLowerCase()) &&
+          a.appointment_date
+        )
+        .sort((a,b) =>
+          String(a.appointment_date).localeCompare(String(b.appointment_date)) ||
+          String(a.appointment_time || "").localeCompare(String(b.appointment_time || ""))
+        );
+
+      const next = upcoming.find(a => {
+        const d = new Date(`${a.appointment_date}T${a.appointment_time || "00:00"}`);
+        return isNaN(d.getTime()) || d >= now;
+      }) || upcoming[0];
+
+      return next ? formatAppointment(next.appointment_date, next.appointment_time) : "—";
+    }
+
+    function buildPatientObject(patient) {
+      const lastVisit = getLatestCompletedAppointment(patient.patient_id);
+
+      const history = appointments
+        .filter(a => String(a.patient_id) === String(patient.patient_id))
+        .sort((a,b) =>
+          String(b.appointment_date || "").localeCompare(String(a.appointment_date || "")) ||
+          String(b.appointment_time || "").localeCompare(String(a.appointment_time || ""))
+        )
+        .map(a => ({
+          date: formatAppointment(a.appointment_date, a.appointment_time),
+          reason: a.appointment_type || "—",
+          doctor: a.doctor || patient.attending_doctor || "—",
+          remarks: a.remarks || "—",
+          status: a.status || "—"
+        }));
+
+      return {
+        initials: initials(patient.full_name),
+        name: patient.full_name || "Unnamed Patient",
+        id: patient.patient_id || "—",
+        phone: patient.phone || "—",
+        weight: patient.current_weight_kg ? `${patient.current_weight_kg} kg` : "—",
+        lastVisit: lastVisit ? formatAppointment(lastVisit.appointment_date, lastVisit.appointment_time) : "—",
+        nextAppointment: getNextAppointment(patient),
+        doctor: patient.attending_doctor || "—",
+        appointmentType: patient.appointment_type || "—",
+        appointmentStatus: history.length ? history[0].status : "No Appointment",
+        status: normalizeStatus(patient.status),
+        history
+      };
+    }
+
+    async function apiGet(action) {
+      const url = `${API_URL}?action=${encodeURIComponent(action)}`;
+      const response = await fetch(url, {
+        method: "GET",
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend request failed (${response.status})`);
+      }
+
+      const data = await response.json();
+
+      if (!data.ok) {
+        throw new Error(data.error || "Backend returned an error.");
+      }
+
+      return data;
+    }
+
+    async function loadPatients() {
+      const tbody = document.getElementById("patientTableBody");
+      const count = document.getElementById("patientCount");
+
+      try {
+        const [patientResponse, appointmentResponse] = await Promise.all([
+          apiGet("getPatients"),
+          apiGet("getAppointments")
+        ]);
+
+        patientList = Array.isArray(patientResponse.patients)
+          ? patientResponse.patients
+          : [];
+
+        appointments = Array.isArray(appointmentResponse.appointments)
+          ? appointmentResponse.appointments
+          : [];
+
+        patients = {};
+        patientList.forEach(patient => {
+          patients[patient.patient_id] = buildPatientObject(patient);
+        });
+
+        renderPatientTable(patientList);
+
+      } catch (error) {
+        console.error("Getwell Patient List:", error);
+
+        count.textContent = "Unable to load";
+
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center;padding:28px;color:#d73542;">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              Unable to load patient data.
+              <div style="font-size:7px;margin-top:6px;color:#8a94a3;">
+                ${escapeHtml(error.message)}
+              </div>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function renderPatientTable(list) {
+      const tbody = document.getElementById("patientTableBody");
+      const count = document.getElementById("patientCount");
+
+      count.textContent = `${list.length} ${list.length === 1 ? "Patient" : "Patients"}`;
+
+      if (!list.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center;padding:28px;color:#7d899b;">
+              No patients found.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map(patient => {
+        const status = normalizeStatus(patient.status);
+        const cls = statusClass(status);
+
+        return `
+          <tr>
+            <td>${escapeHtml(patient.patient_id || "—")}</td>
+
+            <td>
+              <div class="patient-name">
+                ${escapeHtml(patient.full_name || "Unnamed Patient")}
+              </div>
+            </td>
+
+            <td>${escapeHtml(patient.phone || "—")}</td>
+
+            <td>${escapeHtml(formatDate(getLatestCompletedAppointment(patient.patient_id)?.appointment_date))}</td>
+
+            <td>
+              <span class="status-badge ${cls}">
+                <i class="fa-solid fa-circle"></i>
+                ${escapeHtml(status)}
+              </span>
+            </td>
+
+            <td>
+              <button
+                class="view-btn"
+                onclick="openProfile('${escapeHtml(patient.patient_id)}')"
+              >
+                <i class="fa-regular fa-eye"></i>
+                View Profile
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
 
     /* =========================
        OPEN PROFILE
     ========================= */
 
-    function openProfile(patientKey) {
+    function openProfile(patientId) {
+      const patient = patients[patientId];
 
-      const patient = patients[patientKey];
+      if (!patient) return;
 
-      if (!patient) {
-        return;
-      }
+      document.getElementById("profileAvatar").textContent = patient.initials;
+      document.getElementById("profileName").textContent = patient.name;
+      document.getElementById("profileId").textContent = patient.id;
+      document.getElementById("profilePhone").textContent = patient.phone;
+      document.getElementById("profileWeight").textContent = patient.weight;
+      document.getElementById("profileLastVisit").textContent = patient.lastVisit;
+      document.getElementById("profileNextAppointment").textContent = patient.nextAppointment;
+      document.getElementById("profileDoctor").textContent = patient.doctor;
+      document.getElementById("profileAppointmentType").textContent = patient.appointmentType;
+      document.getElementById("profileAppointmentStatus").textContent = patient.appointmentStatus;
 
+      const statusElement = document.getElementById("profileStatus");
+      statusElement.textContent = patient.status;
 
-      document.getElementById("profileAvatar").textContent =
-        patient.initials;
-
-      document.getElementById("profileName").textContent =
-        patient.name;
-
-      document.getElementById("profileId").textContent =
-        patient.id;
-
-      document.getElementById("profilePhone").textContent =
-        patient.phone;
-
-      document.getElementById("profileWeight").textContent =
-        patient.weight;
-
-      document.getElementById("profileLastVisit").textContent =
-        patient.lastVisit;
-
-      document.getElementById("profileNextAppointment").textContent =
-        patient.nextAppointment;
-
-      document.getElementById("profileDoctor").textContent =
-        patient.doctor;
-
-      document.getElementById("profileAppointmentType").textContent =
-        patient.appointmentType;
-
-      document.getElementById("profileAppointmentStatus").textContent =
-        patient.appointmentStatus;
-
-
-      const statusElement =
-        document.getElementById("profileStatus");
-
-      statusElement.textContent =
-        patient.status;
-
-      if (patient.status === "Active") {
-
+      if (String(patient.status).toLowerCase() === "active") {
         statusElement.style.background = "#e1f8ec";
         statusElement.style.color = "#0a9b59";
-
       } else {
-
         statusElement.style.background = "#f1f3f6";
         statusElement.style.color = "#7a8493";
-
       }
 
-
-      /* HISTORY */
-
-      const historyBody =
-        document.getElementById("historyBody");
-
+      const historyBody = document.getElementById("historyBody");
       historyBody.innerHTML = "";
 
-
-      patient.history.forEach((item, index) => {
-
-        const row =
-          document.createElement("tr");
-
-        row.innerHTML = `
-
-          <td>
-            ${index + 1}
-          </td>
-
-          <td>
-            ${item.date}
-          </td>
-
-          <td>
-            ${item.reason}
-          </td>
-
-          <td>
-            ${item.doctor}
-          </td>
-
-          <td class="note-text">
-            ${item.remarks || "—"}
-          </td>
-
+      if (!patient.history.length) {
+        historyBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;color:#7d899b;padding:20px;">
+              No appointment history.
+            </td>
+          </tr>
         `;
+      } else {
+        patient.history.forEach((item, index) => {
+          const row = document.createElement("tr");
 
-        historyBody.appendChild(row);
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${escapeHtml(item.date)}</td>
+            <td>${escapeHtml(item.reason)}</td>
+            <td>${escapeHtml(item.doctor)}</td>
+            <td class="note-text">${escapeHtml(item.remarks || "—")}</td>
+          `;
 
-      });
-
-
-      document.getElementById(
-        "profileModal"
-      ).style.display = "flex";
-
-    }
-
-
-    /* =========================
-       CLOSE PROFILE
-    ========================= */
-
-    function closeProfile() {
-
-      document.getElementById(
-        "profileModal"
-      ).style.display = "none";
-
-    }
-
-
-    /* =========================
-       SEARCH
-    ========================= */
-
-    function searchPatients() {
-
-      const search =
-        document
-          .getElementById("patientSearch")
-          .value
-          .toLowerCase()
-          .trim();
-
-
-      const rows =
-        document.querySelectorAll(
-          "#patientTable tbody tr"
-        );
-
-
-      rows.forEach(row => {
-
-        const text =
-          row.textContent.toLowerCase();
-
-        row.style.display =
-          text.includes(search)
-            ? ""
-            : "none";
-
-      });
-
-    }
-
-
-    /* =========================
-       CLOSE MODAL OUTSIDE
-    ========================= */
-
-    window.onclick = function(event) {
-
-      const modal =
-        document.getElementById("profileModal");
-
-      if (event.target === modal) {
-
-        closeProfile();
-
+          historyBody.appendChild(row);
+        });
       }
 
+      document.getElementById("profileModal").style.display = "flex";
+    }
+
+    function closeProfile() {
+      document.getElementById("profileModal").style.display = "none";
+    }
+
+    function searchPatients() {
+      const search = document
+        .getElementById("patientSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+      const rows = document.querySelectorAll("#patientTableBody tr");
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(search) ? "" : "none";
+      });
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("profileModal");
+
+      if (event.target === modal) {
+        closeProfile();
+      }
     };
 
-  </script>
+    document.addEventListener("DOMContentLoaded", loadPatients);
+</script>
 
 </body>
 </html>
