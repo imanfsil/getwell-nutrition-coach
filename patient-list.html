@@ -395,6 +395,99 @@
       cursor: pointer;
     }
 
+    .edit-modal-card {
+      width: min(650px, 94vw);
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 20px 55px rgba(0,0,0,.20);
+    }
+
+    .edit-modal-header {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .edit-modal-header h3 {
+      color:#204c9c;
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:3px;
+    }
+
+    .edit-modal-header p {
+      color:#7d899b;
+      font-size:10px;
+    }
+
+    .edit-form-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .edit-field {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .edit-full { grid-column:1/-1; }
+
+    .edit-field label {
+      color:#52627a;
+      font-size:10px;
+      font-weight:600;
+    }
+
+    .edit-field input, .edit-field select, .edit-field textarea {
+      width:100%;
+      border:1px solid #dce2eb;
+      border-radius:9px;
+      padding:10px 11px;
+      outline:none;
+      color:#17325c;
+      background:#fff;
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+    }
+
+    .edit-field input, .edit-field select { height:40px; }
+    .edit-field textarea { min-height:78px; resize:vertical; }
+    .edit-field input:focus, .edit-field select:focus, .edit-field textarea:focus {
+      border-color:#315df4;
+      box-shadow:0 0 0 3px rgba(49,93,244,.08);
+    }
+
+    .edit-modal-footer {
+      display:flex;
+      justify-content:flex-end;
+      gap:9px;
+      margin-top:20px;
+    }
+
+    .secondary-edit, .primary-edit {
+      border:0;
+      border-radius:9px;
+      padding:10px 15px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .secondary-edit { background:#f1f4fb; color:#52627a; }
+    .primary-edit { background:#315df4; color:#fff; }
+    .primary-edit:disabled { opacity:.6; cursor:wait; }
+
+    @media(max-width:600px){
+      .edit-form-grid{grid-template-columns:1fr;}
+      .edit-full{grid-column:auto;}
+    }
+
 
     /* =========================
        PROFILE SUMMARY
@@ -941,7 +1034,7 @@ button{font-family:"Poppins",sans-serif!important}
             —
           </div>
 
-          <button class="edit-appointment">
+          <button class="edit-appointment" id="editAppointmentBtn" type="button" title="Edit next appointment">
             <i class="fa-solid fa-pen"></i>
           </button>
 
@@ -1081,6 +1174,63 @@ button{font-family:"Poppins",sans-serif!important}
        JAVASCRIPT
   ========================= -->
 
+  <!-- EDIT APPOINTMENT MODAL -->
+  <div class="modal" id="editAppointmentModal" aria-hidden="true">
+    <div class="edit-modal-card">
+      <div class="edit-modal-header">
+        <div>
+          <h3>Edit Appointment</h3>
+          <p id="editAppointmentPatient">Patient</p>
+        </div>
+        <button class="modal-close" type="button" onclick="closeEditAppointment()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <input type="hidden" id="editAppointmentId">
+
+      <div class="edit-form-grid">
+        <div class="edit-field">
+          <label>Doctor</label>
+          <input id="editAppointmentDoctor" type="text">
+        </div>
+        <div class="edit-field">
+          <label>Appointment Type</label>
+          <input id="editAppointmentType" type="text">
+        </div>
+        <div class="edit-field">
+          <label>Date</label>
+          <input id="editAppointmentDate" type="date">
+        </div>
+        <div class="edit-field">
+          <label>Time</label>
+          <input id="editAppointmentTime" type="time">
+        </div>
+        <div class="edit-field">
+          <label>Status</label>
+          <select id="editAppointmentStatus">
+            <option>Scheduled</option>
+            <option>Confirmed</option>
+            <option>Rescheduled</option>
+            <option>Completed</option>
+            <option>No Show</option>
+            <option>Missed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div class="edit-field edit-full">
+          <label>Remarks</label>
+          <textarea id="editAppointmentRemarks" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="edit-modal-footer">
+        <button class="secondary-edit" type="button" onclick="closeEditAppointment()">Cancel</button>
+        <button class="primary-edit" id="saveAppointmentEditBtn" type="button" onclick="saveAppointmentEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* =========================================================
        GETWELL PATIENT LIST — GOOGLE SHEETS BACKEND
@@ -1132,10 +1282,11 @@ button{font-family:"Poppins",sans-serif!important}
 
     function formatTime(value) {
       if (!value) return "";
-      const raw = String(value);
+      const raw = String(value).trim();
 
-      // HH:mm / HH:mm:ss
-      const match = raw.match(/^(\d{1,2}):(\d{2})/);
+      // Supports normal HH:mm / HH:mm:ss as well as Google Sheets
+      // time-only cells that arrive as "1899-12-30 HH:mm:ss".
+      const match = raw.match(/(?:T|\s|^)(\d{1,2}):(\d{2})(?::\d{2})?/);
       if (!match) return raw;
 
       let hour = Number(match[1]);
@@ -1175,28 +1326,30 @@ button{font-family:"Poppins",sans-serif!important}
       return rows[0] || null;
     }
 
-    function getNextAppointment(patient) {
-      if (patient.next_appointment) return String(patient.next_appointment);
-
+    function getNextAppointmentRecord(patientId) {
       const now = new Date();
-
       const upcoming = appointments
         .filter(a =>
-          String(a.patient_id) === String(patient.patient_id) &&
+          String(a.patient_id) === String(patientId) &&
           ["scheduled", "confirmed", "rescheduled"].includes(String(a.status || "").toLowerCase()) &&
-          a.appointment_date
+          /^\d{4}-\d{2}-\d{2}$/.test(String(a.appointment_date || ""))
         )
-        .sort((a,b) =>
-          String(a.appointment_date).localeCompare(String(b.appointment_date)) ||
-          String(a.appointment_time || "").localeCompare(String(b.appointment_time || ""))
-        );
+        .sort((a,b) => {
+          const ad = `${a.appointment_date}T${a.appointment_time || "00:00"}`;
+          const bd = `${b.appointment_date}T${b.appointment_time || "00:00"}`;
+          return ad.localeCompare(bd);
+        });
 
-      const next = upcoming.find(a => {
+      return upcoming.find(a => {
         const d = new Date(`${a.appointment_date}T${a.appointment_time || "00:00"}`);
-        return isNaN(d.getTime()) || d >= now;
-      }) || upcoming[0];
+        return !isNaN(d.getTime()) && d >= now;
+      }) || upcoming[0] || null;
+    }
 
-      return next ? formatAppointment(next.appointment_date, next.appointment_time) : "—";
+    function getNextAppointment(patient) {
+      const next = getNextAppointmentRecord(patient.patient_id);
+      if (next) return formatAppointment(next.appointment_date, next.appointment_time);
+      return patient.next_appointment ? formatDate(patient.next_appointment) : "—";
     }
 
     function buildPatientObject(patient) {
@@ -1224,6 +1377,7 @@ button{font-family:"Poppins",sans-serif!important}
         weight: patient.current_weight_kg ? `${patient.current_weight_kg} kg` : "—",
         lastVisit: lastVisit ? formatAppointment(lastVisit.appointment_date, lastVisit.appointment_time) : "—",
         nextAppointment: getNextAppointment(patient),
+        nextAppointmentRecord: getNextAppointmentRecord(patient.patient_id),
         doctor: patient.attending_doctor || "—",
         appointmentType: patient.appointment_type || "—",
         appointmentStatus: history.length ? history[0].status : "No Appointment",
@@ -1413,6 +1567,90 @@ button{font-family:"Poppins",sans-serif!important}
       document.getElementById("profileModal").style.display = "flex";
     }
 
+    async function openEditAppointment() {
+      const patientId = document.getElementById("profileId").textContent.trim();
+      const patient = patients[patientId];
+      if (!patient) return;
+
+      const appointment = patient.nextAppointmentRecord;
+      if (!appointment) {
+        alert("This patient does not have an upcoming appointment to edit.");
+        return;
+      }
+
+      document.getElementById("editAppointmentId").value = appointment.appointment_id || "";
+      document.getElementById("editAppointmentPatient").textContent = `${patient.name} · ${patient.id}`;
+      document.getElementById("editAppointmentDoctor").value = appointment.doctor || patient.doctor || "";
+      document.getElementById("editAppointmentType").value = appointment.appointment_type || "";
+      document.getElementById("editAppointmentDate").value = /^\d{4}-\d{2}-\d{2}$/.test(String(appointment.appointment_date || "")) ? appointment.appointment_date : "";
+      const rawTime = String(appointment.appointment_time || "");
+      const timeMatch = rawTime.match(/(?:T|\s|^)(\d{1,2}):(\d{2})/);
+      document.getElementById("editAppointmentTime").value = timeMatch
+        ? `${String(timeMatch[1]).padStart(2, "0")}:${timeMatch[2]}`
+        : "";
+      document.getElementById("editAppointmentStatus").value = appointment.status || "Scheduled";
+      document.getElementById("editAppointmentRemarks").value = appointment.remarks || "";
+
+      document.getElementById("editAppointmentModal").style.display = "flex";
+      document.getElementById("editAppointmentModal").setAttribute("aria-hidden", "false");
+    }
+
+    function closeEditAppointment() {
+      const modal = document.getElementById("editAppointmentModal");
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    async function saveAppointmentEdit() {
+      const btn = document.getElementById("saveAppointmentEditBtn");
+      const appointmentId = document.getElementById("editAppointmentId").value.trim();
+      if (!appointmentId) {
+        alert("Appointment ID is missing.");
+        return;
+      }
+
+      const payload = {
+        action: "updateAppointment",
+        appointment_id: appointmentId,
+        doctor: document.getElementById("editAppointmentDoctor").value.trim(),
+        appointment_type: document.getElementById("editAppointmentType").value.trim(),
+        appointment_date: document.getElementById("editAppointmentDate").value,
+        appointment_time: document.getElementById("editAppointmentTime").value,
+        status: document.getElementById("editAppointmentStatus").value,
+        remarks: document.getElementById("editAppointmentRemarks").value.trim()
+      };
+
+      if (!payload.doctor || !payload.appointment_type || !payload.appointment_date || !payload.appointment_time) {
+        alert("Please complete the doctor, appointment type, date and time.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Saving...";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.error || "Unable to update appointment.");
+
+        closeEditAppointment();
+        await loadPatients();
+        const refreshed = patients[document.getElementById("profileId").textContent.trim()];
+        if (refreshed) openProfile(refreshed.id);
+        alert("Appointment updated successfully.");
+      } catch (error) {
+        console.error(error);
+        alert("The appointment could not be updated.\n\n" + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Save Changes";
+      }
+    }
+
     function closeProfile() {
       document.getElementById("profileModal").style.display = "none";
     }
@@ -1440,7 +1678,10 @@ button{font-family:"Poppins",sans-serif!important}
       }
     };
 
-    document.addEventListener("DOMContentLoaded", loadPatients);
+    document.addEventListener("DOMContentLoaded", () => {
+      loadPatients();
+      document.getElementById("editAppointmentBtn")?.addEventListener("click", openEditAppointment);
+    });
 </script>
 
 </body>
