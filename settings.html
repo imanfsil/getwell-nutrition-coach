@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings | Getwell Clinic</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2b5ba6;
+  --dark-blue:#204c9c;
+  --accent:#315df4;
+  --bg:#eef6ff;
+  --text:#17325c;
+  --muted:#7b8798;
+  --border:#e8edf4;
+  --soft:#f5f8fc;
+  --success:#09975b;
+  --danger:#d73542;
+}
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Poppins",sans-serif;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+/* APP SHELL — MATCHES APPOINTMENTS */
+.sidebar{
+  position:fixed;
+  left:0;top:0;bottom:0;
+  width:258px;
+  background:var(--blue);
+  color:#fff;
+  z-index:100;
+}
+.logo{
+  height:118px;
+  display:flex;
+  align-items:center;
+  padding-left:42px;
+  border-bottom:1px solid rgba(255,255,255,.15);
+  font-size:32px;
+  font-weight:700;
+}
+.nav{padding:42px 20px}
+.nav a{
+  height:64px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 25px;
+  margin-bottom:9px;
+  border-radius:13px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:500;
+}
+.nav a:hover{background:rgba(255,255,255,.10)}
+.nav a.active{
+  background:#fff;
+  color:var(--dark-blue);
+  font-weight:700;
+}
+.nav-icon{
+  width:22px;
+  display:flex;
+  justify-content:center;
+  font-size:17px;
+}
+
+.main{
+  margin-left:258px;
+  width:calc(100% - 258px);
+  min-height:100vh;
+  padding:42px 42px 55px;
+}
+.page-header{margin-bottom:32px}
+.page-title h1{
+  color:var(--dark-blue);
+  font-size:36px;
+  line-height:1.2;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.page-title p{color:#666;font-size:15px}
+
+/* SETTINGS */
+.settings-layout{
+  display:grid;
+  grid-template-columns:230px minmax(0,1fr);
+  gap:18px;
+  align-items:start;
+}
+.settings-menu{
+  background:#fff;
+  border-radius:18px;
+  padding:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  position:sticky;
+  top:25px;
+}
+.menu-label{
+  padding:10px 12px 8px;
+  color:#8a94a3;
+  font-size:9px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+.tab{
+  width:100%;
+  height:46px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:#5b6a80;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 12px;
+  margin-bottom:4px;
+  text-align:left;
+  font-size:11px;
+  font-weight:500;
+}
+.tab i{width:19px;text-align:center;font-size:13px}
+.tab:hover{background:#f4f7fc;color:var(--dark-blue)}
+.tab.active{
+  background:#eef4ff;
+  color:var(--dark-blue);
+  font-weight:700;
+}
+
+.panel{display:none}
+.panel.active{display:block}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:18px;
+}
+.card:last-child{margin-bottom:0}
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:20px;
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--dark-blue);
+  font-size:17px;
+  font-weight:700;
+}
+.card-title i{font-size:15px}
+.card-desc{
+  color:#858f9e;
+  font-size:10px;
+  line-height:1.55;
+  margin-top:4px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.full{grid-column:1/-1}
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.field label{
+  color:#52627a;
+  font-size:11px;
+  font-weight:600;
+}
+.field input,.field select,.field textarea{
+  width:100%;
+  height:42px;
+  border:1px solid #dce2eb;
+  border-radius:9px;
+  padding:0 12px;
+  outline:none;
+  color:var(--text);
+  background:#fff;
+  font-size:12px;
+}
+.field textarea{height:95px;padding:11px 12px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(49,93,244,.08);
+}
+.help{color:#9099a7;font-size:9px}
+
+.toggle-row{
+  min-height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid var(--border);
+}
+.toggle-row:last-child{border-bottom:0}
+.toggle-copy strong{
+  display:block;
+  color:#31415c;
+  font-size:12px;
+  font-weight:600;
+}
+.toggle-copy span{
+  display:block;
+  color:#8a94a3;
+  font-size:9px;
+  margin-top:3px;
+}
+.switch{
+  position:relative;
+  width:42px;
+  height:23px;
+  flex:0 0 42px;
+}
+.switch input{opacity:0;width:0;height:0}
+.slider{
+  position:absolute;
+  inset:0;
+  background:#d9dee7;
+  border-radius:99px;
+  transition:.2s;
+}
+.slider:before{
+  content:"";
+  position:absolute;
+  width:17px;height:17px;
+  left:3px;top:3px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
+  transition:.2s;
+}
+.switch input:checked + .slider{background:var(--accent)}
+.switch input:checked + .slider:before{transform:translateX(19px)}
+
+.primary,.secondary,.danger,.outline{
+  border:0;
+  border-radius:9px;
+  padding:10px 15px;
+  font-size:11px;
+  font-weight:600;
+}
+.primary{background:var(--accent);color:#fff}
+.primary:hover{background:#244fdc}
+.secondary{background:#f1f4fb;color:#52627a}
+.secondary:hover{background:#e7ecf6}
+.outline{background:#fff;color:#315df4;border:1px solid #d9e3fb}
+.danger{background:#fff0f1;color:var(--danger)}
+.danger:hover{background:#ffe4e7}
+
+.save-row{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+}
+
+/* DOCTOR SCHEDULE */
+.doctor-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.doctor-card:last-child{margin-bottom:0}
+.doctor-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
+}
+.doctor-profile{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+.avatar{
+  width:38px;height:38px;
+  border-radius:11px;
+  background:#eef4ff;
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+.doctor-name{font-size:12px;font-weight:700;color:#31415c}
+.doctor-role{font-size:9px;color:#8a94a3;margin-top:2px}
+.status{
+  padding:6px 9px;
+  border-radius:8px;
+  background:#e5f9ee;
+  color:var(--success);
+  font-size:9px;
+  font-weight:600;
+}
+.schedule-grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:7px;
+}
+.day{
+  border:1px solid #e5eaf1;
+  border-radius:9px;
+  background:#fafbfd;
+  padding:8px 5px;
+  text-align:center;
+}
+.day-name{
+  color:#7f8998;
+  font-size:8px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+.day select{
+  width:100%;
+  height:29px;
+  border:0;
+  border-radius:7px;
+  background:#eef4ff;
+  color:var(--dark-blue);
+  font-size:8px;
+  font-weight:600;
+  outline:none;
+}
+
+/* APPOINTMENT RULES */
+.rule{
+  display:grid;
+  grid-template-columns:1fr 180px;
+  align-items:center;
+  gap:20px;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+.rule:last-child{border-bottom:0}
+.rule strong{
+  display:block;
+  color:#31415c;
+  font-size:11px;
+}
+.rule span{
+  display:block;
+  color:#8a94a3;
+  font-size:9px;
+  margin-top:3px;
+}
+
+/* ACCOUNT */
+.account{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding-bottom:20px;
+  margin-bottom:20px;
+  border-bottom:1px solid var(--border);
+}
+.account-avatar{
+  width:56px;height:56px;
+  border-radius:15px;
+  background:var(--accent);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700;
+}
+.account-name{font-size:15px;font-weight:700;color:var(--text)}
+.account-role{font-size:10px;color:#858f9e;margin-top:3px}
+
+/* INFO */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.info{
+  padding:12px;
+  background:#f7f9fc;
+  border-radius:11px;
+}
+.info span{display:block;color:#8a94a3;font-size:9px;margin-bottom:4px}
+.info strong{color:#31415c;font-size:11px;font-weight:600}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  z-index:500;
+  display:none;
+  padding:12px 16px;
+  border-radius:10px;
+  background:#17325c;
+  color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  font-size:11px;
+}
+.toast.show{display:block}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .settings-layout{grid-template-columns:200px minmax(0,1fr)}
+  .schedule-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .sidebar{width:220px}
+  .main{
+    margin-left:220px;
+    width:calc(100% - 220px);
+    padding:35px 30px 50px;
+  }
+  .nav a{font-size:14px}
+  .logo{font-size:28px}
+  .settings-layout{grid-template-columns:1fr}
+  .settings-menu{
+    position:static;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:4px;
+  }
+  .menu-label{grid-column:1/-1}
+}
+@media(max-width:650px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+  }
+  .logo{height:75px;padding-left:25px}
+  .nav{padding:15px}
+  .nav a{height:45px}
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:25px 15px;
+  }
+  .page-title h1{font-size:30px}
+  .settings-menu{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .rule{grid-template-columns:1fr}
+  .schedule-grid{grid-template-columns:repeat(2,1fr)}
+  .info-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+  <div class="logo">Getwell</div>
+
+  <nav class="nav">
+    <a href="admin-dashboard.html">
+      <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="register-patient.html">
+      <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
+      <span>Register Patient</span>
+    </a>
+    <a href="patient-list.html">
+      <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+      <span>Patient List</span>
+    </a>
+    <a href="appointments.html">
+      <span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span>
+      <span>Appointments</span>
+    </a>
+    <a href="reports.html">
+      <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span>
+      <span>Reports</span>
+    </a>
+    <a href="settings.html" class="active">
+      <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+      <span>Settings</span>
+    </a>
+    <a href="admin-login.html">
+      <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+      <span>Logout</span>
+    </a>
+  </nav>
+</aside>
+
+<main class="main">
+
+  <header class="page-header">
+    <div class="page-title">
+      <h1>Settings</h1>
+      <p>Manage your clinic system, doctors, appointments and account.</p>
+    </div>
+  </header>
+
+  <div class="settings-layout">
+
+    <aside class="settings-menu">
+      <div class="menu-label">Settings</div>
+
+      <button class="tab active" data-panel="general">
+        <i class="fa-solid fa-sliders"></i> General
+      </button>
+
+      <button class="tab" data-panel="clinic">
+        <i class="fa-solid fa-hospital"></i> Clinic Information
+      </button>
+
+      <button class="tab" data-panel="doctors">
+        <i class="fa-solid fa-user-doctor"></i> Doctors & Schedule
+      </button>
+
+      <button class="tab" data-panel="appointments">
+        <i class="fa-regular fa-calendar-check"></i> Appointments
+      </button>
+
+      <button class="tab" data-panel="notifications">
+        <i class="fa-regular fa-bell"></i> Notifications
+      </button>
+
+      <button class="tab" data-panel="account">
+        <i class="fa-solid fa-user"></i> My Account
+      </button>
+    </aside>
+
+    <section>
+
+      <!-- GENERAL -->
+      <div class="panel active" id="general">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-sliders"></i> General Settings</h2>
+              <p class="card-desc">Set the basic preferences used throughout the Getwell system.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>System Language</label>
+              <select>
+                <option selected>English</option>
+                <option>Bahasa Melayu</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Currency</label>
+              <select>
+                <option selected>MYR — Malaysian Ringgit</option>
+                <option>USD — US Dollar</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Date Format</label>
+              <select>
+                <option selected>DD MMM YYYY</option>
+                <option>DD/MM/YYYY</option>
+                <option>MM/DD/YYYY</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Time Format</label>
+              <select>
+                <option selected>12-hour</option>
+                <option>24-hour</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-bolt"></i> System Behaviour</h2>
+              <p class="card-desc">Control automatic actions used by patient registration and appointment management.</p>
+            </div>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Auto-calculate patient age</strong>
+              <span>Calculate the patient's age automatically from date of birth.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Auto-generate Patient ID</strong>
+              <span>Create a unique Getwell Patient ID during registration.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Show appointment alerts</strong>
+              <span>Show missed and long-term follow-up patients as alerts.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CLINIC -->
+      <div class="panel" id="clinic">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-hospital"></i> Clinic Information</h2>
+              <p class="card-desc">These details can be used across clinic documents and system displays.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field full">
+              <label>Clinic Name</label>
+              <input value="Getwell Clinic Puncak Alam">
+            </div>
+
+            <div class="field full">
+              <label>Clinic Address</label>
+              <textarea placeholder="Enter full clinic address"></textarea>
+            </div>
+
+            <div class="field">
+              <label>Contact Number</label>
+              <input placeholder="Enter clinic phone number">
+            </div>
+
+            <div class="field">
+              <label>Email Address</label>
+              <input type="email" placeholder="Enter clinic email">
+            </div>
+
+            <div class="field">
+              <label>Operating Days</label>
+              <input value="Monday – Saturday">
+            </div>
+
+            <div class="field">
+              <label>Operating Hours</label>
+              <input value="9:00 AM – 6:00 PM">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-file-invoice"></i> Numbering</h2>
+              <p class="card-desc">Set prefixes used when generating patient and document numbers.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Patient ID Prefix</label>
+              <input value="GW">
+              <span class="help">Example: GW0001</span>
+            </div>
+
+            <div class="field">
+              <label>Invoice Prefix</label>
+              <input value="INV">
+              <span class="help">Example: INV-0001</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DOCTORS -->
+      <div class="panel" id="doctors">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-user-doctor"></i> Doctors & Duty Schedule</h2>
+              <p class="card-desc">This schedule should become the source for doctor availability when creating appointments.</p>
+            </div>
+            <button class="primary" onclick="showToast('Add Doctor can be connected to the doctor database.')">
+              <i class="fa-solid fa-plus"></i> Add Doctor
+            </button>
+          </div>
+
+          <div class="doctor-card">
+            <div class="doctor-top">
+              <div class="doctor-profile">
+                <div class="avatar"><i class="fa-solid fa-user-doctor"></i></div>
+                <div>
+                  <div class="doctor-name">Dr Aaron</div>
+                  <div class="doctor-role">Attending Doctor</div>
+                </div>
+              </div>
+              <span class="status">Active</span>
+            </div>
+
+            <div class="schedule-grid">
+              <div class="day"><div class="day-name">MON</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">TUE</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">WED</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">THU</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">FRI</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">SAT</div><select><option>On Duty</option><option>Off</option></select></div>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <div class="doctor-top">
+              <div class="doctor-profile">
+                <div class="avatar"><i class="fa-solid fa-user-doctor"></i></div>
+                <div>
+                  <div class="doctor-name">Dr Najwa</div>
+                  <div class="doctor-role">Attending Doctor</div>
+                </div>
+              </div>
+              <span class="status">Active</span>
+            </div>
+
+            <div class="schedule-grid">
+              <div class="day"><div class="day-name">MON</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">TUE</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">WED</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">THU</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">FRI</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">SAT</div><select><option>Off</option><option>On Duty</option></select></div>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <div class="doctor-top">
+              <div class="doctor-profile">
+                <div class="avatar"><i class="fa-solid fa-user-doctor"></i></div>
+                <div>
+                  <div class="doctor-name">Dr Aisyah</div>
+                  <div class="doctor-role">Attending Doctor</div>
+                </div>
+              </div>
+              <span class="status">Active</span>
+            </div>
+
+            <div class="schedule-grid">
+              <div class="day"><div class="day-name">MON</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">TUE</div><select><option>On Duty</option><option>Off</option></select></div>
+              <div class="day"><div class="day-name">WED</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">THU</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">FRI</div><select><option>Off</option><option>On Duty</option></select></div>
+              <div class="day"><div class="day-name">SAT</div><select><option>On Duty</option><option>Off</option></select></div>
+            </div>
+          </div>
+
+          <div class="save-row">
+            <button class="secondary" onclick="resetPage()">Reset</button>
+            <button class="primary" onclick="saveSettings()">Save Doctor Schedule</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- APPOINTMENTS -->
+      <div class="panel" id="appointments">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-regular fa-calendar-check"></i> Appointment Rules</h2>
+              <p class="card-desc">Default rules used by the appointment system.</p>
+            </div>
+          </div>
+
+          <div class="rule">
+            <div>
+              <strong>Default visit interval</strong>
+              <span>Used when the next appointment is generated automatically.</span>
+            </div>
+            <select id="visitInterval" class="field-input" style="height:42px;border:1px solid #dce2eb;border-radius:9px;padding:0 10px;font-size:11px;color:#17325c;background:#fff">
+              <option>Every 5 Days</option>
+              <option selected>Every 7 Days</option>
+              <option>Every 14 Days</option>
+            </select>
+          </div>
+
+          <div class="rule">
+            <div>
+              <strong>Default appointment duration</strong>
+              <span>Default duration for newly created appointments.</span>
+            </div>
+            <select style="height:42px;border:1px solid #dce2eb;border-radius:9px;padding:0 10px;font-size:11px;color:#17325c;background:#fff">
+              <option>15 Minutes</option>
+              <option selected>30 Minutes</option>
+              <option>45 Minutes</option>
+              <option>60 Minutes</option>
+            </select>
+          </div>
+
+          <div class="rule">
+            <div>
+              <strong>Missed appointment threshold</strong>
+              <span>When an appointment becomes a missed appointment.</span>
+            </div>
+            <select style="height:42px;border:1px solid #dce2eb;border-radius:9px;padding:0 10px;font-size:11px;color:#17325c;background:#fff">
+              <option selected>30 Minutes</option>
+              <option>1 Hour</option>
+              <option>2 Hours</option>
+              <option>End of Day</option>
+            </select>
+          </div>
+
+          <div class="rule">
+            <div>
+              <strong>Long-term follow-up threshold</strong>
+              <span>When a patient should appear in the follow-up alert list.</span>
+            </div>
+            <select style="height:42px;border:1px solid #dce2eb;border-radius:9px;padding:0 10px;font-size:11px;color:#17325c;background:#fff">
+              <option>14 Days</option>
+              <option selected>30 Days</option>
+              <option>45 Days</option>
+              <option>60 Days</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Show missed appointments on dashboard</strong>
+              <span>Display missed patients in the appointment alert section.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Show long-term follow-up patients</strong>
+              <span>Display patients who have not returned within the threshold.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Allow double-booking</strong>
+              <span>Allow two appointments to use the same doctor and time slot.</span>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div class="panel" id="notifications">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-regular fa-bell"></i> Notifications & Alerts</h2>
+              <p class="card-desc">Choose which events should create admin alerts.</p>
+            </div>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>New appointment</strong>
+              <span>Alert when a new appointment is created.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Missed appointment</strong>
+              <span>Alert when a patient does not attend an appointment.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>Long-term follow-up</strong>
+              <span>Alert when a patient has not returned for the configured period.</span>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-copy">
+              <strong>System announcements</strong>
+              <span>Show important system messages and updates.</span>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACCOUNT -->
+      <div class="panel" id="account">
+
+        <div class="card">
+          <div class="account">
+            <div class="account-avatar">AD</div>
+            <div>
+              <div class="account-name">Admin</div>
+              <div class="account-role">Clinic Administrator</div>
+            </div>
+          </div>
+
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-user"></i> My Account</h2>
+              <p class="card-desc">Manage the administrator account used to access the system.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Full Name</label>
+              <input value="Admin">
+            </div>
+
+            <div class="field">
+              <label>Username</label>
+              <input value="admin">
+            </div>
+
+            <div class="field">
+              <label>Email Address</label>
+              <input type="email" placeholder="Enter email address">
+            </div>
+
+            <div class="field">
+              <label>Phone Number</label>
+              <input placeholder="Enter phone number">
+            </div>
+          </div>
+
+          <div class="save-row">
+            <button class="outline" onclick="showToast('Password settings can be connected to the login system.')">
+              Change Password
+            </button>
+            <button class="primary" onclick="saveSettings()">Save Account</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title"><i class="fa-solid fa-circle-info"></i> System Information</h2>
+              <p class="card-desc">Application information for the current system.</p>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info"><span>Application</span><strong>Getwell Clinic Admin</strong></div>
+            <div class="info"><span>Version</span><strong>1.0.0</strong></div>
+            <div class="info"><span>Environment</span><strong>UI Preview</strong></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" style="color:var(--danger)"><i class="fa-solid fa-right-from-bracket"></i> Session</h2>
+              <p class="card-desc">End the current administrator session.</p>
+            </div>
+          </div>
+
+          <button class="danger" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Log Out
+          </button>
+        </div>
+
+      </div>
+
+      <!-- GLOBAL SAVE -->
+      <div class="card" id="globalSave">
+        <div class="save-row" style="margin-top:0">
+          <button class="secondary" onclick="resetPage()">Reset Changes</button>
+          <button class="primary" onclick="saveSettings()">
+            <i class="fa-solid fa-check"></i> Save Changes
+          </button>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".panel");
+
+tabs.forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    const target = tab.dataset.panel;
+
+    tabs.forEach(t=>t.classList.remove("active"));
+    tab.classList.add("active");
+
+    panels.forEach(panel=>{
+      panel.classList.toggle("active", panel.id === target);
+    });
+
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+});
+
+function showToast(message){
+  const toast=document.getElementById("toast");
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>toast.classList.remove("show"),2600);
+}
+
+function saveSettings(){
+  showToast("Settings saved successfully.");
+}
+
+function resetPage(){
+  if(confirm("Reset the current changes?")){
+    location.reload();
+  }
+}
+
+function logout(){
+  if(confirm("Are you sure you want to log out?")){
+    window.location.href="admin-login.html";
+  }
+}
+</script>
+
+</body>
+</html>
