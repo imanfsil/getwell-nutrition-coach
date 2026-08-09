@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register New Patient - Getwell</title>
+<title>Register Patient | Getwell Clinic</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,25 +11,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2b5ba6;
+  --dark:#204c9c;
+  --accent:#315df4;
+  --bg:#eef6ff;
+  --text:#17325c;
+  --muted:#7b8798;
+  --border:#e5eaf1;
+}
 body{
   min-height:100vh;
-  background:#eef6ff;
-  color:#17325c;
+  background:var(--bg);
+  color:var(--text);
   font-family:"Poppins",sans-serif;
-  font-weight:400;
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 
-/* SAME APP SHELL AS APPOINTMENTS */
+/* SAME MASTER SHELL AS APPOINTMENTS */
 .sidebar{
   position:fixed;
-  inset:0 auto 0 0;
+  left:0;top:0;bottom:0;
   width:258px;
-  height:100vh;
-  background:#2b5ba6;
+  background:var(--blue);
   color:#fff;
   z-index:100;
 }
@@ -44,7 +50,6 @@ button{cursor:pointer}
 }
 .nav{padding:42px 20px}
 .nav a{
-  width:100%;
   height:64px;
   display:flex;
   align-items:center;
@@ -60,13 +65,12 @@ button{cursor:pointer}
 .nav a:hover{background:rgba(255,255,255,.10)}
 .nav a.active{
   background:#fff;
-  color:#204c9c;
+  color:var(--dark);
   font-weight:700;
 }
 .nav-icon{
   width:22px;
   display:flex;
-  align-items:center;
   justify-content:center;
   font-size:17px;
 }
@@ -77,7 +81,6 @@ button{cursor:pointer}
   min-height:100vh;
   padding:42px 42px 55px;
 }
-
 .page-header{
   display:flex;
   justify-content:space-between;
@@ -85,7 +88,7 @@ button{cursor:pointer}
   margin-bottom:32px;
 }
 .page-title h1{
-  color:#204c9c;
+  color:var(--dark);
   font-size:36px;
   line-height:1.2;
   font-weight:700;
@@ -93,24 +96,27 @@ button{cursor:pointer}
 }
 .page-title p{color:#666;font-size:15px}
 
-.header-actions{display:flex;gap:10px;align-items:center}
-
 .card{
   background:#fff;
   border-radius:18px;
   padding:26px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-.form-section + .form-section{
-  border-top:1px solid #edf0f4;
-  margin-top:26px;
-  padding-top:26px;
+.section{
+  border-bottom:1px solid #edf0f4;
+  padding-bottom:26px;
+  margin-bottom:26px;
+}
+.section:last-of-type{
+  border-bottom:0;
+  padding-bottom:0;
+  margin-bottom:0;
 }
 .section-title{
   display:flex;
   align-items:center;
   gap:10px;
-  color:#204c9c;
+  color:var(--dark);
   font-size:17px;
   font-weight:700;
   margin-bottom:18px;
@@ -123,156 +129,145 @@ button{cursor:pointer}
   justify-content:center;
   border-radius:9px;
   background:#eef4ff;
-  color:#315df4;
+  color:var(--accent);
   font-size:14px;
 }
-
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:17px;
 }
-.form-group{
+.field{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:6px;
 }
-.form-group.full{grid-column:1/-1}
-.form-group label{
+.field.full{grid-column:1/-1}
+.field label{
   color:#52627a;
   font-size:11px;
   font-weight:600;
 }
-.form-group input,
-.form-group select,
-.form-group textarea{
+.required{color:#df4552}
+.field input,
+.field select,
+.field textarea{
   width:100%;
   height:44px;
   border:1px solid #dce2eb;
   border-radius:9px;
   padding:0 12px;
+  color:var(--text);
   background:#fff;
-  color:#17325c;
-  font-size:12px;
   outline:none;
-  transition:.15s ease;
+  font-size:12px;
 }
-.form-group textarea{
-  height:120px;
+.field textarea{
+  height:110px;
   padding:12px;
   resize:vertical;
 }
-.form-group input::placeholder,
-.form-group textarea::placeholder{color:#a0a9b7}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:#315df4;
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--accent);
   box-shadow:0 0 0 3px rgba(49,93,244,.08);
 }
-.form-group input[readonly]{
+.field input[readonly]{
   background:#f7f9fc;
-  color:#7c8798;
+  color:#7f8b9c;
 }
-
-.radio-group{
-  min-height:44px;
-  display:flex;
-  align-items:center;
-  gap:28px;
-}
-.radio-option{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#53627a;
-  font-size:12px;
-  font-weight:500;
-  cursor:pointer;
-}
-.radio-option input{
-  width:16px;
-  height:16px;
-  accent-color:#315df4;
-}
-
 .helper{
-  color:#8b95a4;
+  color:#929aa7;
   font-size:9px;
-  margin-top:1px;
 }
-
+.radio-group{
+  height:44px;
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+.radio{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#53627a;
+  font-size:11px;
+  font-weight:500;
+}
+.radio input{
+  width:15px;
+  height:15px;
+  accent-color:var(--accent);
+}
 .form-footer{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  border-top:1px solid #edf0f4;
   margin-top:26px;
   padding-top:22px;
+  border-top:1px solid #edf0f4;
 }
-.form-footer-note{
+.note{
   color:#8a94a3;
   font-size:10px;
 }
-.actions{display:flex;gap:10px}
-
-.primary-button,
-.secondary-button{
+.actions{
+  display:flex;
+  gap:10px;
+}
+.primary,.secondary{
   border:0;
   border-radius:9px;
   padding:11px 17px;
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
 }
-.primary-button{
-  background:#315df4;
+.primary{
+  background:var(--accent);
   color:#fff;
 }
-.primary-button:hover{background:#244fdc}
-.secondary-button{
+.primary:hover{background:#244fdc}
+.secondary{
   background:#f1f4fb;
   color:#52627a;
 }
-.secondary-button:hover{background:#e7ecf6}
+.secondary:hover{background:#e7ecf6}
 
-.required{color:#e24c57;margin-left:2px}
-
-.success-modal,
-.confirm-modal{
+/* SUCCESS MODAL */
+.modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(15,31,55,.48);
-  z-index:2000;
+  z-index:500;
   align-items:center;
   justify-content:center;
   padding:24px;
+  background:rgba(15,31,55,.48);
 }
-.success-modal.show,
-.confirm-modal.show{display:flex}
+.modal.show{display:flex}
 .modal-box{
-  width:min(480px,96vw);
+  width:min(450px,96vw);
   background:#fff;
   border-radius:20px;
   padding:30px;
-  box-shadow:0 25px 70px rgba(0,0,0,.20);
   text-align:center;
+  box-shadow:0 25px 70px rgba(0,0,0,.20);
 }
 .modal-icon{
-  width:60px;
-  height:60px;
+  width:60px;height:60px;
   margin:0 auto 15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   border-radius:16px;
   background:#e5f9ee;
   color:#09975b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:25px;
 }
 .modal-box h2{
-  color:#204c9c;
+  color:var(--dark);
   font-size:22px;
   margin-bottom:7px;
 }
@@ -288,7 +283,8 @@ button{cursor:pointer}
   margin-top:22px;
 }
 
-@media(max-width:1350px){
+/* RESPONSIVE */
+@media(max-width:900px){
   .sidebar{width:220px}
   .main{
     margin-left:220px;
@@ -298,29 +294,17 @@ button{cursor:pointer}
   .nav a{font-size:14px}
   .logo{font-size:28px}
 }
-@media(max-width:900px){
+@media(max-width:700px){
   .form-grid{grid-template-columns:1fr}
-  .form-group.full{grid-column:auto}
+  .field.full{grid-column:auto}
 }
-@media(max-width:850px){
-  .sidebar{width:180px}
-  .main{
-    margin-left:180px;
-    width:calc(100% - 180px);
-    padding:30px 20px;
-  }
-  .page-header{flex-direction:column;gap:15px}
-}
-@media(max-width:600px){
+@media(max-width:650px){
   .sidebar{
     position:relative;
     width:100%;
     height:auto;
   }
-  .logo{
-    height:75px;
-    padding-left:25px;
-  }
+  .logo{height:75px;padding-left:25px}
   .nav{padding:15px}
   .nav a{height:45px}
   .main{
@@ -328,6 +312,7 @@ button{cursor:pointer}
     width:100%;
     padding:25px 15px;
   }
+  .page-header{margin-bottom:24px}
   .page-title h1{font-size:30px}
   .card{padding:20px}
   .form-footer{
@@ -370,7 +355,7 @@ button{cursor:pointer}
       <span>Reports</span>
     </a>
 
-    <a href="#">
+    <a href="settings.html">
       <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
       <span>Settings</span>
     </a>
@@ -387,14 +372,14 @@ button{cursor:pointer}
   <header class="page-header">
     <div class="page-title">
       <h1>Register New Patient</h1>
-      <p>Complete the form below to register a new patient.</p>
+      <p>Complete the patient information below to create a new record.</p>
     </div>
   </header>
 
   <section class="card">
 
     <!-- PATIENT INFORMATION -->
-    <div class="form-section">
+    <div class="section">
       <h2 class="section-title">
         <i class="fa-solid fa-user"></i>
         Patient Information
@@ -402,40 +387,40 @@ button{cursor:pointer}
 
       <div class="form-grid">
 
-        <div class="form-group">
+        <div class="field">
           <label>Patient ID</label>
-          <input id="patientId" type="text" value="Auto Generated" readonly>
-          <span class="helper">Patient ID will be generated automatically.</span>
+          <input id="patientId" value="Auto Generated" readonly>
+          <span class="helper">The Patient ID will be generated automatically.</span>
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Full Name <span class="required">*</span></label>
-          <input id="fullName" type="text" placeholder="Enter patient's full name">
+          <input id="fullName" placeholder="Enter patient's full name">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Phone Number <span class="required">*</span></label>
           <input id="phone" type="tel" placeholder="e.g. 012-3456789">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Date of Birth <span class="required">*</span></label>
           <input id="dob" type="date">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Age</label>
-          <input id="age" type="text" placeholder="Auto Calculated" readonly>
+          <input id="age" placeholder="Auto calculated" readonly>
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Gender <span class="required">*</span></label>
           <div class="radio-group">
-            <label class="radio-option">
+            <label class="radio">
               <input type="radio" name="gender" value="Male">
               Male
             </label>
-            <label class="radio-option">
+            <label class="radio">
               <input type="radio" name="gender" value="Female">
               Female
             </label>
@@ -446,7 +431,7 @@ button{cursor:pointer}
     </div>
 
     <!-- HEALTH INFORMATION -->
-    <div class="form-section">
+    <div class="section">
       <h2 class="section-title">
         <i class="fa-solid fa-heart-pulse"></i>
         Health Information
@@ -454,17 +439,17 @@ button{cursor:pointer}
 
       <div class="form-grid">
 
-        <div class="form-group">
+        <div class="field">
           <label>Height (cm) <span class="required">*</span></label>
           <input id="height" type="number" min="0" step="0.1" placeholder="Enter height">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Starting Weight (kg) <span class="required">*</span></label>
           <input id="startingWeight" type="number" min="0" step="0.1" placeholder="Enter starting weight">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Goal Weight (kg)</label>
           <input id="goalWeight" type="number" min="0" step="0.1" placeholder="Enter goal weight">
         </div>
@@ -473,7 +458,7 @@ button{cursor:pointer}
     </div>
 
     <!-- PROGRAMME INFORMATION -->
-    <div class="form-section">
+    <div class="section">
       <h2 class="section-title">
         <i class="fa-solid fa-hospital"></i>
         Programme Information
@@ -481,12 +466,12 @@ button{cursor:pointer}
 
       <div class="form-grid">
 
-        <div class="form-group">
+        <div class="field">
           <label>Programme Start Date <span class="required">*</span></label>
           <input id="programmeStart" type="date">
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Attending Doctor <span class="required">*</span></label>
           <select id="doctor">
             <option value="">Select doctor</option>
@@ -496,53 +481,48 @@ button{cursor:pointer}
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label>Visit Interval</label>
-          <div class="radio-group">
-            <label class="radio-option">
-              <input type="radio" name="visit" value="Every 5 Days">
-              Every 5 Days
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="visit" value="Every 7 Days" checked>
-              Every 7 Days
-            </label>
-          </div>
+          <select id="visitInterval">
+            <option>Every 5 Days</option>
+            <option selected>Every 7 Days</option>
+            <option>Every 14 Days</option>
+          </select>
         </div>
 
-        <div class="form-group">
-          <label>Custom Next Appointment</label>
+        <div class="field">
+          <label>Next Appointment</label>
           <input id="nextAppointment" type="date">
+          <span class="helper">Optional. Can be scheduled later from Appointments.</span>
         </div>
 
       </div>
     </div>
 
     <!-- REMARKS -->
-    <div class="form-section">
+    <div class="section">
       <h2 class="section-title">
         <i class="fa-regular fa-note-sticky"></i>
         Remarks
       </h2>
 
-      <div class="form-group">
+      <div class="field">
         <label>Additional Remarks</label>
-        <textarea id="remarks" placeholder="Optional remarks..."></textarea>
+        <textarea id="remarks" placeholder="Add any relevant remarks..."></textarea>
       </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="form-footer">
-      <div class="form-footer-note">
+      <div class="note">
         <span class="required">*</span> Required fields
       </div>
 
       <div class="actions">
-        <button class="secondary-button" type="button" onclick="resetForm()">
+        <button class="secondary" type="button" onclick="resetForm()">
           Cancel
         </button>
 
-        <button class="primary-button" type="button" onclick="createPatient()">
+        <button class="primary" type="button" onclick="createPatient()">
           <i class="fa-solid fa-user-plus"></i>
           Create Patient
         </button>
@@ -553,52 +533,49 @@ button{cursor:pointer}
 
 </main>
 
-<!-- SUCCESS -->
-<div class="success-modal" id="successModal">
+<div class="modal" id="successModal">
   <div class="modal-box">
     <div class="modal-icon">
       <i class="fa-solid fa-check"></i>
     </div>
 
-    <h2>Patient Registered</h2>
+    <h2>Patient Registered Successfully</h2>
 
-    <p>
-      The patient has been successfully registered in this UI preview.
+    <p id="successText">
+      The patient has been added to the system.
     </p>
 
     <div class="modal-actions">
-      <button class="primary-button" onclick="closeSuccess()">
-        Done
-      </button>
+      <button class="secondary" onclick="closeSuccess()">Close</button>
+      <button class="primary" onclick="goToPatients()">View Patient List</button>
     </div>
   </div>
 </div>
 
 <script>
-const dobInput = document.getElementById("dob");
-const ageInput = document.getElementById("age");
+const dob = document.getElementById("dob");
+const age = document.getElementById("age");
 
-dobInput.addEventListener("change", function(){
-  if(!this.value){
-    ageInput.value = "";
+dob.addEventListener("change", calculateAge);
+
+function calculateAge(){
+  if(!dob.value){
+    age.value="";
     return;
   }
 
-  const dob = new Date(this.value + "T00:00:00");
+  const birthDate = new Date(dob.value + "T00:00:00");
   const today = new Date();
 
-  let age = today.getFullYear() - dob.getFullYear();
-  const monthDifference = today.getMonth() - dob.getMonth();
+  let years = today.getFullYear() - birthDate.getFullYear();
+  const month = today.getMonth() - birthDate.getMonth();
 
-  if(
-    monthDifference < 0 ||
-    (monthDifference === 0 && today.getDate() < dob.getDate())
-  ){
-    age--;
+  if(month < 0 || (month === 0 && today.getDate() < birthDate.getDate())){
+    years--;
   }
 
-  ageInput.value = age >= 0 ? age + " Years" : "";
-});
+  age.value = years >= 0 ? years + " Years" : "";
+}
 
 function generatePatientId(){
   const number = Math.floor(1000 + Math.random() * 9000);
@@ -607,7 +584,7 @@ function generatePatientId(){
 
 function createPatient(){
 
-  const required = [
+  const requiredFields = [
     document.getElementById("fullName"),
     document.getElementById("phone"),
     document.getElementById("dob"),
@@ -617,17 +594,21 @@ function createPatient(){
     document.getElementById("doctor")
   ];
 
-  const missing = required.some(field => !field.value.trim());
+  const missing = requiredFields.some(field => !field.value.trim());
+  const gender = document.querySelector('input[name="gender"]:checked');
 
-  const genderSelected =
-    document.querySelector('input[name="gender"]:checked');
-
-  if(missing || !genderSelected){
-    alert("Please complete all required patient information.");
+  if(missing || !gender){
+    alert("Please complete all required fields before creating the patient.");
     return;
   }
 
-  document.getElementById("patientId").value = generatePatientId();
+  const id = generatePatientId();
+  document.getElementById("patientId").value = id;
+
+  document.getElementById("successText").textContent =
+    document.getElementById("fullName").value +
+    " has been registered successfully with Patient ID " + id + ".";
+
   document.getElementById("successModal").classList.add("show");
 }
 
@@ -635,24 +616,40 @@ function closeSuccess(){
   document.getElementById("successModal").classList.remove("show");
 }
 
-function resetForm(){
-  if(confirm("Clear all entered patient information?")){
-    document.querySelectorAll("input:not(#patientId), select, textarea")
-      .forEach(el => {
-        if(el.type === "radio"){
-          el.checked = el.defaultChecked;
-        }else{
-          el.value = "";
-        }
-      });
-
-    document.getElementById("patientId").value = "Auto Generated";
-    document.getElementById("age").value = "";
-  }
+function goToPatients(){
+  window.location.href="patient-list.html";
 }
 
-document.addEventListener("keydown", function(event){
-  if(event.key === "Escape"){
+function resetForm(){
+
+  if(!confirm("Clear all entered patient information?")){
+    return;
+  }
+
+  document.getElementById("fullName").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("dob").value="";
+  document.getElementById("age").value="";
+  document.getElementById("height").value="";
+  document.getElementById("startingWeight").value="";
+  document.getElementById("goalWeight").value="";
+  document.getElementById("programmeStart").value="";
+  document.getElementById("doctor").value="";
+  document.getElementById("visitInterval").value="Every 7 Days";
+  document.getElementById("nextAppointment").value="";
+  document.getElementById("remarks").value="";
+  document.querySelectorAll('input[name="gender"]').forEach(r=>r.checked=false);
+  document.getElementById("patientId").value="Auto Generated";
+}
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    closeSuccess();
+  }
+});
+
+document.getElementById("successModal").addEventListener("click",event=>{
+  if(event.target.id==="successModal"){
     closeSuccess();
   }
 });
