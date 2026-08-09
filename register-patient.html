@@ -229,6 +229,7 @@ button{cursor:pointer}
   color:#fff;
 }
 .primary:hover{background:#244fdc}
+.primary:disabled{opacity:.65;cursor:not-allowed}
 .secondary{
   background:#f1f4fb;
   color:#52627a;
@@ -577,12 +578,9 @@ function calculateAge(){
   age.value = years >= 0 ? years + " Years" : "";
 }
 
-function generatePatientId(){
-  const number = Math.floor(1000 + Math.random() * 9000);
-  return "GW" + number;
-}
+const API_URL = "https://script.google.com/macros/s/AKfycbyysVYfFU-wxvhib67EUGYvUnT1CNU8QHJBk5iSDZbGhoUyjB9LIgzEYaapO-6TMPsSQw/exec";
 
-function createPatient(){
+async function createPatient(){
 
   const requiredFields = [
     document.getElementById("fullName"),
@@ -596,20 +594,81 @@ function createPatient(){
 
   const missing = requiredFields.some(field => !field.value.trim());
   const gender = document.querySelector('input[name="gender"]:checked');
+  const button = document.querySelector('.primary[onclick="createPatient()"]');
 
   if(missing || !gender){
     alert("Please complete all required fields before creating the patient.");
     return;
   }
 
-  const id = generatePatientId();
-  document.getElementById("patientId").value = id;
+  const patient = {
+    action: "createPatient",
+    full_name: document.getElementById("fullName").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    date_of_birth: document.getElementById("dob").value,
+    age: document.getElementById("age").value.replace(" Years","").trim(),
+    gender: gender.value,
+    height_cm: document.getElementById("height").value,
+    starting_weight_kg: document.getElementById("startingWeight").value,
+    goal_weight_kg: document.getElementById("goalWeight").value,
+    programme_start_date: document.getElementById("programmeStart").value,
+    attending_doctor: document.getElementById("doctor").value,
+    visit_interval: document.getElementById("visitInterval").value,
+    next_appointment: document.getElementById("nextAppointment").value,
+    appointment_type: "Consultation",
+    remarks: document.getElementById("remarks").value.trim()
+  };
 
-  document.getElementById("successText").textContent =
-    document.getElementById("fullName").value +
-    " has been registered successfully with Patient ID " + id + ".";
+  const originalButton = button ? button.innerHTML : "";
 
-  document.getElementById("successModal").classList.add("show");
+  try {
+    if(button){
+      button.disabled = true;
+      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+    }
+
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(patient)
+    });
+
+    if(!response.ok){
+      throw new Error("Backend request failed (" + response.status + ").");
+    }
+
+    const result = await response.json();
+
+    if(!result.ok){
+      throw new Error(result.error || "The backend could not create the patient.");
+    }
+
+    const savedPatient = result.patient || {};
+    const id = savedPatient.patient_id || "Generated";
+
+    document.getElementById("patientId").value = id;
+
+    document.getElementById("successText").textContent =
+      document.getElementById("fullName").value +
+      " has been registered successfully with Patient ID " + id + ".";
+
+    document.getElementById("successModal").classList.add("show");
+
+  } catch(error) {
+    console.error("Getwell backend error:", error);
+    alert(
+      "The patient could not be saved to the database.\n\n" +
+      error.message +
+      "\n\nPlease check that the Apps Script Web App is deployed with access set to Anyone."
+    );
+  } finally {
+    if(button){
+      button.disabled = false;
+      button.innerHTML = originalButton;
+    }
+  }
 }
 
 function closeSuccess(){
