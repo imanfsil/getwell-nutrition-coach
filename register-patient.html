@@ -1,318 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register New Patient - Getwell</title>
 
-<title>Register New Patient</title>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
 body{
-background:#eef6ff;
-padding:40px;
+  min-height:100vh;
+  background:#eef6ff;
+  color:#17325c;
+  font-family:"Poppins",sans-serif;
+  font-weight:400;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+/* SAME APP SHELL AS APPOINTMENTS */
+.sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:258px;
+  height:100vh;
+  background:#2b5ba6;
+  color:#fff;
+  z-index:100;
+}
+.logo{
+  height:118px;
+  display:flex;
+  align-items:center;
+  padding-left:42px;
+  border-bottom:1px solid rgba(255,255,255,.15);
+  font-size:32px;
+  font-weight:700;
+}
+.nav{padding:42px 20px}
+.nav a{
+  width:100%;
+  height:64px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 25px;
+  margin-bottom:9px;
+  border-radius:13px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:500;
+}
+.nav a:hover{background:rgba(255,255,255,.10)}
+.nav a.active{
+  background:#fff;
+  color:#204c9c;
+  font-weight:700;
+}
+.nav-icon{
+  width:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
 }
 
-.container{
-max-width:900px;
-margin:auto;
+.main{
+  margin-left:258px;
+  width:calc(100% - 258px);
+  min-height:100vh;
+  padding:42px 42px 55px;
 }
 
-.header{
-margin-bottom:35px;
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:32px;
 }
-
-.header h1{
-font-size:34px;
-color:#204c9c;
-margin-bottom:10px;
+.page-title h1{
+  color:#204c9c;
+  font-size:36px;
+  line-height:1.2;
+  font-weight:700;
+  margin-bottom:7px;
 }
+.page-title p{color:#666;font-size:15px}
 
-.header p{
-color:#666;
+.header-actions{display:flex;gap:10px;align-items:center}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-
-.form-box{
-background:white;
-padding:35px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+.form-section + .form-section{
+  border-top:1px solid #edf0f4;
+  margin-top:26px;
+  padding-top:26px;
 }
-
 .section-title{
-font-size:22px;
-color:#204c9c;
-margin-top:25px;
-margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#204c9c;
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:18px;
+}
+.section-title i{
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  background:#eef4ff;
+  color:#315df4;
+  font-size:14px;
 }
 
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
 .form-group{
-margin-bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
-
-label{
-display:block;
-margin-bottom:8px;
-font-weight:600;
-color:#444;
+.form-group.full{grid-column:1/-1}
+.form-group label{
+  color:#52627a;
+  font-size:11px;
+  font-weight:600;
 }
-
-input,
-select,
-textarea{
-
-width:100%;
-padding:15px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:15px;
-outline:none;
-
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  height:44px;
+  border:1px solid #dce2eb;
+  border-radius:9px;
+  padding:0 12px;
+  background:#fff;
+  color:#17325c;
+  font-size:12px;
+  outline:none;
+  transition:.15s ease;
 }
-
-input:focus,
-select:focus,
-textarea:focus{
-
-border-color:#204c9c;
-
+.form-group textarea{
+  height:120px;
+  padding:12px;
+  resize:vertical;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:#a0a9b7}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#315df4;
+  box-shadow:0 0 0 3px rgba(49,93,244,.08);
+}
+.form-group input[readonly]{
+  background:#f7f9fc;
+  color:#7c8798;
 }
 
 .radio-group{
-
-display:flex;
-gap:30px;
-margin-top:10px;
-
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+.radio-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#53627a;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+}
+.radio-option input{
+  width:16px;
+  height:16px;
+  accent-color:#315df4;
 }
 
-.radio-group label{
-
-font-weight:500;
-
+.helper{
+  color:#8b95a4;
+  font-size:9px;
+  margin-top:1px;
 }
 
-button{
+.form-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-top:1px solid #edf0f4;
+  margin-top:26px;
+  padding-top:22px;
+}
+.form-footer-note{
+  color:#8a94a3;
+  font-size:10px;
+}
+.actions{display:flex;gap:10px}
 
-margin-top:30px;
-width:100%;
-padding:16px;
-border:none;
-border-radius:14px;
-background:#204c9c;
-color:white;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
+.primary-button,
+.secondary-button{
+  border:0;
+  border-radius:9px;
+  padding:11px 17px;
+  font-size:12px;
+  font-weight:600;
+}
+.primary-button{
+  background:#315df4;
+  color:#fff;
+}
+.primary-button:hover{background:#244fdc}
+.secondary-button{
+  background:#f1f4fb;
+  color:#52627a;
+}
+.secondary-button:hover{background:#e7ecf6}
 
+.required{color:#e24c57;margin-left:2px}
+
+.success-modal,
+.confirm-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,31,55,.48);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.success-modal.show,
+.confirm-modal.show{display:flex}
+.modal-box{
+  width:min(480px,96vw);
+  background:#fff;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 25px 70px rgba(0,0,0,.20);
+  text-align:center;
+}
+.modal-icon{
+  width:60px;
+  height:60px;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:#e5f9ee;
+  color:#09975b;
+  font-size:25px;
+}
+.modal-box h2{
+  color:#204c9c;
+  font-size:22px;
+  margin-bottom:7px;
+}
+.modal-box p{
+  color:#737f90;
+  font-size:12px;
+  line-height:1.6;
+}
+.modal-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:22px;
 }
 
-button:hover{
-
-background:#163c7e;
-
+@media(max-width:1350px){
+  .sidebar{width:220px}
+  .main{
+    margin-left:220px;
+    width:calc(100% - 220px);
+    padding:35px 30px 50px;
+  }
+  .nav a{font-size:14px}
+  .logo{font-size:28px}
 }
-
+@media(max-width:900px){
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:auto}
+}
+@media(max-width:850px){
+  .sidebar{width:180px}
+  .main{
+    margin-left:180px;
+    width:calc(100% - 180px);
+    padding:30px 20px;
+  }
+  .page-header{flex-direction:column;gap:15px}
+}
+@media(max-width:600px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+  }
+  .logo{
+    height:75px;
+    padding-left:25px;
+  }
+  .nav{padding:15px}
+  .nav a{height:45px}
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:25px 15px;
+  }
+  .page-title h1{font-size:30px}
+  .card{padding:20px}
+  .form-footer{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .actions{justify-content:flex-end}
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<aside class="sidebar">
+  <div class="logo">Getwell</div>
 
-<div class="header">
+  <nav class="nav">
+    <a href="admin-dashboard.html">
+      <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+      <span>Dashboard</span>
+    </a>
 
-<h1>Register New Patient</h1>
+    <a href="register-patient.html" class="active">
+      <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
+      <span>Register Patient</span>
+    </a>
 
-<p>Complete the form below to register a new patient.</p>
+    <a href="patient-list.html">
+      <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+      <span>Patient List</span>
+    </a>
 
+    <a href="appointments.html">
+      <span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span>
+      <span>Appointments</span>
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span>
+      <span>Reports</span>
+    </a>
+
+    <a href="#">
+      <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+      <span>Settings</span>
+    </a>
+
+    <a href="admin-login.html">
+      <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+      <span>Logout</span>
+    </a>
+  </nav>
+</aside>
+
+<main class="main">
+
+  <header class="page-header">
+    <div class="page-title">
+      <h1>Register New Patient</h1>
+      <p>Complete the form below to register a new patient.</p>
+    </div>
+  </header>
+
+  <section class="card">
+
+    <!-- PATIENT INFORMATION -->
+    <div class="form-section">
+      <h2 class="section-title">
+        <i class="fa-solid fa-user"></i>
+        Patient Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Patient ID</label>
+          <input id="patientId" type="text" value="Auto Generated" readonly>
+          <span class="helper">Patient ID will be generated automatically.</span>
+        </div>
+
+        <div class="form-group">
+          <label>Full Name <span class="required">*</span></label>
+          <input id="fullName" type="text" placeholder="Enter patient's full name">
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number <span class="required">*</span></label>
+          <input id="phone" type="tel" placeholder="e.g. 012-3456789">
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth <span class="required">*</span></label>
+          <input id="dob" type="date">
+        </div>
+
+        <div class="form-group">
+          <label>Age</label>
+          <input id="age" type="text" placeholder="Auto Calculated" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Gender <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Male">
+              Male
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Female">
+              Female
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HEALTH INFORMATION -->
+    <div class="form-section">
+      <h2 class="section-title">
+        <i class="fa-solid fa-heart-pulse"></i>
+        Health Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Height (cm) <span class="required">*</span></label>
+          <input id="height" type="number" min="0" step="0.1" placeholder="Enter height">
+        </div>
+
+        <div class="form-group">
+          <label>Starting Weight (kg) <span class="required">*</span></label>
+          <input id="startingWeight" type="number" min="0" step="0.1" placeholder="Enter starting weight">
+        </div>
+
+        <div class="form-group">
+          <label>Goal Weight (kg)</label>
+          <input id="goalWeight" type="number" min="0" step="0.1" placeholder="Enter goal weight">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PROGRAMME INFORMATION -->
+    <div class="form-section">
+      <h2 class="section-title">
+        <i class="fa-solid fa-hospital"></i>
+        Programme Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Programme Start Date <span class="required">*</span></label>
+          <input id="programmeStart" type="date">
+        </div>
+
+        <div class="form-group">
+          <label>Attending Doctor <span class="required">*</span></label>
+          <select id="doctor">
+            <option value="">Select doctor</option>
+            <option>Dr Aaron</option>
+            <option>Dr Najwa</option>
+            <option>Dr Aisyah</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Visit Interval</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="visit" value="Every 5 Days">
+              Every 5 Days
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="visit" value="Every 7 Days" checked>
+              Every 7 Days
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Custom Next Appointment</label>
+          <input id="nextAppointment" type="date">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- REMARKS -->
+    <div class="form-section">
+      <h2 class="section-title">
+        <i class="fa-regular fa-note-sticky"></i>
+        Remarks
+      </h2>
+
+      <div class="form-group">
+        <label>Additional Remarks</label>
+        <textarea id="remarks" placeholder="Optional remarks..."></textarea>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="form-footer">
+      <div class="form-footer-note">
+        <span class="required">*</span> Required fields
+      </div>
+
+      <div class="actions">
+        <button class="secondary-button" type="button" onclick="resetForm()">
+          Cancel
+        </button>
+
+        <button class="primary-button" type="button" onclick="createPatient()">
+          <i class="fa-solid fa-user-plus"></i>
+          Create Patient
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- SUCCESS -->
+<div class="success-modal" id="successModal">
+  <div class="modal-box">
+    <div class="modal-icon">
+      <i class="fa-solid fa-check"></i>
+    </div>
+
+    <h2>Patient Registered</h2>
+
+    <p>
+      The patient has been successfully registered in this UI preview.
+    </p>
+
+    <div class="modal-actions">
+      <button class="primary-button" onclick="closeSuccess()">
+        Done
+      </button>
+    </div>
+  </div>
 </div>
 
-<div class="form-box">
-
-<h2 class="section-title">👤 Patient Information</h2>
-
-<div class="form-group">
-
-<label>Patient ID</label>
-
-<input
-type="text"
-placeholder="Auto Generated"
-readonly>
-
-</div>
-
-<div class="form-group">
-
-<label>Full Name</label>
-
-<input
-type="text">
-
-</div>
-
-<div class="form-group">
-
-<label>Phone Number</label>
-
-<input
-type="tel">
-
-</div>
-
-<div class="form-group">
-
-<label>Date of Birth</label>
-
-<input
-type="date">
-
-</div>
-
-<div class="form-group">
-
-<label>Age</label>
-
-<input
-type="text"
-placeholder="Auto Calculated"
-readonly>
-
-</div>
-
-<div class="form-group">
-
-<label>Gender</label>
-
-<div class="radio-group">
-
-<label>
-<input type="radio" name="gender">
- Male
-</label>
-
-<label>
-<input type="radio" name="gender">
- Female
-</label>
-
-</div>
-
-</div>
-
-<h2 class="section-title">⚕️ Health Information</h2>
-
-<div class="form-group">
-
-<label>Height (cm)</label>
-
-<input type="number">
-
-</div>
-
-<div class="form-group">
-
-<label>Starting Weight (kg)</label>
-
-<input type="number">
-
-</div>
-
-<div class="form-group">
-
-<label>Goal Weight (kg)</label>
-
-<input type="number">
-
-</div>
-
-<h2 class="section-title">🏥 Programme Information</h2>
-
-<div class="form-group">
-
-<label>Programme Start Date</label>
-
-<input type="date">
-
-</div>
-
-<div class="form-group">
-
-<label>Attending Doctor</label>
-
-<select>
-
-<option>Dr Aaron</option>
-
-<option>Dr Najwa</option>
-
-<option>Dr Aisyah</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Visit Interval</label>
-
-<div class="radio-group">
-
-<label>
-<input type="radio" name="visit">
- Every 5 Days
-</label>
-
-<label>
-<input type="radio" name="visit">
- Every 7 Days
-</label>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label>Custom Next Appointment</label>
-
-<input type="date">
-
-</div>
-
-<h2 class="section-title">📝 Remarks</h2>
-
-<div class="form-group">
-
-<textarea
-rows="5"
-placeholder="Optional remarks..."></textarea>
-
-</div>
-
-<button>
-
-Create Patient
-
-</button>
-
-</div>
-
-</div>
+<script>
+const dobInput = document.getElementById("dob");
+const ageInput = document.getElementById("age");
+
+dobInput.addEventListener("change", function(){
+  if(!this.value){
+    ageInput.value = "";
+    return;
+  }
+
+  const dob = new Date(this.value + "T00:00:00");
+  const today = new Date();
+
+  let age = today.getFullYear() - dob.getFullYear();
+  const monthDifference = today.getMonth() - dob.getMonth();
+
+  if(
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < dob.getDate())
+  ){
+    age--;
+  }
+
+  ageInput.value = age >= 0 ? age + " Years" : "";
+});
+
+function generatePatientId(){
+  const number = Math.floor(1000 + Math.random() * 9000);
+  return "GW" + number;
+}
+
+function createPatient(){
+
+  const required = [
+    document.getElementById("fullName"),
+    document.getElementById("phone"),
+    document.getElementById("dob"),
+    document.getElementById("height"),
+    document.getElementById("startingWeight"),
+    document.getElementById("programmeStart"),
+    document.getElementById("doctor")
+  ];
+
+  const missing = required.some(field => !field.value.trim());
+
+  const genderSelected =
+    document.querySelector('input[name="gender"]:checked');
+
+  if(missing || !genderSelected){
+    alert("Please complete all required patient information.");
+    return;
+  }
+
+  document.getElementById("patientId").value = generatePatientId();
+  document.getElementById("successModal").classList.add("show");
+}
+
+function closeSuccess(){
+  document.getElementById("successModal").classList.remove("show");
+}
+
+function resetForm(){
+  if(confirm("Clear all entered patient information?")){
+    document.querySelectorAll("input:not(#patientId), select, textarea")
+      .forEach(el => {
+        if(el.type === "radio"){
+          el.checked = el.defaultChecked;
+        }else{
+          el.value = "";
+        }
+      });
+
+    document.getElementById("patientId").value = "Auto Generated";
+    document.getElementById("age").value = "";
+  }
+}
+
+document.addEventListener("keydown", function(event){
+  if(event.key === "Escape"){
+    closeSuccess();
+  }
+});
+</script>
 
 </body>
-
 </html>
