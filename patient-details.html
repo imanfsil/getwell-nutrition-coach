@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -156,11 +157,53 @@ cursor:pointer;
 
 </style>
 
-</head>
+<style>
+/* === GETWELL MASTER APPOINTMENTS VISUAL SYSTEM === */
+html{font-size:16px!important}
+body{background:#eef6ff!important;color:#17325c!important;font-family:"Poppins",sans-serif!important;margin:0!important;min-height:100vh!important}
+.sidebar{position:fixed!important;top:0!important;left:0!important;bottom:0!important;width:258px!important;height:100vh!important;background:#2b5ba6!important;color:#fff!important;z-index:1000!important}
+.logo{height:118px!important;display:flex!important;align-items:center!important;padding-left:42px!important;border-bottom:1px solid rgba(255,255,255,.15)!important;font-size:32px!important;font-weight:700!important}
+.nav{padding:42px 20px!important}
+.nav a,.menu-link{width:100%!important;height:64px!important;display:flex!important;align-items:center!important;gap:18px!important;padding:0 25px!important;margin-bottom:9px!important;border-radius:13px!important;color:#fff!important;text-decoration:none!important;font-size:16px!important;font-weight:500!important}
+.nav a:hover,.menu-item:hover{background:rgba(255,255,255,.10)!important}
+.nav a.active,.menu-item.active{background:#fff!important;color:#204c9c!important;font-weight:700!important}
+.nav-icon{width:22px!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:17px!important}
+.main,.main-content{margin-left:258px!important;width:calc(100% - 258px)!important;min-height:100vh!important;padding:42px 42px 55px!important}
+.container{max-width:none!important;margin:0!important;padding:0!important}
+.header,.page-header{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;margin-bottom:32px!important}
+.header h1,.page-title h1{color:#204c9c!important;font-size:36px!important;line-height:1.2!important;font-weight:700!important;margin-bottom:7px!important}
+.header p,.page-title p{color:#666!important;font-size:15px!important;margin-top:0!important}
+.cards,.summary-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;margin-bottom:22px!important}
+.card,.section,.report-box,.activity,.search-section,.patient-panel,.top-bar{background:#fff!important;border-radius:18px!important;padding:22px!important;box-shadow:0 10px 25px rgba(0,0,0,.08)!important}
+.card h3,.report-box h2,.activity h2,.search-section h2,.section h2{color:#204c9c!important}
+.number{color:#17325c!important;font-size:28px!important;font-weight:700!important}
+table{width:100%!important;border-collapse:collapse!important}
+th{background:#f3f6ff!important;color:#24539f!important;padding:12px!important;font-size:11px!important}
+td{padding:13px 12px!important;border-bottom:1px solid #edf0f4!important;font-size:11px!important;color:#53627a!important}
+input,select,textarea{border-color:#dce2eb!important;border-radius:10px!important;font-family:"Poppins",sans-serif!important}
+button{font-family:"Poppins",sans-serif!important}
+@media(max-width:1100px){.cards,.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:850px){.sidebar{width:180px!important}.main,.main-content{margin-left:180px!important;width:calc(100% - 180px)!important;padding:30px 20px!important}.cards,.summary-grid{grid-template-columns:1fr!important}}
+@media(max-width:600px){.sidebar{position:relative!important;width:100%!important;height:auto!important}.logo{height:75px!important}.nav{padding:15px!important}.nav a,.menu-link{height:45px!important}.main,.main-content{margin-left:0!important;width:100%!important;padding:25px 15px!important}}
+</style></head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <body>
 
-<div class="container">
+<aside class="sidebar">
+  <div class="logo">Getwell</div>
+  <nav class="nav">
+    <a href="admin-dashboard.html" class=""><span class="nav-icon"><i class="fa-solid fa-house"></i></span><span>Dashboard</span></a>
+    <a href="#" onclick="return false;"><span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span><span>Register Patient</span></a>
+    <a href="patient-list.html" class="active"><span class="nav-icon"><i class="fa-solid fa-users"></i></span><span>Patient List</span></a>
+    <a href="appointments.html" class=""><span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span><span>Appointments</span></a>
+    <a href="reports.html" class=""><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span>Reports</span></a>
+    <a href="#" onclick="return false;"><span class="nav-icon"><i class="fa-solid fa-gear"></i></span><span>Settings</span></a>
+    <a href="admin-login.html"><span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span><span>Logout</span></a>
+  </nav>
+</aside>
+
+<main class="main">
 
 <a href="patient-list.html" class="back-btn">
 ← Back to Patient List
@@ -345,7 +388,6 @@ Record Visit
 
 </div>
 
-</div>
-
+</main>
 </body>
 </html>
