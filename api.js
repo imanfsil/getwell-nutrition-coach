@@ -1,43 +1,203 @@
-// Getwell shared API client. Google Sheets is the source of truth.
-const GETWELL_API_URL = "https://script.google.com/macros/s/AKfycbyysVYfFU-wxvhib67EUGYvUnT1CNU8QHJBk5iSDZbGhoUyjB9LIgzEYaapO-6TMPsSQw/exec";
+// ============================================================
+// GETWELL CLINIC — SHARED API CONNECTION
+// Google Sheets = Master Database
+// ============================================================
 
-async function apiGet(action, params={}) {
-  const qs = new URLSearchParams({action, ...params});
-  const res = await fetch(`${GETWELL_API_URL}?${qs.toString()}`, {cache:'no-store'});
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'API request failed');
-  return data;
-}
+const GETWELL_API_URL =
+  "https://script.google.com/macros/s/AKfycbyEd_pPCXSMFKVm7dM1sMenZ-Cz72fUFSRfUwrtizMZ-Zqb4JeadMX-GKJxwA-zCzXy/exec";
 
-async function apiPost(action, payload={}) {
-  const res = await fetch(GETWELL_API_URL, {
-    method:'POST',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({action,...payload})
+
+// ============================================================
+// GET REQUEST
+// ============================================================
+
+async function apiGet(action, params = {}) {
+
+  const query = new URLSearchParams({
+    action,
+    ...params
   });
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'API request failed');
+
+  const response = await fetch(
+    `${GETWELL_API_URL}?${query.toString()}`,
+    {
+      method: "GET",
+      cache: "no-store"
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Backend request failed (${response.status})`
+    );
+  }
+
+  const data = await response.json();
+
+  if (!data.ok) {
+    throw new Error(
+      data.error || "Backend request failed."
+    );
+  }
+
   return data;
 }
 
-function getPatientIdFromUrl(){
-  return new URLSearchParams(location.search).get('id') || '';
-}
 
-function escapeHtmlSafe(v){
-  return String(v ?? '').replace(
-    /[&<>'"]/g,
-    c => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[c])
+// ============================================================
+// POST REQUEST
+// ============================================================
+
+async function apiPost(action, payload = {}) {
+
+  const response = await fetch(
+    GETWELL_API_URL,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type":
+          "text/plain;charset=utf-8"
+      },
+
+      body: JSON.stringify({
+        action,
+        ...payload
+      })
+    }
   );
+
+  if (!response.ok) {
+    throw new Error(
+      `Backend request failed (${response.status})`
+    );
+  }
+
+  const data = await response.json();
+
+  if (!data.ok) {
+    throw new Error(
+      data.error || "Backend request failed."
+    );
+  }
+
+  return data;
 }
 
-function showApiError(err){
-  console.error(err);
-  alert(err.message || String(err));
+
+// ============================================================
+// GET PATIENT ID FROM URL
+// Example:
+// patient-details.html?id=GW0001
+// ============================================================
+
+function getPatientIdFromUrl() {
+
+  return (
+    new URLSearchParams(
+      window.location.search
+    ).get("id") || ""
+  );
+
+}
+
+
+// ============================================================
+// SAFE HTML
+// Prevents database text from being inserted as raw HTML
+// ============================================================
+
+function escapeHtmlSafe(value) {
+
+  return String(value ?? "").replace(
+    /[&<>'"]/g,
+
+    character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;"
+    })[character]
+
+  );
+
+}
+
+
+// ============================================================
+// API ERROR HANDLER
+// ============================================================
+
+function showApiError(
+  error,
+  fallbackMessage = "Something went wrong."
+) {
+
+  console.error(
+    "Getwell API error:",
+    error
+  );
+
+  const message =
+    error && error.message
+      ? error.message
+      : fallbackMessage;
+
+  alert(message);
+
+}
+
+
+// ============================================================
+// LOADING HELPER
+// ============================================================
+
+function setLoading(
+  element,
+  loading = true,
+  text = "Loading..."
+) {
+
+  if (!element) return;
+
+
+  if (loading) {
+
+    element.dataset.originalContent =
+      element.innerHTML;
+
+    element.innerHTML = text;
+
+    element.disabled = true;
+
+  } else {
+
+    if (
+      element.dataset.originalContent !==
+      undefined
+    ) {
+
+      element.innerHTML =
+        element.dataset.originalContent;
+
+      delete element.dataset.originalContent;
+
+    }
+
+    element.disabled = false;
+
+  }
+
+}
+
+
+// ============================================================
+// BACKEND HEALTH CHECK
+// ============================================================
+
+async function checkBackendHealth() {
+
+  return apiGet("health");
+
 }
