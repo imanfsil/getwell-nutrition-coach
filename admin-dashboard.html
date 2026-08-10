@@ -217,7 +217,8 @@ button{font-family:"Poppins",sans-serif!important}
 @media(max-width:1100px){.cards,.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:850px){.sidebar{width:180px!important}.main,.main-content{margin-left:180px!important;width:calc(100% - 180px)!important;padding:30px 20px!important}.cards,.summary-grid{grid-template-columns:1fr!important}}
 @media(max-width:600px){.sidebar{position:relative!important;width:100%!important;height:auto!important}.logo{height:75px!important}.nav{padding:15px!important}.nav a,.menu-link{height:45px!important}.main,.main-content{margin-left:0!important;width:100%!important;padding:25px 15px!important}}
-</style></head>
+</style><script src="api.js"></script>
+</head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <body>
@@ -249,22 +250,22 @@ button{font-family:"Poppins",sans-serif!important}
 
 <div class="card">
 <h3>Total Patients</h3>
-<div class="number">128</div>
+<div class="number" id="dashTotalPatients">—</div>
 </div>
 
 <div class="card">
 <h3>Today's Appointments</h3>
-<div class="number">8</div>
+<div class="number" id="dashTodayAppointments">—</div>
 </div>
 
 <div class="card">
 <h3>Active Patients</h3>
-<div class="number">104</div>
+<div class="number" id="dashActivePatients">—</div>
 </div>
 
 <div class="card">
 <h3>Completed Goals</h3>
-<div class="number">21</div>
+<div class="number" id="dashCompletedPatients">—</div>
 </div>
 
 </div>
@@ -283,9 +284,7 @@ placeholder="Search by Patient ID, Name or Phone Number">
 
 <h2>Recent Activity</h2>
 
-<div class="activity-item">
-GW0001 • Nurul Iman checked in
-</div>
+<div id="dashActivity"><div class="activity-item">Loading live activity…</div></div>
 
 <div class="activity-item">
 GW0007 • Sarah Lee registered
@@ -300,5 +299,17 @@ GW0010 • Appointment completed
 </div>
 
 </main>
-</body>
+<script>
+(async function loadDashboard(){
+  try{
+    const {dashboard:d}=await apiGet('getDashboard');
+    document.getElementById('dashTotalPatients').textContent=d.totalPatients;
+    document.getElementById('dashTodayAppointments').textContent=d.todayAppointments;
+    document.getElementById('dashActivePatients').textContent=d.activePatients;
+    document.getElementById('dashCompletedPatients').textContent=d.completedPatients;
+    const box=document.getElementById('dashActivity');
+    if(box) box.innerHTML=(d.recentActivity||[]).map(a=>`<div class="activity-item">${escapeHtmlSafe(a.timestamp)} • ${escapeHtmlSafe(a.action)}</div>`).join('') || '<div class="activity-item">No recent activity.</div>';
+  }catch(e){showApiError(e)}
+})();
+</script></body>
 </html>
