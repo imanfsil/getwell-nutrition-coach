@@ -1,13 +1,2192 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Patient Details | Getwell</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><script src="api.js"></script><style>
-*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial,sans-serif;background:#f6f8fc;color:#17325c}.sidebar{position:fixed;left:0;top:0;width:258px;height:100vh;background:#fff;border-right:1px solid #e8ecf2}.logo{height:118px;display:flex;align-items:center;padding-left:36px;font-size:34px;font-weight:700;color:#24539f}.nav{padding:24px 18px}.nav a{height:64px;display:flex;align-items:center;gap:14px;padding:0 18px;color:#667085;text-decoration:none;border-radius:12px;font-size:14px;margin-bottom:6px}.nav a.active,.nav a:hover{background:#eef4ff;color:#24539f}.nav-icon{width:22px;text-align:center}.main{margin-left:258px;padding:42px 42px 60px}.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}.header h1{margin:0;font-size:28px}.header p{margin:7px 0 0;color:#7b8798;font-size:13px}.btn{border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:600}.primary{background:#24539f;color:white}.secondary{background:#edf2f8;color:#24539f}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;border:1px solid #e8ecf2;border-radius:16px;padding:20px;box-shadow:0 4px 16px rgba(20,50,90,.04)}.label{font-size:11px;color:#8a96a8;text-transform:uppercase;letter-spacing:.05em}.value{font-size:20px;font-weight:700;margin-top:7px}.section{margin-top:18px}.section h2{font-size:16px;margin:0 0 12px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:12px 10px;border-bottom:1px solid #edf0f5;text-align:left}.table th{color:#6f7b8e;font-size:10px;text-transform:uppercase}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef4ff;color:#24539f;font-size:10px;font-weight:600}.muted{color:#8a96a8}.profile-actions{display:flex;gap:10px}.modal{position:fixed;inset:0;background:rgba(15,30,55,.35);display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;border-radius:16px;padding:24px;width:min(560px,100%)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:11px;color:#68758a;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:10px;border:1px solid #dce2eb;border-radius:9px;font:inherit;font-size:12px}.field.full{grid-column:1/-1}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}@media(max-width:900px){.sidebar{width:200px}.main{margin-left:200px}.grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0;padding:25px 15px}.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
-</style></head><body><aside class="sidebar"><div class="logo">Getwell</div><nav class="nav"><a href="admin-dashboard.html"><span class="nav-icon"><i class="fa-solid fa-house"></i></span>Dashboard</a><a href="register-patient.html"><span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>Register Patient</a><a href="patient-list.html" class="active"><span class="nav-icon"><i class="fa-solid fa-users"></i></span>Patient List</a><a href="appointments.html"><span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span>Appointments</a><a href="reports.html"><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span>Reports</a><a href="settings.html"><span class="nav-icon"><i class="fa-solid fa-gear"></i></span>Settings</a><a href="admin-login.html"><span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>Logout</a></nav></aside><main class="main"><div class="header"><div><h1 id="title">Patient Details</h1><p id="subtitle">Loading patient record…</p></div><div class="profile-actions"><button class="btn secondary" onclick="history.back()">Back</button><button class="btn primary" onclick="openEdit()">Edit Patient</button></div></div><div id="content"></div></main><div class="modal" id="editModal"><div class="modal-box"><h2>Edit Patient</h2><div class="form-grid"><div class="field"><label>Full Name</label><input id="f_name"></div><div class="field"><label>Phone</label><input id="f_phone"></div><div class="field"><label>Date of Birth</label><input id="f_dob" type="date"></div><div class="field"><label>Gender</label><select id="f_gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div><div class="field"><label>Height (cm)</label><input id="f_height" type="number"></div><div class="field"><label>Goal Weight (kg)</label><input id="f_goal" type="number"></div><div class="field"><label>Doctor</label><input id="f_doctor"></div><div class="field"><label>Status</label><select id="f_status"><option>Active</option><option>Inactive</option><option>Completed</option></select></div><div class="field full"><label>Remarks</label><textarea id="f_remarks"></textarea></div></div><div class="actions"><button class="btn secondary" onclick="closeEdit()">Cancel</button><button class="btn primary" onclick="saveEdit()">Save Changes</button></div></div></div><script>
-let detailData=null; const patientId=getPatientIdFromUrl();
-function fmt(v){return v||'—'}
-function rowTable(headers,rows){return `<div class="table-wrap"><table class="table"><thead><tr>${headers.map(h=>`<th>${escapeHtmlSafe(h)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(x=>`<td>${escapeHtmlSafe(x)}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}" class="muted">No records.</td></tr>`}</tbody></table></div>`}
-function render(d){const p=d.patient;document.getElementById('title').textContent=p.full_name;document.getElementById('subtitle').textContent=`${p.patient_id} · ${p.status||'—'}`;document.getElementById('content').innerHTML=`<div class="grid"><div class="card"><div class="label">Phone</div><div class="value">${escapeHtmlSafe(fmt(p.phone))}</div></div><div class="card"><div class="label">Age / Gender</div><div class="value">${escapeHtmlSafe(fmt(p.age))} / ${escapeHtmlSafe(fmt(p.gender))}</div></div><div class="card"><div class="label">Current Weight</div><div class="value">${escapeHtmlSafe(fmt(p.current_weight_kg))} kg</div></div><div class="card"><div class="label">Next Appointment</div><div class="value">${escapeHtmlSafe(p.next_appointment||'—')}</div></div></div><div class="section card"><h2>Patient Information</h2>${rowTable(['Field','Value'],[['Patient ID',p.patient_id],['Date of Birth',p.date_of_birth],['Height',p.height_cm?`${p.height_cm} cm`:'—'],['Goal Weight',p.goal_weight_kg?`${p.goal_weight_kg} kg`:'—'],['Programme Start',p.programme_start_date],['Attending Doctor',p.attending_doctor],['Last Visit',p.last_visit||'—'],['Remarks',p.remarks||'—']])}</div><div class="section card"><h2>Appointments</h2>${rowTable(['Date','Time','Type','Doctor','Status'],(d.appointments||[]).sort((a,b)=>String(b.appointment_date).localeCompare(String(a.appointment_date))).map(a=>[a.appointment_date,a.appointment_time,a.appointment_type,a.doctor,a.status]))}</div><div class="section card"><h2>Visit History</h2>${rowTable(['Date','Type','Doctor','Status','Weight','Remarks'],(d.visits||[]).sort((a,b)=>String(b.visit_date).localeCompare(String(a.visit_date))).map(v=>[v.visit_date,v.visit_type,v.doctor,v.status,v.weight_kg||'—',v.remarks||'—']))}</div><div class="section card"><h2>Weight Tracking</h2>${rowTable(['Date','Weight','BMI','Notes'],(d.weightTracking||[]).sort((a,b)=>String(b.record_date).localeCompare(String(a.record_date))).map(w=>[w.record_date,w.weight_kg?`${w.weight_kg} kg`:'—',w.bmi||'—',w.notes||'—']))}</div><div class="section card"><h2>Daily Wellness</h2>${rowTable(['Date','Calories','Water','Exercise','Notes'],(d.dailyWellness||[]).sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(w=>[w.date,w.calories_kcal||'—',w.water_litres||'—',w.exercise||'—',w.notes||'—']))}</div>`}
-async function load(){try{if(!patientId)throw new Error('No patient ID was provided.');detailData=await apiGet('getPatientDetails',{patientId});render(detailData)}catch(e){showApiError(e);document.getElementById('subtitle').textContent='Unable to load patient record.'}}
-function openEdit(){const p=detailData.patient;['name','phone','dob','gender','height','goal','doctor','status','remarks'].forEach(k=>{});document.getElementById('f_name').value=p.full_name||'';document.getElementById('f_phone').value=p.phone||'';document.getElementById('f_dob').value=(p.date_of_birth||'').slice(0,10);document.getElementById('f_gender').value=p.gender||'';document.getElementById('f_height').value=p.height_cm||'';document.getElementById('f_goal').value=p.goal_weight_kg||'';document.getElementById('f_doctor').value=p.attending_doctor||'';document.getElementById('f_status').value=p.status||'Active';document.getElementById('f_remarks').value=p.remarks||'';document.getElementById('editModal').classList.add('show')}
-function closeEdit(){document.getElementById('editModal').classList.remove('show')}
-async function saveEdit(){try{await apiPost('updatePatient',{patient_id:patientId,full_name:document.getElementById('f_name').value,phone:document.getElementById('f_phone').value,date_of_birth:document.getElementById('f_dob').value,gender:document.getElementById('f_gender').value,height_cm:document.getElementById('f_height').value,goal_weight_kg:document.getElementById('f_goal').value,attending_doctor:document.getElementById('f_doctor').value,status:document.getElementById('f_status').value,remarks:document.getElementById('f_remarks').value});closeEdit();await load();alert('Patient updated successfully.')}catch(e){showApiError(e)}}
-load();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Details - Getwell</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="api.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+
+html{font-size:16px}
+
+body{
+  background:#eef5fc;
+  color:#17325c;
+  min-height:100vh;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+/* =========================
+   SIDEBAR — SAME MASTER UI
+========================= */
+.sidebar{
+  width:258px;
+  min-height:100vh;
+  background:#2b5ba6;
+  color:#fff;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:1000;
+}
+
+.logo{
+  height:118px;
+  display:flex;
+  align-items:center;
+  padding-left:42px;
+  font-size:32px;
+  font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.nav{padding:42px 20px}
+
+.nav a{
+  width:100%;
+  height:64px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 25px;
+  margin-bottom:9px;
+  border-radius:13px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:500;
+}
+
+.nav a:hover{background:rgba(255,255,255,.10)}
+
+.nav a.active{
+  background:#fff;
+  color:#204c9c;
+  font-weight:700;
+}
+
+.nav-icon{
+  width:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+}
+
+/* =========================
+   MAIN
+========================= */
+.main{
+  margin-left:258px;
+  width:calc(100% - 258px);
+  min-height:100vh;
+  padding:42px 42px 55px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:28px;
+}
+
+.header h1{
+  color:#204c9c;
+  font-size:36px;
+  line-height:1.2;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.header p{
+  color:#666;
+  font-size:15px;
+}
+
+.profile-actions{
+  display:flex;
+  gap:10px;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 17px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.btn.primary{
+  background:#315df4;
+  color:#fff;
+}
+
+.btn.secondary{
+  background:#eef3fb;
+  color:#31569a;
+}
+
+.btn.primary:hover{background:#2854e6}
+
+/* =========================
+   PROFILE HEADER
+========================= */
+.profile-card{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:18px;
+}
+
+.profile-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.profile-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.avatar{
+  width:58px;
+  height:58px;
+  border-radius:13px;
+  background:#315df4;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+  font-weight:600;
+}
+
+.profile-name{
+  color:#24539f;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.2;
+}
+
+.profile-id{
+  color:#7d899b;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 13px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:600;
+}
+
+.status-badge.active{
+  background:#e1f8ec;
+  color:#0a9b59;
+}
+
+.status-badge.completed,
+.status-badge.inactive{
+  background:#f1f3f6;
+  color:#7a8493;
+}
+
+.status-badge.scheduled{
+  background:#eef3ff;
+  color:#315fc0;
+}
+
+/* =========================
+   SUMMARY
+========================= */
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  margin-top:20px;
+}
+
+.summary-box{
+  background:#f5f8fc;
+  border-radius:12px;
+  padding:16px;
+  min-height:82px;
+}
+
+.summary-label{
+  color:#7a889d;
+  font-size:9px;
+  margin-bottom:8px;
+}
+
+.summary-value{
+  color:#234b89;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.45;
+}
+
+/* =========================
+   CONTENT SECTIONS
+========================= */
+.section{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:18px;
+}
+
+.section-title{
+  color:#204c9c;
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:16px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+
+.info-item{
+  padding:4px 0;
+}
+
+.info-label{
+  color:#7a889d;
+  font-size:9px;
+  margin-bottom:6px;
+}
+
+.info-value{
+  color:#173b70;
+  font-size:11px;
+  font-weight:600;
+  word-break:break-word;
+}
+
+/* =========================
+   TABLES
+========================= */
+.table-wrap{
+  overflow-x:auto;
+}
+
+.data-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+.data-table thead{
+  background:#f1f5fd;
+}
+
+.data-table th{
+  text-align:left;
+  padding:12px;
+  color:#24539f;
+  font-size:10px;
+  font-weight:600;
+}
+
+.data-table td{
+  padding:13px 12px;
+  border-bottom:1px solid #edf0f5;
+  color:#53627a;
+  font-size:10px;
+}
+
+.data-table tbody tr:hover{
+  background:#fafcff;
+}
+
+.empty{
+  text-align:center!important;
+  color:#8a96a8!important;
+  padding:25px!important;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(19,38,66,.48);
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  padding:20px;
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+  width:min(650px,94vw);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 20px 55px rgba(0,0,0,.20);
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+.modal-header h2{
+  color:#204c9c;
+  font-size:20px;
+  font-weight:700;
+}
+
+.modal-header p{
+  color:#7d899b;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.close-modal{
+  border:0;
+  background:transparent;
+  color:#7e899a;
+  font-size:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{grid-column:1/-1}
+
+.field label{
+  color:#52627a;
+  font-size:10px;
+  font-weight:600;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #dce2eb;
+  border-radius:9px;
+  padding:10px 11px;
+  outline:none;
+  color:#17325c;
+  background:#fff;
+  font-size:11px;
+}
+
+.field input,
+.field select{height:40px}
+
+.field textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#315df4;
+  box-shadow:0 0 0 3px rgba(49,93,244,.08);
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:20px;
+}
+
+/* =========================
+   LOADING
+========================= */
+.loading{
+  background:#fff;
+  border-radius:18px;
+  padding:45px;
+  text-align:center;
+  color:#7d899b;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.loading i{
+  font-size:24px;
+  color:#315df4;
+  margin-bottom:10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:1100px){
+  .summary-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .info-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:850px){
+  .sidebar{
+    width:180px;
+  }
+
+  .main{
+    margin-left:180px;
+    width:calc(100% - 180px);
+    padding:30px 20px;
+  }
+
+  .nav a{
+    padding:0 16px;
+    font-size:13px;
+  }
+
+  .logo{
+    padding-left:25px;
+  }
+}
+
+@media(max-width:600px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    min-height:auto;
+  }
+
+  .logo{
+    height:75px;
+  }
+
+  .nav{
+    padding:15px;
+  }
+
+  .nav a{
+    height:45px;
+    margin-bottom:5px;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:25px 15px;
+  }
+
+  .header{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .header h1{
+    font-size:28px;
+  }
+
+  .profile-actions{
+    width:100%;
+  }
+
+  .profile-actions .btn{
+    flex:1;
+  }
+
+  .summary-grid,
+  .info-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .profile-top{
+    gap:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+<aside class="sidebar">
+
+  <div class="logo">
+    Getwell
+  </div>
+
+  <nav class="nav">
+
+    <a href="admin-dashboard.html">
+      <span class="nav-icon">
+        <i class="fa-solid fa-house"></i>
+      </span>
+      Dashboard
+    </a>
+
+    <a href="register-patient.html">
+      <span class="nav-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </span>
+      Register Patient
+    </a>
+
+    <a href="patient-list.html" class="active">
+      <span class="nav-icon">
+        <i class="fa-solid fa-users"></i>
+      </span>
+      Patient List
+    </a>
+
+    <a href="appointments.html">
+      <span class="nav-icon">
+        <i class="fa-regular fa-calendar-check"></i>
+      </span>
+      Appointments
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon">
+        <i class="fa-solid fa-chart-column"></i>
+      </span>
+      Reports
+    </a>
+
+    <a href="settings.html">
+      <span class="nav-icon">
+        <i class="fa-solid fa-gear"></i>
+      </span>
+      Settings
+    </a>
+
+    <a href="admin-login.html">
+      <span class="nav-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </span>
+      Logout
+    </a>
+
+  </nav>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+<main class="main">
+
+  <div class="header">
+
+    <div>
+      <h1 id="pageTitle">Patient Details</h1>
+      <p id="pageSubtitle">Loading patient record...</p>
+    </div>
+
+    <div class="profile-actions">
+
+      <button
+        class="btn secondary"
+        onclick="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="openEdit()">
+        <i class="fa-solid fa-pen"></i>
+        Edit Patient
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="pageContent">
+
+    <div class="loading">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      <div>Loading patient record...</div>
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- =========================
+     EDIT PATIENT MODAL
+========================= -->
+<div class="modal" id="editModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <div>
+        <h2>Edit Patient</h2>
+        <p id="editPatientSubtitle"></p>
+      </div>
+
+      <button
+        class="close-modal"
+        onclick="closeEdit()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Full Name</label>
+        <input id="f_name">
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input id="f_phone">
+      </div>
+
+      <div class="field">
+        <label>Date of Birth</label>
+        <input
+          id="f_dob"
+          type="date">
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <select id="f_gender">
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Height (cm)</label>
+        <input
+          id="f_height"
+          type="number"
+          step="0.1">
+      </div>
+
+      <div class="field">
+        <label>Goal Weight (kg)</label>
+        <input
+          id="f_goal"
+          type="number"
+          step="0.1">
+      </div>
+
+      <div class="field">
+        <label>Doctor</label>
+        <input id="f_doctor">
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select id="f_status">
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label>Remarks</label>
+        <textarea id="f_remarks"></textarea>
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn secondary"
+        onclick="closeEdit()">
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        id="saveButton"
+        onclick="saveEdit()">
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let detailData = null;
+
+const patientId =
+  getPatientIdFromUrl();
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function valueOrDash(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    String(value).trim() === ""
+  ){
+    return "—";
+  }
+
+  return String(value);
+}
+
+
+function escapeText(value){
+
+  return escapeHtmlSafe(
+    valueOrDash(value)
+  );
+
+}
+
+
+function initials(name){
+
+  const parts =
+    String(name || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+  if(!parts.length) return "PT";
+
+  if(parts.length === 1){
+    return parts[0]
+      .substring(0,2)
+      .toUpperCase();
+  }
+
+  return (
+    parts[0][0] +
+    parts[parts.length-1][0]
+  ).toUpperCase();
+
+}
+
+
+function formatDate(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    String(value).trim() === ""
+  ){
+    return "—";
+  }
+
+  const text = String(value).trim();
+
+  let date;
+
+  if(/^\d{4}-\d{2}-\d{2}/.test(text)){
+    date = new Date(
+      text.replace(" ","T")
+    );
+  }else{
+    date = new Date(text);
+  }
+
+  if(isNaN(date.getTime())){
+    return text;
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function formatTime(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    String(value).trim() === ""
+  ){
+    return "—";
+  }
+
+  const text = String(value).trim();
+
+  /*
+    Handles:
+    09:00:00
+    1899-12-30 09:00:00
+    2026-08-10 09:00:00
+  */
+
+  const timeMatch =
+    text.match(
+      /(\d{1,2}):(\d{2})(?::(\d{2}))?/
+    );
+
+  if(!timeMatch){
+    return text;
+  }
+
+  let hour =
+    Number(timeMatch[1]);
+
+  const minute =
+    timeMatch[2];
+
+  const suffix =
+    hour >= 12 ? "PM" : "AM";
+
+  hour =
+    hour % 12 || 12;
+
+  return `${hour}:${minute} ${suffix}`;
+
+}
+
+
+function formatDateTime(
+  dateValue,
+  timeValue
+){
+
+  const date =
+    formatDate(dateValue);
+
+  const time =
+    formatTime(timeValue);
+
+  if(date === "—") return "—";
+
+  if(time === "—") return date;
+
+  return `${date} · ${time}`;
+
+}
+
+
+function statusClass(status){
+
+  const value =
+    String(status || "")
+      .toLowerCase();
+
+  if(value === "active")
+    return "active";
+
+  if(
+    value === "completed" ||
+    value === "inactive"
+  )
+    return "completed";
+
+  return "scheduled";
+
+}
+
+
+function appointmentDateTime(
+  appointment
+){
+
+  return formatDateTime(
+    appointment.appointment_date,
+    appointment.appointment_time
+  );
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderPatient(data){
+
+  detailData = data;
+
+  const patient =
+    data.patient;
+
+  if(!patient){
+    throw new Error(
+      "Patient record was not returned by the database."
+    );
+  }
+
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent =
+    patient.full_name ||
+    "Patient Details";
+
+
+  document.getElementById(
+    "pageSubtitle"
+  ).textContent =
+    `${patient.patient_id || patientId} · ${patient.status || "—"}`;
+
+
+  const appointments =
+    Array.isArray(data.appointments)
+      ? [...data.appointments]
+      : [];
+
+
+  const visits =
+    Array.isArray(data.visits)
+      ? [...data.visits]
+      : [];
+
+
+  const weights =
+    Array.isArray(data.weightTracking)
+      ? [...data.weightTracking]
+      : [];
+
+
+  const wellness =
+    Array.isArray(data.wellness)
+      ? [...data.wellness]
+      : [];
+
+
+  appointments.sort(
+    (a,b) =>
+      String(
+        b.appointment_date || ""
+      ).localeCompare(
+        String(
+          a.appointment_date || ""
+        )
+      )
+  );
+
+
+  visits.sort(
+    (a,b) =>
+      String(
+        b.visit_date || ""
+      ).localeCompare(
+        String(
+          a.visit_date || ""
+        )
+      )
+  );
+
+
+  weights.sort(
+    (a,b) =>
+      String(
+        b.date || ""
+      ).localeCompare(
+        String(
+          a.date || ""
+        )
+      )
+  );
+
+
+  wellness.sort(
+    (a,b) =>
+      String(
+        b.date || ""
+      ).localeCompare(
+        String(
+          a.date || ""
+        )
+      )
+  );
+
+
+  const upcoming =
+    appointments.find(
+      a => {
+
+        const status =
+          String(
+            a.status || ""
+          ).toLowerCase();
+
+        return (
+          status !== "completed" &&
+          status !== "cancelled" &&
+          status !== "cancelled by patient" &&
+          status !== "no show" &&
+          status !== "missed"
+        );
+
+      }
+    );
+
+
+  const latestCompleted =
+    appointments.find(
+      a =>
+        String(
+          a.status || ""
+        ).toLowerCase() ===
+        "completed"
+    );
+
+
+  const status =
+    patient.status ||
+    "Active";
+
+
+  document.getElementById(
+    "pageContent"
+  ).innerHTML = `
+
+    <!-- PROFILE HEADER -->
+    <div class="profile-card">
+
+      <div class="profile-top">
+
+        <div class="profile-left">
+
+          <div class="avatar">
+            ${escapeText(
+              initials(
+                patient.full_name
+              )
+            )}
+          </div>
+
+          <div>
+
+            <div class="profile-name">
+              ${escapeText(
+                patient.full_name
+              )}
+            </div>
+
+            <div class="profile-id">
+              ${escapeText(
+                patient.patient_id
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <span
+          class="status-badge ${statusClass(status)}">
+
+          <i class="fa-solid fa-circle"></i>
+
+          ${escapeText(status)}
+
+        </span>
+
+      </div>
+
+
+      <!-- SUMMARY -->
+      <div class="summary-grid">
+
+        <div class="summary-box">
+          <div class="summary-label">
+            Phone Number
+          </div>
+
+          <div class="summary-value">
+            ${escapeText(
+              patient.phone
+            )}
+          </div>
+        </div>
+
+
+        <div class="summary-box">
+          <div class="summary-label">
+            Age / Gender
+          </div>
+
+          <div class="summary-value">
+            ${escapeText(
+              patient.age
+            )}
+            /
+            ${escapeText(
+              patient.gender
+            )}
+          </div>
+        </div>
+
+
+        <div class="summary-box">
+          <div class="summary-label">
+            Current Weight
+          </div>
+
+          <div class="summary-value">
+            ${
+              patient.current_weight_kg
+                ? escapeText(
+                    patient.current_weight_kg
+                  ) + " kg"
+                : "—"
+            }
+          </div>
+        </div>
+
+
+        <div class="summary-box">
+          <div class="summary-label">
+            Next Appointment
+          </div>
+
+          <div class="summary-value">
+
+            ${
+              upcoming
+                ? appointmentDateTime(
+                    upcoming
+                  )
+                : "—"
+            }
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PATIENT INFORMATION -->
+    <section class="section">
+
+      <div class="section-title">
+        Patient Information
+      </div>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <div class="info-label">
+            Patient ID
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              patient.patient_id
+            )}
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Date of Birth
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              formatDate(
+                patient.date_of_birth
+              )
+            )}
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Gender
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              patient.gender
+            )}
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Height
+          </div>
+          <div class="info-value">
+            ${
+              patient.height_cm
+                ? escapeText(
+                    patient.height_cm
+                  ) + " cm"
+                : "—"
+            }
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Goal Weight
+          </div>
+          <div class="info-value">
+            ${
+              patient.goal_weight_kg
+                ? escapeText(
+                    patient.goal_weight_kg
+                  ) + " kg"
+                : "—"
+            }
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Programme Start
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              formatDate(
+                patient.programme_start_date
+              )
+            )}
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Attending Doctor
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              patient.attending_doctor
+            )}
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Last Visit
+          </div>
+          <div class="info-value">
+            ${
+              latestCompleted
+                ? escapeText(
+                    formatDate(
+                      latestCompleted.appointment_date
+                    )
+                  )
+                : escapeText(
+                    patient.last_visit
+                      ? formatDate(
+                          patient.last_visit
+                        )
+                      : "—"
+                  )
+            }
+          </div>
+        </div>
+
+
+        <div class="info-item">
+          <div class="info-label">
+            Remarks
+          </div>
+          <div class="info-value">
+            ${escapeText(
+              patient.remarks
+            )}
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- APPOINTMENT INFORMATION -->
+    <section class="section">
+
+      <div class="section-title">
+        Appointment Information
+      </div>
+
+      ${
+        upcoming
+          ? `
+            <div class="info-grid">
+
+              <div class="info-item">
+                <div class="info-label">
+                  Date & Time
+                </div>
+                <div class="info-value">
+                  ${escapeText(
+                    appointmentDateTime(
+                      upcoming
+                    )
+                  )}
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">
+                  Doctor
+                </div>
+                <div class="info-value">
+                  ${escapeText(
+                    upcoming.doctor
+                  )}
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">
+                  Appointment Type
+                </div>
+                <div class="info-value">
+                  ${escapeText(
+                    upcoming.appointment_type
+                  )}
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">
+                  Status
+                </div>
+                <div class="info-value">
+                  ${escapeText(
+                    upcoming.status
+                  )}
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">
+                  Remarks
+                </div>
+                <div class="info-value">
+                  ${escapeText(
+                    upcoming.remarks
+                  )}
+                </div>
+              </div>
+
+            </div>
+          `
+          : `
+            <div class="empty">
+              No upcoming appointment.
+            </div>
+          `
+      }
+
+    </section>
+
+
+    <!-- RECENT APPOINTMENT HISTORY -->
+    <section class="section">
+
+      <div class="section-title">
+        Recent Appointment History
+      </div>
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Billed Date</th>
+              <th>Reason for Visit</th>
+              <th>Doctor Attended</th>
+              <th>Status</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              appointments.length
+                ? appointments.map(
+                    (a,index) => `
+
+                      <tr>
+
+                        <td>
+                          ${index + 1}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            appointmentDateTime(
+                              a
+                            )
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            a.appointment_type
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            a.doctor
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            a.status
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            a.remarks
+                          )}
+                        </td>
+
+                      </tr>
+
+                    `
+                  ).join("")
+                : `
+                  <tr>
+                    <td
+                      colspan="6"
+                      class="empty">
+                      No appointment history.
+                    </td>
+                  </tr>
+                `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- VISIT HISTORY -->
+    <section class="section">
+
+      <div class="section-title">
+        Visit History
+      </div>
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Visit Type</th>
+              <th>Doctor</th>
+              <th>Status</th>
+              <th>Weight</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              visits.length
+                ? visits.map(
+                    v => `
+
+                      <tr>
+
+                        <td>
+                          ${escapeText(
+                            formatDate(
+                              v.visit_date
+                            )
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            v.visit_type
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            v.doctor
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            v.status
+                          )}
+                        </td>
+
+                        <td>
+                          ${
+                            v.weight_kg
+                              ? escapeText(
+                                  v.weight_kg
+                                ) + " kg"
+                              : "—"
+                          }
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            v.notes
+                          )}
+                        </td>
+
+                      </tr>
+
+                    `
+                  ).join("")
+                : `
+                  <tr>
+                    <td
+                      colspan="6"
+                      class="empty">
+                      No visit records.
+                    </td>
+                  </tr>
+                `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- WEIGHT TRACKING -->
+    <section class="section">
+
+      <div class="section-title">
+        Weight Tracking
+      </div>
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weight</th>
+              <th>BMI</th>
+              <th>Body Fat</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              weights.length
+                ? weights.map(
+                    w => `
+
+                      <tr>
+
+                        <td>
+                          ${escapeText(
+                            formatDate(
+                              w.date
+                            )
+                          )}
+                        </td>
+
+                        <td>
+                          ${
+                            w.weight_kg
+                              ? escapeText(
+                                  w.weight_kg
+                                ) + " kg"
+                              : "—"
+                          }
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.bmi
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.body_fat
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.notes
+                          )}
+                        </td>
+
+                      </tr>
+
+                    `
+                  ).join("")
+                : `
+                  <tr>
+                    <td
+                      colspan="5"
+                      class="empty">
+                      No weight tracking records.
+                    </td>
+                  </tr>
+                `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- DAILY WELLNESS -->
+    <section class="section">
+
+      <div class="section-title">
+        Daily Wellness
+      </div>
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Calories</th>
+              <th>Water</th>
+              <th>Exercise</th>
+              <th>Mood</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              wellness.length
+                ? wellness.map(
+                    w => `
+
+                      <tr>
+
+                        <td>
+                          ${escapeText(
+                            formatDate(
+                              w.date
+                            )
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.calories
+                          )}
+                        </td>
+
+                        <td>
+                          ${
+                            w.water_ml
+                              ? escapeText(
+                                  w.water_ml
+                                ) + " ml"
+                              : "—"
+                          }
+                        </td>
+
+                        <td>
+                          ${
+                            w.exercise_minutes
+                              ? escapeText(
+                                  w.exercise_minutes
+                                ) + " min"
+                              : "—"
+                          }
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.mood
+                          )}
+                        </td>
+
+                        <td>
+                          ${escapeText(
+                            w.notes
+                          )}
+                        </td>
+
+                      </tr>
+
+                    `
+                  ).join("")
+                : `
+                  <tr>
+                    <td
+                      colspan="6"
+                      class="empty">
+                      No daily wellness records.
+                    </td>
+                  </tr>
+                `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  `;
+}
+
+
+/* =========================
+   LOAD
+========================= */
+
+async function loadPatient(){
+
+  try{
+
+    if(!patientId){
+      throw new Error(
+        "No patient ID was provided."
+      );
+    }
+
+
+    const data =
+      await apiGet(
+        "getPatientDetails",
+        {
+          patientId:
+            patientId
+        }
+      );
+
+
+    renderPatient(data);
+
+  }catch(error){
+
+    console.error(
+      "Getwell Patient Details:",
+      error
+    );
+
+    document.getElementById(
+      "pageSubtitle"
+    ).textContent =
+      "Unable to load patient record.";
+
+    document.getElementById(
+      "pageContent"
+    ).innerHTML = `
+
+      <div class="loading">
+
+        <i class="fa-solid fa-triangle-exclamation"></i>
+
+        <div>
+          Unable to load patient data.
+        </div>
+
+        <div style="
+          margin-top:8px;
+          font-size:10px;
+          color:#8a96a8;
+        ">
+          ${escapeHtmlSafe(
+            error.message
+          )}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================
+   EDIT
+========================= */
+
+function openEdit(){
+
+  if(
+    !detailData ||
+    !detailData.patient
+  ){
+    alert(
+      "Patient data has not loaded yet."
+    );
+    return;
+  }
+
+
+  const p =
+    detailData.patient;
+
+
+  document.getElementById(
+    "editPatientSubtitle"
+  ).textContent =
+    `${p.full_name || ""} · ${p.patient_id || patientId}`;
+
+
+  document.getElementById(
+    "f_name"
+  ).value =
+    p.full_name || "";
+
+
+  document.getElementById(
+    "f_phone"
+  ).value =
+    p.phone || "";
+
+
+  document.getElementById(
+    "f_dob"
+  ).value =
+    normalizeDateForInput(
+      p.date_of_birth
+    );
+
+
+  document.getElementById(
+    "f_gender"
+  ).value =
+    p.gender || "";
+
+
+  document.getElementById(
+    "f_height"
+  ).value =
+    p.height_cm || "";
+
+
+  document.getElementById(
+    "f_goal"
+  ).value =
+    p.goal_weight_kg || "";
+
+
+  document.getElementById(
+    "f_doctor"
+  ).value =
+    p.attending_doctor || "";
+
+
+  document.getElementById(
+    "f_status"
+  ).value =
+    p.status || "Active";
+
+
+  document.getElementById(
+    "f_remarks"
+  ).value =
+    p.remarks || "";
+
+
+  document.getElementById(
+    "editModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+function normalizeDateForInput(
+  value
+){
+
+  if(!value){
+    return "";
+  }
+
+  const text =
+    String(value);
+
+  const match =
+    text.match(
+      /^(\d{4}-\d{2}-\d{2})/
+    );
+
+  if(match){
+    return match[1];
+  }
+
+  const date =
+    new Date(text);
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+    return "";
+  }
+
+  return [
+    date.getFullYear(),
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0"),
+    String(
+      date.getDate()
+    ).padStart(2,"0")
+  ].join("-");
+
+}
+
+
+function closeEdit(){
+
+  document.getElementById(
+    "editModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =========================
+   SAVE EDIT
+========================= */
+
+async function saveEdit(){
+
+  const button =
+    document.getElementById(
+      "saveButton"
+    );
+
+
+  try{
+
+    button.disabled = true;
+    button.textContent =
+      "Saving...";
+
+
+    await apiPost(
+      "updatePatient",
+      {
+
+        patient_id:
+          patientId,
+
+        full_name:
+          document.getElementById(
+            "f_name"
+          ).value.trim(),
+
+        phone:
+          document.getElementById(
+            "f_phone"
+          ).value.trim(),
+
+        date_of_birth:
+          document.getElementById(
+            "f_dob"
+          ).value,
+
+        gender:
+          document.getElementById(
+            "f_gender"
+          ).value,
+
+        height_cm:
+          document.getElementById(
+            "f_height"
+          ).value,
+
+        goal_weight_kg:
+          document.getElementById(
+            "f_goal"
+          ).value,
+
+        attending_doctor:
+          document.getElementById(
+            "f_doctor"
+          ).value.trim(),
+
+        status:
+          document.getElementById(
+            "f_status"
+          ).value,
+
+        remarks:
+          document.getElementById(
+            "f_remarks"
+          ).value.trim()
+
+      }
+    );
+
+
+    closeEdit();
+
+
+    await loadPatient();
+
+
+    alert(
+      "Patient updated successfully."
+    );
+
+
+  }catch(error){
+
+    showApiError(
+      error,
+      "Unable to update patient."
+    );
+
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent =
+      "Save Changes";
+
+  }
+
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+function goBack(){
+
+  if(
+    document.referrer &&
+    document.referrer.includes(
+      "patient-list"
+    )
+  ){
+
+    history.back();
+
+  }else{
+
+    window.location.href =
+      "patient-list.html";
+
+  }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadPatient();
+
+</script>
+
+</body>
+</html>
