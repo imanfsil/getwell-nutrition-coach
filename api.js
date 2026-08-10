@@ -1,6 +1,6 @@
 // ============================================================
 // GETWELL CLINIC — FINAL SHARED API
-// Google Sheets = MASTER DATABASE
+// GOOGLE SHEETS = MASTER DATABASE
 // ============================================================
 
 const GETWELL_API_URL =
@@ -32,15 +32,17 @@ async function apiGet(action, params = {}) {
     );
   }
 
-  const data = await response.json();
+  const result = await response.json();
 
-  if (!data.ok) {
+  if (!result.ok) {
     throw new Error(
-      data.error || "Backend request failed."
+      result.error || "Backend request failed."
     );
   }
 
-  return data;
+  // IMPORTANT:
+  // Code.gs returns { ok:true, data:data }
+  return result.data;
 }
 
 
@@ -54,12 +56,10 @@ async function apiPost(action, payload = {}) {
     GETWELL_API_URL,
     {
       method: "POST",
-
       headers: {
         "Content-Type":
           "text/plain;charset=utf-8"
       },
-
       body: JSON.stringify({
         action,
         ...payload
@@ -73,15 +73,24 @@ async function apiPost(action, payload = {}) {
     );
   }
 
-  const data = await response.json();
+  const result = await response.json();
 
-  if (!data.ok) {
+  if (!result.ok) {
     throw new Error(
-      data.error || "Backend request failed."
+      result.error || "Backend request failed."
     );
   }
 
-  return data;
+  return result.data;
+}
+
+
+// ============================================================
+// HEALTH
+// ============================================================
+
+async function getHealth() {
+  return apiGet("health");
 }
 
 
@@ -102,11 +111,12 @@ async function getPatients() {
   return apiGet("getPatients");
 }
 
-
 async function getPatientDetails(patientId) {
 
   if (!patientId) {
-    throw new Error("Patient ID is required.");
+    throw new Error(
+      "Patient ID is required."
+    );
   }
 
   return apiGet(
@@ -117,27 +127,28 @@ async function getPatientDetails(patientId) {
   );
 }
 
-
 async function registerPatient(patientData) {
-
   return apiPost(
     "registerPatient",
     patientData
   );
 }
 
+async function createPatient(patientData) {
+  return apiPost(
+    "createPatient",
+    patientData
+  );
+}
 
 async function savePatient(patientData) {
-
   return apiPost(
     "savePatient",
     patientData
   );
 }
 
-
 async function updatePatient(patientData) {
-
   return apiPost(
     "updatePatient",
     patientData
@@ -150,15 +161,19 @@ async function updatePatient(patientData) {
 // ============================================================
 
 async function getAppointments(params = {}) {
-
   return apiGet(
     "getAppointments",
     params
   );
 }
 
-
 async function getPatientAppointments(patientId) {
+
+  if (!patientId) {
+    throw new Error(
+      "Patient ID is required."
+    );
+  }
 
   return apiGet(
     "getAppointments",
@@ -167,7 +182,6 @@ async function getPatientAppointments(patientId) {
     }
   );
 }
-
 
 async function getAppointment(appointmentId) {
 
@@ -180,13 +194,15 @@ async function getAppointment(appointmentId) {
   return apiGet(
     "getAppointment",
     {
-      appointment_id: appointmentId
+      appointment_id:
+        appointmentId
     }
   );
 }
 
-
-async function createAppointment(appointmentData) {
+async function createAppointment(
+  appointmentData
+) {
 
   return apiPost(
     "createAppointment",
@@ -194,8 +210,9 @@ async function createAppointment(appointmentData) {
   );
 }
 
-
-async function saveAppointment(appointmentData) {
+async function saveAppointment(
+  appointmentData
+) {
 
   return apiPost(
     "saveAppointment",
@@ -203,15 +220,15 @@ async function saveAppointment(appointmentData) {
   );
 }
 
-
-async function updateAppointment(appointmentData) {
+async function updateAppointment(
+  appointmentData
+) {
 
   return apiPost(
     "updateAppointment",
     appointmentData
   );
 }
-
 
 async function changeAppointmentStatus(
   appointmentId,
@@ -221,8 +238,9 @@ async function changeAppointmentStatus(
   return apiPost(
     "changeAppointmentStatus",
     {
-      appointment_id: appointmentId,
-      status: status
+      appointment_id:
+        appointmentId,
+      status
     }
   );
 }
@@ -232,16 +250,23 @@ async function changeAppointmentStatus(
 // VISITS
 // ============================================================
 
-async function getVisits(patientId = "") {
+async function getVisits(patientId) {
 
   return apiGet(
     "getVisits",
-    patientId
-      ? { patient_id: patientId }
-      : {}
+    {
+      patient_id: patientId
+    }
   );
 }
 
+async function saveVisit(visitData) {
+
+  return apiPost(
+    "saveVisit",
+    visitData
+  );
+}
 
 async function addVisit(visitData) {
 
@@ -252,45 +277,34 @@ async function addVisit(visitData) {
 }
 
 
-async function saveVisit(visitData) {
-
-  return apiPost(
-    "saveVisit",
-    visitData
-  );
-}
-
-
 // ============================================================
 // WEIGHT TRACKING
 // ============================================================
 
 async function getWeightTracking(
-  patientId = ""
+  patientId
 ) {
 
   return apiGet(
     "getWeightTracking",
-    patientId
-      ? { patient_id: patientId }
-      : {}
+    {
+      patient_id: patientId
+    }
   );
 }
-
-
-async function addWeight(weightData) {
-
-  return apiPost(
-    "addWeight",
-    weightData
-  );
-}
-
 
 async function saveWeight(weightData) {
 
   return apiPost(
     "saveWeight",
+    weightData
+  );
+}
+
+async function addWeight(weightData) {
+
+  return apiPost(
+    "addWeight",
     weightData
   );
 }
@@ -302,20 +316,14 @@ async function saveWeight(weightData) {
 
 async function getDoctors() {
 
-  return apiGet("getDoctors");
-}
-
-
-async function addDoctor(doctorData) {
-
-  return apiPost(
-    "addDoctor",
-    doctorData
+  return apiGet(
+    "getDoctors"
   );
 }
 
-
-async function saveDoctor(doctorData) {
+async function saveDoctor(
+  doctorData
+) {
 
   return apiPost(
     "saveDoctor",
@@ -323,8 +331,19 @@ async function saveDoctor(doctorData) {
   );
 }
 
+async function addDoctor(
+  doctorData
+) {
 
-async function updateDoctor(doctorData) {
+  return apiPost(
+    "addDoctor",
+    doctorData
+  );
+}
+
+async function updateDoctor(
+  doctorData
+) {
 
   return apiPost(
     "updateDoctor",
@@ -347,7 +366,6 @@ async function getDoctorSchedule(
   );
 }
 
-
 async function saveDoctorSchedule(
   scheduleData
 ) {
@@ -357,7 +375,6 @@ async function saveDoctorSchedule(
     scheduleData
   );
 }
-
 
 async function updateDoctorSchedule(
   scheduleData
@@ -371,53 +388,15 @@ async function updateDoctorSchedule(
 
 
 // ============================================================
-// DAILY WELLNESS
-// ============================================================
-
-async function getDailyWellness(
-  patientId = ""
-) {
-
-  return apiGet(
-    "getDailyWellness",
-    patientId
-      ? { patient_id: patientId }
-      : {}
-  );
-}
-
-
-async function addWellness(
-  wellnessData
-) {
-
-  return apiPost(
-    "addWellness",
-    wellnessData
-  );
-}
-
-
-async function saveWellness(
-  wellnessData
-) {
-
-  return apiPost(
-    "saveWellness",
-    wellnessData
-  );
-}
-
-
-// ============================================================
 // SETTINGS
 // ============================================================
 
 async function getSettings() {
 
-  return apiGet("getSettings");
+  return apiGet(
+    "getSettings"
+  );
 }
-
 
 async function saveSetting(
   settingData
@@ -431,212 +410,66 @@ async function saveSetting(
 
 
 // ============================================================
+// DAILY WELLNESS
+// ============================================================
+
+async function getWellness(
+  patientId
+) {
+
+  return apiGet(
+    "getWellness",
+    {
+      patient_id: patientId
+    }
+  );
+}
+
+async function saveWellness(
+  wellnessData
+) {
+
+  return apiPost(
+    "saveWellness",
+    wellnessData
+  );
+}
+
+async function addWellness(
+  wellnessData
+) {
+
+  return apiPost(
+    "addWellness",
+    wellnessData
+  );
+}
+
+
+// ============================================================
+// REPORTS
+// ============================================================
+
+async function getReports(
+  params = {}
+) {
+
+  return apiGet(
+    "getReports",
+    params
+  );
+}
+
+
+// ============================================================
 // ACTIVITY LOG
 // ============================================================
 
 async function getActivityLog() {
 
-  return apiGet("getActivityLog");
-}
-
-
-// ============================================================
-// USERS
-// ============================================================
-
-async function getUsers() {
-
-  return apiGet("getUsers");
-}
-
-
-// ============================================================
-// PATIENT ID FROM URL
-// ============================================================
-
-function getPatientIdFromUrl() {
-
-  return (
-    new URLSearchParams(
-      window.location.search
-    ).get("id") || ""
+  return apiGet(
+    "getActivityLog"
   );
-}
-
-
-// ============================================================
-// SAFE HTML
-// ============================================================
-
-function escapeHtmlSafe(value) {
-
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>'"]/g,
-
-    character => ({
-
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      "'": "&#39;",
-      '"': "&quot;"
-
-    })[character]
-  );
-}
-
-
-// ============================================================
-// DATE / TIME DISPLAY
-// ============================================================
-
-function formatDateTime(value) {
-
-  if (!value) {
-    return "—";
-  }
-
-  const d = new Date(
-    String(value).replace(
-      " ",
-      "T"
-    )
-  );
-
-  if (
-    Number.isNaN(
-      d.getTime()
-    )
-  ) {
-    return String(value);
-  }
-
-  return d.toLocaleString(
-    "en-MY",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true
-    }
-  );
-}
-
-
-function formatDateOnly(value) {
-
-  if (!value) {
-    return "—";
-  }
-
-  const d = new Date(
-    String(value).replace(
-      " ",
-      "T"
-    )
-  );
-
-  if (
-    Number.isNaN(
-      d.getTime()
-    )
-  ) {
-    return String(value);
-  }
-
-  return d.toLocaleDateString(
-    "en-MY",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    }
-  );
-}
-
-
-// ============================================================
-// ERROR HANDLER
-// ============================================================
-
-function showApiError(
-  error,
-  fallbackMessage =
-    "Something went wrong."
-) {
-
-  console.error(
-    "Getwell API error:",
-    error
-  );
-
-  const message =
-    error &&
-    error.message
-      ? error.message
-      : fallbackMessage;
-
-  alert(message);
-}
-
-
-// ============================================================
-// LOADING
-// ============================================================
-
-function setLoading(
-  element,
-  loading = true,
-  text = "Loading..."
-) {
-
-  if (!element) {
-    return;
-  }
-
-  if (loading) {
-
-    element.dataset.originalContent =
-      element.innerHTML;
-
-    element.innerHTML =
-      text;
-
-    element.disabled =
-      true;
-
-  } else {
-
-    if (
-      element.dataset.originalContent
-      !== undefined
-    ) {
-
-      element.innerHTML =
-        element.dataset.originalContent;
-
-      delete element.dataset
-        .originalContent;
-    }
-
-    element.disabled =
-      false;
-  }
-}
-
-
-// ============================================================
-// BACKEND HEALTH
-// ============================================================
-
-async function checkBackendHealth() {
-
-  return apiGet("health");
-
 }
 
 
@@ -649,11 +482,14 @@ window.GetwellAPI = {
   apiGet,
   apiPost,
 
+  getHealth,
+
   getDashboard,
 
   getPatients,
   getPatientDetails,
   registerPatient,
+  createPatient,
   savePatient,
   updatePatient,
 
@@ -666,39 +502,41 @@ window.GetwellAPI = {
   changeAppointmentStatus,
 
   getVisits,
-  addVisit,
   saveVisit,
+  addVisit,
 
   getWeightTracking,
-  addWeight,
   saveWeight,
+  addWeight,
 
   getDoctors,
-  addDoctor,
   saveDoctor,
+  addDoctor,
   updateDoctor,
 
   getDoctorSchedule,
   saveDoctorSchedule,
   updateDoctorSchedule,
 
-  getDailyWellness,
-  addWellness,
-  saveWellness,
-
   getSettings,
   saveSetting,
 
-  getActivityLog,
-  getUsers,
+  getWellness,
+  saveWellness,
+  addWellness,
 
-  getPatientIdFromUrl,
-  escapeHtmlSafe,
-  formatDateTime,
-  formatDateOnly,
+  getReports,
 
-  showApiError,
-  setLoading,
-
-  checkBackendHealth
+  getActivityLog
 };
+
+
+// ============================================================
+// BACKWARD COMPATIBILITY
+// Existing pages can still call apiGet/apiPost directly.
+// ============================================================
+
+console.log(
+  "Getwell API connected:",
+  GETWELL_API_URL
+);
