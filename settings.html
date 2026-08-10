@@ -470,6 +470,7 @@ button{cursor:pointer}
   .info-grid{grid-template-columns:1fr}
 }
 </style>
+<script src="api.js"></script>
 </head>
 
 <body>
@@ -1048,9 +1049,21 @@ function showToast(message){
   window.toastTimer=setTimeout(()=>toast.classList.remove("show"),2600);
 }
 
-function saveSettings(){
-  showToast("Settings saved successfully.");
+async function saveSettings(){
+  try{
+    const interval=document.getElementById('visitInterval');
+    if(interval) await apiPost('saveSetting',{section:'appointments',setting_key:'default_visit_interval_days',setting_value:String(interval.value).replace(/\D/g,'')});
+    showToast('Settings saved successfully.');
+  }catch(e){showApiError(e)}
 }
+(async function loadSettings(){
+  try{
+    const {settings}=await apiGet('getSettings');
+    const interval=document.getElementById('visitInterval');
+    const v=settings?.appointments?.default_visit_interval_days;
+    if(interval&&v) interval.value=String(v);
+  }catch(e){console.warn(e)}
+})();
 
 function resetPage(){
   if(confirm("Reset the current changes?")){
