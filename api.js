@@ -1,10 +1,10 @@
 // ============================================================
-// GETWELL CLINIC — SHARED API CONNECTION
+// GETWELL CLINIC — FINAL SHARED API
 // Google Sheets = Master Database
 // ============================================================
 
 const GETWELL_API_URL =
-  "https://script.google.com/macros/s/AKfycbyEd_pPCXSMFKVm7dM1sMenZ-Cz72fUFSRfUwrtizMZ-Zqb4JeadMX-GKJxwA-zCzXy/exec";
+  "https://script.google.com/macros/s/AKfycbwPYJHJuU-3fzV0s3Upvm3L-xedqsdXyxMTxYrDWGNL-6YHqAEr35eK7q6YkQ584x45pg/exec";
 
 
 // ============================================================
@@ -86,7 +86,7 @@ async function apiPost(action, payload = {}) {
 
 
 // ============================================================
-// GET PATIENT ID FROM URL
+// PATIENT ID FROM URL
 // Example:
 // patient-details.html?id=GW0001
 // ============================================================
@@ -104,7 +104,6 @@ function getPatientIdFromUrl() {
 
 // ============================================================
 // SAFE HTML
-// Prevents database text from being inserted as raw HTML
 // ============================================================
 
 function escapeHtmlSafe(value) {
@@ -126,7 +125,7 @@ function escapeHtmlSafe(value) {
 
 
 // ============================================================
-// API ERROR HANDLER
+// ERROR HANDLER
 // ============================================================
 
 function showApiError(
