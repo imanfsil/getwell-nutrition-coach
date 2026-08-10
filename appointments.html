@@ -2009,9 +2009,7 @@ button.add-time{
 
             <i class="fa-regular fa-calendar calendar-icon"></i>
 
-            <span>
-                10 Aug 2026 (Today)
-            </span>
+            <span id="selectedDateLabel">Loading date...</span>
 
             <i class="fa-solid fa-chevron-down arrow"></i>
 
@@ -2040,9 +2038,7 @@ button.add-time{
                     Today's Appointments
                 </div>
 
-                <div class="summary-number">
-                    4
-                </div>
+                <div class="summary-number" id="todayCount">0</div>
 
                 <div class="summary-sub">
                     Scheduled
@@ -2066,9 +2062,7 @@ button.add-time{
                     Tomorrow's Appointments
                 </div>
 
-                <div class="summary-number">
-                    3
-                </div>
+                <div class="summary-number" id="tomorrowCount">0</div>
 
                 <div class="summary-sub">
                     Scheduled
@@ -2092,9 +2086,7 @@ button.add-time{
                     This Week
                 </div>
 
-                <div class="summary-number">
-                    12
-                </div>
+                <div class="summary-number" id="weekCount">0</div>
 
                 <div class="summary-sub">
                     Total Appointments
@@ -2118,9 +2110,7 @@ button.add-time{
                     Missing / No Show
                 </div>
 
-                <div class="summary-number">
-                    5
-                </div>
+                <div class="summary-number" id="missedCount">0</div>
 
                 <div class="summary-sub">
                     Need Follow-up
@@ -2158,129 +2148,13 @@ button.add-time{
 
             </div>
 
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    9:00 AM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Nurul Iman
-                    </div>
-
-                    <div class="appointment-type">
-                        Weight Loss Consultation
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Aaron
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    9:30 AM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Ali Ahmad
-                    </div>
-
-                    <div class="appointment-type">
-                        Follow Up
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Aaron
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    11:00 AM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        John Tan
-                    </div>
-
-                    <div class="appointment-type">
-                        IV Drip Therapy
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Aaron
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    2:00 PM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Sarah Lee
-                    </div>
-
-                    <div class="appointment-type">
-                        Skin Consultation
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Najwa
-                </div>
-
-                <div class="status status-completed">
-                    Completed
-                </div>
-
-            </div>
-
+            <div id="todayAppointmentsList"></div>
 
             <button class="card-footer" type="button" onclick="openOverview('today')">
                 View Full Schedule &nbsp; →
             </button>
 
         </div>
-
 
 
         <!-- TOMORROW -->
@@ -2300,100 +2174,13 @@ button.add-time{
 
             </div>
 
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    9:00 AM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Fatimah Zahra
-                    </div>
-
-                    <div class="appointment-type">
-                        Weight Loss Consultation
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Aaron
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    10:30 AM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Ahmad Firdaus
-                    </div>
-
-                    <div class="appointment-type">
-                        Follow Up
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Aaron
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
-
-            <div class="appointment-item">
-
-                <div class="appointment-time">
-                    2:00 PM
-                </div>
-
-                <div class="appointment-details">
-
-                    <div class="appointment-patient">
-                        Siti Aisyah
-                    </div>
-
-                    <div class="appointment-type">
-                        IV Drip Therapy
-                    </div>
-
-                </div>
-
-                <div class="appointment-doctor">
-                    Dr. Najwa
-                </div>
-
-                <div class="status status-scheduled">
-                    Scheduled
-                </div>
-
-            </div>
-
+            <div id="tomorrowAppointmentsList"></div>
 
             <button class="card-footer green" type="button" onclick="openOverview('tomorrow')">
                 View Full Schedule &nbsp; →
             </button>
 
         </div>
-
 
 
         <!-- MISSED -->
@@ -2413,71 +2200,9 @@ button.add-time{
 
             </div>
 
-
-            <div class="missed-item">
-
-                <div class="missed-details">
-
-                    <div class="missed-name">
-                        Ali bin Hassan
-                    </div>
-
-                    <div class="missed-date">
-                        10 Aug 2026
-                    </div>
-
-                </div>
-
-                <div class="no-show">
-                    No Show
-                </div>
-
-            </div>
-
-
-            <div class="missed-item">
-
-                <div class="missed-details">
-
-                    <div class="missed-name">
-                        Nur Syazwani
-                    </div>
-
-                    <div class="missed-date">
-                        9 Aug 2026
-                    </div>
-
-                </div>
-
-                <div class="no-show">
-                    No Show
-                </div>
-
-            </div>
-
-
-            <div class="missed-item">
-
-                <div class="missed-details">
-
-                    <div class="missed-name">
-                        John Tan
-                    </div>
-
-                    <div class="missed-date">
-                        7 Aug 2026
-                    </div>
-
-                </div>
-
-                <div class="no-show">
-                    No Show
-                </div>
-
-            </div>
+            <div id="missedAppointmentsList"></div>
 
         </div>
-
 
 
         <!-- UPCOMING -->
@@ -2521,47 +2246,9 @@ button.add-time{
 
             </div>
 
-
-            <div class="followup-item">
-
-                <div class="followup-name">
-                    Farah Nadia
-                </div>
-
-                <div class="last-visit">
-                    Last visit: 45 days ago
-                </div>
-
-            </div>
-
-
-            <div class="followup-item">
-
-                <div class="followup-name">
-                    Ahmad Syukri
-                </div>
-
-                <div class="last-visit">
-                    Last visit: 62 days ago
-                </div>
-
-            </div>
-
-
-            <div class="followup-item">
-
-                <div class="followup-name">
-                    Nurul Huda
-                </div>
-
-                <div class="last-visit">
-                    Last visit: 90 days ago
-                </div>
-
-            </div>
+            <div id="followUpList"></div>
 
         </div>
-
 
 
         <!-- QUICK ACTIONS -->
@@ -2635,7 +2322,7 @@ button.add-time{
   <div class="ui-panel small">
     <button class="ui-close" type="button" onclick="closeUI('editAppointmentOverlay')">&times;</button>
     <h2>Edit Appointment</h2>
-    <div class="panel-sub">Update the patient's appointment schedule. UI-only for now.</div>
+    <div class="panel-sub">Update the appointment. Changes are saved to the Google Sheet.</div>
 
     <div class="edit-modal-grid">
       <div class="full">
@@ -2646,8 +2333,7 @@ button.add-time{
       <div>
         <label class="edit-modal-label">Doctor</label>
         <select class="edit-modal-select" id="editDoctor">
-          <option value="Dr. Aaron">Dr. Aaron</option>
-          <option value="Dr. Najwa">Dr. Najwa</option>
+          <option value="">Select Doctor</option>
         </select>
       </div>
 
@@ -2665,6 +2351,16 @@ button.add-time{
         <label class="edit-modal-label">Time</label>
         <input class="edit-modal-input" id="editTime" type="time">
       </div>
+
+      <div>
+        <label class="edit-modal-label">Status</label>
+        <select class="edit-modal-select" id="editStatus">
+          <option value="Scheduled">Scheduled</option>
+          <option value="Completed">Completed</option>
+          <option value="No Show">No Show</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
     </div>
 
     <div class="ui-actions">
@@ -2679,7 +2375,7 @@ button.add-time{
   <div class="ui-panel">
     <button class="ui-close" type="button" onclick="closeUI('overviewOverlay')">&times;</button>
     <h2 id="overviewTitle">Appointments</h2>
-    <div class="panel-sub" id="overviewSub">UI preview using sample appointment data.</div>
+    <div class="panel-sub" id="overviewSub">Live appointment data from the Getwell Clinic database.</div>
     <div id="overviewContent"></div>
   </div>
 </div>
@@ -2706,26 +2402,26 @@ button.add-time{
     <button class="ui-close" type="button" onclick="closeUI('patientProfileOverlay')">&times;</button>
 
     <div class="patient-profile-head">
-      <div class="patient-avatar" id="profileAvatar">NI</div>
+      <div class="patient-avatar" id="profileAvatar">--</div>
       <div>
-        <h2 id="profileName">Nurul Iman</h2>
-        <div class="patient-profile-id" id="profileId">GW0001</div>
+        <h2 id="profileName">Patient</h2>
+        <div class="patient-profile-id" id="profileId">—</div>
       </div>
-      <span class="profile-status" id="profileStatus">Active</span>
+      <span class="profile-status" id="profileStatus">—</span>
     </div>
 
     <div class="profile-grid">
       <div class="profile-info-card">
         <span>Phone Number</span>
-        <strong id="profilePhone">012-3456789</strong>
+        <strong id="profilePhone">—</strong>
       </div>
       <div class="profile-info-card">
         <span>Current Weight</span>
-        <strong id="profileWeight">60 kg</strong>
+        <strong id="profileWeight">—</strong>
       </div>
       <div class="profile-info-card">
         <span>Last Visit</span>
-        <strong id="profileLastVisit">10 Aug 2026</strong>
+        <strong id="profileLastVisit">—</strong>
       </div>
       <div class="profile-info-card profile-next-card">
         <div class="profile-info-label-row">
@@ -2735,16 +2431,16 @@ button.add-time{
             <i class="fa-solid fa-pencil"></i>
           </button>
         </div>
-        <strong id="profileNextAppointment">10 Aug 2026 · 9:00 AM</strong>
+        <strong id="profileNextAppointment">—</strong>
       </div>
     </div>
 
     <div class="profile-section">
       <h3>Appointment Information</h3>
       <div class="profile-details">
-        <div><span>Doctor</span><strong id="profileDoctor">Dr. Aaron</strong></div>
-        <div><span>Appointment Type</span><strong id="profileType">Weight Loss Consultation</strong></div>
-        <div><span>Status</span><strong id="profileAppointmentStatus">Scheduled</strong></div>
+        <div><span>Doctor</span><strong id="profileDoctor">—</strong></div>
+        <div><span>Appointment Type</span><strong id="profileType">—</strong></div>
+        <div><span>Status</span><strong id="profileAppointmentStatus">—</strong></div>
       </div>
     </div>
 
@@ -2872,19 +2568,7 @@ See you soon, and thank you for choosing GetWell Clinic! 😊💙</textarea>
             </label>
 
             <select id="doctor">
-
-                <option value="">
-                    Select Doctor
-                </option>
-
-                <option value="Dr. Aaron">
-                    Dr. Aaron
-                </option>
-
-                <option value="Dr. Najwa">
-                    Dr. Najwa
-                </option>
-
+                <option value="">Select Doctor</option>
             </select>
 
         </div>
@@ -2932,71 +2616,25 @@ See you soon, and thank you for choosing GetWell Clinic! 😊💙</textarea>
 
 
 <script>
-/* =========================================================
-   APPOINTMENT UI — SAMPLE DATA ONLY
-   No Firebase/database connection in this phase.
-   ========================================================= */
+// =========================================================
+// LIVE DATA STATE
+// The Google Sheet / Code.gs API is the source of truth.
+// No appointment or patient records are hard-coded here.
+// =========================================================
 
-let samplePatients = [
-  {id:"GW0001", name:"Nurul Iman", phone:"012-3456789", weight:"60 kg", status:"Active", lastVisit:"10 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"10 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Scheduled"},{"date":"27 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"13 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"29 Jun 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0002", name:"Ali Ahmad", phone:"011-2233445", weight:"88 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0003", name:"Sarah Lee", phone:"017-8899001", weight:"56 kg", status:"Completed", lastVisit:"10 Aug 2026", nextAppointment:"—", doctor:"Dr. Najwa", type:"Skin Consultation", history:[{"date":"10 Aug 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"20 Jul 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"22 Jun 2026","type":"Consultation","doctor":"Dr. Najwa","status":"Completed"}]},
-  {id:"GW0004", name:"John Tan", phone:"018-7788990", weight:"73 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy", history:[{"date":"7 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"24 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"10 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0005", name:"Fatimah Zahra", phone:"012-5566778", weight:"72 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"8 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0006", name:"Ahmad Firdaus", phone:"013-4455667", weight:"81 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 10:30 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"26 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0007", name:"Siti Aisyah", phone:"016-9988776", weight:"64 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"11 Aug 2026 · 2:00 PM", doctor:"Dr. Najwa", type:"IV Drip Therapy", history:[{"date":"8 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Najwa","status":"Completed"},{"date":"18 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Najwa","status":"Completed"}]},
-  {id:"GW0008", name:"Ali bin Hassan", phone:"012-1112233", weight:"90 kg", status:"Active", lastVisit:"9 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"9 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"No Show"},{"date":"26 Jul 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0009", name:"Nur Syazwani", phone:"013-2223344", weight:"68 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"No Show"},{"date":"25 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0010", name:"Farah Nadia", phone:"014-3334455", weight:"76 kg", status:"Active", lastVisit:"26 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"26 Jun 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 Jun 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"29 May 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"15 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"1 May 2026","type":"Initial Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0011", name:"Ahmad Syukri", phone:"015-4445566", weight:"84 kg", status:"Active", lastVisit:"9 Jun 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"9 Jun 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"26 May 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"12 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0012", name:"Nurul Huda", phone:"016-5556677", weight:"71 kg", status:"Active", lastVisit:"12 May 2026", nextAppointment:"—", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"12 May 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"28 Apr 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"14 Apr 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0013", name:"Jivitha", phone:"017-1112233", weight:"69 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"8 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0014", name:"Mei Ling", phone:"012-2223344", weight:"63 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 11:00 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0015", name:"Hafiz Rahman", phone:"013-3334455", weight:"82 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Consultation", history:[{"date":"7 Aug 2026","type":"Consultation","doctor":"Dr. Aaron","status":"Completed"},{"date":"24 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
-  {id:"GW0016", name:"Aina Sofea", phone:"016-4445566", weight:"58 kg", status:"Active", lastVisit:"7 Aug 2026", nextAppointment:"11 Aug 2026 · 3:00 PM", doctor:"Dr. Najwa", type:"Follow Up", history:[{"date":"7 Aug 2026","type":"Follow Up","doctor":"Dr. Najwa","status":"Completed"},{"date":"21 Jul 2026","type":"Follow Up","doctor":"Dr. Najwa","status":"Completed"}]},
-  {id:"GW0017", name:"Daniel Lim", phone:"018-5556677", weight:"77 kg", status:"Active", lastVisit:"6 Aug 2026", nextAppointment:"12 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy", history:[{"date":"6 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"23 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"}]}
-];
+let patientsData = [];
+let todayAppointments = [];
+let tomorrowAppointments = [];
+let weekAppointments = [];
+let missedAppointments = [];
+let followUpPatients = [];
+let upcomingAppointments = [];
 
-let todayAppointments = [
-  ["9:00 AM","Nurul Iman","Weight Loss Consultation","Dr. Aaron","Scheduled"],
-  ["9:30 AM","Ali Ahmad","Follow Up","Dr. Aaron","Scheduled"],
-  ["11:00 AM","John Tan","IV Drip Therapy","Dr. Aaron","Scheduled"],
-  ["2:00 PM","Sarah Lee","Skin Consultation","Dr. Najwa","Completed"]
-];
-
-let tomorrowAppointments = [
-  ["9:00 AM","Fatimah Zahra","Weight Loss Consultation","Dr. Aaron","Scheduled"],
-  ["10:30 AM","Ahmad Firdaus","Follow Up","Dr. Aaron","Scheduled"],
-  ["2:00 PM","Siti Aisyah","IV Drip Therapy","Dr. Najwa","Scheduled"]
-];
-
-let missedAppointments = [
-  ["Ali bin Hassan","10 Aug 2026"],
-  ["Nur Syazwani","9 Aug 2026"],
-  ["John Tan","7 Aug 2026"]
-];
-
-let followUpPatients = [
-  ["Farah Nadia","Last visit: 45 days ago"],
-  ["Ahmad Syukri","Last visit: 62 days ago"],
-  ["Nurul Huda","Last visit: 90 days ago"]
-];
-
-let upcomingAppointments = [
-  ["10 Aug 2026","9:00 AM","Jivitha","Weight Loss Consultation","Dr. Aaron","Scheduled"],
-  ["10 Aug 2026","11:00 AM","Mei Ling","Follow Up","Dr. Aaron","Scheduled"],
-  ["11 Aug 2026","9:30 AM","Hafiz Rahman","Consultation","Dr. Aaron","Scheduled"],
-  ["11 Aug 2026","3:00 PM","Aina Sofea","Follow Up","Dr. Najwa","Scheduled"],
-  ["12 Aug 2026","9:00 AM","Daniel Lim","IV Drip Therapy","Dr. Aaron","Scheduled"],
-  ["12 Aug 2026","11:00 AM","Jivitha","Follow Up","Dr. Aaron","Scheduled"],
-  ["13 Aug 2026","10:30 AM","Mei Ling","Weight Loss Consultation","Dr. Aaron","Scheduled"],
-  ["13 Aug 2026","2:00 PM","Hafiz Rahman","Follow Up","Dr. Najwa","Scheduled"],
-  ["14 Aug 2026","9:00 AM","Aina Sofea","Consultation","Dr. Aaron","Scheduled"],
-  ["14 Aug 2026","3:00 PM","Daniel Lim","Follow Up","Dr. Najwa","Scheduled"]
-];
-
-let calendarDate = new Date(2026,7,10);
+let calendarDate = new Date();
+let selectedDateISO = localISODate(new Date());
 let selectedPatient = null;
+
+
 
 function closeUI(id){
   document.getElementById(id).classList.remove("show");
@@ -3024,17 +2662,16 @@ function renderCalendar(){
 
   const firstDay = new Date(year,month,1).getDay();
   const daysInMonth = new Date(year,month+1,0).getDate();
-  const prevDays = new Date(year,month,0).getDate();
 
   for(let i=0;i<firstDay;i++){
-    const day = prevDays-firstDay+i+1;
-    html += `<button class="calendar-day muted" type="button">${day}</button>`;
+    html += `<button class="calendar-day muted" type="button"></button>`;
   }
 
   for(let day=1;day<=daysInMonth;day++){
-    const isSelected =
-      year===2026 && month===7 && day===10;
-    const isToday = isSelected;
+    const d = new Date(year,month,day);
+    const iso = localISODate(d);
+    const isSelected = iso === selectedDateISO;
+    const isToday = iso === localISODate(new Date());
     html += `<button class="calendar-day ${isSelected?"selected":""} ${isToday?"today":""}"
       type="button" onclick="selectCalendarDate(${year},${month},${day})">${day}</button>`;
   }
@@ -3042,7 +2679,7 @@ function renderCalendar(){
   const cells = firstDay + daysInMonth;
   const remaining = (7-(cells%7))%7;
   for(let day=1;day<=remaining;day++){
-    html += `<button class="calendar-day muted" type="button">${day}</button>`;
+    html += `<button class="calendar-day muted" type="button"></button>`;
   }
 
   grid.innerHTML = html;
@@ -3050,16 +2687,31 @@ function renderCalendar(){
 
 function selectCalendarDate(year,month,day){
   const selected = new Date(year,month,day);
-  const formatted = selected.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
-  document.querySelector("#dateSelector span").textContent =
-    formatted + (year===2026 && month===7 && day===10 ? " (Today)" : "");
+  selectedDateISO = localISODate(selected);
+  updateDateSelector();
   closeUI("calendarOverlay");
+  renderAllLiveSections();
 }
 
-function getUpcomingReferenceDate(){
-  // UI sample reference: Saturday 8 Aug 2026.
-  // Upcoming starts after tomorrow, so the five cards are Monday–Friday.
-  return new Date(2026,7,8);
+function updateDateSelector(){
+  const d = new Date(selectedDateISO + "T00:00:00");
+  const todayISO = localISODate(new Date());
+  const label = d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  document.getElementById("selectedDateLabel").textContent =
+    label + (selectedDateISO===todayISO ? " (Today)" : "");
+}
+
+function localISODate(date){
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+function addDaysISO(iso,days){
+  const d=new Date(iso+"T00:00:00");
+  d.setDate(d.getDate()+days);
+  return localISODate(d);
 }
 
 function formatLongDate(date){
@@ -3067,10 +2719,7 @@ function formatLongDate(date){
 }
 
 function formatISODate(date){
-  const y=date.getFullYear();
-  const m=String(date.getMonth()+1).padStart(2,"0");
-  const d=String(date.getDate()).padStart(2,"0");
-  return `${y}-${m}-${d}`;
+  return localISODate(date);
 }
 
 function upcomingDataForDate(date){
@@ -3078,22 +2727,23 @@ function upcomingDataForDate(date){
   return upcomingAppointments.filter(a=>a[0]===dateLabel);
 }
 
+function getUpcomingReferenceDate(){
+  return new Date(selectedDateISO+"T00:00:00");
+}
+
 function renderUpcomingDays(){
   const container=document.getElementById("upcomingDays");
   if(!container) return;
 
   const reference=getUpcomingReferenceDate();
-  const tomorrow=new Date(reference);
-  tomorrow.setDate(tomorrow.getDate()+1);
-
   const days=[];
   for(let i=1;i<=5;i++){
-    const d=new Date(tomorrow);
-    d.setDate(tomorrow.getDate()+i);
+    const d=new Date(reference);
+    d.setDate(d.getDate()+i);
     days.push(d);
   }
 
-  container.innerHTML=days.map((date,dayIndex)=>{
+  container.innerHTML=days.map(date=>{
     const dateLabel=formatLongDate(date);
     const items=upcomingDataForDate(date);
     const count=items.length;
@@ -3110,12 +2760,12 @@ function renderUpcomingDays(){
 
         ${
           items.length
-          ? items.map((a,index)=>`
+          ? items.map(a=>`
               <div class="day-appointment">
                 <div class="day-appointment-main">
                   <div class="day-time">${a[1]}</div>
                   <button class="upcoming-patient-link" type="button"
-                    onclick="openPatientProfileByName('${a[2]}')">${a[2]}</button>
+                    onclick="openPatientProfileByName('${escapeHtml(a[2])}')">${escapeHtml(a[2])}</button>
                 </div>
                 <button class="day-edit-btn" type="button" title="Edit appointment"
                   onclick="openEditAppointment('upcoming',${upcomingAppointments.indexOf(a)})">
@@ -3130,6 +2780,121 @@ function renderUpcomingDays(){
       </div>
     `;
   }).join("");
+}
+
+function appointmentStatusClass(status){
+  const s=String(status||"Scheduled").toLowerCase().replace(/\s+/g,"-");
+  if(s==="completed") return "status status-completed";
+  if(s==="no-show" || s==="missed" || s==="cancelled") return "status status-no-show";
+  return "status status-scheduled";
+}
+
+function renderAppointmentList(containerId, rows){
+  const container=document.getElementById(containerId);
+  if(!container) return;
+
+  if(!rows.length){
+    container.innerHTML=`<div style="padding:24px 0;color:#8a94a5;font-size:11px;text-align:center;">No appointments scheduled.</div>`;
+    return;
+  }
+
+  container.innerHTML=rows.map((a,i)=>`
+    <div class="appointment-item">
+      <div class="appointment-time">${escapeHtml(a[0])}</div>
+      <div class="appointment-details">
+        <div class="appointment-patient">
+          <button class="appointment-patient-link" type="button"
+            onclick="openPatientProfileByName('${escapeHtml(a[1])}')">${escapeHtml(a[1])}</button>
+        </div>
+        <div class="appointment-type">${escapeHtml(a[2]||"Consultation")}</div>
+      </div>
+      <div class="appointment-doctor">${escapeHtml(a[3]||"—")}</div>
+      <div class="${appointmentStatusClass(a[4])}">${escapeHtml(a[4]||"Scheduled")}</div>
+      <button class="appointment-edit-btn" type="button" title="Edit appointment"
+        onclick="openEditAppointment('${containerId==="todayAppointmentsList"?"today":"tomorrow"}',${i})">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+    </div>
+  `).join("");
+}
+
+function renderMissedList(){
+  const container=document.getElementById("missedAppointmentsList");
+  if(!container) return;
+
+  if(!missedAppointments.length){
+    container.innerHTML=`<div style="padding:24px 0;color:#8a94a5;font-size:11px;text-align:center;">No missed appointments.</div>`;
+    return;
+  }
+
+  container.innerHTML=missedAppointments.slice(0,5).map(a=>`
+    <div class="missed-item">
+      <div class="missed-details">
+        <div class="missed-name">
+          <button class="missed-name-link" type="button"
+            onclick="openPatientProfileByName('${escapeHtml(a[0])}')">${escapeHtml(a[0])}</button>
+        </div>
+        <div class="missed-date">${escapeHtml(formatDisplayDate(a[1]))}</div>
+      </div>
+      <div class="no-show">${escapeHtml(a[4]||"No Show")}</div>
+    </div>
+  `).join("");
+}
+
+function renderFollowUpList(){
+  const container=document.getElementById("followUpList");
+  if(!container) return;
+
+  if(!followUpPatients.length){
+    container.innerHTML=`<div style="padding:24px 0;color:#8a94a5;font-size:11px;text-align:center;">No patients currently require follow-up.</div>`;
+    return;
+  }
+
+  container.innerHTML=followUpPatients.slice(0,5).map(a=>`
+    <div class="followup-item">
+      <div class="followup-name">
+        <button class="followup-name-link" type="button"
+          onclick="openPatientProfileByName('${escapeHtml(a[0])}')">${escapeHtml(a[0])}</button>
+      </div>
+      <div class="last-visit">${escapeHtml(a[1])}</div>
+    </div>
+  `).join("");
+}
+
+function renderAllLiveSections(){
+  renderAppointmentList("todayAppointmentsList",todayAppointments);
+  renderAppointmentList("tomorrowAppointmentsList",tomorrowAppointments);
+  renderMissedList();
+  renderFollowUpList();
+  renderUpcomingDays();
+
+  const t=document.getElementById("todayCount");
+  const tm=document.getElementById("tomorrowCount");
+  const w=document.getElementById("weekCount");
+  const m=document.getElementById("missedCount");
+  if(t) t.textContent=todayAppointments.length;
+  if(tm) tm.textContent=tomorrowAppointments.length;
+  if(w) w.textContent=weekAppointments.length;
+  if(m) m.textContent=missedAppointments.length;
+
+  updateDateSelector();
+}
+
+function formatDisplayDate(value){
+  if(!value) return "—";
+  const s=String(value);
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
+    return formatLongDate(new Date(s+"T00:00:00"));
+  }
+  return s;
+}
+
+function parseDateOnly(value){
+  if(!value) return null;
+  const s=String(value);
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return new Date(s+"T00:00:00");
+  const d=new Date(s);
+  return isNaN(d.getTime()) ? null : d;
 }
 
 function makeDashboardNamesClickable(){
@@ -3181,73 +2946,82 @@ function openOverview(type){
 
   if(type==="today"){
     heading="Today's Appointments";
-    sub.textContent="10 Aug 2026 · 4 appointments";
+    sub.textContent=`${formatDisplayDate(localISODate(new Date()))} · ${todayAppointments.length} appointment(s)`;
     rows=todayAppointments.map((a,i)=>appointmentRow(a,"today",i)).join("");
   }else if(type==="tomorrow"){
+    const tomorrowISO=addDaysISO(localISODate(new Date()),1);
     heading="Tomorrow's Appointments";
-    sub.textContent="11 Aug 2026 · 3 scheduled appointments";
+    sub.textContent=`${formatDisplayDate(tomorrowISO)} · ${tomorrowAppointments.length} appointment(s)`;
     rows=tomorrowAppointments.map((a,i)=>appointmentRow(a,"tomorrow",i)).join("");
   }else if(type==="week"){
     heading="This Week";
-    sub.textContent="10–16 Aug 2026 · 12 total appointments";
-    rows=[...todayAppointments,...tomorrowAppointments].map((a,i)=>appointmentRow(a,i<todayAppointments.length?"today":"tomorrow",i<todayAppointments.length?i:i-todayAppointments.length)).join("");
+    const today=new Date();
+    const day=today.getDay();
+    const monday=new Date(today);
+    monday.setDate(today.getDate()-(day===0?6:day-1));
+    const sunday=new Date(monday);
+    sunday.setDate(monday.getDate()+6);
+    sub.textContent=`${formatLongDate(monday)} – ${formatLongDate(sunday)} · ${weekAppointments.length} appointment(s)`;
+    rows=weekAppointments.map((a,i)=>appointmentRow(a,"week",i)).join("");
   }else if(type==="missed"){
     heading="Missed Appointments";
-    sub.textContent="Patients who did not attend their scheduled appointment.";
+    sub.textContent=`${missedAppointments.length} appointment(s) marked No Show or Missed.`;
     rows=missedAppointments.map(a=>`
       <tr>
-        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[0]}')">${a[0]}</button></td>
-        <td>${a[1]}</td>
-        <td><span class="no-show">No Show</span></td>
+        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${escapeHtml(a[0])}')">${escapeHtml(a[0])}</button></td>
+        <td>${escapeHtml(formatDisplayDate(a[1]))}</td>
+        <td><span class="no-show">${escapeHtml(a[4]||"No Show")}</span></td>
       </tr>`).join("");
   }else if(type==="followup"){
     heading="Patients Due for Follow-Up";
-    sub.textContent="Patients who remain due for follow-up after the 3-day waiting period.";
+    sub.textContent="Patients without an upcoming appointment whose last visit is past the follow-up threshold.";
     rows=followUpPatients.map(a=>`
       <tr>
-        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[0]}')">${a[0]}</button></td>
-        <td>${a[1]}</td>
+        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${escapeHtml(a[0])}')">${escapeHtml(a[0])}</button></td>
+        <td>${escapeHtml(a[1])}</td>
         <td><button class="ui-btn secondary" type="button" onclick="openReminderModal()">Send Reminder</button></td>
       </tr>`).join("");
   }else if(type==="calendar"){
     heading="Upcoming Appointments";
-    sub.textContent="The five upcoming days after tomorrow.";
+    sub.textContent="Upcoming scheduled appointments from the Google Sheet.";
     rows=upcomingAppointments.map((a,i)=>`
       <tr>
-        <td>${a[0]}</td>
-        <td>${a[1]}</td>
-        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[2]}')">${a[2]}</button></td>
-        <td>${a[4]}</td>
-        <td><span class="status status-scheduled">${a[5]}</span></td>
+        <td>${escapeHtml(a[0])}</td>
+        <td>${escapeHtml(a[1])}</td>
+        <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${escapeHtml(a[2])}')">${escapeHtml(a[2])}</button></td>
+        <td>${escapeHtml(a[4]||"—")}</td>
+        <td><span class="${appointmentStatusClass(a[5])}">${escapeHtml(a[5])}</span></td>
         <td><button class="appointment-edit-btn" type="button" title="Edit appointment"
           onclick="openEditAppointment('upcoming',${i})"><i class="fa-solid fa-pencil"></i></button></td>
       </tr>`).join("");
   }
 
   title.textContent=heading;
+  const empty = !rows;
   content.innerHTML=`
-    <table class="ui-table">
-      ${
-        type==="missed" || type==="followup"
-        ? `<thead><tr><th>Patient</th><th>Details</th><th>Action</th></tr></thead>`
-        : type==="calendar"
-        ? `<thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
-        : `<thead><tr><th>Time</th><th>Patient</th><th>Type</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
-      }
-      <tbody>${rows}</tbody>
-    </table>`;
+    ${empty
+      ? `<div style="padding:25px;text-align:center;color:#8a94a5;font-size:12px;">No records found in the Google Sheet.</div>`
+      : `<table class="ui-table">
+          ${
+            type==="missed" || type==="followup"
+            ? `<thead><tr><th>Patient</th><th>Details</th><th>Action</th></tr></thead>`
+            : type==="calendar"
+            ? `<thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
+            : `<thead><tr><th>Time</th><th>Patient</th><th>Type</th><th>Doctor</th><th>Status</th><th>Edit</th></tr></thead>`
+          }
+          <tbody>${rows}</tbody>
+        </table>`}`;
   document.getElementById("overviewOverlay").classList.add("show");
 }
 
 function appointmentRow(a,type,index){
-  const statusClass=a[4]==="Completed" ? "status status-completed" : "status status-scheduled";
   return `
     <tr>
-      <td>${a[0]}</td>
-      <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${a[1]}')">${a[1]}</button></td>
-      <td>${a[2]}</td>
-      <td>${a[3]}</td>
-      <td><span class="${statusClass}">${a[4]}</span></td>
+      <td>${escapeHtml(a[0])}</td>
+      <td><button class="patient-link" type="button" onclick="openPatientProfileByName('${escapeHtml(a[1])}')">${escapeHtml(a[1])}</button></td>
+      <td>${escapeHtml(a[2]||"Consultation")}</td>
+      <td>${escapeHtml(a[3]||"—")}</td>
+      <td><span class="${appointmentStatusClass(a[4])}">${escapeHtml(a[4]||"Scheduled")}</span></td>
       <td><button class="appointment-edit-btn" type="button" title="Edit appointment"
         onclick="openEditAppointment('${type}',${index})"><i class="fa-solid fa-pencil"></i></button></td>
     </tr>`;
@@ -3261,21 +3035,35 @@ function openEditAppointment(type,index){
   if(type==="today") a=todayAppointments[index];
   else if(type==="tomorrow") a=tomorrowAppointments[index];
   else if(type==="upcoming") a=upcomingAppointments[index];
+  else if(type==="week") a=weekAppointments[index];
 
   if(!a) return;
 
-  editingAppointment={type,index,appointmentId:a[6],patientId:a[7],date:a[7]||a[0],time:a[0],doctor:a[3]||a[4],type:a[2]||a[3]};
+  editingAppointment={
+    type,index,
+    appointmentId:a[6],
+    patientId:a[7],
+    date:a[8] || a[0],
+    time:a[0],
+    doctor:a[3] || a[4],
+    type:a[2] || "Consultation"
+  };
 
-  document.getElementById("editPatientName").value=a[1] || a[2];
-  document.getElementById("editDoctor").value=a[3] || a[4];
-  document.getElementById("editType").value=a[2] || a[3];
+  document.getElementById("editPatientName").value=a[1] || a[2] || a[7] || "";
+  document.getElementById("editDoctor").value=a[3] || a[4] || "";
+  document.getElementById("editType").value=a[2] || "Consultation";
+  document.getElementById("editStatus").value=a[4] || "Scheduled";
 
-  const dateText=(type==="upcoming" ? a[0] : a[7]) || a[0];
-  document.getElementById("editDate").value=(String(dateText).match(/^\d{4}-\d{2}-\d{2}$/)?dateText:formatISODate(new Date(dateText)));
+  let dateText=a[8] || a[7] || (type==="upcoming" ? a[0] : "");
+  if(/^\d{4}-\d{2}-\d{2}$/.test(String(dateText))){
+    document.getElementById("editDate").value=dateText;
+  }else{
+    const parsed=parseDateOnly(dateText);
+    document.getElementById("editDate").value=parsed ? formatISODate(parsed) : "";
+  }
 
-  const time=a[0].includes("AM") || a[0].includes("PM") ? a[0] : a[1];
+  const time=a[0] && (String(a[0]).includes("AM") || String(a[0]).includes("PM")) ? a[0] : a[1];
   document.getElementById("editTime").value=to24Hour(time);
-
   document.getElementById("editAppointmentOverlay").classList.add("show");
 }
 
@@ -3299,69 +3087,48 @@ function to12Hour(value){
 }
 
 async function saveEditedAppointment(){
-  try{
-    if(window.editingAppointment && editingAppointment.appointmentId){
-      await apiPost('updateAppointment',{appointment_id:editingAppointment.appointmentId,appointment_date:document.getElementById('editDate')?.value||editingAppointment.date,appointment_time:to24Hour(document.getElementById('editTime')?.value||editingAppointment.time),appointment_type:document.getElementById('editType')?.value||editingAppointment.type,doctor:document.getElementById('editDoctor')?.value||editingAppointment.doctor});
-      await loadLiveAppointments();
-      closeUI('editAppointmentOverlay');
-      return;
-    }
-  }catch(e){showApiError(e);return}
+  const appointmentId=editingAppointment?.appointmentId;
+  if(!appointmentId){
+    alert("This appointment does not have a valid appointment ID in the Google Sheet.");
+    return;
+  }
+
   const date=document.getElementById("editDate").value;
   const time=document.getElementById("editTime").value;
   const doctor=document.getElementById("editDoctor").value;
   const type=document.getElementById("editType").value.trim();
+  const status=document.getElementById("editStatus").value;
 
-  if(!date || !time || !doctor || !type){
+  if(!date || !time || !doctor || !type || !status){
     alert("Please complete all appointment details.");
     return;
   }
 
-  const formattedDate=new Date(date+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
-  const displayTime=to12Hour(time);
+  try{
+    const appointmentDateTime=`${date} ${time}:00`;
+    const currentRaw=allAppointments.find(a=>String(a.appointment_id)===String(appointmentId));
+    await apiPost("updateAppointment",{
+      appointment_id:appointmentId,
+      patient_id:editingAppointment.patientId || currentRaw?.patient_id || "",
+      doctor_id:currentRaw?.doctor_id || "",
+      appointment_datetime:appointmentDateTime,
+      appointment_type:type,
+      status:status
+    });
 
-  if(editingAppointment.type==="profile"){
-    const patient=samplePatients.find(p=>p.id===editingAppointment.patientId);
-    if(patient){
-      patient.nextAppointment=`${formattedDate} · ${displayTime}`;
-      patient.doctor=doctor;
-      patient.type=type;
-
-      document.getElementById("profileNextAppointment").textContent=patient.nextAppointment;
-      document.getElementById("profileDoctor").textContent=doctor;
-      document.getElementById("profileType").textContent=type;
-      document.getElementById("profileAppointmentStatus").textContent="Scheduled";
-    }
-  }else{
-    const {type:source,index}=editingAppointment;
-
-    if(source==="today"){
-      todayAppointments[index][0]=displayTime;
-      todayAppointments[index][2]=type;
-      todayAppointments[index][3]=doctor;
-    }else if(source==="tomorrow"){
-      tomorrowAppointments[index][0]=displayTime;
-      tomorrowAppointments[index][2]=type;
-      tomorrowAppointments[index][3]=doctor;
-    }else if(source==="upcoming"){
-      upcomingAppointments[index][0]=formattedDate;
-      upcomingAppointments[index][1]=displayTime;
-      upcomingAppointments[index][3]=type;
-      upcomingAppointments[index][4]=doctor;
-    }
-
-    renderUpcomingDays();
-    makeDashboardNamesClickable();
+    closeUI("editAppointmentOverlay");
+    await loadLiveAppointments();
+    alert("Appointment updated successfully.");
+  }catch(e){
+    showApiError(e);
   }
-
-  closeUI("editAppointmentOverlay");
-  alert("Appointment updated successfully in the UI preview.");
 }
+
 function openPatientProfileByName(name){
-  const patient = samplePatients.find(p => p.name === name);
+  const patient = patientsData.find(p => p.name === name);
 
   if(!patient){
-    alert("Patient profile is not available in this UI sample yet.");
+    alert("Patient profile is not available.");
     return;
   }
 
@@ -3380,17 +3147,12 @@ function openPatientProfileByName(name){
   document.getElementById("profileAppointmentStatus").textContent =
     patient.nextAppointment === "—" ? "No Upcoming Appointment" : "Scheduled";
 
-  // Show every visit recorded for this UI sample, newest first.
+  // Only show history actually returned by the backend.
   const history = patient.history && patient.history.length
     ? patient.history
-    : [{
-        date: patient.lastVisit,
-        type: patient.type,
-        doctor: patient.doctor,
-        status: "Completed"
-      }];
+    : [];
 
-  document.getElementById("profileHistory").innerHTML = `
+  document.getElementById("profileHistory").innerHTML = history.length ? `
     <div class="profile-history-table-wrap">
       <table class="profile-history-table">
         <thead>
@@ -3408,9 +3170,9 @@ function openPatientProfileByName(name){
             return `
               <tr>
                 <td class="visit-no">${index + 1}</td>
-                <td class="billed-date">${h.date}</td>
-                <td class="reason">${h.type}</td>
-                <td class="doctor">${h.doctor}</td>
+                <td class="billed-date">${escapeHtml(h.date||"—")}</td>
+                <td class="reason">${escapeHtml(h.type||"—")}</td>
+                <td class="doctor">${escapeHtml(h.doctor||"—")}</td>
                 <td class="remark-cell">
                   ${remark
                     ? `<div class="remark-saved">
@@ -3430,38 +3192,50 @@ function openPatientProfileByName(name){
         </tbody>
       </table>
     </div>
-  `;
+  ` : `<div style="padding:15px 0;color:#8a94a5;font-size:11px;">No appointment history has been returned by the backend.</div>`;
 
   document.getElementById("patientProfileOverlay").classList.add("show");
 }
 
 function editProfileAppointment(){
-  const name = document.getElementById("profileName").textContent;
-  const patient = samplePatients.find(p => p.name === name);
+  const patientId=document.getElementById("profileId").textContent.trim();
+  const patient=patientsData.find(p=>p.id===patientId);
 
   if(!patient){
-    alert("Patient profile is not available in this UI sample yet.");
+    alert("Patient profile is not available.");
     return;
   }
 
-  editingAppointment = {type:"profile", index:null, patientId:patient.id};
+  const appointment=allAppointments.find(a=>String(a.patient_id)===String(patient.id) &&
+    !["Completed","No Show","Missed","Cancelled"].includes(String(a.status)));
 
-  document.getElementById("editPatientName").value = patient.name;
-  document.getElementById("editDoctor").value = patient.doctor || "Dr. Aaron";
-  document.getElementById("editType").value = patient.type || "Consultation";
-
-  if(patient.nextAppointment && patient.nextAppointment !== "—"){
-    const parts = patient.nextAppointment.split(" · ");
-    const parsed = new Date(parts[0]);
-    document.getElementById("editDate").value = isNaN(parsed.getTime()) ? "" : formatISODate(parsed);
-    document.getElementById("editTime").value = to24Hour(parts[1] || "");
-  }else{
-    document.getElementById("editDate").value = "";
-    document.getElementById("editTime").value = "";
+  if(!appointment){
+    alert("This patient has no upcoming appointment to edit.");
+    return;
   }
 
+  const row=toRow(appointment);
+  editingAppointment={
+    type:"profile",
+    index:null,
+    appointmentId:appointment.appointment_id,
+    patientId:appointment.patient_id,
+    date:appointment.appointment_date,
+    time:appointment.appointment_time,
+    doctor:appointment.doctor,
+    doctorId:appointment.doctor_id,
+    type:appointment.appointment_type
+  };
+
+  document.getElementById("editPatientName").value=patient.name;
+  document.getElementById("editDoctor").value=appointment.doctor||"";
+  document.getElementById("editType").value=appointment.appointment_type||"Consultation";
+  document.getElementById("editDate").value=appointment.appointment_date||"";
+  document.getElementById("editTime").value=appointment.appointment_time||"";
+  document.getElementById("editStatus").value=appointment.status||"Scheduled";
   document.getElementById("editAppointmentOverlay").classList.add("show");
 }
+
 function escapeHtml(value){
   return String(value ?? "")
     .replace(/&/g,"&amp;")
@@ -3474,7 +3248,7 @@ function escapeHtml(value){
 let editingRemark={patientId:null, historyIndex:null};
 
 function openRemark(patientId, historyIndex){
-  const patient=samplePatients.find(p=>p.id===patientId);
+  const patient=patientsData.find(p=>p.id===patientId);
   if(!patient || !patient.history || !patient.history[historyIndex]) return;
 
   editingRemark={patientId,historyIndex};
@@ -3488,7 +3262,7 @@ function openRemark(patientId, historyIndex){
 }
 
 function saveRemark(){
-  const patient=samplePatients.find(p=>p.id===editingRemark.patientId);
+  const patient=patientsData.find(p=>p.id===editingRemark.patientId);
   if(!patient || !patient.history || !patient.history[editingRemark.historyIndex]) return;
 
   patient.history[editingRemark.historyIndex].remark =
@@ -3499,9 +3273,34 @@ function saveRemark(){
 }
 
 
+function renderDoctorOptions(){
+  const doctors=new Set();
+
+  patientsData.forEach(p=>{
+    if(p.doctor && p.doctor!=="—") doctors.add(String(p.doctor));
+  });
+
+  allAppointments.forEach(a=>{
+    if(a.doctor && a.doctor!=="—") doctors.add(String(a.doctor));
+  });
+
+  const options=[...doctors].sort((a,b)=>a.localeCompare(b));
+  const selects=[
+    document.getElementById("doctor"),
+    document.getElementById("editDoctor")
+  ].filter(Boolean);
+
+  selects.forEach(select=>{
+    const current=select.value;
+    select.innerHTML='<option value="">Select Doctor</option>'+
+      options.map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");
+    if(current && options.includes(current)) select.value=current;
+  });
+}
+
 function renderPatientOptions(filter=""){
   const q = filter.toLowerCase().trim();
-  const list = samplePatients.filter(p =>
+  const list = patientsData.filter(p =>
     p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)
   );
   document.getElementById("patientOptions").innerHTML = list.map(p => `
@@ -3517,7 +3316,7 @@ function filterPatients(){
 }
 
 function selectPatient(id){
-  selectedPatient = samplePatients.find(p=>p.id===id);
+  selectedPatient = patientsData.find(p=>p.id===id);
   document.getElementById("patientName").value = selectedPatient.name;
   document.getElementById("patientId").value = selectedPatient.id;
   document.getElementById("selectedPatient").style.display = "block";
@@ -3547,7 +3346,14 @@ async function saveAppointment(){
     const time=document.getElementById("appointmentTime")?.value || "";
     const type=selectedPatient?.type || "Consultation";
     const doctor=document.getElementById("doctor")?.value || "";
-    if(patientId&&date&&time&&doctor){ await apiPost("createAppointment",{patient_id:patientId,patient_name:selectedPatient?.name||"",doctor,appointment_date:date,appointment_time:time,appointment_type:type,status:"Scheduled"}); await loadLiveAppointments(); closeAppointmentModal(); return; }
+    if(patientId&&date&&time&&doctor){ await apiPost("createAppointment",{
+        patient_id:patientId,
+        doctor_id:"",
+        appointment_datetime:`${date} ${time}:00`,
+        appointment_type:type,
+        status:"Scheduled",
+        remarks:""
+      }); await loadLiveAppointments(); closeAppointmentModal(); return; }
   }catch(e){showApiError(e);return}
   const patientName = document.getElementById("patientName").value.trim();
   const patientId = document.getElementById("patientId").value.trim();
@@ -3592,23 +3398,34 @@ function sendReminders(){
 }
 
 function exportAppointments(){
+  const exportRows = weekAppointments.length ? weekAppointments : [...todayAppointments,...tomorrowAppointments];
+  const todayISO=localISODate(new Date());
+  const day=new Date(todayISO+"T00:00:00").getDay();
+  const monday=new Date(todayISO+"T00:00:00");
+  monday.setDate(monday.getDate()-(day===0?6:day-1));
+  const sunday=new Date(monday);
+  sunday.setDate(monday.getDate()+6);
+
   document.getElementById("exportContent").innerHTML = `
     <table class="ui-table">
       <thead>
         <tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th></tr>
       </thead>
       <tbody>
-        ${todayAppointments.map(a=>`
+        ${exportRows.map(a=>`
           <tr>
-            <td>10 Aug 2026</td><td>${a[0]}</td><td>${a[1]}</td><td>${a[3]}</td><td>${a[4]}</td>
-          </tr>`).join("")}
-        ${tomorrowAppointments.map(a=>`
-          <tr>
-            <td>11 Aug 2026</td><td>${a[0]}</td><td>${a[1]}</td><td>${a[3]}</td><td>${a[4]}</td>
-          </tr>`).join("")}
+            <td>${escapeHtml((a[7]||a[8]) ? formatDisplayDate(a[7]||a[8]) : "—")}</td>
+            <td>${escapeHtml(a[0])}</td>
+            <td>${escapeHtml(a[1])}</td>
+            <td>${escapeHtml(a[3]||"—")}</td>
+            <td>${escapeHtml(a[4]||"—")}</td>
+          </tr>`).join("") || `<tr><td colspan="5" style="text-align:center;color:#888;">No appointments found in the Google Sheet.</td></tr>`}
       </tbody>
     </table>`;
   document.getElementById("exportOverlay").classList.add("show");
+
+  const range=document.querySelector('#exportOverlay .panel-sub');
+  if(range) range.textContent=`${formatLongDate(monday)} – ${formatLongDate(sunday)} · ${exportRows.length} appointment(s)`;
 }
 
 function printAppointmentSummary(){
@@ -3628,7 +3445,7 @@ function printAppointmentSummary(){
       </head>
       <body>
         <h1>Getwell Appointment Summary</h1>
-        <p>10–16 Aug 2026</p>
+        <p>Current week appointment summary</p>
         ${content}
         <script>window.onload=function(){window.print();}<\/script>
       </body>
@@ -3654,31 +3471,197 @@ document.addEventListener("keydown",function(event){
 });
 
 
+let allAppointments=[];
+
+function normalizeAppointment(raw){
+  const patient=patientsData.find(p=>String(p.id)===String(raw.patient_id));
+  const rawDateTime=raw.appointment_datetime || raw.datetime || "";
+  let date=raw.appointment_date || "";
+  let time=raw.appointment_time || "";
+
+  if(rawDateTime){
+    const parsed=String(rawDateTime).replace("T"," ");
+    const match=parsed.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{1,2}:\d{2}(?::\d{2})?)/);
+    if(match){
+      date=match[1];
+      time=match[2];
+    }else{
+      const d=new Date(parsed);
+      if(!isNaN(d.getTime())){
+        date=localISODate(d);
+        time=`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+      }
+    }
+  }
+
+  return {
+    ...raw,
+    appointment_date:date,
+    appointment_time:time,
+    patient_name:raw.patient_name || patient?.name || raw.patient_id || "Unknown Patient",
+    doctor:raw.doctor || raw.doctor_name || patient?.doctor || raw.doctor_id || "—",
+    doctor_id:raw.doctor_id || "",
+    appointment_type:raw.appointment_type || "Consultation",
+    status:raw.status || "Scheduled"
+  };
+}
+
+function toRow(a){
+  return [
+    formatTimeValue(a.appointment_time),
+    a.patient_name||a.patient_id,
+    a.appointment_type||"Consultation",
+    a.doctor||a.doctor_id||"—",
+    a.status||"Scheduled",
+    a.appointment_id,
+    a.patient_id,
+    a.appointment_date
+  ];
+}
+
 async function loadLiveAppointments(){
   try{
-    const [pRes,aRes,dRes] = await Promise.all([apiGet('getPatients'),apiGet('getAppointments'),apiGet('getDoctors')]);
-    samplePatients=(pRes.patients||[]).map(p=>({id:p.patient_id,name:p.full_name,phone:p.phone,weight:p.current_weight_kg?`${p.current_weight_kg} kg`:'—',status:p.status,lastVisit:p.last_visit||'—',nextAppointment:p.next_appointment||'—',doctor:p.attending_doctor,type:p.appointment_type||'Consultation',history:[]}));
-    const all=aRes.appointments||[];
-    const toRow=a=>[formatTimeValue(a.appointment_time),a.patient_name||((samplePatients.find(p=>p.id===a.patient_id)||{}).name)||a.patient_id,a.appointment_type,a.doctor,a.status,a.appointment_id,a.patient_id,a.appointment_date];
-    const now=new Date(); const isoToday=now.toISOString().slice(0,10); const t=new Date(now); t.setDate(t.getDate()+1); const isoTomorrow=t.toISOString().slice(0,10);
-    todayAppointments=all.filter(a=>a.appointment_date===isoToday).sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time))).map(toRow);
-    tomorrowAppointments=all.filter(a=>a.appointment_date===isoTomorrow).sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time))).map(toRow);
-    missedAppointments=all.filter(a=>['No Show','Missed'].includes(String(a.status))).map(a=>[a.patient_name||a.patient_id,a.appointment_date,a.appointment_id,a.patient_id]);
-    followUpPatients=samplePatients.filter(p=>p.status==='Active'&&!p.nextAppointment||p.status==='Active'&&p.nextAppointment==='—').filter(p=>p.lastVisit&&p.lastVisit!=='—').map(p=>[p.name,`Last visit: ${p.lastVisit}`,p.id]);
-    upcomingAppointments=all.filter(a=>a.status==='Scheduled').sort((a,b)=>(a.appointment_date+' '+a.appointment_time).localeCompare(b.appointment_date+' '+b.appointment_time)).map(toUpcomingRow);
-    renderUpcomingDays(); renderPatientOptions();
-    if(typeof renderCalendar==='function') renderCalendar();
-    if(typeof openOverview==='function' && document.querySelector('.overview-overlay.show')) openOverview('today');
-  }catch(e){showApiError(e)}
+    const [pRes,aRes] = await Promise.all([
+      apiGet('getPatients'),
+      apiGet('getAppointments')
+    ]);
+
+    patientsData=(pRes.patients||[]).map(p=>({
+      id:p.patient_id,
+      name:p.full_name,
+      phone:p.phone||"—",
+      weight:p.current_weight_kg ? `${p.current_weight_kg} kg` : "—",
+      status:p.status||"—",
+      lastVisit:p.last_visit||"—",
+      nextAppointment:p.next_appointment||"—",
+      doctor:p.attending_doctor||"—",
+      type:p.appointment_type||"Consultation",
+      history:[]
+    }));
+
+    allAppointments=(aRes.appointments||[]).map(normalizeAppointment);
+    renderDoctorOptions();
+
+    const todayISO=localISODate(new Date());
+    const tomorrowISO=addDaysISO(todayISO,1);
+
+    todayAppointments=allAppointments
+      .filter(a=>String(a.appointment_date)===todayISO)
+      .sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time)))
+      .map(toRow);
+
+    tomorrowAppointments=allAppointments
+      .filter(a=>String(a.appointment_date)===tomorrowISO)
+      .sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time)))
+      .map(toRow);
+
+    const today=new Date(todayISO+"T00:00:00");
+    const day=today.getDay();
+    const monday=new Date(today);
+    monday.setDate(today.getDate()-(day===0?6:day-1));
+    const sunday=new Date(monday);
+    sunday.setDate(monday.getDate()+6);
+    const mondayISO=localISODate(monday);
+    const sundayISO=localISODate(sunday);
+
+    weekAppointments=allAppointments
+      .filter(a=>String(a.appointment_date)>=mondayISO && String(a.appointment_date)<=sundayISO)
+      .sort((a,b)=>(String(a.appointment_date)+" "+String(a.appointment_time))
+        .localeCompare(String(b.appointment_date)+" "+String(b.appointment_time)))
+      .map(toRow);
+
+    missedAppointments=allAppointments
+      .filter(a=>["No Show","Missed"].includes(String(a.status)))
+      .sort((a,b)=>String(b.appointment_date).localeCompare(String(a.appointment_date)))
+      .map(a=>[
+        a.patient_name||a.patient_id,
+        a.appointment_date,
+        a.appointment_id,
+        a.patient_id,
+        a.status
+      ]);
+
+    const scheduledPatientIds=new Set(
+      allAppointments
+        .filter(a=>a.status==="Scheduled" && String(a.appointment_date)>=todayISO)
+        .map(a=>String(a.patient_id))
+    );
+
+    followUpPatients=patientsData
+      .filter(p=>String(p.status).toLowerCase()==="active")
+      .filter(p=>!scheduledPatientIds.has(String(p.id)))
+      .map(p=>{
+        const d=parseDateOnly(p.lastVisit);
+        if(!d) return null;
+        const days=Math.floor((new Date(todayISO+"T00:00:00")-new Date(d.getFullYear(),d.getMonth(),d.getDate()))/86400000);
+        return days>=3 ? [p.name,`Last visit: ${days} days ago`,p.id] : null;
+      })
+      .filter(Boolean)
+      .sort((a,b)=>{
+        const na=parseInt(a[1].match(/\d+/)?.[0]||"0",10);
+        const nb=parseInt(b[1].match(/\d+/)?.[0]||"0",10);
+        return nb-na;
+      });
+
+    upcomingAppointments=allAppointments
+      .filter(a=>a.status==="Scheduled" && String(a.appointment_date)>=todayISO)
+      .sort((a,b)=>(String(a.appointment_date)+" "+String(a.appointment_time))
+        .localeCompare(String(b.appointment_date)+" "+String(b.appointment_time)))
+      .map(a=>[
+        formatDisplayDate(a.appointment_date),
+        formatTimeValue(a.appointment_time),
+        a.patient_name||a.patient_id,
+        a.appointment_type||"Consultation",
+        a.doctor||a.doctor_id||"—",
+        a.status||"Scheduled",
+        a.appointment_id,
+        a.patient_id,
+        a.appointment_date
+      ]);
+
+    renderAllLiveSections();
+    renderPatientOptions();
+    renderDoctorOptions();
+    if(typeof renderCalendar==="function") renderCalendar();
+  }catch(e){
+    console.error(e);
+    showApiError(e);
+  }
 }
-function formatTimeValue(v){if(!v)return '';const [h,m]=String(v).split(':');let n=Number(h);const ap=n>=12?'PM':'AM';n=n%12||12;return `${n}:${m||'00'} ${ap}`}
-function toUpcomingRow(a){return [a.appointment_date,formatTimeValue(a.appointment_time),a.patient_name||a.patient_id,a.appointment_type,a.doctor,a.status,a.appointment_id,a.patient_id]}
+
+function formatTimeValue(v){
+  if(!v) return "";
+  const s=String(v).trim();
+  if(/AM|PM/i.test(s)) return s;
+  const parts=s.split(":");
+  let h=Number(parts[0]);
+  const m=String(parts[1]||"00").padStart(2,"0");
+  if(Number.isNaN(h)) return s;
+  const ap=h>=12?"PM":"AM";
+  h=h%12||12;
+  return `${h}:${m} ${ap}`;
+}
+
+function toUpcomingRow(a){
+  return [
+    formatDisplayDate(a.appointment_date),
+    formatTimeValue(a.appointment_time),
+    a.patient_name||a.patient_id,
+    a.appointment_type||"Consultation",
+    a.doctor||"—",
+    a.status||"Scheduled",
+    a.appointment_id,
+    a.patient_id,
+    a.appointment_date
+  ];
+}
 
 document.addEventListener("DOMContentLoaded",function(){
+  updateDateSelector();
   renderPatientOptions();
-  renderUpcomingDays();
+  renderDoctorOptions();
+  renderAllLiveSections();
   loadLiveAppointments();
-  makeDashboardNamesClickable();
 });
 </script>
 
