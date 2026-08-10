@@ -3,15 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Register Patient | Getwell Clinic</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 :root{
   --blue:#2b5ba6;
   --dark:#204c9c;
@@ -20,25 +35,43 @@
   --text:#17325c;
   --muted:#7b8798;
   --border:#e5eaf1;
+  --green:#0b9b61;
+  --red:#df4552;
 }
+
 body{
   min-height:100vh;
   background:var(--bg);
   color:var(--text);
   font-family:"Poppins",sans-serif;
 }
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
 
-/* SAME MASTER SHELL AS APPOINTMENTS */
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
 .sidebar{
   position:fixed;
-  left:0;top:0;bottom:0;
+  left:0;
+  top:0;
+  bottom:0;
   width:258px;
   background:var(--blue);
   color:#fff;
   z-index:100;
 }
+
 .logo{
   height:118px;
   display:flex;
@@ -48,7 +81,11 @@ button{cursor:pointer}
   font-size:32px;
   font-weight:700;
 }
-.nav{padding:42px 20px}
+
+.nav{
+  padding:42px 20px;
+}
+
 .nav a{
   height:64px;
   display:flex;
@@ -61,13 +98,19 @@ button{cursor:pointer}
   text-decoration:none;
   font-size:16px;
   font-weight:500;
+  transition:.2s ease;
 }
-.nav a:hover{background:rgba(255,255,255,.10)}
+
+.nav a:hover{
+  background:rgba(255,255,255,.10);
+}
+
 .nav a.active{
   background:#fff;
   color:var(--dark);
   font-weight:700;
 }
+
 .nav-icon{
   width:22px;
   display:flex;
@@ -75,18 +118,24 @@ button{cursor:pointer}
   font-size:17px;
 }
 
+/* =========================================================
+   MAIN
+========================================================= */
+
 .main{
   margin-left:258px;
   width:calc(100% - 258px);
   min-height:100vh;
   padding:42px 42px 55px;
 }
+
 .page-header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
   margin-bottom:32px;
 }
+
 .page-title h1{
   color:var(--dark);
   font-size:36px;
@@ -94,7 +143,15 @@ button{cursor:pointer}
   font-weight:700;
   margin-bottom:7px;
 }
-.page-title p{color:#666;font-size:15px}
+
+.page-title p{
+  color:#666;
+  font-size:15px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .card{
   background:#fff;
@@ -102,16 +159,19 @@ button{cursor:pointer}
   padding:26px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+
 .section{
   border-bottom:1px solid #edf0f4;
   padding-bottom:26px;
   margin-bottom:26px;
 }
+
 .section:last-of-type{
   border-bottom:0;
   padding-bottom:0;
   margin-bottom:0;
 }
+
 .section-title{
   display:flex;
   align-items:center;
@@ -121,6 +181,7 @@ button{cursor:pointer}
   font-weight:700;
   margin-bottom:18px;
 }
+
 .section-title i{
   width:32px;
   height:32px;
@@ -132,23 +193,37 @@ button{cursor:pointer}
   color:var(--accent);
   font-size:14px;
 }
+
+/* =========================================================
+   FORM
+========================================================= */
+
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:17px;
 }
+
 .field{
   display:flex;
   flex-direction:column;
   gap:6px;
 }
-.field.full{grid-column:1/-1}
+
+.field.full{
+  grid-column:1/-1;
+}
+
 .field label{
   color:#52627a;
   font-size:11px;
   font-weight:600;
 }
-.required{color:#df4552}
+
+.required{
+  color:var(--red);
+}
+
 .field input,
 .field select,
 .field textarea{
@@ -161,32 +236,39 @@ button{cursor:pointer}
   background:#fff;
   outline:none;
   font-size:12px;
+  transition:.2s ease;
 }
+
 .field textarea{
   height:110px;
   padding:12px;
   resize:vertical;
 }
+
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
   border-color:var(--accent);
   box-shadow:0 0 0 3px rgba(49,93,244,.08);
 }
+
 .field input[readonly]{
   background:#f7f9fc;
   color:#7f8b9c;
 }
+
 .helper{
   color:#929aa7;
   font-size:9px;
 }
+
 .radio-group{
   height:44px;
   display:flex;
   align-items:center;
   gap:26px;
 }
+
 .radio{
   display:flex;
   align-items:center;
@@ -195,11 +277,33 @@ button{cursor:pointer}
   font-size:11px;
   font-weight:500;
 }
+
 .radio input{
   width:15px;
   height:15px;
   accent-color:var(--accent);
 }
+
+/* =========================================================
+   LOADING DOCTOR
+========================================================= */
+
+.doctor-loading{
+  color:#8995a7;
+  font-size:10px;
+  margin-top:2px;
+}
+
+.doctor-error{
+  color:var(--red);
+  font-size:10px;
+  margin-top:2px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
 .form-footer{
   display:flex;
   align-items:center;
@@ -209,34 +313,54 @@ button{cursor:pointer}
   padding-top:22px;
   border-top:1px solid #edf0f4;
 }
+
 .note{
   color:#8a94a3;
   font-size:10px;
 }
+
 .actions{
   display:flex;
   gap:10px;
 }
-.primary,.secondary{
+
+.primary,
+.secondary{
   border:0;
   border-radius:9px;
   padding:11px 17px;
   font-size:11px;
   font-weight:600;
+  transition:.2s ease;
 }
+
 .primary{
   background:var(--accent);
   color:#fff;
 }
-.primary:hover{background:#244fdc}
-.primary:disabled{opacity:.65;cursor:not-allowed}
+
+.primary:hover{
+  background:#244fdc;
+}
+
+.primary:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
 .secondary{
   background:#f1f4fb;
   color:#52627a;
 }
-.secondary:hover{background:#e7ecf6}
 
-/* SUCCESS MODAL */
+.secondary:hover{
+  background:#e7ecf6;
+}
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
 .modal{
   display:none;
   position:fixed;
@@ -247,7 +371,11 @@ button{cursor:pointer}
   padding:24px;
   background:rgba(15,31,55,.48);
 }
-.modal.show{display:flex}
+
+.modal.show{
+  display:flex;
+}
+
 .modal-box{
   width:min(450px,96vw);
   background:#fff;
@@ -256,8 +384,10 @@ button{cursor:pointer}
   text-align:center;
   box-shadow:0 25px 70px rgba(0,0,0,.20);
 }
+
 .modal-icon{
-  width:60px;height:60px;
+  width:60px;
+  height:60px;
   margin:0 auto 15px;
   border-radius:16px;
   background:#e5f9ee;
@@ -267,16 +397,19 @@ button{cursor:pointer}
   justify-content:center;
   font-size:25px;
 }
+
 .modal-box h2{
   color:var(--dark);
   font-size:22px;
   margin-bottom:7px;
 }
+
 .modal-box p{
   color:#737f90;
   font-size:12px;
   line-height:1.6;
 }
+
 .modal-actions{
   display:flex;
   justify-content:center;
@@ -284,104 +417,205 @@ button{cursor:pointer}
   margin-top:22px;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   ERROR MODAL
+========================================================= */
+
+.error-box .modal-icon{
+  background:#fff0f2;
+  color:#df4552;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media(max-width:900px){
-  .sidebar{width:220px}
+
+  .sidebar{
+    width:220px;
+  }
+
   .main{
     margin-left:220px;
     width:calc(100% - 220px);
     padding:35px 30px 50px;
   }
-  .nav a{font-size:14px}
-  .logo{font-size:28px}
+
+  .nav a{
+    font-size:14px;
+  }
+
+  .logo{
+    font-size:28px;
+  }
+
 }
+
 @media(max-width:700px){
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
 }
+
 @media(max-width:650px){
+
   .sidebar{
     position:relative;
     width:100%;
     height:auto;
   }
-  .logo{height:75px;padding-left:25px}
-  .nav{padding:15px}
-  .nav a{height:45px}
+
+  .logo{
+    height:75px;
+    padding-left:25px;
+  }
+
+  .nav{
+    padding:15px;
+  }
+
+  .nav a{
+    height:45px;
+  }
+
   .main{
     margin-left:0;
     width:100%;
     padding:25px 15px;
   }
-  .page-header{margin-bottom:24px}
-  .page-title h1{font-size:30px}
-  .card{padding:20px}
+
+  .page-header{
+    margin-bottom:24px;
+  }
+
+  .page-title h1{
+    font-size:30px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
   .form-footer{
     flex-direction:column;
     align-items:stretch;
   }
-  .actions{justify-content:flex-end}
+
+  .actions{
+    justify-content:flex-end;
+  }
+
 }
+
 </style>
-<script src="api.js"></script>
 </head>
 
 <body>
 
+<!-- =======================================================
+     SIDEBAR
+======================================================== -->
+
 <aside class="sidebar">
-  <div class="logo">Getwell</div>
+
+  <div class="logo">
+    Getwell
+  </div>
 
   <nav class="nav">
+
     <a href="admin-dashboard.html">
-      <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-house"></i>
+      </span>
       <span>Dashboard</span>
     </a>
 
     <a href="register-patient.html" class="active">
-      <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </span>
       <span>Register Patient</span>
     </a>
 
     <a href="patient-list.html">
-      <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-users"></i>
+      </span>
       <span>Patient List</span>
     </a>
 
     <a href="appointments.html">
-      <span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span>
+      <span class="nav-icon">
+        <i class="fa-regular fa-calendar-check"></i>
+      </span>
       <span>Appointments</span>
     </a>
 
     <a href="reports.html">
-      <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-chart-column"></i>
+      </span>
       <span>Reports</span>
     </a>
 
     <a href="settings.html">
-      <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-gear"></i>
+      </span>
       <span>Settings</span>
     </a>
 
     <a href="admin-login.html">
-      <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+      <span class="nav-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </span>
       <span>Logout</span>
     </a>
+
   </nav>
+
 </aside>
+
+
+<!-- =======================================================
+     MAIN
+======================================================== -->
 
 <main class="main">
 
   <header class="page-header">
+
     <div class="page-title">
-      <h1>Register New Patient</h1>
-      <p>Complete the patient information below to create a new record.</p>
+
+      <h1>
+        Register New Patient
+      </h1>
+
+      <p>
+        Complete the patient information below to create a new record.
+      </p>
+
     </div>
+
   </header>
+
 
   <section class="card">
 
-    <!-- PATIENT INFORMATION -->
+    <!-- ===================================================
+         PATIENT INFORMATION
+    ==================================================== -->
+
     <div class="section">
+
       <h2 class="section-title">
         <i class="fa-solid fa-user"></i>
         Patient Information
@@ -390,50 +624,137 @@ button{cursor:pointer}
       <div class="form-grid">
 
         <div class="field">
-          <label>Patient ID</label>
-          <input id="patientId" value="Auto Generated" readonly>
-          <span class="helper">The Patient ID will be generated automatically.</span>
+
+          <label>
+            Patient ID
+          </label>
+
+          <input
+            id="patientId"
+            value="Auto Generated"
+            readonly
+          >
+
+          <span class="helper">
+            The Patient ID will be generated automatically.
+          </span>
+
         </div>
 
-        <div class="field">
-          <label>Full Name <span class="required">*</span></label>
-          <input id="fullName" placeholder="Enter patient's full name">
-        </div>
 
         <div class="field">
-          <label>Phone Number <span class="required">*</span></label>
-          <input id="phone" type="tel" placeholder="e.g. 012-3456789">
+
+          <label>
+            Full Name
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="fullName"
+            type="text"
+            placeholder="Enter patient's full name"
+            autocomplete="name"
+          >
+
         </div>
 
-        <div class="field">
-          <label>Date of Birth <span class="required">*</span></label>
-          <input id="dob" type="date">
-        </div>
 
         <div class="field">
-          <label>Age</label>
-          <input id="age" placeholder="Auto calculated" readonly>
+
+          <label>
+            Phone Number
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            placeholder="e.g. 012-3456789"
+            autocomplete="tel"
+          >
+
         </div>
 
+
         <div class="field">
-          <label>Gender <span class="required">*</span></label>
+
+          <label>
+            Date of Birth
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="dob"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Age
+          </label>
+
+          <input
+            id="age"
+            placeholder="Auto calculated"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Gender
+            <span class="required">*</span>
+          </label>
+
           <div class="radio-group">
+
             <label class="radio">
-              <input type="radio" name="gender" value="Male">
+
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+              >
+
               Male
+
             </label>
+
+
             <label class="radio">
-              <input type="radio" name="gender" value="Female">
+
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+              >
+
               Female
+
             </label>
+
           </div>
+
         </div>
 
       </div>
+
     </div>
 
-    <!-- HEALTH INFORMATION -->
+
+    <!-- ===================================================
+         HEALTH INFORMATION
+    ==================================================== -->
+
     <div class="section">
+
       <h2 class="section-title">
         <i class="fa-solid fa-heart-pulse"></i>
         Health Information
@@ -442,25 +763,68 @@ button{cursor:pointer}
       <div class="form-grid">
 
         <div class="field">
-          <label>Height (cm) <span class="required">*</span></label>
-          <input id="height" type="number" min="0" step="0.1" placeholder="Enter height">
+
+          <label>
+            Height (cm)
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="height"
+            type="number"
+            min="0"
+            step="0.1"
+            placeholder="Enter height"
+          >
+
         </div>
 
-        <div class="field">
-          <label>Starting Weight (kg) <span class="required">*</span></label>
-          <input id="startingWeight" type="number" min="0" step="0.1" placeholder="Enter starting weight">
-        </div>
 
         <div class="field">
-          <label>Goal Weight (kg)</label>
-          <input id="goalWeight" type="number" min="0" step="0.1" placeholder="Enter goal weight">
+
+          <label>
+            Starting Weight (kg)
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="startingWeight"
+            type="number"
+            min="0"
+            step="0.1"
+            placeholder="Enter starting weight"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Goal Weight (kg)
+          </label>
+
+          <input
+            id="goalWeight"
+            type="number"
+            min="0"
+            step="0.1"
+            placeholder="Enter goal weight"
+          >
+
         </div>
 
       </div>
+
     </div>
 
-    <!-- PROGRAMME INFORMATION -->
+
+    <!-- ===================================================
+         PROGRAMME INFORMATION
+    ==================================================== -->
+
     <div class="section">
+
       <h2 class="section-title">
         <i class="fa-solid fa-hospital"></i>
         Programme Information
@@ -469,250 +833,1104 @@ button{cursor:pointer}
       <div class="form-grid">
 
         <div class="field">
-          <label>Programme Start Date <span class="required">*</span></label>
-          <input id="programmeStart" type="date">
+
+          <label>
+            Programme Start Date
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="programmeStart"
+            type="date"
+          >
+
         </div>
 
+
         <div class="field">
-          <label>Attending Doctor <span class="required">*</span></label>
+
+          <label>
+            Attending Doctor
+            <span class="required">*</span>
+          </label>
+
           <select id="doctor">
-            <option value="">Select doctor</option>
-            <option>Dr Aaron</option>
-            <option>Dr Najwa</option>
-            <option>Dr Aisyah</option>
+
+            <option value="">
+              Loading doctors...
+            </option>
+
           </select>
+
+          <span
+            id="doctorMessage"
+            class="doctor-loading"
+          >
+            Loading doctors from database...
+          </span>
+
         </div>
 
+
         <div class="field">
-          <label>Visit Interval</label>
+
+          <label>
+            Visit Interval
+          </label>
+
           <select id="visitInterval">
-            <option>Every 5 Days</option>
-            <option selected>Every 7 Days</option>
-            <option>Every 14 Days</option>
+
+            <option value="Every 5 Days">
+              Every 5 Days
+            </option>
+
+            <option
+              value="Every 7 Days"
+              selected
+            >
+              Every 7 Days
+            </option>
+
+            <option value="Every 14 Days">
+              Every 14 Days
+            </option>
+
           </select>
+
         </div>
 
+
         <div class="field">
-          <label>Next Appointment</label>
-          <input id="nextAppointment" type="date">
-          <span class="helper">Optional. Can be scheduled later from Appointments.</span>
+
+          <label>
+            Next Appointment
+          </label>
+
+          <input
+            id="nextAppointment"
+            type="date"
+          >
+
+          <span class="helper">
+            Optional. Can be scheduled later from Appointments.
+          </span>
+
         </div>
 
       </div>
+
     </div>
 
-    <!-- REMARKS -->
+
+    <!-- ===================================================
+         REMARKS
+    ==================================================== -->
+
     <div class="section">
+
       <h2 class="section-title">
         <i class="fa-regular fa-note-sticky"></i>
         Remarks
       </h2>
 
       <div class="field">
-        <label>Additional Remarks</label>
-        <textarea id="remarks" placeholder="Add any relevant remarks..."></textarea>
+
+        <label>
+          Additional Remarks
+        </label>
+
+        <textarea
+          id="remarks"
+          placeholder="Add any relevant remarks..."
+        ></textarea>
+
       </div>
+
     </div>
 
+
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
+
     <div class="form-footer">
+
       <div class="note">
-        <span class="required">*</span> Required fields
+
+        <span class="required">*</span>
+        Required fields
+
       </div>
 
+
       <div class="actions">
-        <button class="secondary" type="button" onclick="resetForm()">
+
+        <button
+          class="secondary"
+          type="button"
+          onclick="resetForm()"
+        >
           Cancel
         </button>
 
-        <button class="primary" type="button" onclick="createPatient()">
+
+        <button
+          id="createPatientButton"
+          class="primary"
+          type="button"
+          onclick="createPatient()"
+        >
+
           <i class="fa-solid fa-user-plus"></i>
+
           Create Patient
+
         </button>
+
       </div>
+
     </div>
 
   </section>
 
 </main>
 
-<div class="modal" id="successModal">
+
+<!-- =======================================================
+     SUCCESS MODAL
+======================================================== -->
+
+<div
+  class="modal"
+  id="successModal"
+>
+
   <div class="modal-box">
+
     <div class="modal-icon">
+
       <i class="fa-solid fa-check"></i>
+
     </div>
 
-    <h2>Patient Registered Successfully</h2>
+
+    <h2>
+      Patient Registered Successfully
+    </h2>
+
 
     <p id="successText">
       The patient has been added to the system.
     </p>
 
+
     <div class="modal-actions">
-      <button class="secondary" onclick="closeSuccess()">Close</button>
-      <button class="primary" onclick="goToPatients()">View Patient List</button>
+
+      <button
+        class="secondary"
+        onclick="closeSuccess()"
+      >
+        Close
+      </button>
+
+
+      <button
+        class="primary"
+        onclick="goToPatients()"
+      >
+        View Patient List
+      </button>
+
     </div>
+
   </div>
+
 </div>
 
+
+<!-- =======================================================
+     ERROR MODAL
+======================================================== -->
+
+<div
+  class="modal"
+  id="errorModal"
+>
+
+  <div class="modal-box error-box">
+
+    <div class="modal-icon">
+
+      <i class="fa-solid fa-exclamation"></i>
+
+    </div>
+
+
+    <h2>
+      Unable to Save Patient
+    </h2>
+
+
+    <p id="errorText">
+      Something went wrong.
+    </p>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="primary"
+        onclick="closeError()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
-const dob = document.getElementById("dob");
-const age = document.getElementById("age");
 
-dob.addEventListener("change", calculateAge);
+/* =========================================================
+   GETWELL CLINIC
+   REGISTER PATIENT
+   GOOGLE SHEETS = MASTER DATABASE
+========================================================= */
 
-function calculateAge(){
-  if(!dob.value){
-    age.value="";
-    return;
+
+/* =========================================================
+   BACKEND URL
+
+   This is the same backend used by the final dashboard/API.
+========================================================= */
+
+const GETWELL_API_URL =
+  "https://script.google.com/macros/s/AKfycbwPYJHJuU-3fzV0s3Upvm3L-xedqsdXyxMTxYrDWGNL-6YHqAEr35eK7q6YkQ584x45pg/exec";
+
+
+/* =========================================================
+   BASIC API GET
+========================================================= */
+
+async function apiGet(action, params = {}) {
+
+  const query = new URLSearchParams({
+    action,
+    ...params
+  });
+
+  const response = await fetch(
+    `${GETWELL_API_URL}?${query.toString()}`,
+    {
+      method:"GET",
+      cache:"no-store"
+    }
+  );
+
+  if (!response.ok) {
+
+    throw new Error(
+      `Backend request failed (${response.status}).`
+    );
+
   }
 
-  const birthDate = new Date(dob.value + "T00:00:00");
-  const today = new Date();
+  const data = await response.json();
 
-  let years = today.getFullYear() - birthDate.getFullYear();
-  const month = today.getMonth() - birthDate.getMonth();
+  if (!data.ok) {
 
-  if(month < 0 || (month === 0 && today.getDate() < birthDate.getDate())){
-    years--;
+    throw new Error(
+      data.error ||
+      "Backend request failed."
+    );
+
   }
 
-  age.value = years >= 0 ? years + " Years" : "";
+  return data;
+
 }
 
 
+/* =========================================================
+   BASIC API POST
+========================================================= */
+
+async function apiPost(action, payload = {}) {
+
+  const response = await fetch(
+    GETWELL_API_URL,
+    {
+      method:"POST",
+
+      headers:{
+        "Content-Type":
+          "text/plain;charset=utf-8"
+      },
+
+      body:JSON.stringify({
+        action,
+        ...payload
+      })
+    }
+  );
+
+  if (!response.ok) {
+
+    throw new Error(
+      `Backend request failed (${response.status}).`
+    );
+
+  }
+
+  const data = await response.json();
+
+  if (!data.ok) {
+
+    throw new Error(
+      data.error ||
+      "Backend request failed."
+    );
+
+  }
+
+  return data;
+
+}
+
+
+/* =========================================================
+   AGE CALCULATION
+========================================================= */
+
+const dob =
+  document.getElementById("dob");
+
+const age =
+  document.getElementById("age");
+
+
+dob.addEventListener(
+  "change",
+  calculateAge
+);
+
+
+function calculateAge(){
+
+  if(!dob.value){
+
+    age.value = "";
+
+    return;
+
+  }
+
+
+  const birthDate =
+    new Date(
+      dob.value + "T00:00:00"
+    );
+
+  const today =
+    new Date();
+
+
+  let years =
+    today.getFullYear() -
+    birthDate.getFullYear();
+
+
+  const month =
+    today.getMonth() -
+    birthDate.getMonth();
+
+
+  if(
+    month < 0 ||
+    (
+      month === 0 &&
+      today.getDate() <
+      birthDate.getDate()
+    )
+  ){
+
+    years--;
+
+  }
+
+
+  age.value =
+    years >= 0
+      ? years + " Years"
+      : "";
+
+}
+
+
+/* =========================================================
+   LOAD DOCTORS FROM GOOGLE SHEETS
+========================================================= */
+
+async function loadDoctors(){
+
+  const doctorSelect =
+    document.getElementById("doctor");
+
+  const doctorMessage =
+    document.getElementById("doctorMessage");
+
+
+  try{
+
+    doctorSelect.innerHTML =
+      `<option value="">Loading doctors...</option>`;
+
+    doctorMessage.className =
+      "doctor-loading";
+
+    doctorMessage.textContent =
+      "Loading doctors from database...";
+
+
+    const result =
+      await apiGet("getDoctors");
+
+
+    const doctors =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+
+    doctorSelect.innerHTML =
+      `<option value="">Select doctor</option>`;
+
+
+    if(!doctors.length){
+
+      doctorSelect.innerHTML +=
+        `<option value="" disabled>
+          No doctors found
+        </option>`;
+
+      doctorMessage.className =
+        "doctor-error";
+
+      doctorMessage.textContent =
+        "No doctors found in the DOCTORS sheet.";
+
+      return;
+
+    }
+
+
+    doctors.forEach(doctor => {
+
+      /*
+       * Support common doctor column names.
+       * The doctor_id is used as the option value
+       * when available.
+       */
+
+      const doctorId =
+        String(
+          doctor.doctor_id ||
+          ""
+        ).trim();
+
+
+      const doctorName =
+        String(
+          doctor.doctor_name ||
+          doctor.name ||
+          doctor.full_name ||
+          doctor.doctor ||
+          doctorId ||
+          ""
+        ).trim();
+
+
+      if(!doctorName){
+
+        return;
+
+      }
+
+
+      const option =
+        document.createElement("option");
+
+
+      /*
+       * Patient record stores the selected
+       * doctor value.
+       *
+       * Prefer doctor name because the
+       * register form currently uses
+       * attending_doctor.
+       */
+
+      option.value =
+        doctorName;
+
+      option.textContent =
+        doctorName;
+
+
+      /*
+       * Keep doctor ID available in
+       * the option for future use.
+       */
+
+      if(doctorId){
+
+        option.dataset.doctorId =
+          doctorId;
+
+      }
+
+
+      doctorSelect.appendChild(
+        option
+      );
+
+    });
+
+
+    doctorMessage.className =
+      "doctor-loading";
+
+    doctorMessage.textContent =
+      "Doctors loaded from database.";
+
+
+  }catch(error){
+
+    console.error(
+      "Unable to load doctors:",
+      error
+    );
+
+
+    doctorSelect.innerHTML =
+      `<option value="">
+        Unable to load doctors
+      </option>`;
+
+
+    doctorMessage.className =
+      "doctor-error";
+
+    doctorMessage.textContent =
+      error.message ||
+      "Unable to load doctors.";
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE PATIENT
+========================================================= */
 
 async function createPatient(){
 
   const requiredFields = [
-    document.getElementById("fullName"),
-    document.getElementById("phone"),
-    document.getElementById("dob"),
-    document.getElementById("height"),
-    document.getElementById("startingWeight"),
-    document.getElementById("programmeStart"),
-    document.getElementById("doctor")
+
+    document.getElementById(
+      "fullName"
+    ),
+
+    document.getElementById(
+      "phone"
+    ),
+
+    document.getElementById(
+      "dob"
+    ),
+
+    document.getElementById(
+      "height"
+    ),
+
+    document.getElementById(
+      "startingWeight"
+    ),
+
+    document.getElementById(
+      "programmeStart"
+    ),
+
+    document.getElementById(
+      "doctor"
+    )
+
   ];
 
-  const missing = requiredFields.some(field => !field.value.trim());
-  const gender = document.querySelector('input[name="gender"]:checked');
-  const button = document.querySelector('.primary[onclick="createPatient()"]');
 
-  if(missing || !gender){
-    alert("Please complete all required fields before creating the patient.");
+  const missing =
+    requiredFields.some(
+      field =>
+        !String(
+          field.value
+        ).trim()
+    );
+
+
+  const gender =
+    document.querySelector(
+      'input[name="gender"]:checked'
+    );
+
+
+  if(
+    missing ||
+    !gender
+  ){
+
+    alert(
+      "Please complete all required fields before creating the patient."
+    );
+
     return;
+
   }
+
+
+  const button =
+    document.getElementById(
+      "createPatientButton"
+    );
+
+
+  /*
+   * Collect patient information.
+   */
 
   const patient = {
-    action: "createPatient",
-    full_name: document.getElementById("fullName").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    date_of_birth: document.getElementById("dob").value,
-    age: document.getElementById("age").value.replace(" Years","").trim(),
-    gender: gender.value,
-    height_cm: document.getElementById("height").value,
-    starting_weight_kg: document.getElementById("startingWeight").value,
-    goal_weight_kg: document.getElementById("goalWeight").value,
-    programme_start_date: document.getElementById("programmeStart").value,
-    attending_doctor: document.getElementById("doctor").value,
-    visit_interval: document.getElementById("visitInterval").value,
-    next_appointment: document.getElementById("nextAppointment").value,
-    appointment_type: "Consultation",
-    remarks: document.getElementById("remarks").value.trim()
+
+    full_name:
+      document
+        .getElementById("fullName")
+        .value
+        .trim(),
+
+    phone:
+      document
+        .getElementById("phone")
+        .value
+        .trim(),
+
+    date_of_birth:
+      document
+        .getElementById("dob")
+        .value,
+
+    age:
+      document
+        .getElementById("age")
+        .value
+        .replace(
+          " Years",
+          ""
+        )
+        .trim(),
+
+    gender:
+      gender.value,
+
+    height_cm:
+      document
+        .getElementById("height")
+        .value,
+
+    starting_weight_kg:
+      document
+        .getElementById("startingWeight")
+        .value,
+
+    goal_weight_kg:
+      document
+        .getElementById("goalWeight")
+        .value,
+
+    programme_start_date:
+      document
+        .getElementById("programmeStart")
+        .value,
+
+    attending_doctor:
+      document
+        .getElementById("doctor")
+        .value,
+
+    visit_interval:
+      document
+        .getElementById("visitInterval")
+        .value,
+
+    next_appointment:
+      document
+        .getElementById("nextAppointment")
+        .value,
+
+    appointment_type:
+      "Consultation",
+
+    remarks:
+      document
+        .getElementById("remarks")
+        .value
+        .trim(),
+
+    status:
+      "active"
+
   };
 
-  const originalButton = button ? button.innerHTML : "";
 
-  try {
-    if(button){
-      button.disabled = true;
-      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
-    }
+  /*
+   * Save state.
+   */
 
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(patient)
-    });
+  const originalButton =
+    button.innerHTML;
 
-    if(!response.ok){
-      throw new Error("Backend request failed (" + response.status + ").");
-    }
 
-    const result = await response.json();
+  try{
 
-    if(!result.ok){
-      throw new Error(result.error || "The backend could not create the patient.");
-    }
+    button.disabled = true;
 
-    const savedPatient = result.patient || {};
-    const id = savedPatient.patient_id || "Generated";
+    button.innerHTML =
+      '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
 
-    document.getElementById("patientId").value = id;
 
-    document.getElementById("successText").textContent =
-      document.getElementById("fullName").value +
-      " has been registered successfully with Patient ID " + id + ".";
+    /*
+     * IMPORTANT:
+     *
+     * The backend action is:
+     *
+     * registerPatient
+     *
+     * NOT createPatient.
+     */
 
-    document.getElementById("successModal").classList.add("show");
+    const result =
+      await apiPost(
+        "registerPatient",
+        patient
+      );
 
-  } catch(error) {
-    console.error("Getwell backend error:", error);
-    alert(
-      "The patient could not be saved to the database.\n\n" +
-      error.message +
-      "\n\nPlease check that the Apps Script Web App is deployed with access set to Anyone."
+
+    /*
+     * Backend structure:
+     *
+     * {
+     *   ok: true,
+     *   data: {...patient}
+     * }
+     */
+
+    const savedPatient =
+      result.data || {};
+
+
+    const patientId =
+      savedPatient.patient_id ||
+      "Generated";
+
+
+    /*
+     * Show generated Patient ID.
+     */
+
+    document.getElementById(
+      "patientId"
+    ).value =
+      patientId;
+
+
+    /*
+     * Success message.
+     */
+
+    document.getElementById(
+      "successText"
+    ).textContent =
+      document
+        .getElementById("fullName")
+        .value
+        +
+        " has been registered successfully with Patient ID "
+        +
+        patientId
+        +
+        ".";
+
+
+    document
+      .getElementById(
+        "successModal"
+      )
+      .classList.add("show");
+
+
+  }catch(error){
+
+    console.error(
+      "Getwell backend error:",
+      error
     );
-  } finally {
-    if(button){
-      button.disabled = false;
-      button.innerHTML = originalButton;
-    }
+
+
+    document.getElementById(
+      "errorText"
+    ).textContent =
+      error.message ||
+      "The patient could not be saved to the database.";
+
+
+    document
+      .getElementById(
+        "errorModal"
+      )
+      .classList.add("show");
+
+
+  }finally{
+
+    button.disabled = false;
+
+    button.innerHTML =
+      originalButton;
+
   }
+
 }
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
 
 function closeSuccess(){
-  document.getElementById("successModal").classList.remove("show");
+
+  document
+    .getElementById(
+      "successModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
 }
 
+
 function goToPatients(){
-  window.location.href="patient-list.html";
+
+  window.location.href =
+    "patient-list.html";
+
 }
+
+
+/* =========================================================
+   ERROR MODAL
+========================================================= */
+
+function closeError(){
+
+  document
+    .getElementById(
+      "errorModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   RESET FORM
+========================================================= */
 
 function resetForm(){
 
-  if(!confirm("Clear all entered patient information?")){
+  if(
+    !confirm(
+      "Clear all entered patient information?"
+    )
+  ){
+
     return;
+
   }
 
-  document.getElementById("fullName").value="";
-  document.getElementById("phone").value="";
-  document.getElementById("dob").value="";
-  document.getElementById("age").value="";
-  document.getElementById("height").value="";
-  document.getElementById("startingWeight").value="";
-  document.getElementById("goalWeight").value="";
-  document.getElementById("programmeStart").value="";
-  document.getElementById("doctor").value="";
-  document.getElementById("visitInterval").value="Every 7 Days";
-  document.getElementById("nextAppointment").value="";
-  document.getElementById("remarks").value="";
-  document.querySelectorAll('input[name="gender"]').forEach(r=>r.checked=false);
-  document.getElementById("patientId").value="Auto Generated";
+
+  document.getElementById(
+    "fullName"
+  ).value = "";
+
+
+  document.getElementById(
+    "phone"
+  ).value = "";
+
+
+  document.getElementById(
+    "dob"
+  ).value = "";
+
+
+  document.getElementById(
+    "age"
+  ).value = "";
+
+
+  document.getElementById(
+    "height"
+  ).value = "";
+
+
+  document.getElementById(
+    "startingWeight"
+  ).value = "";
+
+
+  document.getElementById(
+    "goalWeight"
+  ).value = "";
+
+
+  document.getElementById(
+    "programmeStart"
+  ).value = "";
+
+
+  document.getElementById(
+    "doctor"
+  ).value = "";
+
+
+  document.getElementById(
+    "visitInterval"
+  ).value =
+    "Every 7 Days";
+
+
+  document.getElementById(
+    "nextAppointment"
+  ).value = "";
+
+
+  document.getElementById(
+    "remarks"
+  ).value = "";
+
+
+  document
+    .querySelectorAll(
+      'input[name="gender"]'
+    )
+    .forEach(
+      radio =>
+        radio.checked = false
+    );
+
+
+  document.getElementById(
+    "patientId"
+  ).value =
+    "Auto Generated";
+
 }
 
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape"){
-    closeSuccess();
-  }
-});
 
-document.getElementById("successModal").addEventListener("click",event=>{
-  if(event.target.id==="successModal"){
-    closeSuccess();
+/* =========================================================
+   CLOSE MODALS BY CLICKING OUTSIDE
+========================================================= */
+
+document
+  .getElementById(
+    "successModal"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "successModal"
+      ){
+
+        closeSuccess();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "errorModal"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "errorModal"
+      ){
+
+        closeError();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      closeSuccess();
+      closeError();
+
+    }
+
   }
-});
+);
+
+
+/* =========================================================
+   INITIALISE PAGE
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadDoctors();
+
+  }
+);
+
 </script>
 
 </body>
