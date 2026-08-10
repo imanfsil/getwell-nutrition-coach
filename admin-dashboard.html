@@ -1,1182 +1,1691 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getwell | Dashboard</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<title>Getwell Admin Dashboard</title>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<script src="api.js"></script>
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Poppins",sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
 }
 
-:root{
-    --blue:#2f62ad;
-    --blue-dark:#1f4f96;
-    --blue-text:#17498f;
-    --bg:#eef6ff;
-    --soft:#f4f7fc;
-    --border:#e4eaf3;
-    --text:#173f78;
-    --muted:#6f7f99;
-    --green:#18a66a;
-    --green-bg:#e4f7ef;
-    --red:#d9534f;
-    --red-bg:#fff0ef;
-    --shadow:0 8px 24px rgba(31,79,150,.08);
+html{
+  font-size:16px;
 }
 
 body{
-    min-height:100vh;
-    background:var(--bg);
-    color:var(--text);
+  background:#eef6ff;
+  color:#17325c;
+  min-height:100vh;
 }
+
+
+/* =========================================================
+   SIDEBAR
+   KEEP GETWELL ORIGINAL VISUAL
+========================================================= */
 
 .sidebar{
-    width:232px;
-    min-height:100vh;
-    background:#2f62ad;
-    color:#fff;
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    z-index:20;
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+
+  width:258px;
+  height:100vh;
+
+  background:#2b5ba6;
+  color:#fff;
+
+  z-index:1000;
 }
 
-.brand{
-    height:105px;
-    display:flex;
-    align-items:center;
-    padding-left:38px;
-    font-size:30px;
-    font-weight:700;
-    color:#fff;
-    border-bottom:1px solid rgba(255,255,255,.16);
+.logo{
+  height:118px;
+
+  display:flex;
+  align-items:center;
+
+  padding-left:42px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.15);
+
+  font-size:32px;
+  font-weight:700;
 }
 
 .nav{
-    padding:38px 18px;
+  padding:42px 20px;
 }
 
 .nav a{
-    width:100%;
-    height:58px;
-    display:flex;
-    align-items:center;
-    gap:17px;
-    padding:0 25px;
-    margin-bottom:12px;
-    border-radius:12px;
-    color:#fff;
-    text-decoration:none;
-    font-size:15px;
-    font-weight:600;
-    transition:background .15s ease,color .15s ease;
+  width:100%;
+  height:64px;
+
+  display:flex;
+  align-items:center;
+
+  gap:18px;
+
+  padding:0 25px;
+  margin-bottom:9px;
+
+  border-radius:13px;
+
+  color:#fff;
+  text-decoration:none;
+
+  font-size:16px;
+  font-weight:500;
+
+  transition:.2s ease;
 }
 
 .nav a:hover{
-    background:rgba(255,255,255,.10);
+  background:rgba(255,255,255,.10);
 }
 
 .nav a.active{
-    background:#fff;
-    color:#204c9c;
-    font-weight:700;
+  background:#fff;
+  color:#204c9c;
+  font-weight:700;
 }
 
 .nav-icon{
-    width:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex:none;
-    font-size:16px;
+  width:22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:17px;
 }
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
-    margin-left:232px;
-    min-height:100vh;
-    padding:30px 38px 55px;
+  margin-left:258px;
+
+  width:
+    calc(100% - 258px);
+
+  min-height:100vh;
+
+  padding:
+    42px
+    42px
+    55px;
 }
 
-.page-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:34px;
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+
+  margin-bottom:32px;
 }
 
-.page-title{
-    font-size:34px;
-    line-height:1.2;
-    font-weight:700;
-    color:#204c9c;
+.header-left h1{
+  color:#204c9c;
+
+  font-size:36px;
+  line-height:1.2;
+
+  font-weight:700;
+
+  margin-bottom:7px;
 }
 
-.welcome{
-    padding-top:8px;
-    color:#53657f;
-    font-size:14px;
-    font-weight:500;
+.header-left p{
+  color:#666;
+  font-size:15px;
 }
 
-/* SUMMARY */
+.header-right{
+  color:#53627a;
+  font-size:14px;
+  padding-top:4px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
 .summary-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:22px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:18px;
+
+  margin-bottom:22px;
 }
 
 .summary-card{
-    background:#fff;
-    border-radius:16px;
-    padding:20px;
-    min-height:111px;
-    box-shadow:var(--shadow);
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
 }
 
-.summary-label{
-    color:var(--blue-text);
-    font-size:15px;
-    font-weight:700;
-    margin-bottom:13px;
+.summary-card h3{
+  color:#204c9c;
+
+  font-size:15px;
+  font-weight:600;
+
+  margin-bottom:10px;
 }
 
-.summary-value{
-    color:#153f7a;
-    font-size:27px;
-    line-height:1;
-    font-weight:700;
+.summary-number{
+  color:#17325c;
+
+  font-size:30px;
+  font-weight:700;
+
+  line-height:1.2;
 }
 
-.summary-sub{
-    margin-top:8px;
-    color:#8996aa;
-    font-size:11px;
-    font-weight:500;
+.summary-description{
+  color:#8290a5;
+
+  font-size:11px;
+
+  margin-top:7px;
 }
 
-/* SEARCH */
-.card{
-    background:#fff;
-    border-radius:16px;
-    box-shadow:var(--shadow);
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-section{
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+  margin-bottom:22px;
 }
 
-.search-card{
-    padding:21px 20px 20px;
-    margin-bottom:22px;
+.search-title{
+  color:#204c9c;
+
+  font-size:21px;
+  font-weight:700;
+
+  margin-bottom:16px;
 }
 
-.section-title{
-    color:var(--blue-text);
-    font-size:20px;
-    font-weight:700;
-    margin-bottom:18px;
-}
-
-.search-wrap{
-    position:relative;
+.search-wrapper{
+  position:relative;
 }
 
 .search-icon{
-    position:absolute;
-    left:14px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#8190a8;
-    font-size:15px;
+  position:absolute;
+
+  left:16px;
+  top:50%;
+
+  transform:
+    translateY(-50%);
+
+  color:#7e91ad;
+
+  font-size:13px;
 }
 
 .search-input{
-    width:100%;
-    height:51px;
-    border:1px solid #dce4ef;
-    border-radius:9px;
-    outline:none;
-    padding:0 16px 0 39px;
-    color:#345071;
-    font-size:12px;
-    background:#fff;
+  width:100%;
+
+  height:48px;
+
+  padding:
+    0
+    16px
+    0
+    42px;
+
+  border:
+    1px solid #dce2eb;
+
+  border-radius:10px;
+
+  outline:none;
+
+  color:#17325c;
+
+  font-size:13px;
+
+  font-family:"Poppins",sans-serif;
 }
 
 .search-input:focus{
-    border-color:#7ea4dd;
-    box-shadow:0 0 0 3px rgba(47,98,173,.08);
+  border-color:#2b5ba6;
 }
 
-.search-results{
-    display:none;
-    margin-top:8px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
+
+/* =========================================================
+   ATTENTION NEEDED
+========================================================= */
+
+.section{
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+  margin-bottom:22px;
 }
 
-.search-result{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:13px 15px;
-    border-bottom:1px solid var(--border);
-    text-decoration:none;
-    color:inherit;
-    background:#fff;
-}
+.section-title{
+  color:#204c9c;
 
-.search-result:last-child{
-    border-bottom:none;
-}
+  font-size:21px;
+  font-weight:700;
 
-.search-result:hover{
-    background:#f7faff;
-}
-
-.result-name{
-    color:var(--blue-text);
-    font-size:12px;
-    font-weight:700;
-}
-
-.result-meta{
-    color:#8794a8;
-    font-size:10px;
-    margin-top:3px;
-}
-
-.result-status{
-    font-size:10px;
-    font-weight:600;
-    padding:5px 9px;
-    border-radius:20px;
-    background:var(--green-bg);
-    color:var(--green);
-}
-
-/* ATTENTION */
-.attention-card{
-    padding:21px 20px;
-    margin-bottom:22px;
+  margin-bottom:18px;
 }
 
 .attention-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:12px;
 }
 
-.attention-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    min-height:76px;
-    padding:14px 16px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    background:#fff;
+.attention-card{
+  border:
+    1px solid #dce5f1;
+
+  border-radius:11px;
+
+  min-height:68px;
+
+  padding:12px 14px;
+
+  display:flex;
+  align-items:center;
+
+  justify-content:space-between;
 }
 
 .attention-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
+  display:flex;
+  align-items:center;
+
+  gap:11px;
 }
 
-.alert-icon{
-    width:34px;
-    height:34px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:9px;
-    background:var(--red-bg);
-    color:var(--red);
-    font-size:15px;
-    font-weight:700;
+.attention-icon{
+  width:32px;
+  height:32px;
+
+  border-radius:9px;
+
+  background:#fff0f0;
+
+  color:#f04455;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
 }
 
 .attention-label{
-    color:#36557c;
-    font-size:11px;
-    font-weight:600;
-    line-height:1.4;
+  color:#204c9c;
+
+  font-size:11px;
+  font-weight:600;
+
+  line-height:1.35;
 }
 
-.attention-count{
-    color:var(--blue-text);
-    font-size:22px;
-    font-weight:700;
+.attention-number{
+  color:#17325c;
+
+  font-size:21px;
+  font-weight:700;
 }
 
-/* LOWER */
+
+/* =========================================================
+   LOWER GRID
+========================================================= */
+
 .lower-grid{
-    display:grid;
-    grid-template-columns:1.45fr .85fr;
-    gap:22px;
-    margin-bottom:22px;
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,2fr)
+    minmax(300px,1fr);
+
+  gap:18px;
+
+  margin-bottom:22px;
 }
 
-.followup-card,
-.actions-card,
-.activity-card{
-    padding:21px 20px;
+
+/* =========================================================
+   FOLLOW UP
+========================================================= */
+
+.followup-list{
+  min-height:115px;
 }
 
-.patient-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
+.followup-item{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  padding:
+    12px
+    0;
+
+  border-bottom:
+    1px solid #edf0f4;
 }
 
-.patient-row:last-child{
-    border-bottom:none;
+.followup-item:last-child{
+  border-bottom:none;
+}
+
+.patient-info{
+  display:flex;
+  flex-direction:column;
+
+  gap:2px;
 }
 
 .patient-name{
-    color:#244a7e;
-    font-size:12px;
-    font-weight:700;
+  color:#17325c;
+
+  font-size:13px;
+  font-weight:600;
 }
 
-.patient-meta{
-    color:#8794a8;
-    font-size:10px;
-    margin-top:3px;
+.patient-id{
+  color:#8290a5;
+
+  font-size:10px;
 }
 
 .view-link{
-    color:#315fa9;
-    font-size:10px;
-    font-weight:600;
-    text-decoration:none;
+  border:none;
+
+  background:#eef4ff;
+
+  color:#24539f;
+
+  padding:
+    7px
+    12px;
+
+  border-radius:8px;
+
+  text-decoration:none;
+
+  font-size:10px;
+  font-weight:600;
 }
 
 .view-link:hover{
-    text-decoration:underline;
+  background:#e2ecff;
 }
 
-.empty{
-    padding:18px 0 8px;
-    color:#8a96a8;
-    font-size:11px;
+.empty-state{
+  color:#8a98ac;
+
+  font-size:12px;
+
+  padding:
+    18px
+    0;
 }
 
-/* ACTIONS */
-.action-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions{
+  display:flex;
+  flex-direction:column;
+
+  gap:9px;
 }
 
-.action-btn{
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:10px;
-    width:100%;
-    min-height:43px;
-    padding:0 14px;
-    border:1px solid #dfe6f0;
-    border-radius:9px;
-    background:#fff;
-    color:var(--blue-text);
-    font-size:11px;
-    font-weight:600;
-    text-decoration:none;
-    cursor:pointer;
+.quick-action{
+  width:100%;
+
+  min-height:43px;
+
+  border:
+    1px solid #dce5f1;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  color:#204c9c;
+
+  display:flex;
+  align-items:center;
+
+  gap:11px;
+
+  padding:
+    0
+    14px;
+
+  text-decoration:none;
+
+  font-size:11px;
+  font-weight:600;
+
+  transition:.2s ease;
 }
 
-.action-btn:hover{
-    background:#f5f8fd;
+.quick-action:hover{
+  background:#f5f8ff;
 }
 
-.action-plus{
-    font-size:17px;
-    line-height:1;
+.quick-action i{
+  width:16px;
+
+  text-align:center;
+
+  font-size:11px;
 }
 
-/* ACTIVITY */
-.activity-card{
-    margin-bottom:20px;
+
+/* =========================================================
+   RECENT ACTIVITY
+========================================================= */
+
+.activity-section{
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
 }
 
-.activity-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-height:49px;
-    border-bottom:1px solid var(--border);
+.activity-list{
+  max-height:310px;
+
+  overflow-y:auto;
 }
 
-.activity-row:last-child{
-    border-bottom:none;
+.activity-item{
+  padding:
+    12px
+    0;
+
+  border-bottom:
+    1px solid #edf0f4;
+
+  color:#53627a;
+
+  font-size:12px;
+
+  line-height:1.5;
 }
 
-.activity-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#315fa9;
-    flex:none;
-}
-
-.activity-text{
-    color:#52657f;
-    font-size:11px;
-    line-height:1.5;
+.activity-item:last-child{
+  border-bottom:none;
 }
 
 .activity-time{
-    color:#8996aa;
-    font-size:10px;
+  color:#8a98ac;
 }
 
-/* LOADING / ERROR */
+.activity-action{
+  color:#17325c;
+  font-weight:500;
+}
+
+
+/* =========================================================
+   DATABASE STATUS
+========================================================= */
+
+.database-status{
+  display:flex;
+
+  justify-content:flex-end;
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:14px;
+
+  color:#8a98ac;
+
+  font-size:10px;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#20b26b;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
 .loading{
-    color:#8794a8;
-    font-size:11px;
+  color:#8a98ac;
+
+  font-size:12px;
 }
 
-.error{
-    color:#c6534e;
-    font-size:11px;
-}
 
-.footer-note{
-    text-align:right;
-    color:#99a4b4;
-    font-size:9px;
-}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-/* RESPONSIVE */
 @media(max-width:1100px){
-    .summary-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
 
-    .attention-grid{
-        grid-template-columns:1fr;
-    }
+  .summary-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .attention-grid{
+    grid-template-columns:1fr;
+  }
+
+  .lower-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
-@media(max-width:800px){
-    .sidebar{
-        width:205px;
-    }
+@media(max-width:850px){
 
-    .main{
-        margin-left:205px;
-        padding:25px;
+  .sidebar{
+    width:180px;
+  }
 
-    .lower-grid{
-        grid-template-columns:1fr;
-    }
+  .main{
+    margin-left:180px;
+
+    width:
+      calc(100% - 180px);
+
+    padding:
+      30px
+      20px;
+  }
+
+  .logo{
+    padding-left:28px;
+    font-size:27px;
+  }
+
+  .nav{
+    padding:30px 12px;
+  }
+
+  .nav a{
+    padding:0 15px;
+    gap:12px;
+  }
+
 }
 
-@media(max-width:650px){
-    .sidebar{
-        position:relative;
-        width:100%;
-        min-height:auto;
-    }
+@media(max-width:600px){
 
-    .brand{
-        height:75px;
-        padding:22px 25px;
-        font-size:25px;
-    }
+  .sidebar{
+    position:relative;
 
-    .nav{
-        padding:15px;
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
+    width:100%;
+    height:auto;
+  }
 
-    .nav a{
-        margin:0;
-        padding:0 15px;
-    }
+  .logo{
+    height:75px;
+  }
 
-    .main{
-        margin-left:0;
-        padding:20px;
-    }
+  .nav{
+    padding:15px;
+  }
 
-    .summary-grid{
-        grid-template-columns:1fr;
-    }
+  .nav a{
+    height:48px;
+  }
 
-    .page-header{
-        gap:15px;
-        flex-direction:column;
-    }
+  .main{
+    margin-left:0;
+
+    width:100%;
+
+    padding:
+      25px
+      15px;
+  }
+
+  .header{
+    flex-direction:column;
+
+    gap:8px;
+  }
+
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+
 }
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+  width:7px;
+}
+
+::-webkit-scrollbar-track{
+  background:#eef6ff;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#c4d2e7;
+  border-radius:10px;
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<div class="container">
+
+
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
+
 <aside class="sidebar">
-    <div class="brand">Getwell</div>
 
-    <nav class="nav">
-        <a href="dashboard.html" class="active">
-            <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
-            <span>Dashboard</span>
-        </a>
+  <div class="logo">
+    Getwell
+  </div>
 
-        <a href="register-patient.html">
-            <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
-            <span>Register Patient</span>
-        </a>
+  <nav class="nav">
 
-        <a href="patient-list.html">
-            <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
-            <span>Patient List</span>
-        </a>
+    <a
+      href="admin-dashboard.html"
+      class="active"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-house"></i>
+      </span>
 
-        <a href="appointments.html">
-            <span class="nav-icon"><i class="fa-regular fa-calendar-check"></i></span>
-            <span>Appointments</span>
-        </a>
+      <span>Dashboard</span>
+    </a>
 
-        <a href="reports.html">
-            <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span>
-            <span>Reports</span>
-        </a>
 
-        <a href="settings.html">
-            <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
-            <span>Settings</span>
-        </a>
+    <a
+      href="register-patient.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </span>
 
-        <a href="#" id="logoutLink">
-            <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-            <span>Logout</span>
-        </a>
-    </nav>
+      <span>Register Patient</span>
+    </a>
+
+
+    <a
+      href="patient-list.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-users"></i>
+      </span>
+
+      <span>Patient List</span>
+    </a>
+
+
+    <a
+      href="appointments.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-regular fa-calendar-check"></i>
+      </span>
+
+      <span>Appointments</span>
+    </a>
+
+
+    <a
+      href="reports.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-chart-column"></i>
+      </span>
+
+      <span>Reports</span>
+    </a>
+
+
+    <a
+      href="settings.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-gear"></i>
+      </span>
+
+      <span>Settings</span>
+    </a>
+
+
+    <a
+      href="admin-login.html"
+    >
+      <span class="nav-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </span>
+
+      <span>Logout</span>
+    </a>
+
+  </nav>
+
 </aside>
+
+
+
+<!-- ======================================================
+     MAIN CONTENT
+====================================================== -->
 
 <main class="main">
 
-    <header class="page-header">
-        <div>
-            <h1 class="page-title">Dashboard</h1>
-        </div>
 
-        <div class="welcome">
-            Welcome back, Clinic Team 👋
-        </div>
-    </header>
+<!-- HEADER -->
 
-    <!-- SUMMARY -->
-    <section class="summary-grid">
+<div class="header">
 
-        <div class="summary-card">
-            <div class="summary-label">Total Patients</div>
-            <div class="summary-value" id="totalPatients">—</div>
-            <div class="summary-sub">All registered patients</div>
-        </div>
+  <div class="header-left">
 
-        <div class="summary-card">
-            <div class="summary-label">Today's Appointments</div>
-            <div class="summary-value" id="todayAppointments">—</div>
-            <div class="summary-sub">Scheduled for today</div>
-        </div>
+    <h1>
+      Dashboard
+    </h1>
 
-        <div class="summary-card">
-            <div class="summary-label">Active Patients</div>
-            <div class="summary-value" id="activePatients">—</div>
-            <div class="summary-sub">Currently active</div>
-        </div>
+    <p>
+      Welcome back, Clinic Team 👋
+    </p>
 
-        <div class="summary-card">
-            <div class="summary-label">Completed Goals</div>
-            <div class="summary-value" id="completedGoals">—</div>
-            <div class="summary-sub">Patients who reached their goal</div>
-        </div>
+  </div>
 
-    </section>
+  <div class="header-right">
 
-    <!-- SEARCH -->
-    <section class="card search-card">
-        <h2 class="section-title">🔍 Search Patient</h2>
+    <span id="dashboardDate">
+      Loading date...
+    </span>
 
-        <div class="search-wrap">
-            <span class="search-icon">⌕</span>
-            <input
-                id="patientSearch"
-                class="search-input"
-                type="text"
-                autocomplete="off"
-                placeholder="Search by Patient ID, Name or Phone Number"
-            >
-        </div>
+  </div>
 
-        <div id="searchResults" class="search-results"></div>
-    </section>
+</div>
 
-    <!-- ATTENTION -->
-    <section class="card attention-card">
-        <h2 class="section-title">Attention Needed</h2>
 
-        <div class="attention-grid">
 
-            <div class="attention-item">
-                <div class="attention-left">
-                    <div class="alert-icon">!</div>
-                    <div class="attention-label">
-                        Patients Due for<br>Follow-Up
-                    </div>
-                </div>
-                <div class="attention-count" id="followUpCount">—</div>
-            </div>
+<!-- ======================================================
+     SUMMARY
+====================================================== -->
 
-            <div class="attention-item">
-                <div class="attention-left">
-                    <div class="alert-icon">!</div>
-                    <div class="attention-label">
-                        Missed<br>Appointments
-                    </div>
-                </div>
-                <div class="attention-count" id="missedCount">—</div>
-            </div>
+<div class="summary-grid">
 
-            <div class="attention-item">
-                <div class="attention-left">
-                    <div class="alert-icon">!</div>
-                    <div class="attention-label">
-                        Patients Without<br>Upcoming Appointment
-                    </div>
-                </div>
-                <div class="attention-count" id="noUpcomingCount">—</div>
-            </div>
 
-        </div>
-    </section>
+  <div class="summary-card">
 
-    <!-- FOLLOW UP + QUICK ACTIONS -->
-    <section class="lower-grid">
+    <h3>
+      Total Patients
+    </h3>
 
-        <div class="card followup-card">
-            <h2 class="section-title">Patients Due for Follow-Up</h2>
-            <div id="followUpList">
-                <div class="loading">Loading...</div>
-            </div>
-        </div>
-
-        <div class="card actions-card">
-            <h2 class="section-title">Quick Actions</h2>
-
-            <div class="action-list">
-                <a class="action-btn" href="register-patient.html">
-                    <span class="action-plus">+</span>
-                    <span>Register Patient</span>
-                </a>
-
-                <a class="action-btn" href="appointments.html">
-                    <span class="action-plus">+</span>
-                    <span>New Appointment</span>
-                </a>
-
-                <a class="action-btn" href="patient-list.html">
-                    <span>☷</span>
-                    <span>View Patient List</span>
-                </a>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- RECENT ACTIVITY -->
-    <section class="card activity-card">
-        <h2 class="section-title">Recent Activity</h2>
-        <div id="activityList">
-            <div class="loading">Loading...</div>
-        </div>
-    </section>
-
-    <div class="footer-note">
-        Data displayed from Getwell Clinic database
+    <div
+      class="summary-number"
+      id="dashTotalPatients"
+    >
+      —
     </div>
+
+    <div class="summary-description">
+      All registered patients
+    </div>
+
+  </div>
+
+
+
+  <div class="summary-card">
+
+    <h3>
+      Today's Appointments
+    </h3>
+
+    <div
+      class="summary-number"
+      id="dashTodayAppointments"
+    >
+      —
+    </div>
+
+    <div class="summary-description">
+      Scheduled for today
+    </div>
+
+  </div>
+
+
+
+  <div class="summary-card">
+
+    <h3>
+      Active Patients
+    </h3>
+
+    <div
+      class="summary-number"
+      id="dashActivePatients"
+    >
+      —
+    </div>
+
+    <div class="summary-description">
+      Currently active
+    </div>
+
+  </div>
+
+
+
+  <div class="summary-card">
+
+    <h3>
+      Completed Goals
+    </h3>
+
+    <div
+      class="summary-number"
+      id="dashCompletedGoals"
+    >
+      —
+    </div>
+
+    <div class="summary-description">
+      Patients who reached their goal
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<!-- ======================================================
+     SEARCH PATIENT
+====================================================== -->
+
+<div class="search-section">
+
+  <div class="search-title">
+    🔍 Search Patient
+  </div>
+
+  <div class="search-wrapper">
+
+    <i
+      class="fa-solid fa-magnifying-glass search-icon"
+    ></i>
+
+    <input
+      type="text"
+      class="search-input"
+      id="patientSearch"
+      placeholder="Search by Patient ID, Name or Phone Number"
+      autocomplete="off"
+    >
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================================================
+     ATTENTION NEEDED
+====================================================== -->
+
+<div class="section">
+
+  <div class="section-title">
+    Attention Needed
+  </div>
+
+
+  <div class="attention-grid">
+
+
+    <div class="attention-card">
+
+      <div class="attention-left">
+
+        <div class="attention-icon">
+          !
+        </div>
+
+        <div class="attention-label">
+          Patients Due for<br>
+          Follow-Up
+        </div>
+
+      </div>
+
+      <div
+        class="attention-number"
+        id="dashFollowUp"
+      >
+        —
+      </div>
+
+    </div>
+
+
+
+    <div class="attention-card">
+
+      <div class="attention-left">
+
+        <div class="attention-icon">
+          !
+        </div>
+
+        <div class="attention-label">
+          Missed<br>
+          Appointments
+        </div>
+
+      </div>
+
+      <div
+        class="attention-number"
+        id="dashMissed"
+      >
+        —
+      </div>
+
+    </div>
+
+
+
+    <div class="attention-card">
+
+      <div class="attention-left">
+
+        <div class="attention-icon">
+          !
+        </div>
+
+        <div class="attention-label">
+          Patients Without<br>
+          Upcoming Appointment
+        </div>
+
+      </div>
+
+      <div
+        class="attention-number"
+        id="dashWithoutAppointment"
+      >
+        —
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================================================
+     FOLLOW UP + QUICK ACTIONS
+====================================================== -->
+
+<div class="lower-grid">
+
+
+  <!-- FOLLOW UP -->
+
+  <div class="section">
+
+    <div class="section-title">
+      Patients Due for Follow-Up
+    </div>
+
+    <div
+      class="followup-list"
+      id="dashFollowUpList"
+    >
+
+      <div class="loading">
+        Loading live patient data...
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- QUICK ACTIONS -->
+
+  <div class="section">
+
+    <div class="section-title">
+      Quick Actions
+    </div>
+
+
+    <div class="quick-actions">
+
+
+      <a
+        href="register-patient.html"
+        class="quick-action"
+      >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Register Patient
+
+      </a>
+
+
+      <a
+        href="appointments.html"
+        class="quick-action"
+      >
+
+        <i class="fa-solid fa-calendar-plus"></i>
+
+        New Appointment
+
+      </a>
+
+
+      <a
+        href="patient-list.html"
+        class="quick-action"
+      >
+
+        <i class="fa-solid fa-list"></i>
+
+        View Patient List
+
+      </a>
+
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<!-- ======================================================
+     RECENT ACTIVITY
+====================================================== -->
+
+<div class="activity-section">
+
+  <div class="section-title">
+    Recent Activity
+  </div>
+
+
+  <div
+    class="activity-list"
+    id="dashActivity"
+  >
+
+    <div class="loading">
+      Loading live activity...
+    </div>
+
+  </div>
+
+
+  <div class="database-status">
+
+    <span class="status-dot"></span>
+
+    Data displayed from Getwell Clinic database
+
+  </div>
+
+</div>
+
+
 
 </main>
 
+</div>
+
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
 <script>
-/*
-=========================================================
-GETWELL DASHBOARD
-=========================================================
-GOOGLE SHEETS IS THE SOURCE OF TRUTH.
 
-This page:
-- READS dashboard data from Code.gs
-- READS patient data from Code.gs
-- DOES NOT use localStorage/sessionStorage as a database
-- DOES NOT hard-code patient/appointment/activity data
-- Refreshing the page retrieves current data again
-=========================================================
-*/
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbwPYJHJuU-3fzV0s3Upvm3L-xedqsdXyxMTxYrDWGNL-6YHqAEr35eK7q6YkQ584x45pg/exec";
+/* =========================================================
+   SAFE HTML
+========================================================= */
 
-let patients = [];
+function escapeHtml(value){
 
-/* ---------- API ---------- */
+  return String(value ?? "")
 
-async function apiGet(action, params = {}) {
-    const url = new URL(API_URL);
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-    url.searchParams.set("action", action);
+}
 
-    Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== "") {
-            url.searchParams.set(key, value);
-        }
-    });
 
-    const response = await fetch(url.toString(), {
-        method: "GET",
-        cache: "no-store"
-    });
 
-    if (!response.ok) {
-        throw new Error("Unable to connect to the database.");
+/* =========================================================
+   DATE
+========================================================= */
+
+function displayCurrentDate(){
+
+  const element =
+    document.getElementById(
+      "dashboardDate"
+    );
+
+  if(!element) return;
+
+  const today =
+    new Date();
+
+  element.textContent =
+    today.toLocaleDateString(
+      "en-MY",
+      {
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+}
+
+
+
+/* =========================================================
+   LOAD DASHBOARD
+========================================================= */
+
+async function loadDashboard(){
+
+  try{
+
+    console.log(
+      "Loading Getwell dashboard..."
+    );
+
+
+    /*
+      IMPORTANT:
+
+      api.js returns result.data directly.
+
+      Therefore:
+
+      const d = await apiGet("getDashboard")
+
+      NOT:
+
+      const {dashboard:d} = ...
+    */
+
+    const d =
+      await apiGet(
+        "getDashboard"
+      );
+
+
+    console.log(
+      "LIVE DASHBOARD DATA:",
+      d
+    );
+
+
+    /* =====================================================
+       SUMMARY
+    ===================================================== */
+
+    document.getElementById(
+      "dashTotalPatients"
+    ).textContent =
+      Number(
+        d.totalPatients || 0
+      );
+
+
+    document.getElementById(
+      "dashTodayAppointments"
+    ).textContent =
+      Number(
+        d.todayAppointments || 0
+      );
+
+
+    document.getElementById(
+      "dashActivePatients"
+    ).textContent =
+      Number(
+        d.activePatients || 0
+      );
+
+
+    document.getElementById(
+      "dashCompletedGoals"
+    ).textContent =
+      Number(
+        d.completedGoals || 0
+      );
+
+
+
+    /* =====================================================
+       ATTENTION
+    ===================================================== */
+
+    const attention =
+      d.attention || {};
+
+
+    document.getElementById(
+      "dashFollowUp"
+    ).textContent =
+      Number(
+        attention.followUp || 0
+      );
+
+
+    document.getElementById(
+      "dashMissed"
+    ).textContent =
+      Number(
+        attention.missedAppointments || 0
+      );
+
+
+    document.getElementById(
+      "dashWithoutAppointment"
+    ).textContent =
+      Number(
+        attention.withoutUpcomingAppointment || 0
+      );
+
+
+
+    /* =====================================================
+       FOLLOW-UP PATIENTS
+    ===================================================== */
+
+    const followUpBox =
+      document.getElementById(
+        "dashFollowUpList"
+      );
+
+
+    const followUpPatients =
+      d.followUpPatients || [];
+
+
+    if(
+      !followUpPatients.length
+    ){
+
+      followUpBox.innerHTML = `
+        <div class="empty-state">
+          No patients currently require follow-up.
+        </div>
+      `;
+
     }
 
-    const data = await response.json();
+    else{
 
-    if (data.ok === false) {
-        throw new Error(data.error || "Backend request failed.");
-    }
+      followUpBox.innerHTML =
+        followUpPatients
+          .map(
+            patient => {
 
-    return data;
-}
+              const id =
+                patient.patient_id || "";
 
-/* ---------- HELPERS ---------- */
+              const name =
+                patient.full_name ||
+                "Unknown Patient";
 
-function firstValue(obj, keys, fallback = "") {
-    if (!obj) return fallback;
 
-    for (const key of keys) {
-        if (
-            obj[key] !== undefined &&
-            obj[key] !== null &&
-            String(obj[key]).trim() !== ""
-        ) {
-            return obj[key];
-        }
-    }
+              return `
 
-    return fallback;
-}
+                <div class="followup-item">
 
-function asArray(value) {
-    if (Array.isArray(value)) return value;
-    return [];
-}
+                  <div class="patient-info">
 
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
+                    <span class="patient-name">
+                      ${escapeHtml(name)}
+                    </span>
 
-function formatDateTime(value) {
-    if (!value) return "";
+                    <span class="patient-id">
+                      ${escapeHtml(id)}
+                    </span>
 
-    const date = new Date(value);
+                  </div>
 
-    if (Number.isNaN(date.getTime())) {
-        return String(value);
-    }
+                  <a
+                    class="view-link"
+                    href="patient-list.html?patient_id=${encodeURIComponent(id)}"
+                  >
+                    View
+                  </a>
 
-    return date.toLocaleString("en-MY", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-    });
-}
-
-/* ---------- DASHBOARD ---------- */
-
-async function loadDashboard() {
-    try {
-        const data = await apiGet("getDashboard");
-
-        /*
-         The backend is the authority.
-         We only map the returned values into the UI.
-        */
-
-        document.getElementById("totalPatients").textContent =
-            firstValue(data, ["patientCount", "totalPatients"], 0);
-
-        document.getElementById("todayAppointments").textContent =
-            firstValue(data, ["todayAppointments"], 0);
-
-        document.getElementById("activePatients").textContent =
-            firstValue(data, ["activePatients"], 0);
-
-        document.getElementById("completedGoals").textContent =
-            firstValue(
-                data,
-                ["completedPatients", "completedGoals"],
-                0
-            );
-
-        const followUps = asArray(
-            firstValue(data, ["followUpPatients"], [])
-        );
-
-        const missed = asArray(
-            firstValue(data, ["missedAppointments"], [])
-        );
-
-        document.getElementById("followUpCount").textContent =
-            followUps.length;
-
-        document.getElementById("missedCount").textContent =
-            missed.length;
-
-        /*
-         No upcoming count is fabricated.
-         We calculate it from actual patient/appointment data
-         only when the backend provides the required records.
-        */
-        const noUpcoming = calculateNoUpcomingPatients(followUps);
-
-        document.getElementById("noUpcomingCount").textContent =
-            noUpcoming;
-
-        renderFollowUps(followUps);
-        renderActivity(
-            asArray(firstValue(data, ["recentActivity"], []))
-        );
-
-    } catch (error) {
-        console.error("Dashboard error:", error);
-
-        document.getElementById("followUpList").innerHTML =
-            `<div class="error">${escapeHtml(error.message)}</div>`;
-
-        document.getElementById("activityList").innerHTML =
-            `<div class="error">${escapeHtml(error.message)}</div>`;
-    }
-}
-
-/*
- We deliberately do not invent a "no upcoming appointment"
- number from incomplete information.
-
- If the backend later exposes a dedicated no-upcoming list/count,
- this function can simply use that backend value.
- For now it returns 0 unless the backend provides the required
- patient records.
-*/
-function calculateNoUpcomingPatients() {
-    return 0;
-}
-
-/* ---------- FOLLOW UP ---------- */
-
-function renderFollowUps(list) {
-    const container = document.getElementById("followUpList");
-
-    if (!list.length) {
-        container.innerHTML =
-            `<div class="empty">No patients currently require follow-up.</div>`;
-        return;
-    }
-
-    const limited = list.slice(0, 5);
-
-    container.innerHTML = limited.map(item => {
-        const patientId = firstValue(
-            item,
-            ["patient_id", "patientId", "id"],
-            ""
-        );
-
-        const name = firstValue(
-            item,
-            ["full_name", "fullName", "name"],
-            patientId || "Patient"
-        );
-
-        const lastVisit = firstValue(
-            item,
-            ["last_visit", "lastVisit"],
-            "No recent visit"
-        );
-
-        return `
-            <div class="patient-row">
-                <div>
-                    <div class="patient-name">
-                        ${escapeHtml(name)}
-                    </div>
-                    <div class="patient-meta">
-                        ${escapeHtml(patientId)}
-                        ${patientId && lastVisit ? " • " : ""}
-                        ${escapeHtml(lastVisit)}
-                    </div>
                 </div>
 
-                ${
-                    patientId
-                    ? `<a class="view-link"
-                          href="patient-details.html?id=${encodeURIComponent(patientId)}">
-                          View Patient →
-                       </a>`
-                    : ""
-                }
-            </div>
-        `;
-    }).join("");
-}
+              `;
 
-/* ---------- ACTIVITY ---------- */
+            }
+          )
+          .join("");
 
-function renderActivity(list) {
-    const container = document.getElementById("activityList");
-
-    if (!list.length) {
-        container.innerHTML =
-            `<div class="empty">No recent activity.</div>`;
-        return;
     }
 
-    const limited = list.slice(0, 6);
 
-    container.innerHTML = limited.map(item => {
-        const timestamp = firstValue(
-            item,
-            ["timestamp", "date", "created_at"],
-            ""
-        );
 
-        const module = firstValue(
-            item,
-            ["module"],
-            ""
-        );
+    /* =====================================================
+       RECENT ACTIVITY
+    ===================================================== */
 
-        const action = firstValue(
-            item,
-            ["action", "description"],
-            "Activity recorded"
-        );
+    const activityBox =
+      document.getElementById(
+        "dashActivity"
+      );
 
-        const reference = firstValue(
-            item,
-            ["reference_id", "referenceId"],
-            ""
-        );
 
-        const text = [
-            action,
-            reference ? reference : "",
-            module ? `(${module})` : ""
-        ].filter(Boolean).join(" ");
+    const activities =
+      d.recentActivity || [];
 
-        return `
-            <div class="activity-row">
-                <span class="activity-dot"></span>
-                <div class="activity-text">
-                    ${escapeHtml(text)}
-                    ${
-                        timestamp
-                        ? `<span class="activity-time">
-                            • ${escapeHtml(formatDateTime(timestamp))}
-                           </span>`
-                        : ""
-                    }
-                </div>
-            </div>
-        `;
-    }).join("");
-}
 
-/* ---------- PATIENT SEARCH ---------- */
+    if(
+      !activities.length
+    ){
 
-async function loadPatientsForSearch() {
-    try {
-        const data = await apiGet("getPatients");
+      activityBox.innerHTML = `
+        <div class="activity-item">
+          No recent activity.
+        </div>
+      `;
 
-        patients =
-            asArray(firstValue(
-                data,
-                ["patients", "data"],
-                []
-            ));
-
-    } catch (error) {
-        console.error("Patient search loading error:", error);
-        patients = [];
-    }
-}
-
-function renderSearchResults(query) {
-    const box = document.getElementById("searchResults");
-
-    if (!query.trim()) {
-        box.style.display = "none";
-        box.innerHTML = "";
-        return;
     }
 
-    const q = query.toLowerCase().trim();
+    else{
 
-    const matches = patients.filter(patient => {
-        const id = String(firstValue(
-            patient,
-            ["patient_id", "patientId", "id"],
-            ""
-        )).toLowerCase();
+      activityBox.innerHTML =
+        activities
+          .map(
+            activity => {
 
-        const name = String(firstValue(
-            patient,
-            ["full_name", "fullName", "name"],
-            ""
-        )).toLowerCase();
+              const timestamp =
+                activity.timestamp ||
+                "";
 
-        const phone = String(firstValue(
-            patient,
-            ["phone"],
-            ""
-        )).toLowerCase();
+              const action =
+                activity.action ||
+                "";
 
-        return (
-            id.includes(q) ||
-            name.includes(q) ||
-            phone.includes(q)
-        );
-    }).slice(0, 6);
+              const reference =
+                activity.reference_id ||
+                "";
 
-    box.style.display = "block";
 
-    if (!matches.length) {
-        box.innerHTML =
-            `<div class="empty" style="padding:14px 15px;">
-                No matching patient found.
-             </div>`;
-        return;
-    }
+              return `
 
-    box.innerHTML = matches.map(patient => {
-        const id = firstValue(
-            patient,
-            ["patient_id", "patientId", "id"],
-            ""
-        );
+                <div class="activity-item">
 
-        const name = firstValue(
-            patient,
-            ["full_name", "fullName", "name"],
-            id
-        );
+                  <span class="activity-time">
+                    ${escapeHtml(timestamp)}
+                  </span>
 
-        const phone = firstValue(
-            patient,
-            ["phone"],
-            ""
-        );
+                  <span>
+                    •
+                  </span>
 
-        const status = firstValue(
-            patient,
-            ["status"],
-            "Active"
-        );
+                  <span class="activity-action">
+                    ${escapeHtml(action)}
+                  </span>
 
-        return `
-            <a class="search-result"
-               href="patient-details.html?id=${encodeURIComponent(id)}">
+                  ${
+                    reference
+                    ?
+                    `
+                    <span>
+                      ${escapeHtml(reference)}
+                    </span>
+                    `
+                    :
+                    ""
+                  }
 
-                <div>
-                    <div class="result-name">
-                        ${escapeHtml(name)}
-                    </div>
-
-                    <div class="result-meta">
-                        ${escapeHtml(id)}
-                        ${phone ? " • " + escapeHtml(phone) : ""}
-                    </div>
                 </div>
 
-                <span class="result-status">
-                    ${escapeHtml(status)}
-                </span>
-            </a>
-        `;
-    }).join("");
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Dashboard error:",
+      error
+    );
+
+
+    /*
+      IMPORTANT:
+      We do NOT insert fake numbers.
+      If backend fails, dashboard tells us.
+    */
+
+    document.getElementById(
+      "dashTotalPatients"
+    ).textContent = "—";
+
+    document.getElementById(
+      "dashTodayAppointments"
+    ).textContent = "—";
+
+    document.getElementById(
+      "dashActivePatients"
+    ).textContent = "—";
+
+    document.getElementById(
+      "dashCompletedGoals"
+    ).textContent = "—";
+
+
+    const activityBox =
+      document.getElementById(
+        "dashActivity"
+      );
+
+
+    if(activityBox){
+
+      activityBox.innerHTML = `
+
+        <div class="activity-item">
+
+          Unable to load live database data.
+
+          <br>
+
+          <span class="activity-time">
+            Please check the Google Sheets backend connection.
+          </span>
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
 }
 
-/* ---------- EVENTS ---------- */
 
-document.getElementById("patientSearch").addEventListener(
-    "input",
-    event => renderSearchResults(event.target.value)
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+  .getElementById("patientSearch")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        const query =
+          this.value.trim();
+
+
+        if(!query) return;
+
+
+        window.location.href =
+          "patient-list.html?search=" +
+          encodeURIComponent(query);
+
+      }
+
+    }
+  );
+
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    displayCurrentDate();
+
+    loadDashboard();
+
+  }
 );
 
-document.addEventListener("click", event => {
-    const searchCard = document.querySelector(".search-card");
-    const results = document.getElementById("searchResults");
-
-    if (
-        !searchCard.contains(event.target) &&
-        results.style.display === "block"
-    ) {
-        results.style.display = "none";
-    }
-});
-
-document.getElementById("logoutLink").addEventListener(
-    "click",
-    event => {
-        event.preventDefault();
-
-        /*
-         Logout should be connected to your existing authentication
-         system when the rest of the admin authentication flow is
-         finalized. No localStorage/sessionStorage is used here.
-        */
-
-        window.location.href = "index.html";
-    }
-);
-
-/* ---------- START ---------- */
-
-(async function initDashboard() {
-    await Promise.all([
-        loadDashboard(),
-        loadPatientsForSearch()
-    ]);
-})();
 </script>
+
 
 </body>
 </html>
-dashboard-final-v2.html
-HTML
