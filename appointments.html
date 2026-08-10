@@ -1880,6 +1880,7 @@ button.add-time{
 
 </style>
 
+<script src="api.js"></script>
 </head>
 
 
@@ -2936,7 +2937,7 @@ See you soon, and thank you for choosing GetWell Clinic! 😊💙</textarea>
    No Firebase/database connection in this phase.
    ========================================================= */
 
-const samplePatients = [
+let samplePatients = [
   {id:"GW0001", name:"Nurul Iman", phone:"012-3456789", weight:"60 kg", status:"Active", lastVisit:"10 Aug 2026", nextAppointment:"10 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"Weight Loss Consultation", history:[{"date":"10 Aug 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Scheduled"},{"date":"27 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"13 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"29 Jun 2026","type":"Weight Loss Consultation","doctor":"Dr. Aaron","status":"Completed"}]},
   {id:"GW0002", name:"Ali Ahmad", phone:"011-2233445", weight:"88 kg", status:"Active", lastVisit:"8 Aug 2026", nextAppointment:"10 Aug 2026 · 9:30 AM", doctor:"Dr. Aaron", type:"Follow Up", history:[{"date":"8 Aug 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"},{"date":"25 Jul 2026","type":"Weight Loss Injection","doctor":"Dr. Aaron","status":"Completed"},{"date":"11 Jul 2026","type":"Follow Up","doctor":"Dr. Aaron","status":"Completed"}]},
   {id:"GW0003", name:"Sarah Lee", phone:"017-8899001", weight:"56 kg", status:"Completed", lastVisit:"10 Aug 2026", nextAppointment:"—", doctor:"Dr. Najwa", type:"Skin Consultation", history:[{"date":"10 Aug 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"20 Jul 2026","type":"Skin Consultation","doctor":"Dr. Najwa","status":"Completed"},{"date":"22 Jun 2026","type":"Consultation","doctor":"Dr. Najwa","status":"Completed"}]},
@@ -2956,32 +2957,32 @@ const samplePatients = [
   {id:"GW0017", name:"Daniel Lim", phone:"018-5556677", weight:"77 kg", status:"Active", lastVisit:"6 Aug 2026", nextAppointment:"12 Aug 2026 · 9:00 AM", doctor:"Dr. Aaron", type:"IV Drip Therapy", history:[{"date":"6 Aug 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"},{"date":"23 Jul 2026","type":"IV Drip Therapy","doctor":"Dr. Aaron","status":"Completed"}]}
 ];
 
-const todayAppointments = [
+let todayAppointments = [
   ["9:00 AM","Nurul Iman","Weight Loss Consultation","Dr. Aaron","Scheduled"],
   ["9:30 AM","Ali Ahmad","Follow Up","Dr. Aaron","Scheduled"],
   ["11:00 AM","John Tan","IV Drip Therapy","Dr. Aaron","Scheduled"],
   ["2:00 PM","Sarah Lee","Skin Consultation","Dr. Najwa","Completed"]
 ];
 
-const tomorrowAppointments = [
+let tomorrowAppointments = [
   ["9:00 AM","Fatimah Zahra","Weight Loss Consultation","Dr. Aaron","Scheduled"],
   ["10:30 AM","Ahmad Firdaus","Follow Up","Dr. Aaron","Scheduled"],
   ["2:00 PM","Siti Aisyah","IV Drip Therapy","Dr. Najwa","Scheduled"]
 ];
 
-const missedAppointments = [
+let missedAppointments = [
   ["Ali bin Hassan","10 Aug 2026"],
   ["Nur Syazwani","9 Aug 2026"],
   ["John Tan","7 Aug 2026"]
 ];
 
-const followUpPatients = [
+let followUpPatients = [
   ["Farah Nadia","Last visit: 45 days ago"],
   ["Ahmad Syukri","Last visit: 62 days ago"],
   ["Nurul Huda","Last visit: 90 days ago"]
 ];
 
-const upcomingAppointments = [
+let upcomingAppointments = [
   ["10 Aug 2026","9:00 AM","Jivitha","Weight Loss Consultation","Dr. Aaron","Scheduled"],
   ["10 Aug 2026","11:00 AM","Mei Ling","Follow Up","Dr. Aaron","Scheduled"],
   ["11 Aug 2026","9:30 AM","Hafiz Rahman","Consultation","Dr. Aaron","Scheduled"],
@@ -3263,15 +3264,14 @@ function openEditAppointment(type,index){
 
   if(!a) return;
 
-  editingAppointment={type,index};
+  editingAppointment={type,index,appointmentId:a[6],patientId:a[7],date:a[7]||a[0],time:a[0],doctor:a[3]||a[4],type:a[2]||a[3]};
 
   document.getElementById("editPatientName").value=a[1] || a[2];
   document.getElementById("editDoctor").value=a[3] || a[4];
   document.getElementById("editType").value=a[2] || a[3];
 
-  const dateText=a[0];
-  const parsed=new Date(dateText);
-  document.getElementById("editDate").value=formatISODate(parsed);
+  const dateText=(type==="upcoming" ? a[0] : a[7]) || a[0];
+  document.getElementById("editDate").value=(String(dateText).match(/^\d{4}-\d{2}-\d{2}$/)?dateText:formatISODate(new Date(dateText)));
 
   const time=a[0].includes("AM") || a[0].includes("PM") ? a[0] : a[1];
   document.getElementById("editTime").value=to24Hour(time);
@@ -3298,7 +3298,15 @@ function to12Hour(value){
   return `${h}:${String(m).padStart(2,"0")} ${ap}`;
 }
 
-function saveEditedAppointment(){
+async function saveEditedAppointment(){
+  try{
+    if(window.editingAppointment && editingAppointment.appointmentId){
+      await apiPost('updateAppointment',{appointment_id:editingAppointment.appointmentId,appointment_date:document.getElementById('editDate')?.value||editingAppointment.date,appointment_time:to24Hour(document.getElementById('editTime')?.value||editingAppointment.time),appointment_type:document.getElementById('editType')?.value||editingAppointment.type,doctor:document.getElementById('editDoctor')?.value||editingAppointment.doctor});
+      await loadLiveAppointments();
+      closeUI('editAppointmentOverlay');
+      return;
+    }
+  }catch(e){showApiError(e);return}
   const date=document.getElementById("editDate").value;
   const time=document.getElementById("editTime").value;
   const doctor=document.getElementById("editDoctor").value;
@@ -3532,7 +3540,15 @@ function closeAppointmentModal(){
   document.getElementById("appointmentModal").classList.remove("show");
 }
 
-function saveAppointment(){
+async function saveAppointment(){
+  try{
+    const patientId=selectedPatient?.id || document.getElementById("appointmentPatientId")?.value || "";
+    const date=document.getElementById("appointmentDate")?.value || "";
+    const time=document.getElementById("appointmentTime")?.value || "";
+    const type=selectedPatient?.type || "Consultation";
+    const doctor=document.getElementById("doctor")?.value || "";
+    if(patientId&&date&&time&&doctor){ await apiPost("createAppointment",{patient_id:patientId,patient_name:selectedPatient?.name||"",doctor,appointment_date:date,appointment_time:time,appointment_type:type,status:"Scheduled"}); await loadLiveAppointments(); closeAppointmentModal(); return; }
+  }catch(e){showApiError(e);return}
   const patientName = document.getElementById("patientName").value.trim();
   const patientId = document.getElementById("patientId").value.trim();
   const doctor = document.getElementById("doctor").value;
@@ -3637,9 +3653,31 @@ document.addEventListener("keydown",function(event){
   }
 });
 
+
+async function loadLiveAppointments(){
+  try{
+    const [pRes,aRes,dRes] = await Promise.all([apiGet('getPatients'),apiGet('getAppointments'),apiGet('getDoctors')]);
+    samplePatients=(pRes.patients||[]).map(p=>({id:p.patient_id,name:p.full_name,phone:p.phone,weight:p.current_weight_kg?`${p.current_weight_kg} kg`:'—',status:p.status,lastVisit:p.last_visit||'—',nextAppointment:p.next_appointment||'—',doctor:p.attending_doctor,type:p.appointment_type||'Consultation',history:[]}));
+    const all=aRes.appointments||[];
+    const toRow=a=>[formatTimeValue(a.appointment_time),a.patient_name||((samplePatients.find(p=>p.id===a.patient_id)||{}).name)||a.patient_id,a.appointment_type,a.doctor,a.status,a.appointment_id,a.patient_id,a.appointment_date];
+    const now=new Date(); const isoToday=now.toISOString().slice(0,10); const t=new Date(now); t.setDate(t.getDate()+1); const isoTomorrow=t.toISOString().slice(0,10);
+    todayAppointments=all.filter(a=>a.appointment_date===isoToday).sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time))).map(toRow);
+    tomorrowAppointments=all.filter(a=>a.appointment_date===isoTomorrow).sort((a,b)=>String(a.appointment_time).localeCompare(String(b.appointment_time))).map(toRow);
+    missedAppointments=all.filter(a=>['No Show','Missed'].includes(String(a.status))).map(a=>[a.patient_name||a.patient_id,a.appointment_date,a.appointment_id,a.patient_id]);
+    followUpPatients=samplePatients.filter(p=>p.status==='Active'&&!p.nextAppointment||p.status==='Active'&&p.nextAppointment==='—').filter(p=>p.lastVisit&&p.lastVisit!=='—').map(p=>[p.name,`Last visit: ${p.lastVisit}`,p.id]);
+    upcomingAppointments=all.filter(a=>a.status==='Scheduled').sort((a,b)=>(a.appointment_date+' '+a.appointment_time).localeCompare(b.appointment_date+' '+b.appointment_time)).map(toUpcomingRow);
+    renderUpcomingDays(); renderPatientOptions();
+    if(typeof renderCalendar==='function') renderCalendar();
+    if(typeof openOverview==='function' && document.querySelector('.overview-overlay.show')) openOverview('today');
+  }catch(e){showApiError(e)}
+}
+function formatTimeValue(v){if(!v)return '';const [h,m]=String(v).split(':');let n=Number(h);const ap=n>=12?'PM':'AM';n=n%12||12;return `${n}:${m||'00'} ${ap}`}
+function toUpcomingRow(a){return [a.appointment_date,formatTimeValue(a.appointment_time),a.patient_name||a.patient_id,a.appointment_type,a.doctor,a.status,a.appointment_id,a.patient_id]}
+
 document.addEventListener("DOMContentLoaded",function(){
   renderPatientOptions();
   renderUpcomingDays();
+  loadLiveAppointments();
   makeDashboardNamesClickable();
 });
 </script>
